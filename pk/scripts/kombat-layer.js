@@ -25,6 +25,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	    ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, this.components['Player'].boundingBox ) )
 	{
 		ball.velocity.x *= -1;
+		ball.hitPaddle( );
 	}
 	
 	if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )

@@ -12,8 +12,6 @@ function HUDLayer( scene ) {
 	opponentScore.position.x = viewport.width * 0.75;
 	opponentScore.position.y = viewport.height * 0.10;
 	this.addComponent( 'OpponentScore', opponentScore );
-	
-	console.log( this );
 }
 
 HUDLayer.prototype = new Layer;
