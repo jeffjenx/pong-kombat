@@ -1,4 +1,4 @@
-pong-kombat
+Pong Kombat
 ===========
 
-A JavaScript game based on the Stephen Gagne's original Pong / Mortal Kombat hybrid
+A JavaScript game based on the Stephen Gagne's original Pong / Mortal Kombat hybrid.

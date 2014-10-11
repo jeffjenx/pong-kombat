@@ -1,0 +1,12 @@
+body
+{
+	-webkit-background-size: cover;
+	background-color: black;
+	background-repeat: no-repeat;
+}
+
+canvas
+{
+	border: solid 1px white;
+	box-sizing: border-box;
+}
