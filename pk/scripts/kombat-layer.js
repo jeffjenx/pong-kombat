@@ -12,6 +12,10 @@ KombatLayer.prototype = new Layer;
 KombatLayer.prototype.constructor = KombatLayer;
 
 KombatLayer.prototype.update = function( deltaTime ) {
+	if( this.scene.matchOver ) {
+		return;
+	}
+	
 	Layer.prototype.update.call( this, deltaTime );
 	
 	var ball = this.components['Ball'];
