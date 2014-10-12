@@ -7,6 +7,7 @@ Layer.prototype.constructor = Layer;
 
 Layer.prototype.addComponent = function( id, object ) {
 	this.components[id] = object;
+	this.components[id].id = id;
 	this.components[id].layer = this;
 };
 

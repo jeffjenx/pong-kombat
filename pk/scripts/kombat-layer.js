@@ -38,4 +38,14 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		this.components['Opponent'].score += 1;
 		ball.reset( );
 	}
+	
+	if( this.components['PlayerProjectile'] && Collision.RectRect( this.components['PlayerProjectile'].boundingBox, this.components['Opponent'].boundingBox ) ) {
+		this.components['Player'].score += 1;
+		this.removeComponent( 'PlayerProjectile' );
+	}
+	
+	if( this.components['OpponentProjectile'] && Collision.RectRect( this.components['OpponentProjectile'].boundingBox, this.components['Player'].boundingBox ) ) {
+		this.components['Opponent'].score += 1;
+		this.removeComponent( 'OpponentProjectile' );
+	}
 };

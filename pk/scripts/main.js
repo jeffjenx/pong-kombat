@@ -3,6 +3,7 @@ load( "pk/scripts/", [
 	"player",
 	"opponent",
 	"ball",
+	"projectile",
 	
 	"title-scene",
 	"choose-paddle-scene",

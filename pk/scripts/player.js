@@ -23,8 +23,22 @@ Player.prototype.handleInput = function( deltaTime ) {
 			{
 				this.moveDown( );
 			}
+			
+			if( InputManager.checkButtonPress( Buttons.ACTION ) && !this.layer.components['PlayerProjectile'] )
+			{
+				var projectile = this.shootProjectile( );
+				projectile.velocity.x = viewport.width * 0.25;
+			}
 		break;
 	}
+};
+
+Player.prototype.shootProjectile = function( ) {
+	var projectile = Paddle.prototype.shootProjectile.call( this );
+	projectile.velocity.x = viewport.width * 0.25;
+	this.layer.addComponent( 'PlayerProjectile', projectile );
+	
+	return projectile;
 };
 
 Player.prototype.update = function( deltaTime ) {

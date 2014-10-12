@@ -28,6 +28,12 @@ Paddle.prototype.restrictToBounds = function( ) {
 	}
 };
 
+Paddle.prototype.shootProjectile = function( ) {
+	var projectile = new Projectile( );
+	projectile.position = copy( this.position );
+	return projectile;
+};
+
 Paddle.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
