@@ -5,6 +5,7 @@ load( "pk/scripts/", [
 	"ball",
 	"projectile",
 	
+	"splash-scene",
 	"title-scene",
 	"choose-paddle-scene",
 	"kombat-scene",
@@ -49,7 +50,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new TitleScene( );
+		app.startupScene = new SplashScene( );
 		app.initialize( );
 	};
 };
