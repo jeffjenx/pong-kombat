@@ -1,6 +1,7 @@
 function Player( ) {
 	Paddle.call( this );
 	
+	this.tint = new Color( 255, 255, 0 );
 	this.score = 0;
 	
 	this.position.x = viewport.width * 0.02;

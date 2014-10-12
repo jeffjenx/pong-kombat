@@ -5,6 +5,7 @@ load( "pk/scripts/", [
 	"ball",
 	
 	"title-scene",
+	"choose-paddle-scene",
 	"kombat-scene",
 	
 	"background-layer",

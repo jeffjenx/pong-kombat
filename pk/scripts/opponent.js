@@ -1,6 +1,7 @@
 function Opponent( ) {
 	Paddle.call( this );
 	
+	this.tint = new Color( 0, 0, 255 );
 	this.score = 0;
 	
 	this.position.x = viewport.width * 0.98;

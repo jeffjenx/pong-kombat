@@ -37,6 +37,6 @@ TitleScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
-		SceneManager.changeScene( new KombatScene( ), Transitions.NONE );
+		SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
 	}
 };
