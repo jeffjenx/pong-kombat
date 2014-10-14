@@ -8,16 +8,42 @@ function Ball( ) {
 	this.position.y = viewport.height * 0.50;
 	this.size.x = viewport.height * 0.02;
 	this.size.y = viewport.height * 0.02;
+	
+	// Audio
+	if( !app.isMobile( ) )
+	{
+		this.beepSound = new Sound( 'Beep' );
+		this.boopSound = new Sound( 'Boop' );
+	}
 }
 
 Ball.prototype = new Sprite;
 Ball.prototype.constructor = Ball;
 
 Ball.prototype.hitPaddle = function( ) {
+	this.velocity.x *= -1;
+	
+	// Increase ball speed over time
 	if( this.speed < this.maxSpeed )
 	{
 		this.speed += 1;
 		this.velocity = this.velocity.multiply( 1.25 );
+	}
+	
+	if( !app.isMobile( ) )
+	{
+		this.beepSound.stop( );
+		this.beepSound.play( );
+	}
+};
+
+Ball.prototype.hitWall = function( ) {
+	this.velocity.y *= -1;
+	
+	if( !app.isMobile( ) )
+	{
+		this.boopSound.stop( );
+		this.boopSound.play( );
 	}
 };
 

@@ -1,4 +1,10 @@
 {
+	"audio" :
+	{
+		"Beep" : "sounds/beep",
+		"Boop" : "sounds/boop"
+	},
+	
 	"text" :
 	{
 		"Title" : "Pong Kombat"

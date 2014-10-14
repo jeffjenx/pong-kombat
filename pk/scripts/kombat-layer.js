@@ -33,13 +33,12 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	
 	if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < viewport.width * 0.03 ) )
 	{
-		ball.velocity.y *= -1;
+		ball.hitWall( );
 	}
 	
 	if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) ||
 	    ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
 	{
-		ball.velocity.x *= -1;
 		ball.hitPaddle( );
 	}
 	
