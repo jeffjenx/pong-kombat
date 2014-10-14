@@ -1,15 +1,22 @@
 function KombatLayer( scene ) {
 	Layer.call( this, scene );
 	
-	this.addComponent( 'Player', new Player( ) );
-	this.addComponent( 'Opponent', new Opponent( ) );
 	this.addComponent( 'Ball', new Ball( ) );
-	
 	this.components['Ball'].reset( );
 }
 
 KombatLayer.prototype = new Layer;
 KombatLayer.prototype.constructor = KombatLayer;
+
+KombatLayer.prototype.addKombatant = function( kombatant ) {
+	if( this.components['LeftKombatant'] ) {
+		kombatant.paddle.position.x = viewport.width * 0.98;
+		this.addComponent( 'RightKombatant', kombatant );
+	} else {
+		kombatant.paddle.position.x = viewport.width * 0.02;
+		this.addComponent( 'LeftKombatant', kombatant );
+	}
+};
 
 KombatLayer.prototype.update = function( deltaTime ) {
 	if( this.scene.matchOver ) {
@@ -19,14 +26,16 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
 	
 	var ball = this.components['Ball'];
+	var leftKombatant = this.components['LeftKombatant'];
+	var rightKombatant = this.components['RightKombatant'];
 	
-	if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < 0 ) )
+	if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < viewport.width * 0.03 ) )
 	{
 		ball.velocity.y *= -1;
 	}
 	
-	if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, this.components['Opponent'].boundingBox ) ||
-	    ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, this.components['Player'].boundingBox ) )
+	if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) ||
+	    ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
 	{
 		ball.velocity.x *= -1;
 		ball.hitPaddle( );
@@ -34,22 +43,22 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	
 	if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
 	{
-		this.components['Player'].score += 1;
+		leftKombatant.score += 1;
 		ball.reset( );
 	}
 	else if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
 	{
-		this.components['Opponent'].score += 1;
+		rightKombatant.score += 1;
 		ball.reset( );
 	}
 	
-	if( this.components['PlayerProjectile'] && Collision.RectRect( this.components['PlayerProjectile'].boundingBox, this.components['Opponent'].boundingBox ) ) {
-		this.components['Player'].score += 1;
-		this.removeComponent( 'PlayerProjectile' );
+	if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+		leftKombatant.score += 1;
+		leftKombatant.paddle.projectile = null;
 	}
 	
-	if( this.components['OpponentProjectile'] && Collision.RectRect( this.components['OpponentProjectile'].boundingBox, this.components['Player'].boundingBox ) ) {
-		this.components['Opponent'].score += 1;
-		this.removeComponent( 'OpponentProjectile' );
+	if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+		rightKombatant.score += 1;
+		rightKombatant.paddle.projectile = null;
 	}
 };

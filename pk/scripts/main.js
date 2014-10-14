@@ -4,6 +4,8 @@ load( "pk/scripts/", [
 	"opponent",
 	"ball",
 	"projectile",
+	"paddles/yellow-paddle",
+	"paddles/blue-paddle",
 	
 	"splash-scene",
 	"title-scene",

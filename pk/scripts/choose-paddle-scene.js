@@ -32,14 +32,17 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
-		var nextScene = new KombatScene( );
-		var player = nextScene.layers['Kombat'].components['Player'];
+		var kombatScene = new KombatScene( );
 		
-		player.tint = ( this.selectedText.text === "Yellow" ) ? new Color( 255, 255, 0 ) : new Color( 0, 0, 255 );
-		nextScene.layers['Kombat'].components['Opponent'].tint = ( player.tint.blue === 255 ) ? new Color( 255, 255, 0 ) : new Color( 0, 0, 255 );
+		var player = new Player( );
+		player.setPaddle( this.selectedText.text );
+		kombatScene.addKombatant( player );
 		
-		SceneManager.changeScene( nextScene, Transitions.NONE );
-		//SceneManager.changeScene( new KombatScene( ), Transitions.NONE );
+		var computer = new Opponent( );
+		computer.setPaddle( this.selectedText.text === 'Yellow' ? 'Blue' : 'Yellow' );
+		kombatScene.addKombatant( computer );
+		
+		SceneManager.changeScene( kombatScene, Transitions.NONE );
 	}
 	
 	if( InputManager.checkButtonPress( Buttons.DOWN ) || InputManager.checkButtonPress( Buttons.UP ) )

@@ -1,8 +1,9 @@
-function Projectile( ) {
+function Projectile( sourcePaddle ) {
 	Sprite.call( this, 'Ball' );
 	
 	this.size.x = viewport.height * 0.02;
 	this.size.y = viewport.height * 0.02;
+	this.sourcePaddle = sourcePaddle;
 }
 
 Projectile.prototype = new Sprite;
@@ -16,6 +17,6 @@ Projectile.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
 	if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 ) {
-		this.layer.removeComponent( this.id );
+		this.sourcePaddle.projectile = null;
 	}
 };

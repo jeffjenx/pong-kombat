@@ -32,7 +32,7 @@ Ball.prototype.reset = function( ) {
 	
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg
-	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Player or Opponent
+	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Towards left or right
 	angle *= Math.PI / 180; // Convert ot radians
 	
 	this.velocity.x = Math.abs( speed ) * Math.cos( angle );
