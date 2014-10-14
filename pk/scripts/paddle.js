@@ -34,9 +34,9 @@ Paddle.prototype.moveUp = function( ) {
 
 Paddle.prototype.restrictToBounds = function( ) {
 	var paddingBottom = viewport.height;
-	var paddingTop = 0;
+	var paddingTop = viewport.height * 0.05;
 	
-	if( ( this.velocity.y > 0 && this.boundingBox.bottom > paddingBottom ) || ( this.velocity.y < 0 && this.boundingBox.top < paddingTop ) )
+	if( ( this.velocity.y > 0 && this.boundingBox.bottom >= paddingBottom ) || ( this.velocity.y < 0 && this.boundingBox.top <= paddingTop ) )
 	{
 		this.velocity.y = 0;
 	}

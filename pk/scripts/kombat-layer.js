@@ -12,9 +12,11 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 	if( this.components['LeftKombatant'] ) {
 		kombatant.paddle.position.x = viewport.width * 0.98;
 		this.addComponent( 'RightKombatant', kombatant );
+		this.scene.layers['HUD'].components['RightName'].text = kombatant.paddle.name;
 	} else {
 		kombatant.paddle.position.x = viewport.width * 0.02;
 		this.addComponent( 'LeftKombatant', kombatant );
+		this.scene.layers['HUD'].components['LeftName'].text = kombatant.paddle.name;
 	}
 };
 

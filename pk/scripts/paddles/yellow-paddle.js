@@ -11,18 +11,6 @@ function YellowPaddle( ) {
 YellowPaddle.prototype = new Paddle;
 YellowPaddle.prototype.constructor = YellowPaddle;
 
-YellowPaddle.prototype.moveDown = function( ) {
-	Paddle.prototype.moveDown.call( this );
-	
-	this.velocity.y = viewport.height * 0.25;
-};
-
-YellowPaddle.prototype.moveUp = function( ) {
-	Paddle.prototype.moveUp.call( this );
-	
-	this.velocity.y = -viewport.height * 0.25;
-};
-
 YellowPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	this.projectile.tint = new Color( 255, 255, 0 );

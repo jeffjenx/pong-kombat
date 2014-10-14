@@ -8,7 +8,17 @@ function HUDLayer( scene ) {
 	leftHealth.registration.y = 0;
 	leftHealth.size.x = viewport.width * 0.50;
 	leftHealth.size.y = viewport.height * 0.05;
+	leftHealth.tint = new Color( 0, 255, 0 );
 	this.addComponent( 'LeftHealth', leftHealth );
+	
+	var leftName = new Text( 'Test' );
+	leftName.color = 'white';
+	leftName.fontSize = viewport.height * 0.03;
+	leftName.textAlign = 'left';
+	leftName.textBaseline = 'top';
+	leftName.position.x = 0;
+	leftName.position.y = 0;
+	this.addComponent( 'LeftName', leftName );
 	
 	var rightHealth = new Sprite( 'Ball' );
 	rightHealth.position.x = viewport.width;
@@ -17,7 +27,17 @@ function HUDLayer( scene ) {
 	rightHealth.registration.y = 0;
 	rightHealth.size.x = viewport.width * 0.50;
 	rightHealth.size.y = viewport.height * 0.05;
+	rightHealth.tint = new Color( 0, 255, 0 );
 	this.addComponent( 'RightHealth', rightHealth );
+	
+	var rightName = new Text( 'Test' );
+	rightName.color = 'white';
+	rightName.fontSize = viewport.height * 0.03;
+	rightName.textAlign = 'right';
+	rightName.textBaseline = 'top';
+	rightName.position.x = viewport.width;
+	rightName.position.y = 0;
+	this.addComponent( 'RightName', rightName );
 }
 
 HUDLayer.prototype = new Layer;
