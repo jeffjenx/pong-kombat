@@ -69,6 +69,9 @@ var SceneManager = {
 		this.nextScene = null;
 		this.transitioning = false;
 		InputManager.context = ( this.transitionContext == "Mouse" ) ? Mouse : Keyboard;
+		while( InputManager.history.length ) {
+			InputManager.history.pop( );
+		}
 		InputManager.mouse.x = viewport.width / 2;
 		InputManager.mouse.y = viewport.height / 2;
 		this.transitionContext = false;

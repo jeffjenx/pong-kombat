@@ -145,6 +145,10 @@ App.prototype.initialize = function( ) {
 	
 	window.onkeyup = function( input ) {
 		delete InputManager.currentState[ Keyboard[ input.keyCode ] ];
+		if( InputManager.history.length > 10 ) {
+			InputManager.history.splice( 0, InputManager.history.length - 10 );
+		}
+		InputManager.history.push( Keyboard[ input.keyCode ] );
 	};
 	
 	if( window.navigator.msPointerEnabled )

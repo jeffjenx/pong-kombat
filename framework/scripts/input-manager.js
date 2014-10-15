@@ -26,6 +26,8 @@ var InputManager = {
 	currentState : { },
 	previousState : { },
 	
+	history : [ ],
+	
 	context : Keyboard,
 	mouse : { x : 0, y : 0 },
 	
@@ -47,6 +49,16 @@ var InputManager = {
 		}
 		
 		return ( this.wasButtonDown( button ) && this.isButtonUp( button ) ) ? true : false;
+	},
+	
+	checkSequence : function( buttonSequence ) {
+		var sequence = buttonSequence.join( );
+		var history = InputManager.history.join( );
+		if( sequence !== history.substring( history.length - sequence.length ) ) {
+			return false;
+		}
+		
+		return true;
 	},
 	
 	handlePointers : function( event ) {
