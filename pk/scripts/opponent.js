@@ -41,7 +41,9 @@ Opponent.prototype.setPaddle = function( paddle ) {
 };
 
 Opponent.prototype.update = function( deltaTime ) {
-	this.applyAI( );
+	if( this.layer.scene.state === this.layer.scene.states.fighting ) {
+		this.applyAI( );
+	}
 	this.paddle.update( deltaTime );
 	this.paddle.restrictToBounds( );
 };

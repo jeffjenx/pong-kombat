@@ -22,10 +22,8 @@ Player.prototype.handleInput = function( ) {
 				this.paddle.moveDown( );
 			}
 			
-			//if( this.paddle.canShootProjectile( ) && InputManager.checkButtonPress( Buttons.ACTION ) )
 			if( this.paddle.canShootProjectile( ) && InputManager.checkSequence( [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) )
 			{
-				console.log( InputManager.checkSequence( [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) );
 				this.paddle.shootProjectile( );
 			}
 		break;

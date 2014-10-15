@@ -1,12 +1,17 @@
 function KombatLayer( scene ) {
 	Layer.call( this, scene );
-	
-	this.addComponent( 'Ball', new Ball( ) );
-	this.components['Ball'].reset( );
 }
 
 KombatLayer.prototype = new Layer;
 KombatLayer.prototype.constructor = KombatLayer;
+
+KombatLayer.prototype.setBall = function( ) {
+	if( !this.components['Ball'] ) {
+		this.addComponent( 'Ball', new Ball( ) );
+	}
+	
+	this.components['Ball'].reset( );
+};
 
 KombatLayer.prototype.addKombatant = function( kombatant ) {
 	if( this.components['LeftKombatant'] ) {
@@ -21,7 +26,7 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 };
 
 KombatLayer.prototype.update = function( deltaTime ) {
-	if( this.scene.matchOver ) {
+	if( this.scene.state !== this.scene.states.fighting ) {
 		return;
 	}
 	

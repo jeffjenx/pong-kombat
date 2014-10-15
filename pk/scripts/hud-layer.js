@@ -11,7 +11,7 @@ function HUDLayer( scene ) {
 	leftHealth.tint = new Color( 0, 255, 0 );
 	this.addComponent( 'LeftHealth', leftHealth );
 	
-	var leftName = new Text( 'Test' );
+	var leftName = new Text( );
 	leftName.color = 'white';
 	leftName.fontSize = viewport.height * 0.03;
 	leftName.textAlign = 'left';
@@ -30,7 +30,7 @@ function HUDLayer( scene ) {
 	rightHealth.tint = new Color( 0, 255, 0 );
 	this.addComponent( 'RightHealth', rightHealth );
 	
-	var rightName = new Text( 'Test' );
+	var rightName = new Text( );
 	rightName.color = 'white';
 	rightName.fontSize = viewport.height * 0.03;
 	rightName.textAlign = 'right';
@@ -38,6 +38,14 @@ function HUDLayer( scene ) {
 	rightName.position.x = viewport.width;
 	rightName.position.y = 0;
 	this.addComponent( 'RightName', rightName );
+	
+	var announcement = new Text( 'Bounce' );
+	announcement.color = 'white';
+	announcement.fontSize = viewport.height * 0.10;
+	announcement.textAlign = 'center';
+	announcement.position.x = viewport.width * 0.50;
+	announcement.position.y = viewport.height * 0.50;
+	this.addComponent( 'Announcement', announcement );
 }
 
 HUDLayer.prototype = new Layer;
