@@ -11,18 +11,6 @@ function BluePaddle( ) {
 BluePaddle.prototype = new Paddle;
 BluePaddle.prototype.constructor = BluePaddle;
 
-BluePaddle.prototype.moveDown = function( ) {
-	Paddle.prototype.moveDown.call( this );
-	
-	this.velocity.y = viewport.height * 0.25;
-};
-
-BluePaddle.prototype.moveUp = function( ) {
-	Paddle.prototype.moveUp.call( this );
-	
-	this.velocity.y = -viewport.height * 0.25;
-};
-
 BluePaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	this.projectile.tint = new Color( 0, 0, 255 );
