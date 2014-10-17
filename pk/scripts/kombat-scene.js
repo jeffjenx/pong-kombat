@@ -54,16 +54,6 @@ KombatScene.prototype.update = function( deltaTime ) {
 			}
 		break;
 		
-		/*
-		case this.states.starting :
-			if( this.stateTime >= 3 ) {
-				this.changeState( this.states.fighting );
-				this.layers['HUD'].removeComponent( 'Announcement' );
-				this.layers['Kombat'].setBall( );
-			}
-		break;
-		*/
-		
 		case this.states.fighting :
 			if( leftKombatant.score >= this.winningScore || rightKombatant.score >= this.winningScore ) {
 				this.winner = ( leftKombatant.score > rightKombatant.score ) ? leftKombatant : rightKombatant;
@@ -74,14 +64,6 @@ KombatScene.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.states.finishing :
-			/*
-			if( this.stateTime >= 3 ) {
-				this.layers['HUD'].removeComponent( 'FinishThem' );
-			} else {
-				this.layers['Kombat'].centerPaddles( );
-			}
-			*/
-			
 			if( this.stateTime >= 3 ) {
 				this.changeState( this.states.ending );
 				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
