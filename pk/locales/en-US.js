@@ -13,6 +13,7 @@
 	"images" :
 	{
 		"Paddle" : "images/paddle.png",
-		"Ball" : "images/ball.png"
+		"Ball" : "images/ball.png",
+		"Black" : "images/black.png"
 	}
 }

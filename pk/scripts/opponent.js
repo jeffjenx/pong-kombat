@@ -29,6 +29,10 @@ Opponent.prototype.applyAI = function( ) {
 	}
 };
 
+Opponent.prototype.handleDismantle = function( ) {
+	this.paddle.shootProjectile( );
+};
+
 Opponent.prototype.setPaddle = function( paddle ) {
 	switch( paddle ) {
 		case 'Blue' :
@@ -42,7 +46,7 @@ Opponent.prototype.setPaddle = function( paddle ) {
 
 Opponent.prototype.update = function( deltaTime ) {
 	if( this.layer.scene.state === this.layer.scene.states.fighting ) {
-		this.applyAI( );
+		//this.applyAI( );
 	}
 	this.paddle.update( deltaTime );
 	this.paddle.restrictToBounds( );

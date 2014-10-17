@@ -5,15 +5,15 @@ function KombatScene( ) {	Scene.call( this );
 	
 	this.winningScore = 1;
 	this.states = {
-		starting : 0,
-		fighting : 1,
+		announcing : 0,
+		starting : 1,
+		fighting : 2,
 		finishing : 3,
-		ending : 4
+		dismantling : 4,
+		ending : 5
 	};
-	this.state = this.states.starting;
-	this.stateTime = 0;
 	
-	this.winner = null;}KombatScene.prototype = new Scene;KombatScene.prototype.constructor = KombatScene;
+	this.startMatch( );}KombatScene.prototype = new Scene;KombatScene.prototype.constructor = KombatScene;
 
 KombatScene.prototype.addKombatant = function( kombatant ) {
 	this.layers['Kombat'].addKombatant( kombatant );
@@ -22,6 +22,13 @@ KombatScene.prototype.addKombatant = function( kombatant ) {
 KombatScene.prototype.changeState = function( state ) {
 	this.state = state;
 	this.stateTime = 0;
+};
+
+KombatScene.prototype.startMatch = function( ) {
+	this.layers['HUD'].addAnnouncement( 'Bounce' );
+	this.stateTime = 0;
+	this.state = this.states.announcing;
+	this.winner = null;
 };
 
 KombatScene.prototype.update = function( deltaTime ) {
@@ -33,6 +40,21 @@ KombatScene.prototype.update = function( deltaTime ) {
 	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
 	
 	switch( this.state ) {
+		case this.states.announcing :
+			if( this.stateTime >= 3 ) {
+				this.layers['HUD'].removeComponent( 'Announcement' );
+				if( this.winner === null ) {
+					this.changeState( this.states.fighting );
+					this.layers['Kombat'].setBall( );
+				} else {
+					this.changeState( this.states.finishing );
+				}
+			} else {
+				this.layers['Kombat'].centerPaddles( );
+			}
+		break;
+		
+		/*
 		case this.states.starting :
 			if( this.stateTime >= 3 ) {
 				this.changeState( this.states.fighting );
@@ -40,29 +62,35 @@ KombatScene.prototype.update = function( deltaTime ) {
 				this.layers['Kombat'].setBall( );
 			}
 		break;
+		*/
 		
 		case this.states.fighting :
 			if( leftKombatant.score >= this.winningScore || rightKombatant.score >= this.winningScore ) {
-				this.changeState( this.states.finishing );
 				this.winner = ( leftKombatant.score > rightKombatant.score ) ? leftKombatant : rightKombatant;
-				this.stateTime = 0;
-				var finishThem = new Text( 'Finish Them' );
 				this.layers['Kombat'].removeComponent( 'Ball' );
-				this.layers['HUD'].addComponent( 'FinishThem', finishThem );
+				this.layers['HUD'].addAnnouncement( "Finish'm!" );
+				this.changeState( this.states.announcing );
 			}
 		break;
 		
 		case this.states.finishing :
+			/*
 			if( this.stateTime >= 3 ) {
 				this.layers['HUD'].removeComponent( 'FinishThem' );
 			} else {
 				this.layers['Kombat'].centerPaddles( );
 			}
+			*/
 			
-			if( this.stateTime >= 6 ) {
+			if( this.stateTime >= 3 ) {
 				this.changeState( this.states.ending );
 				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 			}
+		break;
+		
+		case this.states.dismantling :
+			this.layers['HUD'].cinemaMode( );
+			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
 		break;
 		
 		case this.states.ending :
