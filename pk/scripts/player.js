@@ -20,9 +20,14 @@ Player.prototype.handleDismantle = function( kombatScene ) {
 };
 
 Player.prototype.handleInput = function( ) {
-	switch( InputManager.context )
-	{
-		case Keyboard :
+	switch( this.layer.scene.state ) {
+		case this.layer.scene.states.finishing :
+			if( InputManager.checkSequence( [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) ) {
+				this.layer.scene.changeState( this.layer.scene.states.dismantling );
+			}
+		break;
+		
+		case this.layer.scene.states.fighting :
 			if( InputManager.isButtonDown( Buttons.UP ) )
 			{
 				this.paddle.moveUp( );
@@ -35,10 +40,6 @@ Player.prototype.handleInput = function( ) {
 			if( this.paddle.canShootProjectile( ) && InputManager.checkSequence( [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) )
 			{
 				this.paddle.shootProjectile( );
-			}
-			
-			if( this.layer.scene.state === this.layer.scene.states.finishing && InputManager.checkSequence( [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) ) {
-				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}
 		break;
 	}
