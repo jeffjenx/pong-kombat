@@ -91,6 +91,15 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.dismantling :
 			this.layers['HUD'].cinemaMode( );
 			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
+	
+			if( this.stateTime >= 7 ) {
+				this.changeState( this.states.ending );
+				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+				
+				var dismantled = new Text( 'Dismantled!' );
+				dismantled.position.y = viewport.height * 0.60;
+				this.layers['HUD'].addComponent( 'Dismantled', dismantled );
+			}
 		break;
 		
 		case this.states.ending :
