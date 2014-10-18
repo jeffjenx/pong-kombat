@@ -9,23 +9,13 @@ Player.prototype.draw = function( context ) {
 	this.paddle.draw( context );
 };
 
-Player.prototype.handleDismantle = function( kombatScene ) {
-	this.handleInput( );
-	switch( InputManager.context )
-	{
-		case Keyboard :
-			
-		break;
-	}
-};
-
 Player.prototype.handleInput = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.finishing :
 			if( InputManager.checkSequence( [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ] ) ) {
 				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}
-		break;
+		// No "break;" on this case
 		
 		case this.layer.scene.states.fighting :
 			if( InputManager.isButtonDown( Buttons.UP ) )
@@ -57,6 +47,16 @@ Player.prototype.setPaddle = function( paddle ) {
 };
 
 Player.prototype.update = function( deltaTime ) {
-	this.handleInput( deltaTime );
+	switch( this.layer.scene.state ) {
+		case this.layer.scene.states.fighting :
+			this.handleInput( );
+		break;
+		
+		case this.layer.scene.states.finishing :
+			if( this === this.layer.scene.winner ) {
+				this.handleInput( );
+			}
+		break;
+	}
 	this.paddle.update( deltaTime );
 };

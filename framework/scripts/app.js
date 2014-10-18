@@ -141,7 +141,10 @@ App.prototype.initialize = function( ) {
 	window.onkeydown = function( input ) {
 		InputManager.context = Keyboard;
 		InputManager.currentState[ Keyboard[ input.keyCode ] ] = Date.now( );
+		clearTimeout( this.keySequenceTimer );
 	};
+	
+	this.keySequenceTimer = null;
 	
 	window.onkeyup = function( input ) {
 		delete InputManager.currentState[ Keyboard[ input.keyCode ] ];
@@ -149,6 +152,12 @@ App.prototype.initialize = function( ) {
 			InputManager.history.splice( 0, InputManager.history.length - 10 );
 		}
 		InputManager.history.push( Keyboard[ input.keyCode ] );
+		this.keySequenceTimer = setTimeout( function( ) {
+			if( InputManager.history.length > 10 ) {
+				InputManager.history.splice( 0, InputManager.history.length - 10 );
+			}
+			InputManager.history.push( '-' );
+		}, 500 );
 	};
 	
 	if( window.navigator.msPointerEnabled )

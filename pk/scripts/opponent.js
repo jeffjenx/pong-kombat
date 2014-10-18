@@ -11,26 +11,37 @@ Opponent.prototype.draw = function( context ) {
 };
 
 Opponent.prototype.applyAI = function( ) {
-	var ball = this.layer.components['Ball'];
-	
-	if( this.paddle.boundingBox.bottom < ball.position.y )
-	{
-		this.paddle.moveDown( );
+	switch( this.layer.scene.state ) {
+		case this.layer.scene.states.fighting :
+			var ball = this.layer.components['Ball'];
+			
+			if( this.paddle.boundingBox.bottom < ball.position.y )
+			{
+				this.paddle.moveDown( );
+			}
+			else if( this.paddle.boundingBox.top > ball.position.y )
+			{
+				this.paddle.moveUp( );
+			}
+			
+			if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
+			{
+				this.paddle.shootProjectile( );
+				this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+			}
+		break;
+		
+		case this.layer.scene.states.finishing :
+			if( !this.randomizer ) {
+				this.randomizer = Math.random( );
+			}
+			if( this.randomizer < 0.11 ) {
+				this.layer.scene.changeState( this.layer.scene.states.dismantling );
+			} else if( this.paddle.canShootProjectile( ) ) {
+				this.paddle.shootProjectile( );
+			}
+		break;
 	}
-	else if( this.paddle.boundingBox.top > ball.position.y )
-	{
-		this.paddle.moveUp( );
-	}
-	
-	if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
-	{
-		this.paddle.shootProjectile( );
-		this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
-	}
-};
-
-Opponent.prototype.handleDismantle = function( ) {
-	this.paddle.shootProjectile( );
 };
 
 Opponent.prototype.setPaddle = function( paddle ) {
@@ -45,8 +56,16 @@ Opponent.prototype.setPaddle = function( paddle ) {
 };
 
 Opponent.prototype.update = function( deltaTime ) {
-	if( this.layer.scene.state === this.layer.scene.states.fighting ) {
-		this.applyAI( );
+	switch( this.layer.scene.state ) {
+		case this.layer.scene.states.fighting :
+			this.applyAI( );
+		break;
+		
+		case this.layer.scene.states.finishing :
+			if( this === this.layer.scene.winner ) {
+				this.applyAI( );
+			}
+		break;
 	}
 	this.paddle.update( deltaTime );
 	this.paddle.restrictToBounds( );
