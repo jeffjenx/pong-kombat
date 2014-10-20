@@ -1,6 +1,7 @@
 function KombatScene( ) {	Scene.call( this );
 		this.addLayer( 'Background', new BackgroundLayer( this ) );
 	this.addLayer( 'Kombat', new KombatLayer( this ) );
+	this.addLayer( 'Foreground', new ForegroundLayer( this ) );
 	this.addLayer( 'HUD', new HUDLayer( this ) );
 	
 	this.winningScore = 1;
@@ -22,6 +23,25 @@ KombatScene.prototype.addKombatant = function( kombatant ) {
 KombatScene.prototype.changeState = function( state ) {
 	this.state = state;
 	this.stateTime = 0;
+};
+
+KombatScene.prototype.setLevel = function( level ) {
+	switch( level ) {
+		case Levels.RANDOM :
+			console.log( Levels );
+			this.setLevel( Math.ceil( Math.random( ) * 2 ) ); // TODO: count Levels property
+		break;
+		
+		case Levels.DEFAULT :
+			this.layers['Background'] = new DefaultBackgroundLayer( this );
+			this.layers['Foreground'] = new DefaultForegroundLayer( this );
+		break;
+		
+		case Levels.FOREST :
+			this.layers['Background'] = new ForestBackgroundLayer( this );
+			this.layers['Foreground'] = new ForestForegroundLayer( this );
+		break;
+	}
 };
 
 KombatScene.prototype.startMatch = function( ) {

@@ -14,6 +14,9 @@
 	{
 		"Paddle" : "images/paddle.png",
 		"Ball" : "images/ball.png",
-		"Black" : "images/black.png"
+		"Black" : "images/black.png",
+		
+		"Background-Default" : "images/backgrounds/default.png",
+		"Background-Forest" : "images/backgrounds/forest.png"
 	}
 }

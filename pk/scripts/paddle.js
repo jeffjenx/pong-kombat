@@ -1,3 +1,16 @@
+var Paddles = {
+	RANDOM   : 0,
+	CUSTOM   : 1,
+	BLUE     : 2,
+	GREEN    : 3,
+	MONOLITH : 4,
+	PURPLE   : 5,
+	RED      : 6,
+	SHIFTER  : 7,
+	WHITE    : 8,
+	YELLOW   : 9,
+};
+
 function Paddle( ) {
 	Sprite.call( this, 'Paddle' );
 	

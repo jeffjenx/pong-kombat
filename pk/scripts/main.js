@@ -1,9 +1,14 @@
 load( "pk/scripts/", [
-	"paddle",
 	"player",
 	"opponent",
 	"ball",
 	"projectile",
+	"level",
+	"levels/default-background",
+	"levels/default-foreground",
+	"levels/forest-background",
+	"levels/forest-foreground",
+	"paddle",
 	"paddles/yellow-paddle",
 	"paddles/blue-paddle",
 	
@@ -12,7 +17,6 @@ load( "pk/scripts/", [
 	"choose-paddle-scene",
 	"kombat-scene",
 	
-	"background-layer",
 	"kombat-layer",
 	"hud-layer"
 ] );

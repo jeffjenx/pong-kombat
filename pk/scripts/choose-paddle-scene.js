@@ -42,6 +42,8 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 		computer.setPaddle( this.selectedText.text === 'Yellow' ? 'Blue' : 'Yellow' );
 		kombatScene.addKombatant( computer );
 		
+		kombatScene.setLevel( Levels.RANDOM );
+		
 		SceneManager.changeScene( kombatScene, Transitions.NONE );
 	}
 	
