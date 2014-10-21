@@ -1,14 +1,16 @@
 var Paddles = {
 	RANDOM   : 0,
 	CUSTOM   : 1,
+	
 	BLUE     : 2,
 	GREEN    : 3,
-	MONOLITH : 4,
-	PURPLE   : 5,
-	RED      : 6,
+	PURPLE   : 4,
+	RED      : 5,
+	YELLOW   : 6,
+	
 	SHIFTER  : 7,
-	WHITE    : 8,
-	YELLOW   : 9,
+	MONOLITH : 8,
+	WHITE    : 9
 };
 
 function Paddle( ) {

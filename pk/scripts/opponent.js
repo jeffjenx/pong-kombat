@@ -46,12 +46,15 @@ Opponent.prototype.applyAI = function( ) {
 
 Opponent.prototype.setPaddle = function( paddle ) {
 	switch( paddle ) {
-		case 'Blue' :
-			this.paddle = new BluePaddle( );
-		break;
-		case 'Yellow' :
-			this.paddle = new YellowPaddle( );
-		break;
+		case Paddles.RANDOM : this.setPaddle( Math.floor( 2 + Math.random( ) * 5 ) ); break; // 2 + RAND[1,5] refers to Paddles ENUM
+		case Paddles.BLUE : this.paddle = new BluePaddle( ); break;
+		case Paddles.YELLOW : this.paddle = new YellowPaddle( ); break;
+		case Paddles.RED : this.paddle = new RedPaddle( ); break;
+		case Paddles.GREEN : this.paddle = new GreenPaddle( ); break;
+		case Paddles.PURPLE : this.paddle = new PurplePaddle( ); break;
+		case Paddles.WHITE : this.paddle = new WhitePaddle( ); break;
+		case Paddles.SHIFTER : this.paddle = new ShifterPaddle( ); break;
+		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
 	}
 };
 

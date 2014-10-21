@@ -13,11 +13,18 @@ load( "pk/scripts/", [
 	"paddle",
 	"paddles/yellow-paddle",
 	"paddles/blue-paddle",
+	"paddles/green-paddle",
+	"paddles/red-paddle",
+	"paddles/purple-paddle",
+	"paddles/shifter-paddle",
+	"paddles/monolith-paddle",
+	"paddles/white-paddle",
 	
 	"splash-scene",
 	"title-scene",
 	"choose-paddle-scene",
 	"kombat-scene",
+	"tournament-scene",
 	
 	"kombat-layer",
 	"hud-layer"

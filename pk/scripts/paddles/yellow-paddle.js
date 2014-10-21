@@ -5,6 +5,7 @@ function YellowPaddle( ) {
 	this.size.y = viewport.height * 0.15;
 	this.tint = new Color( 255, 255, 0 );
 	
+	this.enum = "YELLOW";
 	this.name = "Yellow Paddle";
 }
 
@@ -22,7 +23,7 @@ YellowPaddle.prototype.dismantle = function( opponent ) {
 
 YellowPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
-	this.projectile.tint = new Color( 255, 255, 0 );
+	this.projectile.tint = this.tint;
 };
 
 YellowPaddle.prototype.update = function( deltaTime ) {

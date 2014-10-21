@@ -28,7 +28,6 @@ KombatScene.prototype.changeState = function( state ) {
 KombatScene.prototype.setLevel = function( level ) {
 	switch( level ) {
 		case Levels.RANDOM :
-			console.log( Levels );
 			this.setLevel( Math.ceil( Math.random( ) * 2 ) ); // TODO: count Levels property
 		break;
 		

@@ -1,18 +1,18 @@
-function BluePaddle( ) {
+function GreenPaddle( ) {
 	Paddle.call( this );
 	
 	this.size.x = viewport.height * 0.02;
 	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 0, 0, 255 );
+	this.tint = new Color( 0, 255, 0 );
 	
-	this.enum = "BLUE";
-	this.name = "Blue Paddle";
+	this.enum = "GREEN";
+	this.name = "Green Paddle";
 }
 
-BluePaddle.prototype = new Paddle;
-BluePaddle.prototype.constructor = BluePaddle;
+GreenPaddle.prototype = new Paddle;
+GreenPaddle.prototype.constructor = GreenPaddle;
 
-BluePaddle.prototype.dismantle = function( opponent ) {
+GreenPaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
 	
 	if( sceneTime < 2 ) {
@@ -21,12 +21,12 @@ BluePaddle.prototype.dismantle = function( opponent ) {
 	}
 };
 
-BluePaddle.prototype.shootProjectile = function( ) {
+GreenPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	this.projectile.tint = this.tint;
 };
 
-BluePaddle.prototype.update = function( deltaTime ) {
+GreenPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
 };

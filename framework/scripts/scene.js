@@ -7,6 +7,7 @@ Scene.prototype.constructor = Scene;
 
 Scene.prototype.addLayer = function( id, layer ) {
 	this.layers[id] = layer;
+	return this.layers[id];
 };
 
 Scene.prototype.draw = function( context ) {
