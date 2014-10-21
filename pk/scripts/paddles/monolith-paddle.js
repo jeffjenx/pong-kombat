@@ -7,6 +7,8 @@ function MonolithPaddle( ) {
 	
 	this.enum = "MONOLITH";
 	this.name = "Monolith";
+	this.endStory = "monolith end story";
+	this.story = "monolith story";
 }
 
 MonolithPaddle.prototype = new Paddle;

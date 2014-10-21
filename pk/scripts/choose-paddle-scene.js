@@ -98,9 +98,14 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 		player.setPaddle( Paddles[this.paddles[this.currentIndex].enum] );
 		
 		if( app.gameMode === GameModes.TOURNAMENT ) {
-			app.tournament = new TournamentScene( );
-			app.tournament.startPlayer( player );
-			SceneManager.changeScene( app.tournament, Transitions.NONE );
+			if( app.tournament ) {
+				app.tournament.changePlayer( player );
+				SceneManager.changeScene( app.tournament, Transitions.NONE );
+			} else {
+				app.tournament = new TournamentScene( );
+				app.tournament.startPlayer( player );
+				SceneManager.changeScene( app.tournament, Transitions.NONE );
+			}
 		} else {
 			var computer = new Opponent( );
 			computer.setPaddle( Paddles.RANDOM );

@@ -25,6 +25,7 @@ load( "pk/scripts/", [
 	"choose-paddle-scene",
 	"kombat-scene",
 	"tournament-scene",
+	"story-scene",
 	
 	"kombat-layer",
 	"hud-layer"

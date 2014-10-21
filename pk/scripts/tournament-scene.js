@@ -12,6 +12,13 @@ function TournamentScene( ) {	Scene.call( this );
 	titleText.fontSize = viewport.height * 0.10;
 	layer.addComponent( 'TitleText', titleText );}TournamentScene.prototype = new Scene;TournamentScene.prototype.constructor = TournamentScene;
 
+TournamentScene.prototype.changePlayer = function( player ) {
+	this.player = player;
+	this.layers['Tournament'].components['Player'] = this.player.paddle;
+	this.player.paddle.position.x = viewport.width / ( this.opponents.length + 1 ) * ( this.currentIndex + 1 );
+	this.player.paddle.position.y = viewport.height * 0.33;
+};
+
 TournamentScene.prototype.startPlayer = function( player ) {
 	this.player = player;
 	
@@ -47,6 +54,7 @@ TournamentScene.prototype.startPlayer = function( player ) {
 	}
 	
 	this.layers['Tournament'].addComponent( 'Player', this.player.paddle );
+	this.currentIndex = this.opponents.length - 2;
 	this.increaseRank( );
 };
 

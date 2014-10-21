@@ -106,8 +106,19 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.ending :
 			if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
 				if( app.tournament ) {
-					app.tournament.increaseRank( );
-					SceneManager.changeScene( app.tournament, Transitions.NONE );
+					if( app.tournament.player === this.winner ) {
+						app.tournament.increaseRank( );
+						if( app.tournament.currentIndex >= app.tournament.opponents.length ) {
+							var storyScene = new StoryScene( );
+							storyScene.setPaddle( app.tournament.player.paddle );
+							storyScene.setStory( 'end' );
+							SceneManager.changeScene( storyScene, Transitions.NONE );
+						} else {
+							SceneManager.changeScene( app.tournament, Transitions.NONE );
+						}
+					} else {
+						SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
+					}
 				} else {
 					SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
 				}

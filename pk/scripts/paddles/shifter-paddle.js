@@ -7,6 +7,8 @@ function ShifterPaddle( ) {
 	
 	this.enum = "SHIFTER";
 	this.name = "Shifter";
+	this.endStory = "shifter end story";
+	this.story = "shifter story";
 }
 
 ShifterPaddle.prototype = new Paddle;

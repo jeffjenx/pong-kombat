@@ -7,6 +7,8 @@ function YellowPaddle( ) {
 	
 	this.enum = "YELLOW";
 	this.name = "Yellow Paddle";
+	this.endStory = "yellow end story";
+	this.story = "yellow story";
 }
 
 YellowPaddle.prototype = new Paddle;
