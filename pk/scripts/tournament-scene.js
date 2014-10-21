@@ -60,12 +60,13 @@ TournamentScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
+		this.player.score = 0;
+		
 		var computer = new Opponent( );
 		computer.setPaddle( Paddles[this.opponents[this.currentIndex].enum] );
 		
 		var kombatScene = new KombatScene( );
-		
-kombatScene.addKombatant( this.player );
+		kombatScene.addKombatant( this.player );
 		kombatScene.addKombatant( computer );
 		kombatScene.setLevel( Levels.RANDOM );
 		SceneManager.changeScene( kombatScene, Transitions.NONE );

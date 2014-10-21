@@ -98,9 +98,9 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 		player.setPaddle( Paddles[this.paddles[this.currentIndex].enum] );
 		
 		if( app.gameMode === GameModes.TOURNAMENT ) {
-			var tournamentScene = new TournamentScene( );
-			tournamentScene.startPlayer( player );
-			SceneManager.changeScene( tournamentScene, Transitions.NONE );
+			app.tournament = new TournamentScene( );
+			app.tournament.startPlayer( player );
+			SceneManager.changeScene( app.tournament, Transitions.NONE );
 		} else {
 			var computer = new Opponent( );
 			computer.setPaddle( Paddles.RANDOM );

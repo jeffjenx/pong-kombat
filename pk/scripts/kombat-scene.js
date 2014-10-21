@@ -105,7 +105,12 @@ KombatScene.prototype.update = function( deltaTime ) {
 		
 		case this.states.ending :
 			if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
-				SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
+				if( app.tournament ) {
+					app.tournament.increaseRank( );
+					SceneManager.changeScene( app.tournament, Transitions.NONE );
+				} else {
+					SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
+				}
 			}
 		break;
 	}
