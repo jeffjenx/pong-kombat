@@ -30,13 +30,17 @@ TitleScene.prototype.draw = function( context ) {
 	this.background.draw( context );
 	*/
 	this.titleText.draw( context );
+	
+	if( this.layers['Menu'] ) {
+		this.layers['Menu'].draw( context );
+	}
 };
 
 TitleScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( !this.layers['Menu'] && InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
-		SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
+		this.addLayer( 'Menu', new TitleMenu( this ) );
 	}
 };

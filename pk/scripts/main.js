@@ -3,6 +3,8 @@ load( "pk/scripts/", [
 	"opponent",
 	"ball",
 	"projectile",
+	"menu",
+	"menus/title-menu",
 	"level",
 	"levels/default-background",
 	"levels/default-foreground",
