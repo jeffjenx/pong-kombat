@@ -6,12 +6,6 @@ function TitleScene( ) {
 		document.body.style.direction = "rtl";
 	}
 	
-	/*
-	this.background = new Sprite( "BackgroundPaper" );
-	this.background.size.x = viewport.width;
-	this.background.size.y = viewport.height;
-	*/
-	
 	this.titleText = new Text( Resources['Localization'].Title );
 	this.titleText.color = "#FFE8B8";
 	this.titleText.fontFamily = "'Apple Garamond'";
@@ -26,9 +20,6 @@ TitleScene.prototype = new Scene;
 TitleScene.prototype.constructor = TitleScene;
 
 TitleScene.prototype.draw = function( context ) {
-	/*
-	this.background.draw( context );
-	*/
 	this.titleText.draw( context );
 	
 	if( this.layers['Menu'] ) {
@@ -42,5 +33,12 @@ TitleScene.prototype.update = function( deltaTime ) {
 	if( !this.layers['Menu'] && InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
 		this.addLayer( 'Menu', new TitleMenu( this ) );
+	}
+	
+	if( !this.layers['Menu'] && this.timeElapsed > 5 ) {
+		var storyScene = new StoryScene( );
+		storyScene.setPaddle( Paddles.RANDOM );
+		storyScene.setStory( 'background' );
+		SceneManager.changeScene( storyScene, Transitions.NONE );
 	}
 };

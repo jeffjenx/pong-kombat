@@ -28,7 +28,13 @@ KombatScene.prototype.changeState = function( state ) {
 KombatScene.prototype.setLevel = function( level ) {
 	switch( level ) {
 		case Levels.RANDOM :
-			this.setLevel( Math.ceil( Math.random( ) * 2 ) ); // TODO: count Levels property
+			var count = 0;
+			for( var i in Levels) {
+				if( Levels.hasOwnProperty(i) && i !== "RANDOM" ) {
+					++count;
+				}
+			}
+			this.setLevel( Math.ceil( Math.random( ) * count ) );
 		break;
 		
 		case Levels.DEFAULT :
@@ -39,6 +45,46 @@ KombatScene.prototype.setLevel = function( level ) {
 		case Levels.FOREST :
 			this.layers['Background'] = new ForestBackgroundLayer( this );
 			this.layers['Foreground'] = new ForestForegroundLayer( this );
+		break;
+		
+		case Levels.HELL :
+			this.layers['Background'] = new HellBackgroundLayer( this );
+			this.layers['Foreground'] = new HellForegroundLayer( this );
+		break;
+		
+		case Levels.HIGHWAY :
+			this.layers['Background'] = new HighwayBackgroundLayer( this );
+			this.layers['Foreground'] = new HighwayForegroundLayer( this );
+		break;
+		
+		case Levels.ICERIVER :
+			this.layers['Background'] = new IceRiverBackgroundLayer( this );
+			this.layers['Foreground'] = new IceRiverForegroundLayer( this );
+		break;
+		
+		case Levels.PIT :
+			this.layers['Background'] = new PitBackgroundLayer( this );
+			this.layers['Foreground'] = new PitForegroundLayer( this );
+		break;
+		
+		case Levels.PORTAL :
+			this.layers['Background'] = new PortalBackgroundLayer( this );
+			this.layers['Foreground'] = new PortalForegroundLayer( this );
+		break;
+		
+		case Levels.STORM :
+			this.layers['Background'] = new StormBackgroundLayer( this );
+			this.layers['Foreground'] = new StormForegroundLayer( this );
+		break;
+		
+		case Levels.TOWER :
+			this.layers['Background'] = new TowerBackgroundLayer( this );
+			this.layers['Foreground'] = new TowerForegroundLayer( this );
+		break;
+		
+		case Levels.TOXICPOOL :
+			this.layers['Background'] = new ToxicPoolBackgroundLayer( this );
+			this.layers['Foreground'] = new ToxicPoolForegroundLayer( this );
 		break;
 	}
 };

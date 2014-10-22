@@ -21,7 +21,7 @@ SplashScene.prototype.draw = function( context ) {
 SplashScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed >= 5 )
 	{
 		SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
 	}

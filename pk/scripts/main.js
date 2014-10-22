@@ -10,6 +10,22 @@ load( "pk/scripts/", [
 	"levels/default-foreground",
 	"levels/forest-background",
 	"levels/forest-foreground",
+	"levels/hell-background",
+	"levels/hell-foreground",
+	"levels/highway-background",
+	"levels/highway-foreground",
+	"levels/ice-river-background",
+	"levels/ice-river-foreground",
+	"levels/pit-background",
+	"levels/pit-foreground",
+	"levels/portal-background",
+	"levels/portal-foreground",
+	"levels/storm-background",
+	"levels/storm-foreground",
+	"levels/tower-background",
+	"levels/tower-foreground",
+	"levels/toxic-pool-background",
+	"levels/toxic-pool-foreground",
 	"paddle",
 	"paddles/yellow-paddle",
 	"paddles/blue-paddle",
@@ -62,6 +78,7 @@ function ready( ) {
 		}
 	};
 	
+	ResourceManager.addJSON( 'Assets', 'scripts/assets.js' );
 	ResourceManager.addJSON( 'Localization', 'locales/' + app.language + '.js' );
 	
 	ResourceManager.onLoaded = function( ) {
