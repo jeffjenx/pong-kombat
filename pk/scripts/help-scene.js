@@ -6,14 +6,6 @@ function HelpScene( ) {
 	// Background Music Volume
 	// Back to Title Menu / Save
 	
-	if( !app.settings ) {
-		app.settings = {
-			censored : true,
-			sound_fx : 5,
-			music : 5
-		};
-	}
-	
 	var layer = this.addLayer( 'HelpLayer', new Layer( ) );
 	
 	var censoredLabel = new Text( 'Censored' );
@@ -30,13 +22,6 @@ function HelpScene( ) {
 	soundFXLabel.position.y = viewport.height * 0.50;
 	layer.addComponent( 'SoundFXLabel', soundFXLabel );
 	
-	var musicLabel = new Text( 'Music' );
-	musicLabel.fontSize = viewport.height * 0.05;
-	musicLabel.textAlign = 'left';
-	musicLabel.position.x = viewport.width * 0.25;
-	musicLabel.position.y = viewport.height * 0.67;
-	layer.addComponent( 'MusicLabel', musicLabel );
-	
 	var censoredValue = new Text( app.settings.censored ? 'On' : 'Off' );
 	censoredValue.fontSize = viewport.height * 0.05;
 	censoredValue.textAlign = 'right';
@@ -44,19 +29,19 @@ function HelpScene( ) {
 	censoredValue.position.y = viewport.height * 0.33;
 	layer.addComponent( 'CensoredValue', censoredValue );
 	
-	var soundFXValue = new Text( app.settings.sound_fx );
+	var soundFXValue = new Text( app.settings.sound_fx ? 'On' : 'Off' );
 	soundFXValue.fontSize = viewport.height * 0.05;
 	soundFXValue.textAlign = 'right';
 	soundFXValue.position.x = viewport.width * 0.75;
 	soundFXValue.position.y = viewport.height * 0.50;
 	layer.addComponent( 'SoundFXValue', soundFXValue );
 	
-	var musicValue = new Text( app.settings.music );
-	musicValue.fontSize = viewport.height * 0.05;
-	musicValue.textAlign = 'right';
-	musicValue.position.x = viewport.width * 0.75;
-	musicValue.position.y = viewport.height * 0.67;
-	layer.addComponent( 'MusicValue', musicValue );
+	// Audio
+	if( !app.isMobile( ) )
+	{
+		this.beepSound = new Sound( 'Beep' );
+		this.boopSound = new Sound( 'Boop' );
+	}
 	
 	this.selectSetting( 'censored' );
 }
@@ -79,53 +64,51 @@ HelpScene.prototype.selectSetting = function( setting ) {
 			this.layers['HelpLayer'].components['SoundFXLabel'].color = '#FF0';
 			this.layers['HelpLayer'].components['SoundFXValue'].color = '#FF0';
 		break;
-		
-		case 'music' :
-			this.layers['HelpLayer'].components['MusicLabel'].color = '#FF0';
-			this.layers['HelpLayer'].components['MusicValue'].color = '#FF0';
-		break;
 	}
 	
 	this.currentSetting = setting;
 };
 
 HelpScene.prototype.decreaseSetting = function( ) {
-	if( "boolean" === typeof( app.settings[this.currentSetting] ) ) {
-		app.settings[this.currentSetting] = !app.settings[this.currentSetting];
-	} else {
-		app.settings[this.currentSetting] -= 1;
-		
-		if( app.settings[this.currentSetting] < 1 ) {
-			app.settings[this.currentSetting] = 1;
-		}
+	switch( this.currentSetting ) {
+		case 'censored' : app.settings[this.currentSetting] = !app.settings[this.currentSetting]; break;
+		case 'sound_fx' :
+			app.settings[this.currentSetting] = !app.settings[this.currentSetting];
+			if( app.settings[this.currentSetting] === false ) {
+				AudioManager.mute( );
+			} else {
+				AudioManager.unmute( );
+				this.beepSound.play( );
+			}
+		break;
 	}
 	
 	this.layers['HelpLayer'].components['CensoredValue'].text = app.settings.censored ? 'On' : 'Off';
-	this.layers['HelpLayer'].components['SoundFXValue'].text = app.settings.sound_fx;
-	this.layers['HelpLayer'].components['MusicValue'].text = app.settings.music;
+	this.layers['HelpLayer'].components['SoundFXValue'].text = app.settings.sound_fx ? 'On' : 'Off';
 };
 
 HelpScene.prototype.increaseSetting = function( ) {
-	if( "boolean" === typeof( app.settings[this.currentSetting] ) ) {
-		app.settings[this.currentSetting] = !app.settings[this.currentSetting];
-	} else {
-		app.settings[this.currentSetting] += 1;
-		
-		if( app.settings[this.currentSetting] > 10 ) {
-			app.settings[this.currentSetting] = 10;
-		}
+	switch( this.currentSetting ) {
+		case 'censored' : app.settings[this.currentSetting] = !app.settings[this.currentSetting]; break;
+		case 'sound_fx' :
+			app.settings[this.currentSetting] = !app.settings[this.currentSetting];
+			if( app.settings[this.currentSetting] === false ) {
+				AudioManager.mute( );
+			} else {
+				AudioManager.unmute( );
+				this.beepSound.play( );
+			}
+		break;
 	}
 	
 	this.layers['HelpLayer'].components['CensoredValue'].text = app.settings.censored ? 'On' : 'Off';
-	this.layers['HelpLayer'].components['SoundFXValue'].text = app.settings.sound_fx;
-	this.layers['HelpLayer'].components['MusicValue'].text = app.settings.music;
+	this.layers['HelpLayer'].components['SoundFXValue'].text = app.settings.sound_fx ? 'On' : 'Off';
 };
 
 HelpScene.prototype.selectNextSetting = function( ) {
 	switch( this.currentSetting ) {
 		case 'censored' : this.selectSetting( 'sound_fx' ); break;
-		case 'sound_fx' : this.selectSetting( 'music' ); break;
-		case 'music'    : this.selectSetting( 'censored' ); break;
+		case 'sound_fx' : this.selectSetting( 'censored' ); break;
 	}
 };
 
@@ -133,7 +116,6 @@ HelpScene.prototype.selectPreviousSetting = function( ) {
 	switch( this.currentSetting ) {
 		case 'censored' : this.selectSetting( 'music' ); break;
 		case 'sound_fx' : this.selectSetting( 'censored' ); break;
-		case 'music'    : this.selectSetting( 'sound_fx' ); break;
 	}
 };
 
@@ -154,5 +136,9 @@ HelpScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.RIGHT ) ) {
 		this.increaseSetting( );
+	}
+	
+	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
+		SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
 	}
 };

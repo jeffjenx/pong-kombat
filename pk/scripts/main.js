@@ -58,8 +58,12 @@ function ready( ) {
 	}
 	
 	app = new App( );
-	app.aspectRatio = { x : 800, y : 530 };
+	app.aspectRatio = { x : 16, y : 9 };
 	app.resources = "pk/";
+	app.settings = {
+		censored : true,
+		sound_fx : true
+	};
 	if( window.lang !== undefined )
 	{
 		app.language = window.lang;
