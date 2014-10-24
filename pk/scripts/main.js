@@ -42,6 +42,7 @@ load( "pk/scripts/", [
 	"kombat-scene",
 	"tournament-scene",
 	"story-scene",
+	"help-scene",
 	
 	"kombat-layer",
 	"hud-layer"
