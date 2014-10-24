@@ -1,5 +1,7 @@
 function KombatLayer( scene ) {
 	Layer.call( this, scene );
+	
+	this.nextPowerup = this.scene.timeElapsed + 5 + Math.random( ) * 5;
 }
 
 KombatLayer.prototype = new Layer;
@@ -46,10 +48,19 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 	}
 };
 
+KombatLayer.prototype.addPowerup = function( ) {
+	this.addComponent( 'Powerup', new SpeedPowerup( ) );
+};
+
 KombatLayer.prototype.update = function( deltaTime ) {
 	var ball = this.components['Ball'];
 	var leftKombatant = this.components['LeftKombatant'];
 	var rightKombatant = this.components['RightKombatant'];
+	var powerup = this.components['Powerup'];
+	
+	if( !powerup && this.scene.timeElapsed >= this.nextPowerup ) {
+		this.addPowerup( );
+	}
 	
 	switch( this.scene.state ) {
 		case this.scene.states.starting :
@@ -62,10 +73,18 @@ KombatLayer.prototype.update = function( deltaTime ) {
 				ball.hitWall( );
 			}
 			
-			if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) ||
-			    ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
+			if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) )
 			{
-				ball.hitPaddle( );
+				ball.hitPaddle( rightKombatant );
+			}
+			
+			if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
+			{
+				ball.hitPaddle( leftKombatant );
+			}
+			
+			if( powerup && Collision.RectRect( ball.boundingBox, powerup.boundingBox ) ) {
+				ball.hitPowerup( );
 			}
 			
 			if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )

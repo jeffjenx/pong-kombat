@@ -15,12 +15,14 @@ function Ball( ) {
 		this.beepSound = new Sound( 'Beep' );
 		this.boopSound = new Sound( 'Boop' );
 	}
+	
+	this.lastPaddle = null;
 }
 
 Ball.prototype = new Sprite;
 Ball.prototype.constructor = Ball;
 
-Ball.prototype.hitPaddle = function( ) {
+Ball.prototype.hitPaddle = function( paddle ) {
 	this.velocity.x *= -1;
 	
 	// Increase ball speed over time
@@ -35,6 +37,12 @@ Ball.prototype.hitPaddle = function( ) {
 		this.beepSound.stop( );
 		this.beepSound.play( );
 	}
+	
+	this.lastPaddle = paddle;
+};
+
+Ball.prototype.hitPowerup = function( ) {
+	this.layer.components['Powerup'].collect( this.lastPaddle );
 };
 
 Ball.prototype.hitWall = function( ) {

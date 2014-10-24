@@ -35,6 +35,8 @@ load( "pk/scripts/", [
 	"paddles/shifter-paddle",
 	"paddles/monolith-paddle",
 	"paddles/white-paddle",
+	"powerup",
+	"powerups/speed-powerup",
 	
 	"splash-scene",
 	"title-scene",
@@ -58,7 +60,7 @@ function ready( ) {
 	}
 	
 	app = new App( );
-	app.aspectRatio = { x : 16, y : 9 };
+	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 };
 	app.resources = "pk/";
 	app.settings = {
 		censored : true,
