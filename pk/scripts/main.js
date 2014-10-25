@@ -5,6 +5,7 @@ load( "pk/scripts/", [
 	"projectile",
 	"menu",
 	"menus/title-menu",
+	"menus/pause-menu",
 	"level",
 	"levels/default-background",
 	"levels/default-foreground",
@@ -38,16 +39,16 @@ load( "pk/scripts/", [
 	"powerup",
 	"powerups/speed-powerup",
 	
-	"splash-scene",
-	"title-scene",
-	"choose-paddle-scene",
-	"kombat-scene",
-	"tournament-scene",
-	"story-scene",
-	"help-scene",
+	"scenes/splash-scene",
+	"scenes/title-scene",
+	"scenes/choose-paddle-scene",
+	"scenes/kombat-scene",
+	"scenes/tournament-scene",
+	"scenes/story-scene",
+	"scenes/help-scene",
 	
-	"kombat-layer",
-	"hud-layer"
+	"scenes/kombat-layer",
+	"scenes/hud-layer"
 ] );
 
 window.onload = ready;

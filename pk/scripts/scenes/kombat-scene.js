@@ -11,7 +11,8 @@ function KombatScene( ) {	Scene.call( this );
 		fighting : 2,
 		finishing : 3,
 		dismantling : 4,
-		ending : 5
+		ending : 5,
+		paused : 6
 	};
 	
 	this.startMatch( );}KombatScene.prototype = new Scene;KombatScene.prototype.constructor = KombatScene;
@@ -97,6 +98,15 @@ KombatScene.prototype.startMatch = function( ) {
 };
 
 KombatScene.prototype.update = function( deltaTime ) {
+	if( this.state === this.states.paused ) {
+		if( !this.layers['Menu'] ) {
+			this.addLayer( 'Menu', new PauseMenu( this ) );
+		}
+		
+		this.layers['Menu'].update( deltaTime );
+		return;
+	}
+	
 	Scene.prototype.update.call( this, deltaTime );
 	
 	this.stateTime += deltaTime;
@@ -125,6 +135,10 @@ KombatScene.prototype.update = function( deltaTime ) {
 				this.layers['Kombat'].removeComponent( 'Ball' );
 				this.layers['HUD'].addAnnouncement( "Finish'm!" );
 				this.changeState( this.states.announcing );
+			}
+			
+			if( InputManager.checkButtonPress( Buttons.BACK ) ) {
+				this.changeState( this.states.paused );
 			}
 		break;
 		

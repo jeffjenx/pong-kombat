@@ -5,7 +5,8 @@ var Buttons = {
 	RIGHT : 3,
 	UP : 4,
 	PAUSE : 5,
-	MUTE : 6
+	MUTE : 6,
+	BACK : 7
 };
 
 var Keyboard = {
@@ -15,7 +16,8 @@ var Keyboard = {
 	39 : Buttons.RIGHT,    // <right_arrow>
 	38 : Buttons.UP,       // <up_arrow>
 	80 : Buttons.PAUSE,    // P
-	77 : Buttons.MUTE      // M
+	77 : Buttons.MUTE,     // M
+	27 : Buttons.BACK      // ESCAPE
 };
 
 var Mouse = {
