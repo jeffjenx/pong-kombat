@@ -9,8 +9,11 @@
 	
 	"images" :
 	{
+		"Background-Title"     : "images/backgrounds/title.png",
+		"Logo"                 : "images/logo.png",
 		"Quantastical-Painted" : "images/quantastical-painted.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
+		
 		
 		"Paddle" : "images/paddle.png",
 		"Ball"   : "images/ball.png",

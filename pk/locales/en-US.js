@@ -1,6 +1,7 @@
 {
 	"text" :
 	{
-		"Title" : "Pong Kombat"
+		"PRESS SPACEBAR" : "PRESS SPACEBAR",
+		"TO BEGIN"       : "TO BEGIN"
 	}
 }

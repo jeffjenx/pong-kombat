@@ -15,7 +15,8 @@ var SceneManager = {
 	changeScene : function( newScene, transitionType, transitionLength ) {
 		if( this.currentScene == null )
 		{
-			this.currentScene = newScene;
+			this.nextScene = newScene;
+			this.transitionEnded( );
 		}
 		else
 		{
