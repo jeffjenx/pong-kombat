@@ -19,12 +19,12 @@ var SceneManager = {
 		}
 		else
 		{
-			if( transitionLength == undefined )
+			if( transitionLength === undefined )
 			{
 				transitionLength = 1; // 1s default
 			}
 			
-			if( transitionType == undefined )
+			if( transitionType === undefined )
 			{
 				transitionType = Transitions.NONE;
 			}

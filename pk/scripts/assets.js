@@ -9,6 +9,9 @@
 	
 	"images" :
 	{
+		"Quantastical-Painted" : "images/quantastical-painted.png",
+		"Quantastical-Domain"  : "images/quantastical-domain.png",
+		
 		"Paddle" : "images/paddle.png",
 		"Ball"   : "images/ball.png",
 		"Black"  : "images/black.png",
