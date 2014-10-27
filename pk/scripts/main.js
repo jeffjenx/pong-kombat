@@ -38,6 +38,8 @@ load( "pk/scripts/", [
 	"paddles/white-paddle",
 	"powerup",
 	"powerups/speed-powerup",
+	"other/stackblur",
+	//"other/fastblur",
 	
 	"scenes/splash-scene",
 	"scenes/title-scene",

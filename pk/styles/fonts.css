@@ -1,5 +1,21 @@
 @font-face
 {
+    font-family: 'Apple Garamond';
+    font-style: normal;
+    font-weight: 400;
+    src: url( '../fonts/apple-garamond.ttf' ) format( 'truetype' );
+}
+
+@font-face
+{
+    font-family: 'Apple Garamond';
+    font-style: normal;
+    font-weight: 200;
+    src: url( '../fonts/apple-garamond-light.ttf' ) format( 'truetype' );
+}
+
+@font-face
+{
     font-family: 'MK Mythologies';
     font-style: normal;
     font-weight: 400;
