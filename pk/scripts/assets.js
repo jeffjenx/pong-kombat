@@ -11,9 +11,18 @@
 	{
 		"Background-Default"   : "images/backgrounds/default.png",
 		"Background-Title"     : "images/backgrounds/title.png",
+		"Ball-Glare"           : "images/balls/ball-glare",
+		"Ball-8Ball"           : "images/balls/8ball.png",
+		"Ball-Baseball"        : "images/balls/baseball.png",
+		"Ball-Basketball"      : "images/balls/basketball.png",
+		"Ball-Default"         : "images/balls/default.png",
+		"Ball-Earth"           : "images/balls/earth.png",
+		"Ball-Smiley"          : "images/balls/smiley.png",
+		
 		"Health"               : "images/health.png",
 		"HUD"                  : "images/hud.png",
 		"Logo"                 : "images/logo.png",
+		"PK"                   : "images/pk.png",
 		"Quantastical-Painted" : "images/quantastical-painted.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
 		"TV-Glare"             : "images/levels/tv-glare.png",

@@ -49,7 +49,7 @@ Paddle.prototype.moveUp = function( ) {
 
 Paddle.prototype.restrictToBounds = function( ) {
 	var paddingBottom = viewport.height;
-	var paddingTop = viewport.height * 0.05;
+	var paddingTop = SceneManager.currentScene.layers['HUD'].components['HUD'].size.y;
 	
 	if( ( this.velocity.y > 0 && this.boundingBox.bottom >= paddingBottom ) || ( this.velocity.y < 0 && this.boundingBox.top <= paddingTop ) )
 	{

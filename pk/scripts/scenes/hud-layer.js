@@ -11,6 +11,13 @@ function HUDLayer( scene ) {
 	hud.size.y = viewport.height * 0.07;
 	this.addComponent( 'HUD', hud );
 	
+	this.pk = new Sprite( 'PK' );
+	this.pk.position.x = viewport.width * 0.50;
+	this.pk.position.y = hud.size.y * 0.40;
+	this.pk.size.x = viewport.height * 0.09;
+	this.pk.size.y = viewport.height * 0.06;
+	this.addComponent( 'PK', this.pk );
+	
 	this.leftHealthBar = new Sprite( 'Health' );
 	this.leftHealthBar.position.x = viewport.width * 0.043;
 	this.leftHealthBar.position.y = viewport.height * 0.009;
@@ -106,11 +113,12 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.scene.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
 	
+	// Drain health gradually
 	if( ( this.scene.winningScore - rightKombatant.score ) / this.scene.winningScore < this.leftHealthBar.size.x / this.healthBarWidth ) {
-		this.leftHealthBar.size.x -= 1;
+		this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 	}
 	if( ( this.scene.winningScore - leftKombatant.score ) / this.scene.winningScore < this.rightHealthBar.size.x / this.healthBarWidth ) {
-		this.rightHealthBar.size.x -= 1;
+		this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 	}
 	
 	Layer.prototype.update.call( this, deltaTime );

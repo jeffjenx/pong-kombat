@@ -15,7 +15,9 @@ function KombatScene( ) {	Scene.call( this );
 		paused : 6
 	};
 	
-	this.startMatch( );}KombatScene.prototype = new Scene;KombatScene.prototype.constructor = KombatScene;
+	//this.startMatch( );
+	this.changeState( this.states.fighting );
+	this.layers['Kombat'].setBall( Balls.RANDOM );}KombatScene.prototype = new Scene;KombatScene.prototype.constructor = KombatScene;
 
 KombatScene.prototype.addKombatant = function( kombatant ) {
 	this.layers['Kombat'].addKombatant( kombatant );

@@ -28,12 +28,31 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	}
 };
 
-KombatLayer.prototype.setBall = function( ) {
-	if( !this.components['Ball'] ) {
-		this.addComponent( 'Ball', new Ball( ) );
+KombatLayer.prototype.setBall = function( ballType ) {
+	switch( ballType ) {
+		case Balls.RANDOM :
+			var count = 0;
+			for( var i in Balls) {
+				if( Balls.hasOwnProperty(i) && i !== "RANDOM" ) {
+					++count;
+				}
+			}
+			this.setBall( Math.ceil( Math.random( ) * count ) );
+		break;
+		case Balls.BASKETBALL : ball = new Basketball( ); break;
+		case Balls.EIGHTBALL : ball = new EightBall( ); break;
+		case Balls.BASEBALL : ball = new Baseball( ); break;
+		case Balls.EARTH : ball = new EarthBall( ); break;
+		case Balls.SMILEY : ball = new SmileyBall( ); break;
+		
+		case Balls.DEFAULT :
+		default :
+			ball = new DefaultBall( );
+		break;
 	}
 	
-	this.components['Ball'].reset( );
+	ball.set( );
+	this.addComponent( 'Ball', ball );
 };
 
 KombatLayer.prototype.addKombatant = function( kombatant ) {
@@ -57,6 +76,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.components['LeftKombatant'];
 	var rightKombatant = this.components['RightKombatant'];
 	var powerup = this.components['Powerup'];
+	var hud = this.scene.layers['HUD'].components['HUD'];
 	
 	if( !powerup && this.scene.timeElapsed >= this.nextPowerup ) {
 		this.addPowerup( );
@@ -68,7 +88,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.scene.states.fighting :
-			if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < viewport.width * 0.03 ) )
+			if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
 			{
 				ball.hitWall( );
 			}
@@ -90,12 +110,12 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
 			{
 				leftKombatant.score += 1;
-				ball.reset( );
+				this.setBall( Balls.RANDOM );
 			}
 			else if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
 			{
 				rightKombatant.score += 1;
-				ball.reset( );
+				this.setBall( Balls.RANDOM );
 			}
 			
 			if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
