@@ -29,7 +29,6 @@ function Menu( scene ) {
 		context.quadraticCurveTo(x, y, x + radius, y);
 		context.closePath();
 		context.clip();
-		//Sprite.prototype.draw.call( this, context );
 		context.fillStyle = "rgba(0,0,0,0.5)";
 		context.fillRect(x,y,width,height);
 		context.restore();
@@ -131,11 +130,17 @@ Menu.prototype.fadeIn = function( fadeTime ) {
 			}	
 		}
 		this.blurRadius = this.timeElapsed / fadeTime * 33;
+	} else {
+		this.blurRadius = 33;
 	}
 };
 
+Menu.prototype.closeMenu = function( ) {
+	this.scene.removeLayer( 'Menu' );
+};
+
 Menu.prototype.update = function( deltaTime ) {
-	this.fadeIn( 0.5 );
+	this.fadeIn( 0.33 );
 	this.timeElapsed += deltaTime;
 	
 	if( InputManager.checkButtonPress( Buttons.DOWN ) ) {
@@ -147,5 +152,9 @@ Menu.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
 		this.selectCurrentItem( );
+	}
+	
+	if( InputManager.checkButtonPress( Buttons.BACK ) ) {
+		this.closeMenu();
 	}
 };

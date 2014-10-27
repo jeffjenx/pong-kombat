@@ -1,6 +1,6 @@
 Levels = {
 	RANDOM : 0,
-	DEFAULT : 1,
+	DEFAULT : 1/*,
 	FOREST : 2,
 	HELL : 3,
 	HIGHWAY : 4,
@@ -9,7 +9,7 @@ Levels = {
 	PORTAL : 7,
 	STORM : 8,
 	TOWER : 9,
-	TOXICPOOL : 10
+	TOXICPOOL : 10*/
 };
 
 // LEVELS are defined as a BACKGROUND and FOREGROUND

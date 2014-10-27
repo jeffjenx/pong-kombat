@@ -9,17 +9,19 @@
 	
 	"images" :
 	{
+		"Background-Default"   : "images/backgrounds/default.png",
 		"Background-Title"     : "images/backgrounds/title.png",
+		"Health"               : "images/health.png",
+		"HUD"                  : "images/hud.png",
 		"Logo"                 : "images/logo.png",
 		"Quantastical-Painted" : "images/quantastical-painted.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
-		
+		"TV-Glare"             : "images/levels/tv-glare.png",
 		
 		"Paddle" : "images/paddle.png",
 		"Ball"   : "images/ball.png",
 		"Black"  : "images/black.png",
 		
-		"Background-Default"    : "images/backgrounds/default.png",
 		"Background-Forest"     : "images/backgrounds/forest.png",
 		"Background-Hell"       : "images/backgrounds/hell.png",
 		"Background-Highway"    : "images/backgrounds/highway.png",

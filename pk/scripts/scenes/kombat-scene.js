@@ -4,7 +4,7 @@ function KombatScene( ) {	Scene.call( this );
 	this.addLayer( 'Foreground', new ForegroundLayer( this ) );
 	this.addLayer( 'HUD', new HUDLayer( this ) );
 	
-	this.winningScore = 1;
+	this.winningScore = 10;
 	this.states = {
 		announcing : 0,
 		starting : 1,

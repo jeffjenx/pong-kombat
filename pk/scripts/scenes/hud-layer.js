@@ -1,42 +1,54 @@
 function HUDLayer( scene ) {
 	Layer.call( this, scene );
 	
-	var leftHealth = new Sprite( 'Ball' );
-	leftHealth.position.x = 0;
-	leftHealth.position.y = 0;
-	leftHealth.registration.x = 0;
-	leftHealth.registration.y = 0;
-	leftHealth.size.x = viewport.width * 0.50;
-	leftHealth.size.y = viewport.height * 0.05;
-	leftHealth.tint = new Color( 0, 255, 0 );
-	this.addComponent( 'LeftHealth', leftHealth );
+	this.healthBarWidth = viewport.width * 0.411;
+	
+	var hud = new Sprite( 'HUD' );
+	hud.position.x = viewport.width * 0.50;
+	hud.position.y = 0;
+	hud.registration.y = 0;
+	hud.size.x = viewport.width;
+	hud.size.y = viewport.height * 0.07;
+	this.addComponent( 'HUD', hud );
+	
+	this.leftHealthBar = new Sprite( 'Health' );
+	this.leftHealthBar.position.x = viewport.width * 0.043;
+	this.leftHealthBar.position.y = viewport.height * 0.009;
+	this.leftHealthBar.registration.x = 0;
+	this.leftHealthBar.registration.y = 0;
+	this.leftHealthBar.size.x = this.healthBarWidth;
+	this.leftHealthBar.size.y = viewport.height * 0.038;
+	this.addComponent( 'LeftHealthBar', this.leftHealthBar );
+	
+	this.rightHealthBar = new Sprite( 'Health' );
+	this.rightHealthBar.position.x = viewport.width - this.leftHealthBar.position.x;
+	this.rightHealthBar.position.y = this.leftHealthBar.position.y;
+	this.rightHealthBar.registration.x = 1;
+	this.rightHealthBar.registration.y = 0;
+	this.rightHealthBar.size.x = this.leftHealthBar.size.x;
+	this.rightHealthBar.size.y = this.leftHealthBar.size.y;
+	this.addComponent( 'RightHealthBar', this.rightHealthBar );
 	
 	var leftName = new Text( );
 	leftName.color = 'white';
+	leftName.fontFamily = 'Apple Garamond';
 	leftName.fontSize = viewport.height * 0.03;
+	leftName.fontStyle = 200;
 	leftName.textAlign = 'left';
 	leftName.textBaseline = 'top';
-	leftName.position.x = 0;
-	leftName.position.y = 0;
+	leftName.position.x = this.leftHealthBar.position.x + viewport.width * 0.01;
+	leftName.position.y = this.leftHealthBar.position.y;
 	this.addComponent( 'LeftName', leftName );
 	
-	var rightHealth = new Sprite( 'Ball' );
-	rightHealth.position.x = viewport.width;
-	rightHealth.position.y = 0;
-	rightHealth.registration.x = 1;
-	rightHealth.registration.y = 0;
-	rightHealth.size.x = viewport.width * 0.50;
-	rightHealth.size.y = viewport.height * 0.05;
-	rightHealth.tint = new Color( 0, 255, 0 );
-	this.addComponent( 'RightHealth', rightHealth );
-	
 	var rightName = new Text( );
-	rightName.color = 'white';
-	rightName.fontSize = viewport.height * 0.03;
+	rightName.color = leftName.color;
+	rightName.fontFamily = leftName.fontFamily;
+	rightName.fontSize = leftName.fontSize;
+	rightName.fontStyle = leftName.fontStyle;
 	rightName.textAlign = 'right';
 	rightName.textBaseline = 'top';
-	rightName.position.x = viewport.width;
-	rightName.position.y = 0;
+	rightName.position.x = this.rightHealthBar.position.x - viewport.width * 0.01;
+	rightName.position.y = this.rightHealthBar.position.y;
 	this.addComponent( 'RightName', rightName );
 }
 
@@ -94,8 +106,12 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.scene.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
 	
-	this.components['LeftHealth'].size.x = viewport.width * 0.50 - viewport.width * 0.50 * ( rightKombatant.score / this.scene.winningScore );
-	this.components['RightHealth'].size.x = viewport.width * 0.50 - viewport.width * 0.50 * ( leftKombatant.score / this.scene.winningScore );
+	if( ( this.scene.winningScore - rightKombatant.score ) / this.scene.winningScore < this.leftHealthBar.size.x / this.healthBarWidth ) {
+		this.leftHealthBar.size.x -= 1;
+	}
+	if( ( this.scene.winningScore - leftKombatant.score ) / this.scene.winningScore < this.rightHealthBar.size.x / this.healthBarWidth ) {
+		this.rightHealthBar.size.x -= 1;
+	}
 	
 	Layer.prototype.update.call( this, deltaTime );
 };
