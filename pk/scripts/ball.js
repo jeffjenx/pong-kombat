@@ -28,6 +28,8 @@ function Ball( texture ) {
 	this.boopSound = new Sound( 'Boop' );
 	
 	this.lastPaddle = null;
+	this.sourceRotation = this.rotation;
+	this.targetRotation = this.rotation;
 }
 
 Ball.prototype = new Sprite;
@@ -35,7 +37,7 @@ Ball.prototype.constructor = Ball;
 
 Ball.prototype.addGlare = function( ) {
 	this.glare = new Sprite( 'Ball-Glare' );
-	this.glare.opacity = 0.666;
+	this.glare.opacity = 1; //0.666;
 	this.glare.size.x = this.size.x * 3.1;
 	this.glare.size.y = this.size.y * 3.1;
 };
@@ -101,6 +103,7 @@ Ball.prototype.hitPaddle = function( paddle ) {
 	}
 	
 	this.lastPaddle = paddle;
+	this.changedRotation();
 };
 
 Ball.prototype.hitPowerup = function( ) {
@@ -115,6 +118,8 @@ Ball.prototype.hitWall = function( ) {
 		this.boopSound.stop( );
 		this.boopSound.play( );
 	}
+	
+	this.changedRotation();
 };
 
 Ball.prototype.set = function( ) {
@@ -129,10 +134,20 @@ Ball.prototype.set = function( ) {
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg
 	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Towards left or right
-	angle *= Math.PI / 180; // Convert to radians
+	//angle = 45;
 	
-	this.velocity.x = Math.abs( speed ) * Math.cos( angle );
-	this.velocity.y = Math.abs( speed ) * Math.sin( angle );
+	this.velocity.x = Math.abs( speed ) * Math.cos( angle * Math.TO_RADIANS );
+	this.velocity.y = Math.abs( speed ) * Math.sin( angle * Math.TO_RADIANS );
+	
+	this.changedRotation( );
+};
+
+Ball.prototype.changedRotation = function( ) {
+	if( !this.glare){
+		this.addGlare();
+	}
+	this.sourceRotation = this.glare.rotation;
+	this.targetRotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
 };
 
 Ball.prototype.update = function( deltaTime ) {
@@ -145,14 +160,23 @@ Ball.prototype.update = function( deltaTime ) {
 		this.glare.position.x = this.position.x;
 		this.glare.position.y = this.position.y;
 		
-		// Rotate glare texture to match ball direction
-		var angle = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
-		if( this.glare.rotation < angle ) {
-			this.glare.rotation += 90 * Math.abs( (this.glare.rotation - angle) / 360 );
-		} else {
-			this.glare.rotation -= 90 * Math.abs( (this.glare.rotation - angle) / 360 );
+		// Rotate glare to match ball direction
+		if( Math.abs( this.glare.rotation - this.targetRotation ) <= 3 ) {
+			this.glare.rotation = this.targetRotation;
+			this.glare.opacity = 1;
 		}
-	} else {
-		this.addGlare();
+		else {
+			if( this.targetRotation - this.sourceRotation > 180 ){
+				this.targetRotation -= 360;
+			} else if (this.targetRotation - this.sourceRotation < -180) {
+				this.targetRotation += 360;
+			}
+			
+			if( this.glare.rotation < this.targetRotation ) {
+				this.glare.rotation += 135 * Math.abs( (this.glare.rotation - this.targetRotation) / 360 );
+			} else {
+				this.glare.rotation -= 135 * Math.abs( (this.glare.rotation - this.targetRotation) / 360 );
+			}
+		}
 	}
 };
