@@ -90,7 +90,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		case this.scene.states.fighting :
 			if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
 			{
-				console.log(ball.boundingBox, viewport.height, hud.size.y);
 				ball.hitWall( );
 			}
 			
