@@ -32,9 +32,11 @@ function App( ) {
 	this.drawComponentBounds = false;
 	this.drawSpriteBounds = false;
 	
+	/*
 	var socialMedia = document.createElement( 'div' );
 	socialMedia.id = "social_media";
 	document.body.appendChild( socialMedia );
+	*/
 	document.body.setAttribute( 'unselectable', "on" );
 	
 	// Single audio source for mobile browsers

@@ -37,7 +37,7 @@ Ball.prototype.constructor = Ball;
 
 Ball.prototype.addGlare = function( ) {
 	this.glare = new Sprite( 'Ball-Glare' );
-	this.glare.opacity = 1; //0.666;
+	this.glare.opacity = 0.666;
 	this.glare.size.x = this.size.x * 3.1;
 	this.glare.size.y = this.size.y * 3.1;
 };
@@ -88,6 +88,10 @@ Ball.prototype.draw = function( context ) {
 
 Ball.prototype.hitPaddle = function( paddle ) {
 	this.velocity.x *= -1;
+	//this.velocity.y += (paddle.velocity.y this.velocity.y) ? 5 : -5;
+	if( paddle ){
+		//this.velocity.y += ((paddle.paddle.velocity.y < 0) == (this.velocity.y<0)) ? viewport.height * 0.05 : -viewport.height * 0.05;
+	}
 	
 	// Increase ball speed over time
 	if( this.speed < this.maxSpeed )
@@ -134,11 +138,12 @@ Ball.prototype.set = function( ) {
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg
 	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Towards left or right
-	//angle = 45;
+	//angle = -45;
 	
-	this.velocity.x = Math.abs( speed ) * Math.cos( angle * Math.TO_RADIANS );
-	this.velocity.y = Math.abs( speed ) * Math.sin( angle * Math.TO_RADIANS );
+	this.velocity.x = Math.round( speed * Math.cos( angle * Math.TO_RADIANS ) );
+	this.velocity.y = Math.round( speed * Math.sin( angle * Math.TO_RADIANS ) );
 	
+	this.updateBoundingBox( );
 	this.changedRotation( );
 };
 
@@ -163,7 +168,7 @@ Ball.prototype.update = function( deltaTime ) {
 		// Rotate glare to match ball direction
 		if( Math.abs( this.glare.rotation - this.targetRotation ) <= 3 ) {
 			this.glare.rotation = this.targetRotation;
-			this.glare.opacity = 1;
+			//this.glare.opacity = 1;
 		}
 		else {
 			if( this.targetRotation - this.sourceRotation > 180 ){

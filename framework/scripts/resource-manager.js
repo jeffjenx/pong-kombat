@@ -29,7 +29,7 @@ ResourceManager = {
 		snd.load( );
 		snd.addEventListener( 'canplaythrough', function( ) {
 			snd.removeEventListener( 'canplaythrough', arguments.callee, false );
-			ResourceManager.checkLoading( );
+			ResourceManager.checkLoading( id );
 		}, false );
 		
 		Resources[id] = snd;
@@ -40,7 +40,9 @@ ResourceManager = {
 		
 		var img = new Image( );
 		img.src = app.resources + source + "?" + new Date( ).getTime( );
-		img.onload = ResourceManager.checkLoading;
+		img.onload = function( ) {
+			ResourceManager.checkLoading( id );
+		};
 		
 		Resources[id] = img;
 	},
@@ -71,7 +73,7 @@ ResourceManager = {
 						}
 					}
 					
-					if( !app.isMobile( ) && json.audio !== undefined )
+					if( json.audio !== undefined )
 					{
 						for( var i in json.audio )
 						{
@@ -80,13 +82,13 @@ ResourceManager = {
 					}
 				}
 				
-				ResourceManager.checkLoading( );
+				ResourceManager.checkLoading( id );
 			}
 		};
 		ajax.send( null );
 	},
 	
-	checkLoading : function( ) {
+	checkLoading : function( loadedID ) {
 		ResourceManager.loadedCount++;
 		app.loading( );
 		

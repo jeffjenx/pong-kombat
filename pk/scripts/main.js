@@ -1,18 +1,22 @@
 load( "pk/scripts/", [
-	"player",
-	"opponent",
 	"ball",
+	"level",
+	"menu",
+	"opponent",
+	"paddle",
+	"player",
+	"powerup",
+	"projectile",
+	
 	"balls/base-ball",
 	"balls/basket-ball",
 	"balls/default-ball",
 	"balls/earth-ball",
 	"balls/eight-ball",
 	"balls/smiley-ball",
-	"projectile",
-	"menu",
-	"menus/title-menu",
-	"menus/pause-menu",
-	"level",
+	
+	"effects/stackblur",
+	
 	"levels/default-background",
 	"levels/default-foreground",
 	"levels/forest-background",
@@ -33,7 +37,10 @@ load( "pk/scripts/", [
 	"levels/tower-foreground",
 	"levels/toxic-pool-background",
 	"levels/toxic-pool-foreground",
-	"paddle",
+	
+	"menus/title-menu",
+	"menus/pause-menu",
+	
 	"paddles/yellow-paddle",
 	"paddles/blue-paddle",
 	"paddles/green-paddle",
@@ -42,9 +49,8 @@ load( "pk/scripts/", [
 	"paddles/shifter-paddle",
 	"paddles/monolith-paddle",
 	"paddles/white-paddle",
-	"powerup",
+	
 	"powerups/speed-powerup",
-	"other/stackblur",
 	
 	"scenes/splash-scene",
 	"scenes/title-scene",
@@ -53,7 +59,6 @@ load( "pk/scripts/", [
 	"scenes/tournament-scene",
 	"scenes/story-scene",
 	"scenes/help-scene",
-	
 	"scenes/kombat-layer",
 	"scenes/hud-layer"
 ] );
@@ -68,7 +73,7 @@ function ready( ) {
 	}
 	
 	app = new App( );
-	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 };
+	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = "pk/";
 	app.settings = {
 		censored : true,
@@ -98,7 +103,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new ChoosePaddleScene( );
+		app.startupScene = new ChoosePaddleScene();//new SplashScene( );
 		app.initialize( );
 	};
 };

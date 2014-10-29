@@ -37,7 +37,7 @@ KombatLayer.prototype.setBall = function( ballType ) {
 					++count;
 				}
 			}
-			this.setBall( Math.ceil( Math.random( ) * count ) );
+			return this.setBall( Math.ceil( Math.random( ) * count ) );
 		break;
 		case Balls.BASKETBALL : ball = new Basketball( ); break;
 		case Balls.EIGHTBALL : ball = new EightBall( ); break;
@@ -90,6 +90,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		case this.scene.states.fighting :
 			if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
 			{
+				console.log(ball.boundingBox, viewport.height, hud.size.y);
 				ball.hitWall( );
 			}
 			
