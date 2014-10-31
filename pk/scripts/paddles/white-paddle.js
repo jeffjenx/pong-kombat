@@ -1,5 +1,5 @@
 function WhitePaddle( ) {
-	Paddle.call( this );
+	Paddle.call( this, 'Paddle' );
 	
 	this.size.x = viewport.height * 0.02;
 	this.size.y = viewport.height * 0.15;

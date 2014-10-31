@@ -18,6 +18,8 @@
 		"Ball-Default"         : "images/balls/default.png",
 		"Ball-Earth"           : "images/balls/earth.png",
 		"Ball-Smiley"          : "images/balls/smiley.png",
+		"Paddle-Blue"          : "images/paddles/blue-texture.png",
+		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
 		
 		"Health"               : "images/health.png",
 		"HUD"                  : "images/hud.png",

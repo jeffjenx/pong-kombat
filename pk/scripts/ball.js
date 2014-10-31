@@ -142,7 +142,7 @@ Ball.prototype.set = function( ) {
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg
 	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Towards left or right
-	angle = 180;
+	//angle = 180;
 	
 	this.velocity.x = Math.round( speed * Math.cos( angle * Math.TO_RADIANS ) );
 	this.velocity.y = Math.round( speed * Math.sin( angle * Math.TO_RADIANS ) );

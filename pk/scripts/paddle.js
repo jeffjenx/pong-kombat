@@ -13,10 +13,16 @@ var Paddles = {
 	WHITE    : 9
 };
 
-function Paddle( ) {
-	Sprite.call( this, 'Paddle' );
+function Paddle( texture ) {
+	Sprite.call( this, texture );
 	
-	this.size.x = viewport.height * 0.02;
+	this.patternCanvas = document.createElement( 'canvas' );
+	this.patternCanvas.width = ( this.image ) ? this.image.width : 512;
+	this.patternCanvas.height = ( this.image ) ? this.image.height : 512;
+	this.patternContext = this.patternCanvas.getContext( '2d' );
+	
+	this.offset = 0.5;
+	this.size.x = viewport.width * 0.02;
 	this.size.y = viewport.height * 0.15;
 	
 	this.projectile = null;
@@ -30,7 +36,37 @@ Paddle.prototype.canShootProjectile = function( ) {
 };
 
 Paddle.prototype.draw = function( context ) {
-	Sprite.prototype.draw.call( this, context );
+	Component.prototype.draw.call( this, context );
+	
+	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
+	this.patternContext.save( );
+	this.patternContext.translate( -this.offset * this.patternCanvas.width, 0 );
+	this.patternContext.fillStyle = this.pattern;
+	this.patternContext.fillRect( -this.patternCanvas.width, -this.patternCanvas.height, this.patternCanvas.width * 2, this.patternCanvas.height * 2 );
+	this.patternContext.restore( );
+	
+	context.save( );
+	context.globalAlpha *= this.opacity;
+	context.translate( this.position.x, this.position.y );
+	context.rotate( this.rotation * Math.TO_RADIANS );
+	if( this.flipH )
+	{
+		context.scale( -1, 1 );
+	}
+	
+	context.drawImage(
+		this.patternCanvas,
+		0,
+		0,
+		this.patternCanvas.width * (this.size.x / this.size.y) * 0.75,
+		this.patternCanvas.height * 0.75,
+		
+		-this.size.x * this.registration.x * this.scale,
+		-this.size.y * this.registration.y * this.scale,
+		this.size.x * this.scale,
+		this.size.y * this.scale
+	);
+	context.restore( );
 	
 	if( this.projectile ) {
 		this.projectile.draw( context );
@@ -69,6 +105,8 @@ Paddle.prototype.shootProjectile = function( ) {
 
 Paddle.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
+	
+	this.offset = this.position.y / viewport.height * 0.75;
 	
 	if( this.projectile ) {
 		this.projectile.update( deltaTime );

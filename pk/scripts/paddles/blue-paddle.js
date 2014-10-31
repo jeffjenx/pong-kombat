@@ -1,9 +1,9 @@
 function BluePaddle( ) {
-	Paddle.call( this );
+	Paddle.call( this, 'Paddle-Blue' );
 	
-	this.size.x = viewport.height * 0.02;
+	this.size.x = viewport.width * 0.02;
 	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 0, 0, 255 );
+	//this.tint = new Color( 0, 0, 255 );
 	
 	this.enum = "BLUE";
 	this.name = "Blue Paddle";
