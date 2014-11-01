@@ -1,12 +1,10 @@
 function PurplePaddle( ) {
-	Paddle.call( this, 'Paddle' );
-	
-	this.size.x = viewport.height * 0.02;
-	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 255, 0, 255 );
-	
 	this.enum = "PURPLE";
 	this.name = "Purple Paddle";
+	this.bigness = 3.50;
+	
+	Paddle.call( this, 'Paddle-Purple' );
+	
 	this.endStory = "purple end story";
 	this.story = "purple story";
 }

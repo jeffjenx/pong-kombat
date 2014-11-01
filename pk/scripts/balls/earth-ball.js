@@ -1,7 +1,7 @@
 function EarthBall( ) {
 	Ball.call( this, 'Ball-Earth' );
 	
-	this.size.x = viewport.width * 0.04;
+	this.size.x = viewport.width * 0.06;
 	this.size.y = this.size.x;
 }
 

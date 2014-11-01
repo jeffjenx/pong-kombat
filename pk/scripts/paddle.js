@@ -16,6 +16,10 @@ var Paddles = {
 function Paddle( texture ) {
 	Sprite.call( this, texture );
 	
+	if( !this.bigness ) {
+		this.bigness = 3;
+	}
+	
 	this.patternCanvas = document.createElement( 'canvas' );
 	this.patternCanvas.width = ( this.image ) ? this.image.width : 512;
 	this.patternCanvas.height = ( this.image ) ? this.image.height : 512;
@@ -23,7 +27,17 @@ function Paddle( texture ) {
 	
 	this.offset = 0.5;
 	this.size.x = viewport.width * 0.02;
-	this.size.y = viewport.height * 0.15;
+	//this.size.y = viewport.height * 0.2;
+	this.size.y = viewport.height * ( 0.007 * Math.pow( this.bigness, 2 ) + 0.08 ); 
+	
+	// Bigness Scale
+	// 2.0 ~ .12
+	// 2.5 ~ .135
+	// 3.0 ~ .15
+	// 3.5 ~ .175
+	// 4.0 ~ .20
+	// 4.5 ~ .225
+	// 5.0 ~ .25
 	
 	this.projectile = null;
 }

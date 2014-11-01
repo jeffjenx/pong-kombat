@@ -1,12 +1,10 @@
 function RedPaddle( ) {
-	Paddle.call( this, 'Paddle' );
-	
-	this.size.x = viewport.height * 0.02;
-	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 255, 0, 0 );
-	
 	this.enum = "RED";
 	this.name = "Red Paddle";
+	this.bigness = 2.00;
+	
+	Paddle.call( this, 'Paddle-Red' );
+	
 	this.endStory = "red end story";
 	this.story = "red story";
 }

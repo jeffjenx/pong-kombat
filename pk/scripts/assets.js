@@ -19,6 +19,9 @@
 		"Ball-Earth"           : "images/balls/earth.png",
 		"Ball-Smiley"          : "images/balls/smiley.png",
 		"Paddle-Blue"          : "images/paddles/blue-texture.png",
+		"Paddle-Green"         : "images/paddles/green-texture.png",
+		"Paddle-Purple"        : "images/paddles/purple-texture.png",
+		"Paddle-Red"           : "images/paddles/red-texture.png",
 		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
 		
 		"Health"               : "images/health.png",

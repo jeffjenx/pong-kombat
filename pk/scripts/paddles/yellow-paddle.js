@@ -1,12 +1,10 @@
 function YellowPaddle( ) {
+	this.enum = "YELLOW"
+	this.name = "Yellow Paddle";
+	this.height = 3;
+	
 	Paddle.call( this, 'Paddle-Yellow' );
 	
-	//this.size.x = viewport.height * 0.02;
-	//this.size.y = viewport.height * 0.15;
-	//this.tint = new Color( 255, 255, 0 );
-	
-	this.enum = "YELLOW";
-	this.name = "Yellow Paddle";
 	this.endStory = "yellow end story";
 	this.story = "yellow story";
 }
