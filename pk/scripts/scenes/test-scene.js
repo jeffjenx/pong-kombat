@@ -14,6 +14,7 @@ function TestScene( ) {
 	testLayer.addComponent( 'Text', this.text );
 	
 	this.tester = new YellowPaddle( );
+	this.tester.scale = 5;
 	testLayer.addComponent( 'Tester', this.tester );
 }
 

@@ -9,7 +9,8 @@ function YellowPaddle( ) {
 	this.story = "yellow story";
 	
 	this.effect = new ParticleSystem( );
-	this.effect.count = 150;
+	this.effect.particleImages = [Resources['Particle-Fire1'],Resources['Particle-Fire2'],Resources['Particle-Fire3']];
+	this.effect.count = 250;
 	this.effect.minVelocity.x = -this.size.x;
 	this.effect.minVelocity.y = 0;
 	this.effect.maxVelocity.x = this.size.x;
@@ -18,6 +19,10 @@ function YellowPaddle( ) {
 	this.effect.maxParticleSize = this.size.x * 0.3;
 	this.effect.minLife = 50;
 	this.effect.maxLife = 100;
+	this.effect.rotationSpeed = 5;
+	this.effect.scaleSpeed = 5;
+	this.effect.maxOpacity = 0.9;
+	this.effect.fadeSpeed = 0.666;
 	this.effect.start( );
 }
 
@@ -47,6 +52,8 @@ YellowPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
 	this.effect.position = this.position;
-	this.effect.size = this.size;
+	this.effect.size.x = this.size.x * this.scale;
+	this.effect.size.y = this.size.y * this.scale;
+	this.effect.scale = this.scale;
 	this.effect.update( deltaTime );
 };

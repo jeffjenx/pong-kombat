@@ -7,6 +7,24 @@ function BluePaddle( ) {
 	
 	this.endStory = "blue end story";
 	this.story = "blue story";
+	
+	
+	
+	this.effect = new ParticleSystem( );
+	this.effect.particleImages = [Resources['Particle-Smoke1'],Resources['Particle-Smoke2']];
+	this.effect.count = 20;
+	this.effect.minVelocity.x = -this.size.x * 0.25;
+	this.effect.minVelocity.y = -this.size.y * 0.10;
+	this.effect.maxVelocity.x = this.size.x;
+	this.effect.maxVelocity.y = -this.size.y * 0.75;
+	this.effect.minParticleSize = this.size.x * 0.3;
+	this.effect.maxParticleSize = this.size.x * 0.5;
+	this.effect.minLife = 50;
+	this.effect.maxLife = 300;
+	this.effect.maxOpacity = 0.4;
+	this.effect.rotationSpeed = 1;
+	this.effect.scaleSpeed = 5;
+	this.effect.start( );
 }
 
 BluePaddle.prototype = new Paddle;
@@ -21,6 +39,12 @@ BluePaddle.prototype.dismantle = function( opponent ) {
 	}
 };
 
+BluePaddle.prototype.draw = function( context ) {
+	Paddle.prototype.draw.call( this, context );
+	this.effect.draw( context );
+};
+
+
 BluePaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	this.projectile.tint = this.tint;
@@ -29,4 +53,10 @@ BluePaddle.prototype.shootProjectile = function( ) {
 BluePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
+	
+	this.effect.position = this.position;
+	this.effect.size.x = this.size.x * this.scale;
+	this.effect.size.y = this.size.y * this.scale;
+	this.effect.scale = this.scale;
+	this.effect.update( deltaTime );
 };

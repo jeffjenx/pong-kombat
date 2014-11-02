@@ -30,6 +30,8 @@
 		"Particle-Fire1"       : "images/effects/particle-fire-1.png",
 		"Particle-Fire2"       : "images/effects/particle-fire-2.png",
 		"Particle-Fire3"       : "images/effects/particle-fire-3.png",
+		"Particle-Smoke1"      : "images/effects/particle-smoke-1.png",
+		"Particle-Smoke2"      : "images/effects/particle-smoke-2.png",
 		
 		"Health"               : "images/health.png",
 		"HUD"                  : "images/hud.png",
