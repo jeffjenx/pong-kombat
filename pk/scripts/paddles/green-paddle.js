@@ -22,7 +22,27 @@ GreenPaddle.prototype.draw = function( context ) {
 	this.patternContext.fillRect( -this.patternCanvas.width, -this.patternCanvas.height, this.patternCanvas.width * 2, this.patternCanvas.height * 2 );
 	this.patternContext.restore( );
 	
-	context.save( );
+	var width = this.size.x * this.scale;
+	var height = this.size.y * this.scale;
+	var x = this.position.x - width * this.registration.x;
+	var y = this.position.y - height * this.registration.y;
+	var radius = width * 0.50;
+	context.save();
+	context.beginPath();
+	context.moveTo(x + radius, y);
+	context.lineTo(x + width - radius, y);
+	context.quadraticCurveTo(x + width, y, x + width, y + radius);
+	context.lineTo(x + width, y + height - radius);
+	context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+	context.lineTo(x + radius, y + height);
+	context.quadraticCurveTo(x, y + height, x, y + height - radius);
+	context.lineTo(x, y + radius);
+	context.quadraticCurveTo(x, y, x + radius, y);
+	context.closePath();
+	context.clip();
+//	context.restore();
+
+//	context.save( );
 	context.globalAlpha *= this.opacity;
 	context.translate( this.position.x, this.position.y );
 	context.rotate( this.rotation * Math.TO_RADIANS );
@@ -45,7 +65,27 @@ GreenPaddle.prototype.draw = function( context ) {
 	);
 	context.restore( );
 	
-	context.save( );
+	var width = this.size.x * this.scale;
+	var height = this.size.y * this.scale;
+	var x = this.position.x - width * this.registration.x;
+	var y = this.position.y - height * this.registration.y;
+	var radius = width * 0.50;
+	context.save();
+	context.beginPath();
+	context.moveTo(x + radius, y);
+	context.lineTo(x + width - radius, y);
+	context.quadraticCurveTo(x + width, y, x + width, y + radius);
+	context.lineTo(x + width, y + height - radius);
+	context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+	context.lineTo(x + radius, y + height);
+	context.quadraticCurveTo(x, y + height, x, y + height - radius);
+	context.lineTo(x, y + radius);
+	context.quadraticCurveTo(x, y, x + radius, y);
+	context.closePath();
+	context.clip();
+//	context.restore();
+
+//	context.save( );
 	context.globalAlpha *= this.opacity * 0.5;
 	context.translate( this.position.x, this.position.y );
 	context.rotate( this.rotation * Math.TO_RADIANS );
@@ -66,6 +106,15 @@ GreenPaddle.prototype.draw = function( context ) {
 		this.size.x * this.scale,
 		this.size.y * this.scale
 	);
+	
+	context.drawImage(
+		this.gloss.image,
+		-this.size.x * this.registration.x * this.scale * 7,
+		-this.size.y * this.registration.y * this.scale * 1.15,
+		this.size.x * this.scale * 7,
+		this.size.y * this.scale * 1.15
+	);
+	
 	context.restore( );
 	
 	

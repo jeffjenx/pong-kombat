@@ -16,6 +16,8 @@ load( "pk/scripts/", [
 	"balls/smiley-ball",
 	
 	"effects/stackblur",
+	//"effects/fastblur",
+	"effects/particle-system",
 	
 	"levels/default-background",
 	"levels/default-foreground",
@@ -60,7 +62,8 @@ load( "pk/scripts/", [
 	"scenes/story-scene",
 	"scenes/help-scene",
 	"scenes/kombat-layer",
-	"scenes/hud-layer"
+	"scenes/hud-layer",
+	"scenes/test-scene"
 ] );
 
 window.onload = ready;
@@ -103,7 +106,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new ChoosePaddleScene();//new SplashScene( );
+		app.startupScene = new TestScene();//new SplashScene( );
 		app.initialize( );
 	};
 };

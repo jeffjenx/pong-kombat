@@ -7,6 +7,18 @@ function YellowPaddle( ) {
 	
 	this.endStory = "yellow end story";
 	this.story = "yellow story";
+	
+	this.effect = new ParticleSystem( );
+	this.effect.count = 150;
+	this.effect.minVelocity.x = -this.size.x;
+	this.effect.minVelocity.y = 0;
+	this.effect.maxVelocity.x = this.size.x;
+	this.effect.maxVelocity.y = -this.size.y;
+	this.effect.minParticleSize = this.size.x * 0.1;
+	this.effect.maxParticleSize = this.size.x * 0.3;
+	this.effect.minLife = 50;
+	this.effect.maxLife = 100;
+	this.effect.start( );
 }
 
 YellowPaddle.prototype = new Paddle;
@@ -21,6 +33,11 @@ YellowPaddle.prototype.dismantle = function( opponent ) {
 	}
 };
 
+YellowPaddle.prototype.draw = function( context ) {
+	Paddle.prototype.draw.call( this, context );
+	this.effect.draw( context );
+};
+
 YellowPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	this.projectile.tint = this.tint;
@@ -29,4 +46,7 @@ YellowPaddle.prototype.shootProjectile = function( ) {
 YellowPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
+	this.effect.position = this.position;
+	this.effect.size = this.size;
+	this.effect.update( deltaTime );
 };

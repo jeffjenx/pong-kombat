@@ -11,6 +11,7 @@
 	{
 		"Background-Default"   : "images/backgrounds/default.png",
 		"Background-Title"     : "images/backgrounds/title.png",
+		
 		"Ball-Glare"           : "images/balls/ball-glare",
 		"Ball-8Ball"           : "images/balls/8ball.png",
 		"Ball-Baseball"        : "images/balls/baseball.png",
@@ -18,11 +19,17 @@
 		"Ball-Default"         : "images/balls/default.png",
 		"Ball-Earth"           : "images/balls/earth.png",
 		"Ball-Smiley"          : "images/balls/smiley.png",
+		
 		"Paddle-Blue"          : "images/paddles/blue-texture.png",
 		"Paddle-Green"         : "images/paddles/green-texture.png",
 		"Paddle-Purple"        : "images/paddles/purple-texture.png",
 		"Paddle-Red"           : "images/paddles/red-texture.png",
 		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
+		"Paddle-Gloss"         : "images/paddles/paddle-gloss.png",
+		
+		"Particle-Fire1"       : "images/effects/particle-fire-1.png",
+		"Particle-Fire2"       : "images/effects/particle-fire-2.png",
+		"Particle-Fire3"       : "images/effects/particle-fire-3.png",
 		
 		"Health"               : "images/health.png",
 		"HUD"                  : "images/hud.png",
@@ -31,6 +38,7 @@
 		"Quantastical-Painted" : "images/quantastical-painted.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
 		"TV-Glare"             : "images/levels/tv-glare.png",
+		
 		
 		"Paddle" : "images/paddle.png",
 		"Ball"   : "images/ball.png",
