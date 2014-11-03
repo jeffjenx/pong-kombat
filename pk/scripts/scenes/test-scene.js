@@ -15,6 +15,7 @@ function TestScene( ) {
 	
 	this.tester = new YellowPaddle( );
 	this.tester.scale = 5;
+	this.tester.rotation = 90;
 	testLayer.addComponent( 'Tester', this.tester );
 }
 

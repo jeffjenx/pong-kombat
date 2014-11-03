@@ -23,6 +23,8 @@ function ParticleSystem( particleCount ) {
 	this.position.x = viewport.width * 0.50;
 	this.position.y = viewport.height * 0.50;
 	
+	this.rotation = 0;
+	
 	this.size = new Vector( );
 	this.size.x = viewport.width * 0.25;
 	this.size.y = viewport.height * 0.25;
@@ -101,8 +103,12 @@ function Particle( emitter ) {
 	this.velocity.y = emitter.minVelocity.y + Math.random( ) * ( emitter.maxVelocity.y - emitter.minVelocity.y );
 	
 	this.position = new Vector( );
-	this.position.x = emitter.position.x + Math.random( ) * emitter.size.x - emitter.size.x * 0.50;
-	this.position.y = emitter.position.y + Math.random( ) * emitter.size.y - emitter.size.y * 0.50;
+	//this.position.x = emitter.position.x + Math.random( ) * emitter.size.x - emitter.size.x * 0.50;
+	//this.position.y = emitter.position.y + Math.random( ) * emitter.size.y - emitter.size.y * 0.50;
+	var x = Math.random( ) * emitter.size.x - emitter.size.x * 0.50;
+	var y = Math.random( ) * emitter.size.y - emitter.size.y * 0.50;
+	this.position.x = emitter.position.x + x * Math.cos( emitter.rotation * Math.TO_RADIANS ) - y * Math.sin( emitter.rotation * Math.TO_RADIANS );
+	this.position.y = emitter.position.y + x * Math.sin( emitter.rotation * Math.TO_RADIANS ) + y * Math.cos( emitter.rotation * Math.TO_RADIANS );
 	
 	this.radius = emitter.minParticleSize + Math.random( ) * ( emitter.maxParticleSize - emitter.minParticleSize );
 	

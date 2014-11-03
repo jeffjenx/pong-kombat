@@ -167,8 +167,8 @@ Ball.prototype.update = function( deltaTime ) {
 		this.glare.scale = this.scale;
 		this.glare.opacity = this.scale * 0.666;
 	} else {
-		this.scale = 1;
-		this.glare.scale = 1;
+		this.scale = this.scale;
+		this.glare.scale = this.scale;
 		this.glare.opacity = 0.666;
 		Sprite.prototype.update.call( this, deltaTime );
 	}

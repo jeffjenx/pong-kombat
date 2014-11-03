@@ -63,9 +63,47 @@ Paddle.prototype.draw = function( context ) {
 	
 	var width = this.size.x * this.scale;
 	var height = this.size.y * this.scale;
-	var x = this.position.x - width * this.registration.x;
-	var y = this.position.y - height * this.registration.y;
+	var x = -width * this.registration.x;
+	var y = -height * this.registration.y;
 	var radius = width * 0.50;
+	
+	context.save();
+	context.globalAlpha *= this.opacity;
+	context.translate( this.position.x, this.position.y );
+	context.rotate( this.rotation * Math.TO_RADIANS );
+	context.beginPath();
+	context.moveTo(x + radius, y);
+	context.lineTo(x + width - radius, y);
+	context.quadraticCurveTo(x + width, y, x + width, y + radius);
+	context.lineTo(x + width, y + height - radius);
+	context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+	context.lineTo(x + radius, y + height);
+	context.quadraticCurveTo(x, y + height, x, y + height - radius);
+	context.lineTo(x, y + radius);
+	context.quadraticCurveTo(x, y, x + radius, y);
+	context.closePath();
+	context.clip();
+	context.drawImage(
+		this.patternCanvas,
+		0,
+		0,
+		this.patternCanvas.width * (this.size.x / this.size.y) * 0.75,
+		this.patternCanvas.height * 0.75,
+		-width * this.registration.x,
+		-height * this.registration.y,
+		width,
+		height
+	);
+	context.drawImage(
+		this.gloss.image,
+		-width * this.registration.x * 6.5,
+		-height * this.registration.y * 1.15,
+		width * 6.5,
+		height * 1.15
+	);
+	context.restore();
+	
+	/*
 	context.save();
 	context.beginPath();
 	context.moveTo(x + radius, y);
@@ -79,9 +117,8 @@ Paddle.prototype.draw = function( context ) {
 	context.quadraticCurveTo(x, y, x + radius, y);
 	context.closePath();
 	context.clip();
-//	context.restore();
-
-//	context.save( );
+	//context.restore();
+	//context.save( );
 	context.globalAlpha *= this.opacity;
 	context.translate( this.position.x, this.position.y );
 	context.rotate( this.rotation * Math.TO_RADIANS );
@@ -89,29 +126,26 @@ Paddle.prototype.draw = function( context ) {
 	{
 		context.scale( -1, 1 );
 	}
-	
 	context.drawImage(
 		this.patternCanvas,
 		0,
 		0,
 		this.patternCanvas.width * (this.size.x / this.size.y) * 0.75,
 		this.patternCanvas.height * 0.75,
-		
-		-this.size.x * this.registration.x * this.scale,
-		-this.size.y * this.registration.y * this.scale,
-		this.size.x * this.scale,
-		this.size.y * this.scale
+		-width * this.registration.x,
+		-height * this.registration.y,
+		width,
+		height
 	);
-	
 	context.drawImage(
 		this.gloss.image,
-		-this.size.x * this.registration.x * this.scale * 7,
-		-this.size.y * this.registration.y * this.scale * 1.15,
-		this.size.x * this.scale * 7,
-		this.size.y * this.scale * 1.15
+		-width * this.registration.x * 7,
+		-height * this.registration.y * 1.15,
+		width * 7,
+		height * 1.15
 	);
-	
 	context.restore( );
+	*/
 	
 	if( this.projectile ) {
 		this.projectile.draw( context );
