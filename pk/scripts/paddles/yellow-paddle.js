@@ -23,6 +23,7 @@ function YellowPaddle( ) {
 	this.effect.scaleSpeed = 5;
 	this.effect.maxOpacity = 0.9;
 	this.effect.fadeSpeed = 0.666;
+	this.effect.attachTo( this );
 	this.effect.start( );
 }
 
@@ -51,10 +52,5 @@ YellowPaddle.prototype.shootProjectile = function( ) {
 YellowPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
-	this.effect.position = this.position;
-	this.effect.size.x = this.size.x * this.scale;
-	this.effect.size.y = this.size.y * this.scale;
-	this.effect.rotation = this.rotation;
-	this.effect.scale = this.scale;
 	this.effect.update( deltaTime );
 };

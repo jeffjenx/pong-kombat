@@ -257,6 +257,7 @@ App.prototype.render = function( ) {
 	var delta = now - then;
 	then = now;
 	
+	/*
 	// Calculate average framerate
 	while( app.framerates.length > 10 )
 	{
@@ -264,6 +265,7 @@ App.prototype.render = function( ) {
 	}
 	app.framerates.push( 1000 / delta );
 	app.framerate = ( eval( app.framerates.join( '+' ) ) / app.framerates.length ).toFixed( 2 );
+	*/
 	
 	// Clear canvas
 	viewportContext.clearRect( 0, 0, viewport.width, viewport.height );
@@ -334,6 +336,9 @@ App.prototype.resize = function( ) {
 		viewport.width = this.maxWidth;
 		viewport.height = this.maxWidth / this.aspectRatio.x * this.aspectRatio.y;
 	}
+	
+	viewport.width /= 2;
+	viewport.height /= 2;
 	
 	viewport.center = { x : viewport.width / 2, y : viewport.height / 2 };
 	viewport.style.marginTop = -( viewport.height / 2 ) + "px";

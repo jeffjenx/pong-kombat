@@ -106,7 +106,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new TitleScene();//new SplashScene( );
+		app.startupScene = new TestScene();//new SplashScene( );
 		app.initialize( );
 	};
 };

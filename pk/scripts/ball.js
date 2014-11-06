@@ -15,8 +15,8 @@ function Ball( texture ) {
 	this.maxSpeed = 6;
 	
 	this.patternCanvas = document.createElement( 'canvas' );
-	this.patternCanvas.width = ( this.image ) ? this.image.width : 512;
-	this.patternCanvas.height = ( this.image ) ? this.image.height : 512;
+	this.patternCanvas.width = (this.image) ? this.image.width : 512;
+	this.patternCanvas.height = (this.image) ? this.image.height : 512;
 	this.patternContext = this.patternCanvas.getContext( '2d' );
 	
 	this.offset = copy( Vector.Zero );
@@ -30,6 +30,8 @@ function Ball( texture ) {
 	this.lastPaddle = null;
 	this.sourceRotation = this.rotation;
 	this.targetRotation = this.rotation;
+	
+	this.addGlare( );
 }
 
 Ball.prototype = new Sprite;
@@ -38,8 +40,8 @@ Ball.prototype.constructor = Ball;
 Ball.prototype.addGlare = function( ) {
 	this.glare = new Sprite( 'Ball-Glare' );
 	this.glare.opacity = 0.666;
-	this.glare.size.x = this.size.x * 3.05;
-	this.glare.size.y = this.size.y * 3.05;
+	this.glare.size.x = this.size.x * 3;
+	this.glare.size.y = this.size.y * 3;
 };
 
 Ball.prototype.draw = function( context ) {
@@ -49,13 +51,15 @@ Ball.prototype.draw = function( context ) {
 		return;
 	}
 	
-	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
-	this.patternContext.save( );
+//	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
+//	this.patternContext.save( );
 	this.patternContext.translate( this.offset.x * 3, this.offset.y * 3 );
-	this.patternContext.rect( -viewport.width, -viewport.height, viewport.width * 2, viewport.height * 2 );
-	this.patternContext.fillStyle = this.pattern;
-	this.patternContext.fill( );
-	this.patternContext.restore( );
+//	this.patternContext.rect( -viewport.width, -viewport.height, viewport.width * 2, viewport.height * 2 );
+//	this.patternContext.rect( 0, 0, this.image.width, this.image.height );
+//	this.patternContext.fillStyle = this.pattern;
+//	this.patternContext.rect( 0, 0, this.patternCanvas.width, this.patternCanvas.height );
+//	this.patternContext.fill( );
+//	this.patternContext.restore( );
 	
 	context.save( );
 	context.globalAlpha *= this.opacity;
@@ -68,14 +72,42 @@ Ball.prototype.draw = function( context ) {
 	context.beginPath();
 	context.arc(0, 0, this.size.x * this.scale * 0.49, 0, 2 * Math.PI, false);
 	context.clip();
+/*
 	context.drawImage(
 		this.patternCanvas,
+//		this.image,
 		0,
 		0,
 		this.image.width * 0.50,
 		this.image.height * 0.50,
 		-this.size.x * this.registration.x * this.scale,
 		-this.size.y * this.registration.y * this.scale,
+		this.size.x * this.scale,
+		this.size.y * this.scale
+	);
+*/
+	//this.patternContext.translate( this.offset.x, this.offset.y );
+	//this.patternContext.fill( );
+	//this.patternContext.translate( -this.offset.x, -this.offset.y );
+	
+	//this.patternContext.save();
+	//this.patternContext.translate( -this.position.x, -this.position.y );
+	//this.patternContext.rect( this.position.x, this.position.y, this.patternCanvas.width, this.patternCanvas.width );
+	//this.patternContext.fill( );
+	//this.patternContext.restore();
+	
+	//this.patternContext.translate( this.position.x, this.position.y );
+	
+	context.drawImage(
+		this.patternCanvas,
+		// Source
+		0,
+		0,
+		this.patternCanvas.width,
+		this.patternCanvas.height,
+		// Destination
+		-this.size.x * this.scale * 0.50,
+		-this.size.y * this.scale * 0.50,
 		this.size.x * this.scale,
 		this.size.y * this.scale
 	);
@@ -154,9 +186,6 @@ Ball.prototype.set = function( ) {
 };
 
 Ball.prototype.changedRotation = function( ) {
-	if( !this.glare){
-		this.addGlare();
-	}
 	this.sourceRotation = this.glare.rotation;
 	this.targetRotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
 };
@@ -164,12 +193,16 @@ Ball.prototype.changedRotation = function( ) {
 Ball.prototype.update = function( deltaTime ) {
 	if( this.scale < 1 ) {
 		this.scale += 3.3 * deltaTime;
-		this.glare.scale = this.scale;
-		this.glare.opacity = this.scale * 0.666;
+		if( this.glare ) {
+			this.glare.scale = this.scale;
+			this.glare.opacity = this.scale * 0.666;
+		}
 	} else {
 		this.scale = this.scale;
-		this.glare.scale = this.scale;
-		this.glare.opacity = 0.666;
+		if( this.glare ) {
+			this.glare.scale = this.scale;
+			this.glare.opacity = 0.666;
+		}
 		Sprite.prototype.update.call( this, deltaTime );
 	}
 	

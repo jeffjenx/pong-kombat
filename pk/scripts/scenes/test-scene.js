@@ -13,9 +13,9 @@ function TestScene( ) {
 	this.text.position.y = viewport.height * 0.23;
 	testLayer.addComponent( 'Text', this.text );
 	
-	this.tester = new YellowPaddle( );
-	this.tester.scale = 5;
-	this.tester.rotation = 90;
+	this.tester = new EarthBall( );
+	//this.tester.scale = 5;
+	//this.tester.rotation = 90;
 	testLayer.addComponent( 'Tester', this.tester );
 }
 
@@ -23,8 +23,6 @@ TestScene.prototype = new Scene;
 TestScene.prototype.constructor = TestScene;
 
 TestScene.prototype.update = function( deltaTime ) {
-	Scene.prototype.update.call( this, deltaTime );
-	
 	if( InputManager.isButtonDown( Buttons.LEFT ) ) {
 		this.tester.position.x -= viewport.width * 0.25 * deltaTime;
 	}
@@ -37,4 +35,6 @@ TestScene.prototype.update = function( deltaTime ) {
 	if( InputManager.isButtonDown( Buttons.DOWN ) ) {
 		this.tester.position.y += viewport.height * 0.25 * deltaTime;
 	}
+	
+	Scene.prototype.update.call( this, deltaTime );
 };
