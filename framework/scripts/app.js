@@ -337,9 +337,6 @@ App.prototype.resize = function( ) {
 		viewport.height = this.maxWidth / this.aspectRatio.x * this.aspectRatio.y;
 	}
 	
-	viewport.width /= 2;
-	viewport.height /= 2;
-	
 	viewport.center = { x : viewport.width / 2, y : viewport.height / 2 };
 	viewport.style.marginTop = -( viewport.height / 2 ) + "px";
 	viewport.style.marginLeft = -( viewport.width / 2 ) + "px";
