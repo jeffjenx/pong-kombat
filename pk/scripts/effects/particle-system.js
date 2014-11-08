@@ -41,6 +41,7 @@ function ParticleSystem( particleCount ) {
 	this.fadeSpeed = 0.5; // btwn 0 and 1
 	
 	this.attachedObject = null;
+	this.started = false;
 }
 
 ParticleSystem.prototype.constructor = ParticleSystem;
@@ -56,6 +57,7 @@ ParticleSystem.prototype.attachTo = function( obj ) {
 };
 
 ParticleSystem.prototype.start = function( ) {
+	this.started = true;
 	for( var i = 0; i < this.count; i++ )
 	{
 		this.particles.push( new Particle( this ) );
@@ -88,6 +90,10 @@ ParticleSystem.prototype.update = function( deltaTime ) {
 		this.size.y = this.attachedObject.size.y * this.attachedObject.scale;
 		this.rotation = this.attachedObject.rotation;
 		this.scale = this.attachedObject.scale;
+	}
+	
+	if( !this.started ) {
+		this.start();
 	}
 	
 	for(var i = 0; i < this.particles.length; i++)

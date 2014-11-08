@@ -24,7 +24,7 @@ function YellowPaddle( ) {
 	this.effect.maxOpacity = 0.9;
 	this.effect.fadeSpeed = 0.666;
 	this.effect.attachTo( this );
-	this.effect.start( );
+	//this.effect.start( );
 }
 
 YellowPaddle.prototype = new Paddle;

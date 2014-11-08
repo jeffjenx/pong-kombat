@@ -14,9 +14,9 @@ function BluePaddle( ) {
 	this.effect.particleImages = [Resources['Particle-Smoke1'],Resources['Particle-Smoke2']];
 	this.effect.count = 20;
 	this.effect.minVelocity.x = -this.size.x * 0.25;
-	this.effect.minVelocity.y = -this.size.y * 0.10;
-	this.effect.maxVelocity.x = this.size.x;
-	this.effect.maxVelocity.y = -this.size.y * 0.75;
+	this.effect.minVelocity.y = this.size.y * 0.50;
+	this.effect.maxVelocity.x = this.size.x * 0.25;
+	this.effect.maxVelocity.y = -this.size.y * 0.50;
 	this.effect.minParticleSize = this.size.x * 0.3;
 	this.effect.maxParticleSize = this.size.x * 0.5;
 	this.effect.minLife = 50;
@@ -24,7 +24,6 @@ function BluePaddle( ) {
 	this.effect.maxOpacity = 0.4;
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 5;
-	this.effect.start( );
 }
 
 BluePaddle.prototype = new Paddle;

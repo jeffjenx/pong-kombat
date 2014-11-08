@@ -14,28 +14,30 @@ function TitleScene( ) {
 	this.ball = new DefaultBall( );
 	this.ball.scale = 2;
 	this.ball.opacity = 0;
-	this.ball.position.x = viewport.width * 0.80;
-	this.ball.position.y = viewport.height * 0.20;
-	this.ball.velocity.x = -viewport.width * 0.14;
-	this.ball.velocity.y = viewport.height * 0.14;
-	this.ball.changedRotation( );
+	this.ball.startPosition = {x: viewport.width * 0.65, y: viewport.height * 0.30};
+	this.ball.endPosition = {x: viewport.width * 0.45, y: viewport.height * 0.55};
+	this.ball.position.x = this.ball.startPosition.x;
+	this.ball.position.y = this.ball.startPosition.y;
+	this.ball.targetRotation = 135;
 	titleLayer.addComponent( 'Ball', this.ball );
 	
 	this.blue = new BluePaddle( );
 	this.blue.scale = 4;
-	this.blue.position.x = viewport.width * 0.80;
-	this.blue.position.y = viewport.height * 0.20;
+	this.blue.startPosition = {x: viewport.width * 1.20, y: viewport.height * 0.50};
+	this.blue.endPosition = {x: viewport.width * 0.80, y: viewport.height * 0.20};
+	this.blue.position.x = this.blue.startPosition.x;
+	this.blue.position.y = this.blue.startPosition.y;
 	this.blue.rotation = -60;
-	this.blue.velocity.x = -Math.round( viewport.width * 0.25 * Math.cos( this.blue.rotation * Math.TO_RADIANS ) );
-	this.blue.velocity.y = Math.round( viewport.width * 0.25 * Math.sin( this.blue.rotation * Math.TO_RADIANS ) );
 	titleLayer.addComponent( 'Blue', this.blue );
 	
 	this.yellow = new YellowPaddle( );
 	this.yellow.scale = 4;
-	this.yellow.position.x = viewport.width * 0.20;
-	this.yellow.position.y = viewport.height * 0.75;
+	this.yellow.startPosition = {x: viewport.width * -0.20, y:viewport.height * 0.45};
+	this.yellow.endPosition = {x: viewport.width * 0.20, y:viewport.height * 0.75};
+	this.yellow.position.x = this.yellow.startPosition.x;
+	this.yellow.position.y = this.yellow.startPosition.y;
 	this.yellow.rotation = -60;
-	//titleLayer.addComponent( 'Yellow', this.yellow );
+	titleLayer.addComponent( 'Yellow', this.yellow );
 	
 	this.logo = new Sprite( 'Logo' );
 	this.logo.position.x = viewport.width * 0.50;
@@ -71,18 +73,44 @@ TitleScene.prototype.update = function( deltaTime ) {
 		this.addLayer( 'Menu', new TitleMenu( this ) );
 	}
 	
-	if( this.ball.opacity < 1 ){
-		this.ball.opacity += deltaTime;
-	} else {
-		this.ball.opacity = 1;
-	}
-	this.ball.velocity.x *= 0.99;
-	this.ball.velocity.y *= 0.99;
+	this.easePosition( 1, 5, this.ball );
+	this.easePosition( 1, 5, this.yellow );
+	this.easePosition( 1, 5, this.blue );
 	
 	if( !this.layers['Menu'] && this.timeElapsed > 20 ) {
 		var storyScene = new StoryScene( );
 		storyScene.setPaddle( Paddles.RANDOM );
 		storyScene.setStory( 'background' );
 		SceneManager.changeScene( storyScene, Transitions.NONE );
+	}
+};
+
+TitleScene.prototype.ballInterpolation = function( startTime, endTime ) {
+	if( this.timeElapsed > startTime && this.timeElapsed < endTime ) {
+		var time = 1 - (this.timeElapsed - startTime) / (endTime - startTime);
+		
+		this.ball.opacity = (1 - time) * 2;
+		
+		this.ball.position.x = this.ball.endPosition.x - (this.ball.endPosition.x - this.ball.startPosition.x) * time * time;
+		this.ball.position.y = this.ball.endPosition.y - (this.ball.endPosition.y - this.ball.startPosition.y) * time * time;
+	} else if( this.timeElapsed > endTime && this.ball.opacity != 1 ) {
+		this.ball.opacity = 1;
+		this.ball.position.x = this.ball.endPosition.x;
+		this.ball.position.y = this.ball.endPosition.y;
+	}
+};
+
+TitleScene.prototype.easePosition = function( startTime, endTime, component ) {
+	if( this.timeElapsed > startTime && this.timeElapsed < endTime ) {
+		var time = 1 - (this.timeElapsed - startTime) / (endTime - startTime);
+		
+		component.opacity = (1 - time) * 2;
+		
+		component.position.x = component.endPosition.x - (component.endPosition.x - component.startPosition.x) * time * time;
+		component.position.y = component.endPosition.y - (component.endPosition.y - component.startPosition.y) * time * time;
+	} else if( this.timeElapsed > endTime && component.opacity != 1 ) {
+		component.opacity = 1;
+		component.position.x = component.endPosition.x;
+		component.position.y = component.endPosition.y;
 	}
 };
