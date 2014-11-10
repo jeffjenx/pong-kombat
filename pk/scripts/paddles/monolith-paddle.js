@@ -1,14 +1,13 @@
 function MonolithPaddle( ) {
-	Paddle.call( this, 'Paddle' );
-	
-	this.size.x = viewport.height * 0.02;
-	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 90, 90, 80 );
-	
-	this.enum = "MONOLITH";
+	this.enum = "MONOLITH"
 	this.name = "Monolith";
+	this.bigness = 5.00;
+	this.quickness = 3.00;
+	
 	this.endStory = "monolith end story";
 	this.story = "monolith story";
+	
+	Paddle.call( this, 'Paddle-Monolith' );
 }
 
 MonolithPaddle.prototype = new Paddle;

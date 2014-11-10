@@ -1,12 +1,13 @@
 function YellowPaddle( ) {
 	this.enum = "YELLOW"
 	this.name = "Yellow Paddle";
-	this.height = 3;
-	
-	Paddle.call( this, 'Paddle-Yellow' );
+	this.bigness = 3.00;
+	this.quickness = 3.00;
 	
 	this.endStory = "yellow end story";
 	this.story = "yellow story";
+	
+	Paddle.call( this, 'Paddle-Yellow' );
 	
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Fire1'],Resources['Particle-Fire2'],Resources['Particle-Fire3']];

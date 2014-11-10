@@ -34,6 +34,6 @@ SplashScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed >= 8 )
 	{
-		SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.33 );
+		SceneManager.changeScene( new LegalScene( ), Transitions.FADE );
 	}
 };

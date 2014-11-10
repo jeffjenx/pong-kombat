@@ -51,10 +51,10 @@ StoryScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
-		SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
+	//	SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
 	}
 	
 	if( !app.tournament && this.timeElapsed >= 3 ) {
-		SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
+	//	SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
 	}
 };

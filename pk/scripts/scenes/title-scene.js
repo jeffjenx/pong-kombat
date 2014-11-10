@@ -19,6 +19,7 @@ function TitleScene( ) {
 	this.ball.position.x = this.ball.startPosition.x;
 	this.ball.position.y = this.ball.startPosition.y;
 	this.ball.targetRotation = 135;
+	this.ball.addGlare( );
 	titleLayer.addComponent( 'Ball', this.ball );
 	
 	this.blue = new BluePaddle( );
@@ -73,15 +74,13 @@ TitleScene.prototype.update = function( deltaTime ) {
 		this.addLayer( 'Menu', new TitleMenu( this ) );
 	}
 	
-	this.easePosition( 1, 5, this.ball );
-	this.easePosition( 1, 5, this.yellow );
-	this.easePosition( 1, 5, this.blue );
+	this.easePosition( 0.5, 5, this.ball );
+	this.easePosition( 2, 5, this.yellow );
+	this.easePosition( 1, 4, this.blue );
 	
 	if( !this.layers['Menu'] && this.timeElapsed > 20 ) {
-		var storyScene = new StoryScene( );
-		storyScene.setPaddle( Paddles.RANDOM );
-		storyScene.setStory( 'background' );
-		SceneManager.changeScene( storyScene, Transitions.NONE );
+		var storyScene = new MainStoryScene( );
+			SceneManager.changeScene( storyScene, Transitions.FADE );
 	}
 };
 

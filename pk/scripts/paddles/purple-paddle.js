@@ -2,11 +2,12 @@ function PurplePaddle( ) {
 	this.enum = "PURPLE";
 	this.name = "Purple Paddle";
 	this.bigness = 3.50;
-	
-	Paddle.call( this, 'Paddle-Purple' );
+	this.quickness = 4.00;
 	
 	this.endStory = "purple end story";
 	this.story = "purple story";
+	
+	Paddle.call( this, 'Paddle-Purple' );
 }
 
 PurplePaddle.prototype = new Paddle;

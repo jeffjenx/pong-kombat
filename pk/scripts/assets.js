@@ -10,6 +10,7 @@
 	"images" :
 	{
 		"Background-Default"   : "images/backgrounds/default.png",
+		"Background-MainStory" : "images/backgrounds/main-story.png",
 		"Background-Title"     : "images/backgrounds/title.png",
 		
 		"Ball-Glare"           : "images/balls/ball-glare",

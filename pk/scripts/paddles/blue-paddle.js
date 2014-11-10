@@ -1,22 +1,21 @@
 function BluePaddle( ) {
 	this.enum = "BLUE";
 	this.name = "Blue Paddle";
-	this.bigness = 3;
-	
-	Paddle.call( this, 'Paddle-Blue' );
+	this.bigness = 3.00;
+	this.quickness = 3.00;
 	
 	this.endStory = "blue end story";
 	this.story = "blue story";
 	
-	
+	Paddle.call( this, 'Paddle-Blue' );
 	
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Smoke1'],Resources['Particle-Smoke2']];
 	this.effect.count = 20;
 	this.effect.minVelocity.x = -this.size.x * 0.25;
-	this.effect.minVelocity.y = this.size.y * 0.50;
+	this.effect.minVelocity.y = this.size.y * 0.25;
 	this.effect.maxVelocity.x = this.size.x * 0.25;
-	this.effect.maxVelocity.y = -this.size.y * 0.50;
+	this.effect.maxVelocity.y = -this.size.y * 0.25;
 	this.effect.minParticleSize = this.size.x * 0.3;
 	this.effect.maxParticleSize = this.size.x * 0.5;
 	this.effect.minLife = 50;

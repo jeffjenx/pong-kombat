@@ -1,14 +1,13 @@
 function ShifterPaddle( ) {
-	Paddle.call( this, 'Paddle' );
-	
-	this.size.x = viewport.height * 0.02;
-	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 128, 128, 128 );
-	
-	this.enum = "SHIFTER";
+	this.enum = "SHIFTER"
 	this.name = "Shifter";
+	this.bigness = 2.50;
+	this.quickness = 3.50;
+	
 	this.endStory = "shifter end story";
 	this.story = "shifter story";
+	
+	Paddle.call( this, 'Paddle-Shifter' );
 }
 
 ShifterPaddle.prototype = new Paddle;

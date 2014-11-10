@@ -6,6 +6,7 @@ function Text( text ) {
 	this.fontSize = viewport.height / 10;
 	this.fontStyle = "";
 	this.letterSpacing = 0;
+	this.lineHeight = 1;
 	this.text = text;
 	this.textAlign = "center";
 	this.textBaseline = "middle";
@@ -65,11 +66,11 @@ Text.prototype.draw = function( context ) {
 		{
 			if( this.letterSpacing == 0 )
 			{
-				context.fillText( lines[i], 0, i * this.fontSize * this.scale );
+				context.fillText( lines[i], 0, i * this.fontSize * this.scale * this.lineHeight );
 			}
 			else
 			{
-				this.applySpacing( context, lines[i], 0, i * this.fontSize * this.scale );
+				this.applySpacing( context, lines[i], 0, i * this.fontSize * this.scale * this.lineHeight );
 			}
 		}
 	}

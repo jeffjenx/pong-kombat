@@ -4,6 +4,7 @@ function Menu( scene ) {
 	this.currentIndex = -1;
 	this.timeElapsed = 0;
 	this.blurRadius = 0;
+	this.maxBlurRadius = viewport.width * 0.15;
 	
 	// Rounded rectangle
 	var overlay = new Component( 'Menu-Overlay' );
@@ -129,9 +130,16 @@ Menu.prototype.fadeIn = function( fadeTime ) {
 				this.components[i].opacity = this.timeElapsed / fadeTime;
 			}	
 		}
-		this.blurRadius = this.timeElapsed / fadeTime * 33;
-	} else {
-		this.blurRadius = 33;
+		this.blurRadius = this.timeElapsed / fadeTime * this.maxBlurRadius;
+	} else if( this.timeElapsed > fadeTime && this.blurRadius != this.maxBlurRadius ) {
+		this.blurRadius = this.maxBlurRadius;
+		for( var i in this.components ) {
+			if( i === 'Overlay' ) {
+				this.components[i].opacity = 0.50;
+			} else {
+				this.components[i].opacity = 1;
+			}	
+		}
 	}
 };
 

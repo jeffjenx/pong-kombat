@@ -1,14 +1,13 @@
 function WhitePaddle( ) {
-	Paddle.call( this, 'Paddle' );
-	
-	this.size.x = viewport.height * 0.02;
-	this.size.y = viewport.height * 0.15;
-	this.tint = new Color( 255, 255, 255 );
-	
-	this.enum = "WHITE";
+	this.enum = "WHITE"
 	this.name = "White Paddle";
+	this.bigness = 4.00;
+	this.quickness = 5.00;
+	
 	this.endStory = "white end story";
 	this.story = "white story";
+	
+	Paddle.call( this, 'Paddle-White' );
 }
 
 WhitePaddle.prototype = new Paddle;

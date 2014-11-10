@@ -20,6 +20,10 @@ function Paddle( texture ) {
 		this.bigness = 3;
 	}
 	
+	if( !this.quickness ) {
+		this.quickness = 3;
+	}
+	
 	this.gloss = new Sprite( 'Paddle-Gloss' );
 	
 	this.patternCanvas = document.createElement( 'canvas' );
@@ -40,6 +44,15 @@ function Paddle( texture ) {
 	// 4.0 ~ .20
 	// 4.5 ~ .225
 	// 5.0 ~ .25
+	
+	// Quickness Scale (velocity.y)
+	// 2.0 ~ 
+	// 2.5 ~ 
+	// 3.0 ~ 
+	// 3.5 ~ 
+	// 4.0 ~ 
+	// 4.5 ~ 
+	// 5.0 ~ 
 	
 	this.projectile = null;
 }
@@ -153,12 +166,12 @@ Paddle.prototype.draw = function( context ) {
 };
 
 Paddle.prototype.moveDown = function( ) {
-	this.velocity.y = viewport.height * 0.25;
+	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.15 );
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveUp = function( ) {
-	this.velocity.y = -viewport.height * 0.25;
+	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.15 );
 	this.restrictToBounds( );
 };
 
