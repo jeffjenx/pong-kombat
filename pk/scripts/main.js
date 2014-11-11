@@ -80,14 +80,18 @@ function ready( ) {
 	app = new App( );
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = "pk/";
-	app.settings = {
-		censored : true,
-		sound_fx : true
-	};
 	if( window.lang !== undefined )
 	{
 		app.language = window.lang;
 	}
+	app.settings = {
+		'Locale' : app.language,
+		'Difficulty' : 1,
+		'Powerups' : true,
+		'Censored' : true,
+		'SoundFX' : true,
+		'Music' : true
+	};
 	//app.setMobileAudio( "audio/background-music" );
 	app.resize( );
 	
@@ -108,7 +112,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new SplashScene();//new SplashScene( );
+		app.startupScene = new HelpScene();//new SplashScene( );
 		app.initialize( );
 	};
 };
