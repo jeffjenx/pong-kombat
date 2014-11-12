@@ -79,6 +79,25 @@ var SceneManager = {
 	},
 	
 	transitionFade : function( context ) {
+		/*
+		if( this.transitionPercent < 0.5 ) {
+			this.currentScene.draw( context );
+			context.save();
+			context.globalAlpha = this.transitionPercent * 2;
+			context.fillStyle = 'black';
+			context.rect(0,0,viewport.width,viewport.height);
+			context.fill();
+			context.restore();
+		} else {
+			this.nextScene.draw(context);
+			context.globalAlpha = (1 - this.transitionPercent) * 2;
+			context.fillStyle = 'black';
+			context.rect(0,0,viewport.width,viewport.height);
+			context.fill();
+			context.restore();
+		}
+		*/
+		
 		this.currentScene.draw( context );
 		context.save( );
 		context.globalAlpha = this.transitionPercent;

@@ -166,11 +166,15 @@ Paddle.prototype.draw = function( context ) {
 };
 
 Paddle.prototype.moveDown = function( ) {
+	this.offset = this.position.y / viewport.height * 0.75;
+	
 	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.15 );
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveUp = function( ) {
+	this.offset = this.position.y / viewport.height * 0.75;
+	
 	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.15 );
 	this.restrictToBounds( );
 };
@@ -198,7 +202,7 @@ Paddle.prototype.shootProjectile = function( ) {
 Paddle.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
-	this.offset = this.position.y / viewport.height * 0.75;
+	//this.offset = this.position.y / viewport.height * 0.75;
 	
 	if( this.projectile ) {
 		this.projectile.update( deltaTime );

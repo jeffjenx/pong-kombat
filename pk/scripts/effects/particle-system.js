@@ -40,6 +40,7 @@ function ParticleSystem( particleCount ) {
 	this.scaleSpeed = 1;
 	this.fadeSpeed = 0.5; // btwn 0 and 1
 	
+	this.compositeOperation = 'lighter';
 	this.attachedObject = null;
 	this.started = false;
 }
@@ -62,11 +63,15 @@ ParticleSystem.prototype.start = function( ) {
 	{
 		this.particles.push( new Particle( this ) );
 	}
+	
+	for( var j = 0; j < 100; j++ ) {
+		this.update(1/60);
+	}
 };
 
 ParticleSystem.prototype.draw = function( context ) {
 	context.save( );
-	context.globalCompositeOperation = "lighter";
+	context.globalCompositeOperation = this.compositeOperation;
 	
 	for(var i = 0; i < this.particles.length; i++)
 	{

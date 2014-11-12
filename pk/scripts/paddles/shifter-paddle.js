@@ -1,4 +1,5 @@
 function ShifterPaddle( ) {
+	this.color = new Color( 255, 200, 155 );
 	this.enum = "SHIFTER"
 	this.name = "Shifter";
 	this.bigness = 2.50;

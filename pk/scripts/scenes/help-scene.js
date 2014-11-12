@@ -84,14 +84,6 @@ function HelpScene( ) {
 	this.helpLayer.addComponent( 'ReturnLabel', returnLabel );
 	
 	this.selectSetting( 'Locale' );
-/*
-	// Audio
-	if( !app.isMobile( ) )
-	{
-		this.beepSound = new Sound( 'Beep' );
-		this.boopSound = new Sound( 'Boop' );
-	}
-*/
 }
 
 HelpScene.prototype = new Scene;

@@ -1,77 +1,140 @@
 function ChoosePaddleScene( ) {
 	Scene.call( this );
 	
-	this.titleText = new Text( "Choose Your Paddle" );
-	this.titleText.color = "#FFE8B8";
-	this.titleText.fontFamily = "'Apple Garamond'";
-	this.titleText.fontSize = viewport.height * 0.08;
-	this.titleText.fontStyle = "200";
-	this.titleText.position.x = viewport.width * 0.5;
-	this.titleText.position.y = viewport.height * 0.2;
-	this.titleText.textAlign = "center";
+	this.mainLayer = this.addLayer( 'MainLayer', new Layer( ) );
+	this.mainLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
 	
-	this.paddles = new Array( );
+	var titleText = new Text( Resources['Localization']['CHOOSE YOUR PADDLE'] );
+	titleText.fontFamily = 'MK Mythologies';
+	titleText.fontSize = viewport.height * 0.08;
+	titleText.position.y = viewport.height * 0.11;
+	this.mainLayer.addComponent( 'TitleText', titleText );
+	
+	for( var i = 0; i < 6; i++ ) {
+		var box = new Sprite( 'Black' );
+		box.opacity = 0.5;
+		box.size.x = viewport.width * 0.27;
+		box.size.y = viewport.height * 0.33;
+		box.position.x = viewport.width * 0.20 + viewport.width * 0.30 * (i % 3);
+		box.position.y = viewport.height * 0.38 + viewport.height * 0.38 * (i<3 ? 0 : 1);
+		this.mainLayer.addComponent( 'Box' + i, box );
+	}
+	
+	this.paddles = new Array();
 	this.currentIndex = -1;
 	
-	var paddleLayer = this.addLayer( 'Paddles', new Layer( ) );
+	var yellowPaddle = new YellowPaddle();
+	yellowPaddle.position.x = viewport.width * 0.20;
+	yellowPaddle.position.y = viewport.height * 0.38;
+	yellowPaddle.rotation = 33;
+	yellowPaddle.scale = 2;
+	this.paddles.push( yellowPaddle );
 	
-	var yellowPaddle = new YellowPaddle( );
-	yellowPaddle.position.x = viewport.width * 0.25;
-	yellowPaddle.position.y = viewport.height * 0.33;
-	paddleLayer.addComponent( 'YellowPaddle', yellowPaddle );
+	var randomPaddle = new Sprite('Particle-Random1');
+	randomPaddle.color = new Color(0, 255, 255);
+	randomPaddle.enum = 'RANDOM';
+	randomPaddle.position.x = viewport.width * 0.50;
+	randomPaddle.position.y = viewport.height * 0.38;
+	randomPaddle.size.x = viewport.width * 0.15;
+	randomPaddle.size.y = randomPaddle.size.x;
+	this.paddles.push( randomPaddle );
 	
-	var bluePaddle = new BluePaddle( );
-	bluePaddle.position.x = viewport.width * 0.75;
-	bluePaddle.position.y = viewport.height * 0.33;
-	paddleLayer.addComponent( 'BluePaddle', bluePaddle );
+	var bluePaddle = new BluePaddle();
+	bluePaddle.position.x = viewport.width * 0.80;
+	bluePaddle.position.y = viewport.height * 0.38;
+	bluePaddle.rotation = -20;
+	bluePaddle.scale = 2;
+	this.paddles.push( bluePaddle );
 	
 	var redPaddle = new RedPaddle( );
-	redPaddle.position.x = viewport.width * 0.25;
-	redPaddle.position.y = viewport.height * 0.67;
-	paddleLayer.addComponent( 'RedPaddle', redPaddle );
+	redPaddle.position.x = viewport.width * 0.20;
+	redPaddle.position.y = viewport.height * 0.76;
+	redPaddle.rotation = -69;
+	redPaddle.scale = 2;
+	this.paddles.push( redPaddle );
 	
 	var greenPaddle = new GreenPaddle( );
 	greenPaddle.position.x = viewport.width * 0.50;
-	greenPaddle.position.y = viewport.height * 0.67;
-	paddleLayer.addComponent( 'GreenPaddle', greenPaddle );
+	greenPaddle.position.y = viewport.height * 0.76;
+	greenPaddle.rotation = 10;
+	greenPaddle.scale = 2;
+	this.paddles.push( greenPaddle );
 	
 	var purplePaddle = new PurplePaddle( );
-	purplePaddle.position.x = viewport.width * 0.75;
-	purplePaddle.position.y = viewport.height * 0.67;
-	paddleLayer.addComponent( 'PurplePaddle', purplePaddle );
-	
-	var randomPaddle = new Sprite( 'Paddle' );
-	randomPaddle.enum = "RANDOM";
-	randomPaddle.position.x = viewport.width * 0.50;
-	randomPaddle.position.y = viewport.height * 0.33;
-	randomPaddle.size.x = viewport.width * 0.10;
-	randomPaddle.size.y = viewport.height * 0.10;
-	randomPaddle.tint = new Color( 0, 213, 255 );
-	paddleLayer.addComponent( 'RandomPaddle', randomPaddle );
-	
-	this.paddles.push( paddleLayer.components['YellowPaddle'] );
-	this.paddles.push( paddleLayer.components['RandomPaddle'] );
-	this.paddles.push( paddleLayer.components['BluePaddle'] );
-	this.paddles.push( paddleLayer.components['RedPaddle'] );
-	this.paddles.push( paddleLayer.components['GreenPaddle'] );
-	this.paddles.push( paddleLayer.components['PurplePaddle'] );
+	purplePaddle.position.x = viewport.width * 0.80;
+	purplePaddle.position.y = viewport.height * 0.76;
+	purplePaddle.rotation = 45;
+	purplePaddle.scale = 2;
+	this.paddles.push( purplePaddle );
 	
 	this.selectNextPaddle( 'Right' );
+	
+	// Setup random paddle effect
+	randomPaddle.effect = new ParticleSystem( );
+	randomPaddle.effect.particleImages = [Resources['Particle-Random2'],Resources['Particle-Random3'],Resources['Particle-Random4'],Resources['Particle-Random5'],Resources['Particle-Random6']];
+	randomPaddle.effect.count = 20;
+	randomPaddle.effect.minVelocity.x = -randomPaddle.size.x * 0.25;
+	randomPaddle.effect.minVelocity.y = randomPaddle.size.y * 0.25;
+	randomPaddle.effect.maxVelocity.x = randomPaddle.size.x * 0.25;
+	randomPaddle.effect.maxVelocity.y = -randomPaddle.size.y * 0.25;
+	randomPaddle.effect.minParticleSize = randomPaddle.size.x * 0.01;
+	randomPaddle.effect.maxParticleSize = randomPaddle.size.x * 0.09;
+	randomPaddle.effect.minLife = 50;
+	randomPaddle.effect.maxLife = 300;
+	randomPaddle.effect.maxOpacity = 0.3;
+	randomPaddle.effect.rotationSpeed = 1;
+	randomPaddle.effect.scaleSpeed = 3;
+	
+	randomPaddle.draw = function( context ) {
+		Sprite.prototype.draw.call(this, context);
+		randomPaddle.effect.draw(context);
+	};
+	
+	randomPaddle.update = function( deltaTime ) {
+		Paddle.prototype.update.call( this, deltaTime );
+		
+		this.effect.position = this.position;
+		this.effect.rotation = this.rotation;
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
+		this.effect.scale = this.scale;
+		this.effect.update( deltaTime );
+	};
+	
+	for( var j = 0; j < 100; j++ ) {
+		for( var i in this.paddles ) {
+			this.paddles[i].update(1/60);
+		}
+	}
 }
 
 ChoosePaddleScene.prototype = new Scene;
 ChoosePaddleScene.prototype.constructor = ChoosePaddleScene;
 
 ChoosePaddleScene.prototype.draw = function( context ) {
-	this.layers['Paddles'].draw( context );
-	this.titleText.draw( context );
+	Scene.prototype.draw.call( this, context );
+	
+	for( var i = 0; i < this.paddles.length; i++ ) {
+		context.save();
+		context.beginPath();
+		context.rect(
+			viewport.width * 0.20 + viewport.width * 0.30 * (i % 3) - viewport.width * 0.135,
+			viewport.height * 0.38 + viewport.height * 0.38 * (i<3 ? 0 : 1) - viewport.height * 0.165,
+			viewport.width * 0.27,
+			viewport.height * 0.33
+		);
+		if( this.currentIndex === i ){
+			context.strokeStyle = this.paddles[i].color.RGB();
+			context.lineWidth = viewport.width * 0.01;
+			context.stroke();
+		}
+		context.clip();
+		this.paddles[i].draw( context );
+		context.restore();
+	}
 };
 
 ChoosePaddleScene.prototype.selectNextPaddle = function( direction ) {
-	if( this.paddles[this.currentIndex] ) {
-		this.paddles[this.currentIndex].scale = 1.0;
-	}
-	
 	switch( direction ) {
 		case 'Down' :this.currentIndex += 3; break;
 		case 'Left' : this.currentIndex -= 1; break;
@@ -85,12 +148,19 @@ ChoosePaddleScene.prototype.selectNextPaddle = function( direction ) {
 	if( this.currentIndex < 0 ) {
 		this.currentIndex += this.paddles.length;
 	}
-	
-	this.paddles[this.currentIndex].scale = 1.5;
 };
 
 ChoosePaddleScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
+	
+	if( this.paddles[this.currentIndex] ) {
+		var selectedPaddle = this.paddles[this.currentIndex];
+		selectedPaddle.offset += 0.003;
+		if( selectedPaddle.offset > 0.75 ) {
+			selectedPaddle.offset = -0.25;
+		}
+		selectedPaddle.update( deltaTime );
+	}
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{

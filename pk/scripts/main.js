@@ -112,7 +112,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
-		app.startupScene = new HelpScene();//new SplashScene( );
+		app.startupScene = new ChoosePaddleScene( );
 		app.initialize( );
 	};
 };

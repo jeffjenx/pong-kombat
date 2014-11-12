@@ -1,4 +1,5 @@
 function BluePaddle( ) {
+	this.color = new Color( 0, 0, 255 );
 	this.enum = "BLUE";
 	this.name = "Blue Paddle";
 	this.bigness = 3.00;

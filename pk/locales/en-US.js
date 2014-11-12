@@ -1,10 +1,11 @@
 {
 	"text" :
 	{
-		"DIP SWITCHES"   : "DIP SWITCHES",
-		"LEGAL NOTE"     : "LEGAL NOTE",
-		"PRESS SPACEBAR" : "PRESS SPACEBAR",
-		"TO BEGIN"       : "TO BEGIN",
+		"CHOOSE YOUR PADDLE" : "CHOOSE YOUR PADDLE",
+		"DIP SWITCHES"       : "DIP SWITCHES",
+		"LEGAL NOTE"         : "LEGAL NOTE",
+		"PRESS SPACEBAR"     : "PRESS SPACEBAR",
+		"TO BEGIN"           : "TO BEGIN",
 		
 		"Background Music"    : "Background Music",
 		"Censorship"          : "Censorship",

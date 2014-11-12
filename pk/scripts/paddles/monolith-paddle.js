@@ -1,4 +1,5 @@
 function MonolithPaddle( ) {
+	this.color = new Color( 155, 50, 0 );
 	this.enum = "MONOLITH"
 	this.name = "Monolith";
 	this.bigness = 5.00;

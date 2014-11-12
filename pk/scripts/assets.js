@@ -28,12 +28,21 @@
 		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
 		"Paddle-Gloss"         : "images/paddles/paddle-gloss.png",
 		
+		"Particle-BlackSmoke1" : "images/effects/particle-black-smoke-1.png",
+		"Particle-BlackSmoke2" : "images/effects/particle-black-smoke-2.png",
 		"Particle-Fire1"       : "images/effects/particle-fire-1.png",
 		"Particle-Fire2"       : "images/effects/particle-fire-2.png",
 		"Particle-Fire3"       : "images/effects/particle-fire-3.png",
+		"Particle-Random1"      : "images/effects/particle-random-1.png",
+		"Particle-Random2"      : "images/effects/particle-random-2.png",
+		"Particle-Random3"      : "images/effects/particle-random-3.png",
+		"Particle-Random4"      : "images/effects/particle-random-4.png",
+		"Particle-Random5"      : "images/effects/particle-random-5.png",
+		"Particle-Random6"      : "images/effects/particle-random-6.png",
 		"Particle-Smoke1"      : "images/effects/particle-smoke-1.png",
 		"Particle-Smoke2"      : "images/effects/particle-smoke-2.png",
 		
+		"Black"                : "images/black.png",
 		"Health"               : "images/health.png",
 		"HUD"                  : "images/hud.png",
 		"Logo"                 : "images/logo.png",
@@ -43,9 +52,9 @@
 		"TV-Glare"             : "images/levels/tv-glare.png",
 		
 		
+		
 		"Paddle" : "images/paddle.png",
 		"Ball"   : "images/ball.png",
-		"Black"  : "images/black.png",
 		
 		"Background-Forest"     : "images/backgrounds/forest.png",
 		"Background-Hell"       : "images/backgrounds/hell.png",
