@@ -141,6 +141,7 @@ function Particle( emitter ) {
 	var y = Math.random( ) * emitter.size.y - emitter.size.y * 0.50;
 	this.position.x = emitter.position.x + x * Math.cos( emitter.rotation * Math.TO_RADIANS ) - y * Math.sin( emitter.rotation * Math.TO_RADIANS );
 	this.position.y = emitter.position.y + x * Math.sin( emitter.rotation * Math.TO_RADIANS ) + y * Math.cos( emitter.rotation * Math.TO_RADIANS );
+	this.startPosition = { x : emitter.position.x, y : emitter.position.y };
 	
 	this.radius = emitter.minParticleSize + Math.random( ) * ( emitter.maxParticleSize - emitter.minParticleSize );
 	
@@ -148,7 +149,7 @@ function Particle( emitter ) {
 	this.remainingLife = this.life;
 	
 	this.opacity = 0;
-	this.rotation = 0;
+	this.rotation = Math.random() * 360;
 	this.scale = emitter.scale;
 	
 	this.rotationDirection = ( Math.random( ) > 0.5 ) ? 1 : -1;

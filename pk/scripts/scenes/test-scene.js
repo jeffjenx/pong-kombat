@@ -14,7 +14,7 @@ function TestScene( ) {
 	testLayer.addComponent( 'Text', this.text );
 	
 	//this.tester = new EarthBall( );
-	this.tester = new BluePaddle();
+	this.tester = new YellowPaddle();
 	this.tester.scale = 5;
 	//this.tester.rotation = 90;
 	testLayer.addComponent( 'Tester', this.tester );
