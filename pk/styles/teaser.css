@@ -1,0 +1,21 @@
+body {
+	animation: tease 2s infinite;
+	-webkit-animation: tease 2s infinite;
+	background-attachment: fixed;
+	background-image: url( '../icons/pong-kombat-title.jpg' );
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	font-family: 'Mortal Kombat 3';
+	font-size: 3.3em;
+	line-height: 140vh;
+	text-align: center;
+}
+
+@keyframes tease,
+@-webkit-keyframes tease {
+	  0% { color: rgba( 255, 255, 255, 0 ); }
+	 50% { color: rgba( 255, 255, 255, 1 ); }
+	100% { color: rgba( 255, 255, 255, 0 ); }
+}
