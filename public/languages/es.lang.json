@@ -1,0 +1,9 @@
+{
+	"THANK_YOU" : "\u00A1Gracias por jugar Pong Kombat!",
+	"SUBMIT"    : "Enviar",
+
+	"FORMAT" :
+	{
+		"DATE_SHORT" : "%a %e %b"
+	}
+}

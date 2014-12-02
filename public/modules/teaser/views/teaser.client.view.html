@@ -1,0 +1,65 @@
+<section id="teaser" data-ng-controller="TeaserController">
+	<header ng-class="{'blur' : toggle}">
+		<h1 data-print="{{ 'PONG_KOMBAT' | translate }}">
+			<img alt="{{ 'PONG_KOMBAT' | translate }}" src="/icons/pong-kombat-logo.png" />
+		</h1>
+		<h2>{{ 'COMING_SOON' | translate }}</h2>
+	</header>
+	
+	<button ng-click="track('toggle')"></button>
+
+	<div id="notifications" ng-show="toggle">
+		<h3>{{ 'STAY_NOTIFIED' | translate }}</h3>
+
+		<ul>
+			<li>
+				<a id="email" href="{{ 'URL.EMAIL.NOTIFICATIONS' | translate }}" ng-click="track('email')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'EMAIL' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#email"></use>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a id="github" href="{{ 'URL.GITHUB' | translate }}" ng-click="track('github')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'GITHUB' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#github"></use>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a id="pinterest" href="{{ 'URL.PINTEREST' | translate }}" ng-click="track('pinterest')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'PINTEREST' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#pinterest"></use>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a id="facebook" href="{{ 'URL.FACEBOOK' | translate }}" ng-click="track('facebook')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'FACEBOOK' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#facebook"></use>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a id="twitter" href="{{ 'URL.TWITTER' | translate }}" ng-click="track('twitter')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'TWITTER' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#twitter"></use>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a id="wordpress" href="{{ 'URL.WORDPRESS' | translate }}" ng-click="track('wordpress')">
+					<svg viewBox="0 0 115 128">
+						<title>{{ 'WORDPRESS' | translate }}</title>
+						<use xlink:href="/icons/queue-icons.svg#wordpress"></use>
+					</svg>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
