@@ -25,12 +25,12 @@ The purpose of Pong Kombat is--and always has been--to learn something new and t
 
 This project intends to stand as an example for the following web development topics:
 
-1. [MEAN.JS](http://meanjs.org) - An open-source full-stack application solution
-  1.1 [MongoDB](http://mongodb.org) - An open-source NoSQL document database
-  1.2 [Express](http://expressjs.org) - A back-end web application framework
-  1.3 [AngularJS](http://angularjs.org) - An front-end MVW (Model-View-*Whatever*) web application framework
+1. [MEAN.JS](http://meanjs.org) - An open-source full-stack application solution  
+  1.1 [MongoDB](http://mongodb.org) - An open-source NoSQL document database  
+  1.2 [Express](http://expressjs.org) - A back-end web application framework  
+  1.3 [AngularJS](http://angularjs.org) - An front-end MVW (Model-View-*Whatever*) web application framework  
   1.4 [Node.js](http://nodejs.org) - An open-source JavaScript based runtime environment and application server
-2. [SASS](http://sass-lang.com) - A front-end styling extension
+2. [SASS](http://sass-lang.com) - A front-end styling extension  
   2.1 [CSS](http://www.w3.org/Style/CSS/Overview.en.html) - Latest web standards include transitions, animations, transformations, etc.
 3. [HTML5](http://www.w3.org/TR/html5/) - Latest web standards including canvas, audio/video, sockets, etc.
 4. [Facebook](http://developers.facebook.com) - Social media application
@@ -68,11 +68,11 @@ The default language of the application is generic English, which is `/public/la
 The JSON file contains a dictionary of terms and groups of terms that are used throughout the entire application.
 Each term is represented by a KEY and a value.
 
-```json
+```js
 {
 	"PONG_KOMBAT" : "Pong Kombat",
 	"THANK_YOU" : "Thank you for playing!"
-	...
+	/*...*/
 }
 ```
 
@@ -80,16 +80,16 @@ Keys are represented in ALL CAPS and <span style="color:red">**should not be cha
 The values listed immediately after the key are the translated strings.
 Notice the keys in the generic Spanish example below:
 
-```json
+```js
 {
 	"PONG_KOMBAT" : "Pong Kombat",
 	"THANK_YOU" : "&#x00A1;Gracias por jugar Pong Kombat!",
-	...
+	/*...*/
 }
 ```
 
 Since many languages utilize accented and special characters, translations can be provided using Unicode escaped characters.
-The Unicode character shown in the Spanish example, &x00A1; (written `\&x00A1`), references the inverted exclamation point character.
+The Unicode character shown in the Spanish example, &#x00A1; (written `&#x00A1;`), references the inverted exclamation point character.
 
 Some strings may contain a placeholder variable, such as *DIRECTRY* as defined in `"LISTING" : "Index of {{ DIRECTORY }}"`.
 These variables will be replaced by the appropriate controller file.

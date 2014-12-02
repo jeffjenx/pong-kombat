@@ -126,9 +126,8 @@ Keep up with all of the latest news about Pong Kombat, gain insight into the dev
 Legal
 -----
 
-<sup><sub>Pong Kombat is a parody of two well-established franchises, PONG and Mortal Kombat.
+Pong Kombat is a parody of two well-established franchises, PONG and Mortal Kombat.
 It has no affiliation with Atari Inc., Midway Games or Warner Bros. Interactive Entertainment.
-It is created out of love and respect for those franchises, and as a learning tool.
-It is not intended for commercial success.
-Any references or similarities to the beloved franchises are purely comical and are not meant to harm the original intellectual properties.
-Support independent developers and game on!</sub></sup>
+It is created first as a learning tool, and second as a respectful commentary for those franchises.
+It is open source freeware and not intended to be sold for commercial gain.
+Support independent developers and game on!

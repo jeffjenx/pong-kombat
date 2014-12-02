@@ -1,4 +1,4 @@
 Pong Kombat
 ===========
 
-\u00A1Es tan justo, que duele!
+&#x00A1;Es tan justo, que duele!
