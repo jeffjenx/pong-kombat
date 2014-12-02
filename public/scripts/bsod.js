@@ -47,7 +47,7 @@
 		{ property: 'platform',  regex: /Win/i }
 	];
 
-	for( var i = 0, l = platforms.length, platform; i < l; i++ )
+	for( i = 0, l = platforms.length, platform; i < l; i++ )
 	{
 		var platform = platforms[ i ];
 		var identity = navigator[ platform.property ].match( platform.regex );

@@ -1,21 +1,26 @@
 'use strict';
 
 module.exports = {
-	app: {
-		title: 'Pong Kombat',
-		description: 'So real...it hurts!',
-		keywords: 'Pong, Mortal Kombat, Pong Kombat'
+	app :
+	{
+		title       : 'Pong Kombat',
+		description : 'So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced 1994.',
+		keywords    : 'Pong, Mortal Kombat, Pong Kombat, Video Games'
 	},
-	port: process.env.PORT || 3000,
-	templateEngine: 'swig',
-	sessionSecret: 'MEAN',
-	sessionCollection: 'sessions',
-	assets: {
-		lib: {
-			css: [
+	port              : process.env.PORT || 3000,
+	templateEngine    : 'swig',
+	sessionSecret     : 'MEAN',
+	sessionCollection : 'sessions',
+	assets :
+	{
+		lib :
+		{
+			css :
+			[
 				'public/styles/pong-kombat.css'
 			],
-			js: [
+			js :
+			[
 				'public/vendors/angular/angular.js',
 				'public/vendors/angular-resource/angular-resource.js', 
 				'public/vendors/angular-cookies/angular-cookies.js', 
@@ -32,16 +37,19 @@ module.exports = {
 				'public/vendors/angular-local-storage/dist/angular-local-storage.js'
 			]
 		},
-		css: [
+		css :
+		[
 			'public/modules/**/css/*.css'
 		],
-		js: [
+		js :
+		[
 			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js'
 		],
-		tests: [
+		tests :
+		[
 			'public/vendors/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
 		]

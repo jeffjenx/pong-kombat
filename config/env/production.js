@@ -2,28 +2,6 @@
 
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/pong-kombat',
-	assets: {
-		lib: {
-			css: [
-				'public/dist/pong-kombat.min.css'
-			],
-			js: [
-				'public/vendors/angular/angular.min.js',
-				'public/vendors/angular-resource/angular-resource.js', 
-				'public/vendors/angular-cookies/angular-cookies.js', 
-				'public/vendors/angular-animate/angular-animate.js', 
-				'public/vendors/angular-touch/angular-touch.js', 
-				'public/vendors/angular-sanitize/angular-sanitize.js', 
-				'public/vendors/angular-ui-router/release/angular-ui-router.min.js',
-				'public/vendors/angular-ui-utils/ui-utils.min.js',
-				'public/vendors/angular-bootstrap/ui-bootstrap-tpls.min.js',
-				'public/vendors/angular-translate/angular-translate.min.js',
-				'public/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
-			]
-		},
-		css: 'public/dist/application.min.css',
-		js: 'public/dist/application.min.js'
-	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',

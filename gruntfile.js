@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
-		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
+		clientJS: ['public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
 		clientSASS: 'public/styles/sass/{,*/}*.{sass,scss}',
 		mochaTests: ['app/tests/**/*.js']
@@ -79,14 +79,14 @@ module.exports = function(grunt) {
 					mangle: false
 				},
 				files: {
-					'public/dist/application.min.js': 'public/dist/application.js'
+					'public/scripts/pong-kombat.min.js': 'public/scripts/pong-kombat.js'
 				}
 			}
 		},
 		cssmin: {
 			combine: {
 				files: {
-					'public/dist/application.min.css': '<%= applicationCSSFiles %>'
+					'public/styles/pong-kombat.min.css': '<%= applicationCSSFiles %>'
 				}
 			}
 		},
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 		ngAnnotate: {
 			production: {
 				files: {
-					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+					'public/scripts/pong-kombat.js': '<%= applicationJavaScriptFiles %>'
 				}
 			}
 		},
@@ -160,7 +160,7 @@ module.exports = function(grunt) {
 					'public/styles/sys1.css' : 'public/styles/sass/sys1.scss'
 				}
 			},
-			dist: {
+			production: {
 				options: {
 					style: 'compressed',
 					compass: true
@@ -202,7 +202,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['lint', 'sass:dev', 'concurrent:default']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
