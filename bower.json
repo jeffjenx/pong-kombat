@@ -1,38 +1,38 @@
 {
-	"name"         : "pong-kombat",
-	"version"      : "0.7.5",
-	"description"  : "So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced by Stefan Gagne in 1994, finally returns.",
-	"keywords"     : "Pong Kombat, Pong, Mortal Kombat, video games",
-	"dependencies" :
-	{
-		"angular"                               : "~1.2",
-		"angular-resource"                      : "~1.2",
-		"angular-mocks"                         : "~1.2",
-		"angular-cookies"                       : "~1.2",
-		"angular-animate"                       : "~1.2",
-		"angular-touch"                         : "~1.2",
-		"angular-sanitize"                      : "~1.2",
-		"angular-bootstrap"                     : "~0.11.2",
-		"angular-local-storage"                 : "~0.1.5",
-		"angular-ui-utils"                      : "~0.1.1",
-		"angular-ui-router"                     : "~0.2.11",
-		"angular-translate"                     : "~2.4.2",
-		"angular-translate-loader-static-files" : "~2.4.2",
-		"angulartics"                           : "~0.17.1",
-		"animate.css-scss"                      : "geoffgraham/animate.scss",
-		"bootstrap"                             : "~3",
-		"bootstrap-sass-official"               : "~3.3.1",
-		"datatables"                            : "~1.10.4",
-		"hammerjs"                              : "~2.0.4",
-		"jquery-ui"                             : "~1.11.2",
-		"jquery-mobile"                         : "~1.4.5",
-		"jquery-ui-touch-punch"                 : "https://github.com/furf/jquery-ui-touch-punch.git",
-		"modernizr"                             : "~2.8.3",
-		"moment"                                : "~2.8.4",
-		"pagedown"                              : "~1.1.0"
-	},
-	"resolutions"  :
-	{
-		"jquery-ui" : "~1.11.2"
-	}
+  "name": "pong-kombat",
+  "version": "0.7.5",
+  "description": "So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced by Stefan Gagne in 1994, finally returns.",
+  "keywords": "Pong Kombat, Pong, Mortal Kombat, video games",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-mocks": "~1.2",
+    "angular-cookies": "~1.2",
+    "angular-animate": "~1.2",
+    "angular-touch": "~1.2",
+    "angular-sanitize": "~1.2",
+    "angular-bootstrap": "~0.11.2",
+    "angular-local-storage": "~0.1.5",
+    "angular-ui-utils": "~0.1.1",
+    "angular-ui-router": "~0.2.11",
+    "angular-translate": "~2.4.2",
+    "angular-translate-loader-static-files": "~2.4.2",
+    "angulartics": "~0.17.1",
+    "animate.css-scss": "Quantastical/animate.scss",
+    "bootstrap": "~3",
+    "bootstrap-sass-official": "~3.3.1",
+    "datatables": "~1.10.4",
+    "hammerjs": "~2.0.4",
+    "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.2",
+    "jquery-mobile": "~1.4.5",
+    "jquery-ui-touch-punch": "https://github.com/furf/jquery-ui-touch-punch.git",
+    "modernizr": "~2.8.3",
+    "moment": "~2.8.4",
+    "pagedown": "~1.1.0"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.2"
+  }
 }
