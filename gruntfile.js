@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		clientSASS: 'public/styles/sass/{,*/}*.{sass,scss}',
+		clientSASS: ['public/styles/{,*/}*.{sass,scss}', 'public/modules/**/*.scss'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
@@ -155,9 +155,9 @@ module.exports = function(grunt) {
 					compass: true
 				},
 				files: {
-					'public/styles/bsod.css' : 'public/styles/sass/bsod.scss',
-					'public/styles/pong-kombat.css' : 'public/styles/sass/pong-kombat.scss',
-					'public/styles/sys1.css' : 'public/styles/sass/sys1.scss'
+					'public/styles/bsod.css' : 'public/styles/bsod.scss',
+					'public/styles/pong-kombat.css' : 'public/styles/pong-kombat.scss',
+					'public/styles/sys1.css' : 'public/styles/sys1.scss'
 				}
 			},
 			production: {
@@ -166,9 +166,9 @@ module.exports = function(grunt) {
 					compass: true
 				},
 				files: {
-					'public/styles/bsod.min.css' : 'public/styles/sass/bsod.scss',
-					'public/styles/pong-kombat.min.css' : 'public/styles/sass/pong-kombat.scss',
-					'public/styles/sys1.min.css' : 'public/styles/sass/sys1.scss'
+					'public/styles/bsod.min.css' : 'public/styles/bsod.scss',
+					'public/styles/pong-kombat.min.css' : 'public/styles/pong-kombat.scss',
+					'public/styles/sys1.min.css' : 'public/styles/sys1.scss'
 				}
 			}
 		}
