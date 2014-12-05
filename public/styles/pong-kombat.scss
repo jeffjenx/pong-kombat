@@ -1,0 +1,44 @@
+@import 'compass';
+@import 'compass/css3/animation';
+@import 'compass/css3/filter';
+@import 'compass/css3/transition';
+@import 'fonts/abnormal';
+@import 'fonts/dos';
+@import 'fonts/mortal-kombat';
+@import 'fonts/open-sans';
+@import '../vendors/animate.css-scss/_properties';
+@import '../vendors/animate.css-scss/_attention/_flash';
+@import '../vendors/animate.css-scss/_fading-entrances/_fadeIn';
+@import '../vendors/animate.css-scss/_fading-entrances/_fadeInDown';
+@import '../vendors/animate.css-scss/_fading-exits/_fadeOutDown';
+@import '../vendors/animate.css-scss/_fading-exits/_fadeOutUp';
+@import '../vendors/animate.css-scss/_flippers/_flipInY';
+@import '../vendors/animate.css-scss/_flippers/_flipOutY';
+@import '../vendors/animate.css-scss/_zooming-entrances/_zoomIn';
+
+@import '../modules/press/styles/press.scss';
+@import '../modules/teaser/styles/teaser.scss';
+
+$transitionable-prefixed-values : filter;
+
+@media screen
+{
+	body, html
+	{
+		margin: 0;
+	}
+}
+
+@media print
+{
+	body
+	{
+		font-family: 'Apple Garamond';
+		font-size: 7pt;
+
+		@media print and (orientation: landscape)
+		{
+			font-size: 6pt;
+		}
+	}
+}

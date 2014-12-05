@@ -46,86 +46,6 @@
   font-weight: 800;
   src: url("/fonts/Open_Sans/OpenSans-ExtraBold.ttf") format("truetype");
 }
-@media print {
-  body {
-    font-family: 'Inconsolata';
-  }
-
-  #files, #readme {
-    left: 0 !important;
-    height: auto !important;
-    position: relative !important;
-    top: 0 !important;
-    width: 100% !important;
-  }
-
-  #files {
-    page-break-after: always;
-  }
-  #files h1:after {
-    content: "Index of pongkombat.com" attr(data-directory);
-    display: block;
-  }
-  #files h1 span {
-    display: none;
-  }
-  #files table {
-    border-collapse: collapse;
-    white-space: nowrap;
-  }
-  #files table td {
-    border: solid 1pt black;
-    overflow: hidden;
-    padding: 0.125em 0.5em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  #files table td[data-type="bytes"] {
-    text-align: right;
-  }
-  #files table thead td {
-    -webkit-print-color-adjust: exact;
-    background: black;
-    color: white;
-    font-weight: 600;
-  }
-  #files table tbody td hr {
-    display: none;
-  }
-  #files table tbody tr:nth-child(odd) td {
-    -webkit-print-color-adjust: exact;
-    background-color: lightgray;
-  }
-  #files a {
-    color: inherit;
-    text-decoration: none;
-  }
-  #files a:hover {
-    color: blue;
-    text-decoration: underline;
-  }
-
-  #readme a {
-    color: inherit;
-    font-weight: 400;
-    text-decoration: none;
-  }
-  #readme a:after {
-    content: " [" attr(href) "] ";
-  }
-  #readme a:hover {
-    color: blue;
-    text-decoration: underline;
-  }
-
-  #calculator, #menu, .icon, .close, #clock {
-    display: none;
-  }
-
-  .ui-resizable-handle {
-    display: none !important;
-  }
-}
 @media screen {
   body, html {
     background: url("/images/backgrounds/system1.png") repeat;
@@ -468,6 +388,86 @@
   }
   #calculator .overflow-wrapper button#number0 {
     width: calc( 40% + 3% + 3% );
+  }
+}
+@media print {
+  body {
+    font-family: 'Inconsolata';
+  }
+
+  #files, #readme {
+    left: 0 !important;
+    height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+  }
+
+  #files {
+    page-break-after: always;
+  }
+  #files h1:after {
+    content: "Index of pongkombat.com" attr(data-directory);
+    display: block;
+  }
+  #files h1 span {
+    display: none;
+  }
+  #files table {
+    border-collapse: collapse;
+    white-space: nowrap;
+  }
+  #files table td {
+    border: solid 1pt black;
+    overflow: hidden;
+    padding: 0.125em 0.5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #files table td[data-type="bytes"] {
+    text-align: right;
+  }
+  #files table thead td {
+    -webkit-print-color-adjust: exact;
+    background: black;
+    color: white;
+    font-weight: 600;
+  }
+  #files table tbody td hr {
+    display: none;
+  }
+  #files table tbody tr:nth-child(odd) td {
+    -webkit-print-color-adjust: exact;
+    background-color: lightgray;
+  }
+  #files a {
+    color: inherit;
+    text-decoration: none;
+  }
+  #files a:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  #readme a {
+    color: inherit;
+    font-weight: 400;
+    text-decoration: none;
+  }
+  #readme a:after {
+    content: " [" attr(href) "] ";
+  }
+  #readme a:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  #calculator, #menu, .icon, .close, #clock {
+    display: none;
+  }
+
+  .ui-resizable-handle {
+    display: none !important;
   }
 }
 

@@ -1,4 +1,16 @@
 @font-face {
+  font-family: 'Abnormal';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/ABNORMAL/ABNORMAL.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'DOS';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/perfect_dos_vga_437/Perfect DOS VGA 437.ttf") format("truetype");
+}
+@font-face {
   font-family: 'Mortal Kombat';
   font-style: normal;
   font-weight: 400;
@@ -53,10 +65,34 @@
   src: url("/fonts/murdoink/mortalkombatmythologies.ttf") format("truetype");
 }
 @font-face {
-  font-family: 'Abnormal';
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 200;
+  src: url("/fonts/Open_Sans/OpenSans-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url("/fonts/ABNORMAL/ABNORMAL.ttf") format("truetype");
+  src: url("/fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/Open_Sans/OpenSans-Semibold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url("/fonts/Open_Sans/OpenSans-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: url("/fonts/Open_Sans/OpenSans-ExtraBold.ttf") format("truetype");
 }
 @-webkit-keyframes flash {
   0%, 50%, 100% {
@@ -463,168 +499,351 @@
     opacity: 1;
   }
 }
-@media print {
-  body {
-    font-family: 'Apple Garamond';
-    font-size: 7pt;
+@media screen {
+  #press {
+    background: black;
+    color: white;
+    font-family: 'DOS';
+    overflow: auto;
+    padding: 8%;
+    text-shadow: 1px 1px rgba(255, 0, 0, 0.75), -1px 1px rgba(0, 255, 0, 0.5), -1px -1px rgba(0, 0, 255, 0.75);
   }
-}
-@media print and (orientation: landscape) {
-  body {
-    font-size: 6pt;
-  }
-}
-
-@media print {
-  #teaser:before {
-    color: black;
-    content: 'PongKombat.com';
-    display: block;
-    font-family: 'Mortal Kombat';
-    font-size: 1.75em;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  header {
-    text-align: center;
-  }
-  header:before {
-    -webkit-print-color-adjust: exact;
-    background-image: url("/images/qr-codes/pong-kombat.png");
-    background-size: 100%;
+  #press:before, #press:after {
     content: '';
     display: block;
-    height: 13em;
-    margin: 0 auto 6em;
-    width: 13em;
+    left: 0;
+    height: 100%;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
-}
-@media print and (orientation: landscape) {
-  header:before {
-    margin-bottom: 3em;
+  #press:before {
+    background-image: url("/images/backgrounds/scanlines.png");
+    opacity: 0.33;
+    z-index: 5;
   }
-}
-
-@media print {
-  h1:before {
-    content: attr(data-print);
-    font-size: 6.66em;
+  #press:after {
+    background-image: url("/images/arcade-monitor-4x.png");
+    background-size: 100% 100%;
+    opacity: 1;
+    z-index: 10;
+  }
+  #press header {
+    margin: 100vh 0 50%;
+  }
+  #press header h1 {
+    border: 1pt solid white;
+    box-shadow: 1px -1px rgba(255, 0, 0, 0.75), -1px 1px rgba(0, 255, 0, 0.5), -2px -1px rgba(0, 0, 255, 0.75);
+    cursor: default;
+    font-size: 4em;
+    margin: 0 auto;
+    max-width: 8em;
+    padding: 0.25em;
+    position: relative;
+    text-align: center;
     text-transform: uppercase;
   }
-  h1 img {
-    display: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #press header h1:after {
+    background: -webkit-linear-gradient(#ff0, #ff0, #fE0, #f80, #f20, #f00, #f00);
+    box-sizing: border-box;
+    content: 'PONG KOMBAT';
+    height: 100%;
+    padding: 0.25em 0;
+    position: absolute;
+    left: 0;
+    text-shadow: none;
+    top: 0;
+    width: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-
-  h2 {
-    font-family: 'Mortal Kombat 1';
-    font-size: 3.3em;
-    letter-spacing: -1px;
-  }
-
-  h3 {
-    font-family: 'Mortal Kombat 2';
+}
+@media screen and (max-width: 500px) {
+  #press header h1 {
     font-size: 2em;
-    letter-spacing: -1px;
-    margin: 0;
   }
-
-  button {
-    display: none;
+}
+@media screen and (min-width: 500px) and (max-width: 700px) {
+  #press header h1 {
+    font-size: 2.5em;
   }
-
-  #notifications {
-    display: block !important;
-    font-size: 1.5em;
-    margin-top: 6em;
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  #press header h1 {
+    font-size: 3em;
+  }
+}
+@media screen {
+  #press header h2 {
+    color: #696;
+    cursor: default;
+    font-family: 'Mortal Kombat';
     text-align: center;
+    text-transform: uppercase;
   }
-  #notifications ul {
+  #press header p {
+    bottom: 10%;
+    box-sizing: border-box;
+    cursor: default;
+    font-size: 2em;
+    left: 0;
+    padding: 0 10%;
+    position: fixed;
+    text-align: center;
+    transition: opacity 1s;
+    width: 100%;
+    -webkit-animation-name: flash;
+    -moz-animation-name: flash;
+    -ms-animation-name: flash;
+    -o-animation-name: flash;
+    animation-name: flash;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: 3.3s;
+    -moz-animation-duration: 3.3s;
+    -ms-animation-duration: 3.3s;
+    -o-animation-duration: 3.3s;
+    animation-duration: 3.3s;
+    -webkit-animation-delay: 0s;
+    -moz-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    -ms-animation-timing-function: ease;
+    -o-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  #press header p.ng-hide-add {
+    display: block;
+    opacity: 0;
+  }
+  #press header p.ng-hide {
+    -webkit-animation: none;
+    display: none;
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 900px) {
+  #press header p {
+    font-size: 1.2em;
+  }
+}
+@media screen {
+  #press section {
+    box-sizing: border-box;
+    float: left;
+    font-size: 1.1em;
+    line-height: 1.15em;
+    padding: 3em;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 900px) {
+  #press section {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 900px) {
+  #press section:nth-of-type(odd) {
+    padding-right: 1.5em;
+    clear: left;
+  }
+  #press section:nth-of-type(even) {
+    padding-left: 1.5em;
+  }
+}
+@media screen {
+  #press section h3 {
+    color: #f66;
+    font-family: 'Mortal Kombat';
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  #press section h3:before, #press section h3:after {
+    content: '\25cf';
+    font-size: 1.25em;
+    margin: 0 0.33em;
+  }
+  #press section:nth-child(3) h3 {
+    color: #6f6;
+  }
+  #press section:nth-child(4) h3 {
+    color: #fb6;
+  }
+  #press section:nth-child(5) h3 {
+    color: #ff6;
+  }
+  #press section:nth-child(6) h3 {
+    color: #6ff;
+  }
+  #press section:nth-child(7) h3 {
+    color: #f6f;
+  }
+  #press section h4 {
+    font-weight: 400;
+  }
+  #press section a {
+    color: #6464ff;
+    text-decoration: none;
+    text-shadow: 1px 1px rgba(255, 100, 100, 0.5);
+  }
+  #press section a:hover {
+    border-bottom: solid 2pt #9664ff;
+  }
+  #press section dl dt:after {
+    content: ':';
+  }
+  #press section dl dd {
+    margin-bottom: 1em;
+    text-align: right;
+  }
+}
+@media screen and (min-width: 1200px), screen and (min-width: 600px) and (max-width: 900px) {
+  #press section dl dt {
+    float: left;
+  }
+}
+@media screen {
+  #press section dl #related {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  #notifications ul li {
-    display: inline-block;
-    margin: 1em 3em 3em;
+  #press section figure img {
+    width: 100%;
   }
-}
-@media print and (orientation: landscape) {
-  #notifications ul li {
-    margin: 1em 2em 2em;
-  }
-}
-@media print {
-  #notifications ul li:nth-child(n + 4) {
-    margin-top: 2em;
-  }
-  #notifications ul a {
-    color: black;
-    font-family: 'Mortal Kombat';
-    text-decoration: none;
-  }
-  #notifications ul a:after {
-    -webkit-print-color-adjust: exact;
-    background-size: 100%;
-    content: '';
-    display: block;
-    height: 8em;
-    width: 8em;
-  }
-  #notifications ul a#email:after {
-    background-image: url("/images/qr-codes/mailing-list.png");
-  }
-  #notifications ul a#github:after {
-    background-image: url("/images/qr-codes/github.png");
-  }
-  #notifications ul a#pinterest:after {
-    background-image: url("/images/qr-codes/pinterest.png");
-  }
-  #notifications ul a#facebook:after {
-    background-image: url("/images/qr-codes/facebook.png");
-  }
-  #notifications ul a#twitter:after {
-    background-image: url("/images/qr-codes/twitter.png");
-  }
-  #notifications ul a#wordpress:after {
-    background-image: url("/images/qr-codes/wordpress.png");
-  }
-  #notifications ul a:before {
-    display: block;
+  #press section figure figcaption {
+    font-family: 'Open Sans';
+    font-size: 0.75em;
+    text-align: right;
     text-transform: uppercase;
   }
-  #notifications ul a#email:before {
-    content: 'Mailing List';
+  #press section blockquote {
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 2em;
+    opacity: 0.5;
+    position: relative;
+    text-indent: 2em;
+    text-shadow: 1px 1px red, -1px -2px green;
   }
-  #notifications ul a#github:before {
-    content: 'GitHub';
+  #press section blockquote:before {
+    bottom: calc( 100% - 0.33em );
+    content: '\2018\2018';
+    font-family: 'MK Mythologies';
+    font-size: 9em;
+    font-style: normal;
+    letter-spacing: -0.05em;
+    position: absolute;
+    right: calc( 100% - 0.15em );
   }
-  #notifications ul a#pinterest:before {
-    content: 'Pinterest';
+  #press section blockquote p {
+    margin-bottom: 0;
   }
-  #notifications ul a#facebook:before {
-    content: 'Facebook';
+  #press section blockquote footer {
+    font-style: normal;
+    font-weight: 400;
   }
-  #notifications ul a#twitter:before {
-    content: 'Twitter';
+  #press section blockquote footer cite {
+    font-style: normal;
   }
-  #notifications ul a#wordpress:before {
-    content: 'Dev Blog';
+  #press section#features h4:after {
+    content: '...';
   }
-  #notifications ul svg {
-    display: none;
+  #press section#features ul li {
+    margin-bottom: 1em;
+  }
+  #press section#history figure {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+  #press section#media ul, #press section#artwork ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #press section#media ul li, #press section#artwork ul li {
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  #press section#media ul li a:before, #press section#artwork ul li a:before {
+    content: '< ';
+  }
+  #press section#media ul li a:after, #press section#artwork ul li a:after {
+    content: ' >';
+  }
+  #press section#media .icon, #press section#artwork .icon {
+    width: 40%;
+  }
+  #press section#media .icon:first-of-type, #press section#artwork .icon:first-of-type {
+    border-radius: 20%;
+  }
+  #press section#media .icon + img:not(.icon), #press section#artwork .icon + img:not(.icon) {
+    margin-top: 0.5em;
+    width: 60%;
+  }
+  #press section #screenshots {
+    position: relative;
+  }
+  #press section #screenshots figure {
+    position: relative;
+  }
+  #press section #screenshots figure:before, #press section #screenshots figure:after {
+    box-sizing: border-box;
+    content: '<';
+    display: block;
+    font-size: 3em;
+    height: 1em;
+    left: 0;
+    line-height: 0;
+    opacity: 0.33;
+    padding: 0 0.25em;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    transition: opacity 1s;
+    width: 1em;
+  }
+  #press section #screenshots figure:after {
+    content: '>';
+    left: auto;
+    right: 0;
+    text-align: right;
+  }
+  #press section #screenshots figure:hover:before, #press section #screenshots figure:hover:after {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  #press section #screenshots figure img {
+    cursor: pointer;
   }
 }
 @media screen {
-  body, html, .ng-scope {
-    margin: 0;
-    height: 100%;
-    width: 100%;
-  }
-
   #teaser {
     background: black;
     cursor: default;
+    height: 100%;
+    position: absolute;
+    width: 100%;
   }
   #teaser header {
     background-attachment: fixed;
@@ -635,9 +854,9 @@
     cursor: default;
     display: block;
     height: 100%;
-    -moz-transition: -moz-filter 1s;
-    -o-transition: -o-filter 1s;
-    -webkit-transition: -webkit-filter 1s;
+    -moz-transition: filter 1s;
+    -o-transition: filter 1s;
+    -webkit-transition: filter 1s;
     transition: filter 1s;
     width: 100%;
   }
@@ -1533,6 +1752,156 @@
     backface-visibility: hidden;
     /* animation */
     display: none;
+  }
+}
+@media print {
+  #teaser:before {
+    color: black;
+    content: 'PongKombat.com';
+    display: block;
+    font-family: 'Mortal Kombat';
+    font-size: 1.75em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  #teaser header {
+    text-align: center;
+  }
+  #teaser header:before {
+    -webkit-print-color-adjust: exact;
+    background-image: url("/images/qr-codes/pong-kombat.png");
+    background-size: 100%;
+    content: '';
+    display: block;
+    height: 13em;
+    margin: 0 auto 6em;
+    width: 13em;
+  }
+}
+@media print and (orientation: landscape) {
+  #teaser header:before {
+    margin-bottom: 3em;
+  }
+}
+@media print {
+  #teaser h1:before {
+    content: attr(data-print);
+    font-size: 6.66em;
+    text-transform: uppercase;
+  }
+  #teaser h1 img {
+    display: none;
+  }
+  #teaser h2 {
+    font-family: 'Mortal Kombat 1';
+    font-size: 3.3em;
+    letter-spacing: -1px;
+  }
+  #teaser h3 {
+    font-family: 'Mortal Kombat 2';
+    font-size: 2em;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+  #teaser button {
+    display: none;
+  }
+  #teaser #notifications {
+    display: block !important;
+    font-size: 1.5em;
+    margin-top: 6em;
+    text-align: center;
+  }
+  #teaser #notifications ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #teaser #notifications ul li {
+    display: inline-block;
+    margin: 1em 3em 3em;
+  }
+}
+@media print and (orientation: landscape) {
+  #teaser #notifications ul li {
+    margin: 1em 2em 2em;
+  }
+}
+@media print {
+  #teaser #notifications ul li:nth-child(n + 4) {
+    margin-top: 2em;
+  }
+  #teaser #notifications ul a {
+    color: black;
+    font-family: 'Mortal Kombat';
+    text-decoration: none;
+  }
+  #teaser #notifications ul a:after {
+    -webkit-print-color-adjust: exact;
+    background-size: 100%;
+    content: '';
+    display: block;
+    height: 8em;
+    width: 8em;
+  }
+  #teaser #notifications ul a#email:after {
+    background-image: url("/images/qr-codes/mailing-list.png");
+  }
+  #teaser #notifications ul a#github:after {
+    background-image: url("/images/qr-codes/github.png");
+  }
+  #teaser #notifications ul a#pinterest:after {
+    background-image: url("/images/qr-codes/pinterest.png");
+  }
+  #teaser #notifications ul a#facebook:after {
+    background-image: url("/images/qr-codes/facebook.png");
+  }
+  #teaser #notifications ul a#twitter:after {
+    background-image: url("/images/qr-codes/twitter.png");
+  }
+  #teaser #notifications ul a#wordpress:after {
+    background-image: url("/images/qr-codes/wordpress.png");
+  }
+  #teaser #notifications ul a:before {
+    display: block;
+    text-transform: uppercase;
+  }
+  #teaser #notifications ul a#email:before {
+    content: 'Mailing List';
+  }
+  #teaser #notifications ul a#github:before {
+    content: 'GitHub';
+  }
+  #teaser #notifications ul a#pinterest:before {
+    content: 'Pinterest';
+  }
+  #teaser #notifications ul a#facebook:before {
+    content: 'Facebook';
+  }
+  #teaser #notifications ul a#twitter:before {
+    content: 'Twitter';
+  }
+  #teaser #notifications ul a#wordpress:before {
+    content: 'Dev Blog';
+  }
+  #teaser #notifications ul svg {
+    display: none;
+  }
+}
+@media screen {
+  body, html {
+    margin: 0;
+  }
+}
+@media print {
+  body {
+    font-family: 'Apple Garamond';
+    font-size: 7pt;
+  }
+}
+@media print and (orientation: landscape) {
+  body {
+    font-size: 6pt;
   }
 }
 

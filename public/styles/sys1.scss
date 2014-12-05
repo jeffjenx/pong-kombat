@@ -1,0 +1,570 @@
+@import 'fonts/chicago';
+@import 'fonts/inconsolata';
+@import 'fonts/open-sans';
+
+@media screen
+{
+	body, html
+	{
+		background: url( '/images/backgrounds/system1.png' ) repeat;
+		color: black;
+		font-size: 12pt;
+		height: 100%;
+		margin: 0;
+		overflow: hidden;
+		width: 100%;
+
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	html
+	{
+		background: black;
+	}
+
+	.ui-icon,
+	.ui-widget-content .ui-icon
+	{
+		background: none;
+	}
+
+	#desktop
+	{
+		cursor: default;
+		height: calc( 100% - 1.5em );
+		left: 0;
+		margin-top: 1.5em;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.icon
+	{
+		border: none;
+		background-color: transparent;
+		cursor: pointer;
+		font-family: 'Open Sans';
+		font-size: 10pt;
+		font-weight: 500;
+		outline: none;
+		position: absolute;
+		text-align: center;
+
+		&:before
+		{
+			background-image: url( '/images/system1.png' );
+			background-repeat: no-repeat;
+			background-size: 400% 200%;
+			content: ' ';
+			display: block;
+			margin: 0 auto;
+			height: 33pt;
+			width: 33pt;
+		}
+
+		&[data-window="calculator"]:before { background-position: 33.33% 0; }
+		&[data-window="files"]:before { background-position: 0 0; }
+		&[data-window="pongkombat"]:before { background-position: 33.33% 102%; }
+		&[data-window="readme"]:before { background-position: 0 100%; }
+	}
+
+	.fake-window
+	{
+		background: white;
+		border: 1px solid black;
+		border-radius: 3px;
+		box-shadow: 1px 1px 0 0 black;
+		font-family: 'Open Sans';
+		font-size: 1em;
+		font-weight: 200;
+		height: 120px;
+		overflow: hidden;
+		padding-top: 1.5em;
+		position: absolute;
+		width: 320px;
+		z-index: 4;
+
+		&.active
+		{
+			z-index: 5;
+		}
+
+		.close
+		{
+			background: white;
+			border: 1px solid black;
+			box-shadow: 0 0 0 2px white;
+			box-sizing: border-box;
+			cursor: pointer;	
+			font-size: 1em;
+			height: 10px;
+			left: 1em;
+			outline: none;
+			padding: 0;
+			position: absolute;
+			top: calc( 50% - 4px );
+			width: 10px;
+			z-index: 3;
+		}
+
+		h1:first-child
+		{
+			background: white;
+			border-bottom: 1px solid black;
+			cursor: move;
+			font-family: 'Chicago';
+			font-size: 0.8em;
+			font-weight: 400;
+			left: 0;
+			margin: 0;
+			padding: 0.25em 0;
+			position: absolute;
+			text-align: center;
+			text-overflow: ellipsis;
+			top: 0;
+			white-space: nowrap;
+			width: 100%;
+
+			&:before,
+			&:after
+			{
+				background: repeating-linear-gradient( 0deg, black, black 1px, white 1px, white 3px );
+				content: ' ';
+				width: 50%;
+				height: 10px;
+				position: absolute;
+				top: calc( 50% - 4px );
+				z-index: 1;
+			}
+
+			&:before
+			{
+				left: 0.5em;
+			}
+
+			&:after
+			{
+				right: 0.5em;
+			}
+
+			span
+			{
+				background: white;
+				margin: 0 2em;
+				padding: 0.25em 0.75em;
+				position: relative;
+				z-index: 2;
+			}
+		}
+
+		.overflow-wrapper
+		{
+			box-sizing: border-box;
+			height: 100%;
+			overflow: auto;
+			padding: 0.5em;
+			width: 100%;
+
+			-webkit-touch-callout: text;
+			-webkit-user-select: text;
+			-khtml-user-select: text;
+			-moz-user-select: text;
+			-ms-user-select: text;
+			user-select: text;
+
+			> table
+			{
+				margin: 0 auto;
+			}
+
+			p
+			{
+				margin-top: 0;
+			}
+
+			h2
+			{
+				font-family: 'Open Sans';
+				font-size: 1em;
+				font-weight: 500;
+				margin: 0.5em 0;
+			}
+
+			strong
+			{
+				font-weight: 400;
+			}
+		}
+	}
+
+	.ui-resizable-helper
+	{
+		background: transparent;
+		border: 2pt dotted black;
+	}
+
+	#files
+	{
+		table
+		{
+			white-space: nowrap;
+
+			td
+			{
+				padding: 0.125em 0.5em;
+
+				&:first-child
+				{
+					padding-left: 0;
+				}
+
+				&:last-child
+				{
+					padding-right: 0;
+				}
+
+				&[data-type="bytes"]
+				{
+					text-align: right;
+				}
+			}
+
+			thead td
+			{
+				cursor: pointer;
+				font-weight: 500;
+				outline: none;
+
+				a
+				{
+					color: inherit;
+					text-decoration: none;
+				}
+			}
+
+			tbody td
+			{
+				hr
+				{
+					display: none;
+				}
+			}
+		}
+	}
+
+	#readme, #calculator
+	{
+		display: none;
+	}
+
+	#menu
+	{
+		background: white;
+		border-bottom: 1pt solid black;
+		font-family: 'Chicago';
+		font-size: 0.8em;
+		font-weight: 400;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+
+		.ui-menu-item
+		{
+			padding: 0.25em 0.5em;
+			white-space: nowrap;
+
+			&.ui-state-active,
+			&.ui-state-focus
+			{
+				background: black;
+				border: none;
+				color: white;
+				font-weight: inherit;
+				margin: 0;
+			}
+		}
+
+		> .ui-menu-item
+		{
+			display: inline-block;
+
+			&:first-child
+			{
+				color: transparent;
+				margin: 0 0.5em;
+				width: 2em;
+				
+				> .ui-menu-icon
+				{
+					background-image: url( '/images/system1.png' );
+					background-position: 100% 0;
+					background-repeat: no-repeat;
+					background-size: 400% 200%;
+					left: calc( 50% - 0.5em );
+					height: 1em;
+					width: 1em;
+				}
+
+				&.ui-state-active > .ui-menu-icon,
+				&.ui-state-focus > .ui-menu-icon
+				{
+					background-position: 100% 100%;
+					color: transparent;
+				}
+			}
+		}
+
+		&:after
+		{
+			clear: both;
+			content: ' ';
+			display: block;
+		}
+
+		/* Submenu */
+		.ui-menu
+		{
+			background: white;
+			border: 1pt solid black;
+			box-shadow: 2pt 2pt 0 0 black;
+			min-width: 10em;
+
+			.ui-menu-item
+			{
+				padding: 0.25em 1em;
+			}
+		}
+	}
+
+	#clock
+	{
+		cursor: default;
+		font-family: 'Chicago';
+		font-size: 0.8em;
+		font-weight: 400;
+		position: absolute;
+		right: 0.5em;
+		top: 0.25em;
+		z-index: 1;
+
+		.date
+		{
+			margin-right: 1em;
+		}
+	}
+
+	#calculator
+	{
+		height: 150pt;
+		width: 115pt;
+
+		> h1:first-child
+		{
+			background: black;
+
+			&:before,
+			&:after
+			{
+				background: none;
+			}
+
+			span
+			{
+				background: transparent;
+				color: white;
+			}
+		}
+
+		.close
+		{
+			box-shadow: 0 0 0 1pt white;
+			left: 0.75em;
+		}
+
+		.overflow-wrapper
+		{
+			overflow: hidden;
+			text-align: center;
+
+			input
+			{
+				background: white;
+				border: 1pt solid black;
+				box-sizing: border-box;
+				cursor: text;
+				height: 2em;
+				margin-bottom: 3pt;
+				outline: none;
+				padding: 0.5em;
+				text-align: right;
+				width: 100%;
+			}
+
+			button
+			{
+				background: white;
+				border: 1pt solid black;
+				border-radius: 2pt;
+				box-shadow: 2pt 2pt 0 0 black;
+				cursor: pointer;
+				float: left;
+				height: 13%;
+				margin: 3%;
+				outline: none;
+				width: 20%;
+
+				&:active
+				{
+					box-shadow: 1pt 1pt 0 0 black;
+					left: 1pt;
+					position: relative;
+					top: 1pt;
+				}
+
+				&:nth-child( 4n - 2 )
+				{
+					margin-left: 0;
+				}
+
+				&:nth-child( 4n + 1 ),
+				&:last-of-type
+				{
+					margin-right: 0;
+				}
+			}
+
+			button#number0
+			{
+				width: calc( 40% + 3% + 3% );
+			}
+		}
+	}
+}
+
+@media print
+{
+	body
+	{
+		font-family: 'Inconsolata';
+	}
+
+	#files, #readme
+	{
+		left: 0 !important;
+		height: auto !important;
+		position: relative !important;
+		top: 0 !important;
+		width: 100% !important;
+	}
+
+	#files
+	{
+		page-break-after: always;
+
+		h1
+		{
+			&:after
+			{
+				content: 'Index of pongkombat.com' attr(data-directory);
+				display: block;
+			}
+
+			span
+			{
+				display: none;
+			}
+		}
+
+		table
+		{
+			border-collapse: collapse;
+			white-space: nowrap;
+
+			td
+			{
+				border: solid 1pt black;
+				overflow: hidden;
+				padding: 0.125em 0.5em;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+
+				&[data-type="bytes"]
+				{
+					text-align: right;
+				}
+			}
+
+			thead td
+			{
+				-webkit-print-color-adjust: exact;
+				background: black;
+				color: white;
+				font-weight: 600;
+			}
+
+			tbody td
+			{
+				hr
+				{
+					display: none;
+				}
+			}
+
+			tbody tr:nth-child(odd) td
+			{
+				-webkit-print-color-adjust: exact;
+				background-color: lightgray;
+			}
+		}
+
+		a
+		{
+			color: inherit;
+			text-decoration: none;
+
+			&:hover
+			{
+				color: blue;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	#readme
+	{
+		a
+		{
+			color: inherit;
+			font-weight: 400;
+			text-decoration: none;
+
+			&:after
+			{
+				content: ' [' attr(href) '] ';
+			}
+
+			&:hover
+			{
+				color: blue;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	#calculator, #menu, .icon, .close, #clock
+	{
+		display: none;
+	}
+
+	.ui-resizable-handle
+	{
+		display: none !important;
+	}
+}
