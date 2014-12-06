@@ -578,7 +578,7 @@
 }
 @media screen {
   #press header h2 {
-    color: #696;
+    color: #AFA;
     cursor: default;
     font-family: 'Mortal Kombat';
     text-align: center;
@@ -656,6 +656,11 @@
     width: 50%;
   }
 }
+@media screen and (max-width: 600px) {
+  #press section {
+    padding: 2em;
+  }
+}
 @media screen and (max-width: 900px) {
   #press section {
     width: 100%;
@@ -700,6 +705,7 @@
   }
   #press section h4 {
     font-weight: 400;
+    text-transform: uppercase;
   }
   #press section a {
     color: #6464ff;
@@ -714,6 +720,7 @@
   }
   #press section dl dd {
     margin-bottom: 1em;
+    margin-left: 0;
     text-align: right;
   }
 }
@@ -740,7 +747,7 @@
   #press section blockquote {
     font-style: italic;
     font-weight: 200;
-    margin-top: 2em;
+    margin: 2em 1em 1em;
     opacity: 0.5;
     position: relative;
     text-indent: 2em;
@@ -762,6 +769,8 @@
   #press section blockquote footer {
     font-style: normal;
     font-weight: 400;
+    margin-top: 0.5em;
+    text-indent: 0;
   }
   #press section blockquote footer cite {
     font-style: normal;
@@ -785,12 +794,6 @@
     margin-bottom: 2em;
     text-align: center;
   }
-  #press section#media ul li a:before, #press section#artwork ul li a:before {
-    content: '< ';
-  }
-  #press section#media ul li a:after, #press section#artwork ul li a:after {
-    content: ' >';
-  }
   #press section#media .icon, #press section#artwork .icon {
     width: 40%;
   }
@@ -800,41 +803,6 @@
   #press section#media .icon + img:not(.icon), #press section#artwork .icon + img:not(.icon) {
     margin-top: 0.5em;
     width: 60%;
-  }
-  #press section #screenshots {
-    position: relative;
-  }
-  #press section #screenshots figure {
-    position: relative;
-  }
-  #press section #screenshots figure:before, #press section #screenshots figure:after {
-    box-sizing: border-box;
-    content: '<';
-    display: block;
-    font-size: 3em;
-    height: 1em;
-    left: 0;
-    line-height: 0;
-    opacity: 0.33;
-    padding: 0 0.25em;
-    position: absolute;
-    text-align: left;
-    top: 50%;
-    transition: opacity 1s;
-    width: 1em;
-  }
-  #press section #screenshots figure:after {
-    content: '>';
-    left: auto;
-    right: 0;
-    text-align: right;
-  }
-  #press section #screenshots figure:hover:before, #press section #screenshots figure:hover:after {
-    opacity: 1;
-    transition: opacity 1s;
-  }
-  #press section #screenshots figure img {
-    cursor: pointer;
   }
 }
 @media screen {

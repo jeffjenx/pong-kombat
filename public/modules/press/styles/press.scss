@@ -98,7 +98,7 @@
 
 			h2
 			{
-				color: #696;
+				color: #AFA;
 				cursor: default;
 				font-family: 'Mortal Kombat';
 				text-align: center;
@@ -152,6 +152,11 @@
 			padding: 3em;
 			width: 50%;
 
+			@media screen and (max-width: 600px)
+			{
+				padding: 2em;
+			}
+
 			@media screen and (max-width: 900px)
 			{
 				width: 100%;
@@ -189,6 +194,7 @@
 			h4
 			{
 				font-weight: 400;
+				text-transform: uppercase;
 			}
 
 			a
@@ -213,6 +219,7 @@
 				dd
 				{
 					margin-bottom: 1em;
+					margin-left: 0;
 					text-align: right;
 				}
 
@@ -249,7 +256,7 @@
 			{
 				font-style: italic;
 				font-weight: 200;
-				margin-top: 2em;
+				margin: 2em 1em 1em;
 				opacity: 0.5;
 				position: relative;
 				text-indent: 2em;
@@ -276,6 +283,8 @@
 				{
 					font-style: normal;
 					font-weight: 400;
+					margin-top: 0.5em;
+					text-indent: 0;
 
 					cite
 					{
@@ -320,12 +329,6 @@
 					{
 						margin-bottom: 2em;
 						text-align: center;
-
-						a
-						{
-							&:before { content: '< '; }
-							&:after { content: ' >'; }
-						}
 					}
 				}
 
@@ -342,55 +345,6 @@
 					{
 						margin-top: 0.5em;
 						width: 60%;
-					}
-				}
-			}
-
-			#screenshots
-			{
-				position: relative;
-
-				figure
-				{
-					position: relative;
-
-					&:before,
-					&:after
-					{
-						box-sizing: border-box;
-						content: '<';
-						display: block;
-						font-size: 3em;
-						height: 1em;
-						left: 0;
-						line-height: 0;
-						opacity: 0.33;
-						padding: 0 0.25em;
-						position: absolute;
-						text-align: left;
-						top: 50%;
-						transition: opacity 1s;
-						width: 1em;
-					}
-						
-					&:after
-					{
-						content: '>';
-						left: auto;
-						right: 0;
-						text-align: right;
-					}
-
-					&:hover:before,
-					&:hover:after
-					{
-						opacity: 1;
-						transition: opacity 1s;
-					}
-
-					img
-					{
-						cursor: pointer;
 					}
 				}
 			}
