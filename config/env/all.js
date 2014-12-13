@@ -34,7 +34,9 @@ module.exports = {
 				'public/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
 				'public/vendors/angulartics/dist/angulartics.min.js',
 				'public/vendors/angulartics/dist/angulartics-ga.min.js',
-				'public/vendors/angular-local-storage/dist/angular-local-storage.js'
+				'public/vendors/angular-local-storage/dist/angular-local-storage.js',
+				'public/vendors/kineticjs/kinetic.js',
+				'public/vendors/stage-directive/stage-directive.js'
 			]
 		},
 		css :

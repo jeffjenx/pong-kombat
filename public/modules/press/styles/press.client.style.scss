@@ -35,10 +35,13 @@
 
 		&:after
 		{
-			background-image: url( '/images/arcade-monitor-4x.png' );
+			background-image: url( '/images/arcade-monitor.png' );
 			background-size: 100% 100%;
 			opacity: 1;
 			z-index: 10;
+
+			@media screen and (min-width: 500px)  { background-image: url( '/images/arcade-monitor-2x.png' ); }
+			@media screen and (min-width: 1000px) { background-image: url( '/images/arcade-monitor-4x.png' ); }
 		}
 
 		header

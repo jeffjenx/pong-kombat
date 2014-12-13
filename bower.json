@@ -1,6 +1,6 @@
 {
   "name": "pong-kombat",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced by Stefan Gagne in 1994, finally returns.",
   "keywords": "Pong Kombat, Pong, Mortal Kombat, video games",
   "dependencies": {
@@ -29,7 +29,9 @@
     "jquery-ui-touch-punch": "https://github.com/furf/jquery-ui-touch-punch.git",
     "modernizr": "~2.8.3",
     "moment": "~2.8.4",
-    "pagedown": "~1.1.0"
+    "pagedown": "~1.1.0",
+    "kineticjs": "~5.1.0",
+    "stage-directive": "~1.0.0"
   },
   "resolutions": {
     "jquery": "~2.1.1",

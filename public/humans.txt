@@ -1,15 +1,71 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
-
 # TEAM
 
-    <name> -- <role> -- <twitter>
+	Developer:      Jeff Jenkins (Quantastical.com)
+	Contact:        jeff@quantastical.com
+	Twitter:        @Quantastical
+	Location:       Michigan, United States
 
+	
 # THANKS
 
-    <name>
+	Pong Kombat:    Stefan Gagne (Gagne Software)
+	Pong Kombat 2:  Ryan Sadwick (Ryan Sadwick Productions)
+	                Arturo Aquino (Art Entertainment)
+	Pong Kombat 3:  Brandon Kuroda (Krappy Software)
+	Pong:           Allan Alcorn
+	                Atari Inc.
+	Mortal Kombat:  Ed Boon
+	                Dan Forden
+	                John Tobias
+	                John Vogel
+	                Midway Games
+	                NetherRealm Studios
+	                Warner Bros. Interactive Entertainment
+	Tennis:         Ralph Baer (Magnavox)
+	Tennis For Two: William Higinbotham
 
-# TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    jQuery, Modernizr
+# SITE
+
+	Last Updated:   2014-12-13
+	Languages:      English
+	Standards:      CSS Level 3
+	                ECMAScript, 5th Edition
+	                HTML 5
+	Components:     AngularJS
+	                Hammer.JS
+	                jQuery
+	                Kinetic.JS
+	                MEAN.JS
+	                Modernizr
+	                MongoDB
+	                Node.js
+	                Pagedown
+	Services:       DreamHost
+	                Facebook
+	                GameFAQs
+	                GitHub
+	                Google Analytics
+	                Google Search
+	                nodejitsu
+	                StackOverflow
+	                Twitter
+	                Wikipedia
+	Software:       Adobe Illustrator
+	                Adobe Photoshop
+	                Android
+	                Apple iOS
+	                Apple OS X
+	                Apple Safari
+	                Audacity
+	                Balsamiq Mockups
+	                FileZilla
+	                GitHub
+	                Google Chrome
+	                Microsoft Internet Explorer
+	                Microsoft Windows
+	                Mozilla Firefox
+	                Pinterest
+	                Sublime Text
+	                The Unarchiver
+	                TweetDeck 

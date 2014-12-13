@@ -16,8 +16,10 @@
 @import '../vendors/animate.css-scss/_flippers/_flipOutY';
 @import '../vendors/animate.css-scss/_zooming-entrances/_zoomIn';
 
-@import '../modules/press/styles/press.scss';
-@import '../modules/teaser/styles/teaser.scss';
+@import '../modules/play/styles/play.client.style.scss';
+@import '../modules/press/styles/press.client.style.scss';
+@import '../modules/teaser/styles/teaser.client.style.scss';
+@import '../modules/demo/styles/demo.client.style.scss';
 
 $transitionable-prefixed-values : filter;
 

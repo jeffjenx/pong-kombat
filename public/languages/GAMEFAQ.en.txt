@@ -1,0 +1,1203 @@
+
+        The official guide for the 2014 rebirth of the 1994 classic:
+
+
+           ;-.   ,-.  .  .  ,-.   ,  ,  ,-.  .   , ,-.   ,.  ,---.
+           |  ) /   \ |\ | /      | /  /   \ |\ /| |  ) /  \   |  
+           |-'  |   | | \| | -.   |<   |   | | V | |-<  |--|   |  
+           |    \   / |  | \  |   | \  \   / |   | |  ) |  |   |  
+           '     `-'  '  '  `-'   '  `  `-'  '   ' `-'  '  '   '  
+
+                             www.PongKombat.com
+
+
+
+                                Jeff Jenkins
+                            jeff@pongkombat.com
+
+
+
+===============================================================================
+                                  CONTENTS
+===============================================================================
+
+ Introduction....................... 1   Battlegrounds...................... 6 
+                                         + Default........................ 6.1 
+ Story.............................. 2   + Forest......................... 6.2 
+                                         + Hell........................... 6.3 
+ Gameplay........................... 3   + Highway........................ 6.4 
+ + Free Play...................... 3.1   + Ice River...................... 6.5 
+ + P9X Training................... 3.2   + Pit............................ 6.6 
+ + Tournament Edition............. 3.3   + Portal......................... 6.7 
+ + Paddle-2-Paddle................ 3.4   + Storm.......................... 6.8 
+ + Paddle Battle.................. 3.5   + Tower.......................... 6.9 
+ + Dip Switches................... 3.6   + Toxic Pool.................... 6.10 
+ + Analytics...................... 3.7   + Watercolor.................... 6.11 
+   - Leaderboards............... 3.7.1 
+   - General Statistics......... 3.7.2   Collect-A-Balls.................... 7 
+   - Pong Statistics............ 3.7.3   + Sports......................... 7.1 
+   - Kombat Statistics.......... 3.7.4   + Video Games.................... 7.2 
+   - Achievements............... 3.7.5   + Science & Tech................. 7.3 
+                                         + Miscellaneous.................. 7.4 
+ Controls........................... 4 
+ + Basic Controls................. 4.1   Power-Ups.......................... 8 
+ + Advanced Controls.............. 4.2   + Meat........................... 8.1 
+ + Special Moves.................. 4.4   + Glue........................... 8.2 
+ + Using A Keyboard............... 4.5   + Energy Wings................... 8.3 
+ + Using Touch-Enabled Devices.... 4.6   + Shield......................... 8.4 
+ + Using A Gamepad Controller..... 4.7   + Stopwatch...................... 8.5 
+   - Supported Gamepads......... 4.7.1 
+   - Retro Gamepads............. 4.7.2   Secrets...........................§ 9 
+                                         + Blasteroids.................... 9.1 
+ Characters......................... 5   + Blue Screen Of Death........... 9.2 
+ + Main Characters................ 5.1   + Easy Difficulty................ 9.3 
+   - Blue Paddle................ 5.1.1   + Hidden Paddles................. 9.4 
+   - Green Paddle............... 5.1.2   + Level Select................... 9.5 
+   - Purple Paddle.............. 5.1.3   + Pacintosh System 1............. 9.6 
+   - Red Paddle................. 5.1.4   + Spamality Dismantle............ 9.7 
+   - Yellow Paddle.............. 5.1.5   + Super Pong Kombat.............. 9.8 
+ + Boss Characters................ 5.2   + White First.................... 9.9 
+   - Shifter.................... 5.2.1 
+   - Monolith................... 5.2.2   Acknolwedgements.................. 10 
+   - White Paddle............... 5.2.3   + Pong Kombat (2014) Team....... 10.1 
+ + Other Characters............... 5.3   + Pong Kombat (1994) Team....... 10.2 
+   - Myst....................... 5.3.1   + Pong Kombat 2 (1996) Team..... 10.3 
+   - P9X-Bot.................... 5.3.2   + Pong Kombat 3 (1996) Team..... 10.4 
+   - Slayer..................... 5.3.3   + Special Thanks................ 10.5 
+ + Create-A-Paddle................ 5.4   + Pong Kombat Fans.............. 10.6 
+
+
+
+===============================================================================
+  1                             INTRODUCTION
+===============================================================================
+
+The popular freeware title, Pong Kombat, was originally developed as a school
+project by Stefan Gagne in 1994. In 2014, Pong Kombat made it's return to the
+Internet as web-based freeware title on PongKombat.com.
+
+Developed by Jeff Jenkins (Quantastical.com), the Pong Kombat rebirth adheres
+to the original principals and concepts, incorporates popular features of the
+sequels (Pong Kombat 2 and Pong Kombat 3), while adding in new elements and
+enhancements.
+
+
+===============================================================================
+  2                                STORY
+===============================================================================
+
+White Paddle has reclaimed his place atop the porcelan throne of the Pong Lao 
+Tournament, with the help of some friends. As they look down upon the citizens 
+of the pong world, *Pongea*, they can only laugh and bellow at their bloated 
+filesize and lossy compression.
+
+With new powers, and an old attitude, it's just a matter of time before White 
+Paddle destroys the universe in a greedy grab for attention.
+
+The next tournament is about to begin. Do you have what it takes to ascend the
+ranks and defeat White Paddle?
+
+
+===============================================================================
+  3                               GAMEPLAY
+===============================================================================
+
+Pong Kombat combines elments of Atari's PONG and the fighting franchise, Mortal
+Kombat. Gameplay resembles a tennis match, with two paddles opposite each other
+trying to maintain the volley of a ball. In traditional PONG, failure to return
+the volley would result in a point to the opponent.
+
+In Pong Kombat, points are measured as a Life Bar at the top of the field of
+play. Ten (10) points constitutes victory and ends the match. During a volley, 
+competitors are able to perform Special Abilities that have various effects.
+
+For example, each paddle has a projectile attack that can be sent across the
+playing field. If the projectile collides with the opponent, the player will be
+awarded with another point, or partial-point, depending on the effectiveness of
+the attack.
+
+At the end of the match, the winner is granted the opportunity to "finish off"
+their opponent by performing a special finishing move that Dismantles them into
+bits and pieces.
+
+
+-------------------------------------------------------------------------------
+  3.1                            Free Play
+-------------------------------------------------------------------------------
+
+Compete against a random opponent in a single match.
+
+
+-------------------------------------------------------------------------------
+  3.2                           P9X Training
+-------------------------------------------------------------------------------
+
+Before you test your skills in a tournament, you might want to spend some time
+training and learning the special abilities of your chosen character. Practice 
+against a stationary opponent, the P9X-Bot.
+
+
+-------------------------------------------------------------------------------
+  3.3                        Tournament Edition
+-------------------------------------------------------------------------------
+
+Compete against a series of opponents, culminating with a challenge from White 
+Paddle, themself. Beware, though, as there are challengers you may never have 
+faced before.
+
+
+-------------------------------------------------------------------------------
+  3.4                          Paddle-2-Paddle
+-------------------------------------------------------------------------------
+
+Challenge another human-controlled opponent online, wherever and whenever you 
+can. Increase your rank by competing in tournaments or individual matches 
+against your friends or virtual strangers.
+
+
+-------------------------------------------------------------------------------
+  3.5                           Paddle Battle
+-------------------------------------------------------------------------------
+
+Looking for even more ways to play? Doubles matches pit two against two. For an
+even greater challenge, try a handicap match: one against two.
+
+
+-------------------------------------------------------------------------------
+  3.6                           Dip Switches
+-------------------------------------------------------------------------------
+
+Censorship (Default: On)
+    Toggle blood and dismantles: Off, On
+
+Coinage (Default: Free Play)
+    No real purpose: Free Play, 1-4 Credits
+
+Combat (Default: On)
+    Toggle special abilities & dismantles: Off, On
+
+Difficulty (Default: Medium)
+    Adjust intelligence of computer opponents: Easy[*], Medium, Hard, Very Hard
+    [*] See § 9.3 for enabling Easy difficulty.
+
+Power-Ups (Default: On)
+    Toggle power-up abilities: Off, On
+
+Sound FX (Default: 11)
+    Adjust volume of sound effects: Off, 1-11
+
+Tunes (Default: 11)
+    Adjust volume of background music: Off, 1-11
+
+
+-------------------------------------------------------------------------------
+  3.7                             Analytics
+-------------------------------------------------------------------------------
+
+  3.7.1                         Leaderboards                                   
+...............................................................................
+
+Compare yourself amongst various groups of your peers. After you achieve local
+success, challenge regional opponents online, and work your way up the ladder.
+
+Friends
+    Search by username, email address, or connect your favorite social network
+
+Regional
+    Participants within a predefined geographical region based on your location
+
+National
+    People within the same country
+
+International
+    Everyone online
+
+
+  3.7.2                      General Statistics                                
+...............................................................................
+
+Completion Percentage
+    Unlockable Balls, Levels, Characters, Achievements
+
+Favorite Paddle
+    Character chosen most frequently
+
+Time Played
+    Accumulated time spent in matches locally, and online
+
+Streaks
+    Longest winning and losing streaks
+
+
+  3.7.3                        Pong Statistics                                 
+...............................................................................
+
+Win Percentage
+    Number matches won and lost
+
+Points
+    Number of points scored and scored against
+
+Match Times
+    Average, longest, and shortest lengths of time to complete a match
+
+Longest Volley
+    Length of time and number of paddled balls without scoring a point
+
+
+  3.7.4                       Kombat Statistics                                
+...............................................................................
+
+Special Move Percentage
+    Number of projectile hits and misses
+
+Dismantle Success Rate
+    Number of successful dismantles and finishing opportunities
+
+Flawless Victories
+    Number of match wins without taking any damage
+
+Tournament Rank
+    Number of tournament wins and average ranking
+
+
+  3.7.4                         Achievements                                   
+...............................................................................
+
+Blue Paddle
+    Win the Pong Lao Tournament with Blue Paddle
+
+Collect 'Em All
+    Unlock all ball categories
+
+Dismantled!
+    Perform any character or battleground dismantle
+
+Gone Viral
+    Defeat the developer or another player with this achievement
+
+Green Paddle
+    Win the Pong Lao Tournament with Green Paddle
+
+I Got An 'A'
+    Complete P9X Training with each main character
+
+Monolith
+    Win matches playing as and against Monolith
+
+Mr. or Ms. Perfect
+    Unlocked all ball categories; performed every battleground dismantle and 
+    Spamality; performed every special ability and dismantle, and won the 
+    tournament with every character 
+
+MyPaddle
+    Created a custom paddle and won a Paddle-2-Paddle match with it
+
+Purple Paddle
+    Win the Pong Lao Tournament with Purple Paddle
+
+Red Paddle
+    Win the Pong Lao Tournament with Red Paddle
+
+Shifter
+    Win matches playing as and against Shifter
+
+Spamality!
+    Perform the secret Spamality dismantle
+
+White Paddle
+    Defeat White Paddle in the Pong Lao Tournament
+
+Yellow Paddle
+    Win the Pong Lao Tournament with Yellow Paddle
+
+
+===============================================================================
+  4                               CONTROLS
+===============================================================================
+
+-------------------------------------------------------------------------------
+  4.1                          Basic Controls
+-------------------------------------------------------------------------------
+
+       +--------------+-------------------------+----------------------+
+       | Button Label | While On A Menu...      | While Battling...    |
+       +==============+=========================+======================+
+       | Up           | Highlight previous      | Move paddle          |
+       |              | menu item               | upward               |
+       +--------------+-------------------------+----------------------+
+       | Down         | Highlight next          | Move paddle          |
+       |              | menu item               | downward             |
+       +--------------+-------------------------+----------------------+
+       | Left         | Decrease item value     | Move paddle          |
+       |              | (where applicable)      | toward the left      |
+       +--------------+-------------------------+----------------------+
+       | Right        | Increase item value     | Move paddle          |
+       |              | (where applicable)      | toward the right     |
+       +--------------+-------------------------+----------------------+
+       | Back         | Return to previous menu | Pause gameplay       |
+       |              | or close menu           |                      |
+       +--------------+-------------------------+----------------------+
+       | Action       | Select highlighted item | Used in special move |
+       |              | or increase item value  | sequences            |
+       +--------------+-------------------------+----------------------+
+       | Start        | Select highlighted item | Pause gameplay       |
+       +--------------+-------------------------+----------------------+
+
+
+-------------------------------------------------------------------------------
+  4.2                         Advanced Controls
+-------------------------------------------------------------------------------
+
+Ball Speed
+    When returning a volley, press the Action button as the ball approaches 
+    your paddle, to increase the ball speed.
+
+English
+    To alter the trajectory of the ball, use the Up or Down buttons as the
+    ball approaches your paddle.
+
+
+-------------------------------------------------------------------------------
+  4.4                         Special Abilites
+-------------------------------------------------------------------------------
+
+Each character has their own special abilities, so be sure to try out different
+input combinations in order to gain an upper hand against your opponent.
+
+All of the moves are a four button sequence: three movement buttons followed by
+the Action button. All characters have at least one projectile attack.
+
+After defeating your opponent, you will be given the opportunity to finish 
+them off by *Dismantling* them (using the same criteria).
+
+
+-------------------------------------------------------------------------------
+  4.5                         Using A Keyboard
+-------------------------------------------------------------------------------
+
+                    +--------------+----------------------+
+                    | Button       | Keyboard Mapping     |
+                    +==============+======================+
+                    | Up           | Up Arrow or          |
+                    |              | `W` Key              |
+                    +--------------+----------------------+
+                    | Down         | Down Arrow or        |
+                    |              | `S` Key              |
+                    +--------------+----------------------+
+                    | Left         | Left Arrow or        |
+                    |              | `A` Key              |
+                    +--------------+----------------------+
+                    | Right        | Right Arrow or       |
+                    |              | `D` Key              |
+                    +--------------+----------------------+
+                    | Back         | Backspace/Delete Key |
+                    |              | or Escape Key        |
+                    +--------------+----------------------+
+                    | Action       | Spacebar or          |
+                    |              | Shift Key            |
+                    +--------------+----------------------+
+                    | Start        | Enter/Return Key     |
+                    +--------------+----------------------+
+
+
+-------------------------------------------------------------------------------
+  4.6                    Using Touch-Enabled Devices
+-------------------------------------------------------------------------------
+
+                       +--------------+---------------+
+                       | Button       | Touch Gesture |
+                       +==============+===============+
+                       | Up           | Swipe Up      |
+                       +--------------+---------------+
+                       | Down         | Swipe Down    |
+                       +--------------+---------------+
+                       | Left         | Swipe Left    |
+                       +--------------+---------------+
+                       | Right        | Swipe Right   |
+                       +--------------+---------------+
+                       | Back         | Pinch         |
+                       +--------------+---------------+
+                       | Action       | Tap           |
+                       +--------------+---------------+
+                       | Start        | Tap & Hold    |
+                       +--------------+---------------+
+
+
+-------------------------------------------------------------------------------
+  4.7                    Using A Gamepad Controller
+-------------------------------------------------------------------------------
+
+  4.7.1                      Supported Gamepads                                
+...............................................................................
+
+            +--------------+-------------------+-------------------+
+            | Button       | Sony PlayStation  | Microsoft Xbox    |
+            +==============+===================+===================+
+            | Up           | D-Pad Up or       | D-Pad Up or       |
+            |              | Left Analog Up    | Left Analog Up    |
+            +--------------+-------------------+-------------------+
+            | Down         | D-Pad Down or     | D-Pad Down or     |
+            |              | Left Analog Down  | Left Analog Down  |
+            +--------------+-------------------+-------------------+
+            | Left         | D-Pad Left or     | D-Pad Left or     |
+            |              | Left Analog Left  | Left Analog Left  |
+            +--------------+-------------------+-------------------+
+            | Right        | D-Pad Right or    | D-Pad Right or    |
+            |              | Left Analog Right | Left Analog Right |
+            +--------------+-------------------+-------------------+
+            | Back         | Select, Cross or  | Back/White, A,    |
+            |              | Triangle Button   | or Y Button       |
+            +--------------+-------------------+-------------------+
+            | Action       | Square or Circle  | X or B Button     |
+            |              | Button            |                   |
+            +--------------+-------------------+-------------------+
+            | Start        | Start             | Start/Black       |
+            +--------------+-------------------+-------------------+
+
+
+  4.7.2                        Retro Gamepads                                  
+...............................................................................
+
+               +--------------+-------------+----------------+
+               | Button       | Nintendo    | Super Nintendo |
+               +==============+=============+================+
+               | Up           | D-Pad Up    | D-Pad Up       |
+               +--------------+-------------+----------------+
+               | Down         | D-Pad Down  | D-Pad Down     |
+               +--------------+-------------+----------------+
+               | Left         | D-Pad Left  | D-Pad Left     |
+               +--------------+-------------+----------------+
+               | Right        | D-Pad Right | D-Pad Right    |
+               +--------------+-------------+----------------+
+               | Back         | Select or   | Select, B,     |
+               |              | B Button    | or X Button    |
+               +--------------+-------------+----------------+
+               | Action       | A Button    | A or Y Button  |
+               +--------------+-------------+----------------+
+               | Start        | Start       | Start          |
+               +--------------+-------------+----------------+
+
+
+===============================================================================
+  5                              CHARACTERS
+===============================================================================
+
+-------------------------------------------------------------------------------
+  5.1                          Main Characters
+-------------------------------------------------------------------------------
+
+  5.1.1                          Blue Paddle                                   
+...............................................................................
+
+Mythology
+    Blue Paddle spends their days (and nights) alone behind the glow of a 
+    computer screen. After noticing a registration form for the tournament on 
+    Reddit, they decide to enter and attempt to prove they are more than just 
+    another nobody.
+
+Attributes
+    Size  - ******.... (Average)
+    Speed - ******.... (Average)
+
+Abilities
+    Ice Blast (Projectile)    - Left, Down, Right, Action
+    Ice Replica (Shield)      - Down, Up, Down, Action
+    Frozen Shards (Dismantle) - Left, Right, Down, Action
+
+
+  5.1.2                         Green Paddle                                   
+...............................................................................
+
+Mythology
+    Green Paddle is currently working through a mid-life crisis. They enter the
+    Pong Lao Tournament with hopes of finding inner peace and, perhaps, a new 
+    career.
+
+Attributes
+    Size  - *****..... (Small)
+    Speed - ****...... (Slow)
+
+Abilites
+    Acid Blast (Projectile) - Left, Right, Right, Action
+    Arrow (Projectile)      - Left, Left, Right, Action
+    300+1 (Dismantle)       - Left, Right, Left, Action
+
+
+  5.1.3                         Purple Paddle                                   
+...............................................................................
+
+Mythology
+    After ascending the ranks of their local underground Pong Club tournaments,
+    Purple Paddle feels the competition no longer feeds their growing desire to 
+    compete, so they enter the Pong Lao Tournament seeking greater challenge.
+
+Attributes
+    Size  - *******... (Large)
+    Speed - ********.. (Quick)
+
+Abilites
+    Lightning Sai (Projectile) - Up, Right, Down, Action
+    Control Orb (Projectile)   - Down, Left, Right, Action
+    1.21 Gigawatts (Dismantle) - Right, Down, Left, Action
+
+
+  5.1.4                          Red Paddle                                   
+...............................................................................
+
+Mythology
+    Although they have yet to see the fame that comes with it, Red Paddle has a
+    satisfying career as a movie star. They hope to catch the eye of notable 
+    director, Trent Quentiño, with an underdog victory in the tournament.
+
+Attributes
+    Size  - ****...... (Small)
+    Speed - *****..... (Slow)
+
+Abilities
+    Shadow Ball (Projectile) - Left, Left, Right, Action
+    Shadow Paddle (Shield)   - Left, Right, Down, Action
+    Black Mass (Dismantle)   - Left, Right, Right, Action
+
+
+  5.1.5                         Yellow Paddle                                   
+...............................................................................
+
+Mythology
+    Yellow Paddle is the only entrant to be personally selected by White Paddle
+    to enter the tournament. White Paddle knows of their weak mind and the 
+    troubled past that they've endured.
+
+Attributes
+    Size  - ******.... (Average)
+    Speed - ******.... (Average)
+
+Abilities
+    Fireball (Projectile)     - Left, Left, Right, Action
+    Flamethrower (Projectile) - Left, Left, Up, Action
+    Hellfire (Dismantle)      - Left, Up, Right, Action
+
+
+-------------------------------------------------------------------------------
+  5.2                          Boss Characters
+-------------------------------------------------------------------------------
+
+  5.2.1                            Shifter                                   
+...............................................................................
+
+Mythology
+    Shifter has entered the tournament as a joke and for personal entertainment
+    since the sport of battle has intrigued them as long as they can remember,
+    and they have adapted their appearance to guarantee victory.
+
+Attributes
+    Size  - *****..... (Small)
+    Speed - *******... (Quick)
+
+Abilities
+    Laser (Projectile)         - Right, Left, Right, Action
+    Cloak (Shield)             - Left, Left, Left, Action
+    Prey For Mercy (Dismantle) - Left, Up, Right, Action
+
+
+  5.2.2                           Monolith                                   
+...............................................................................
+
+Mythology
+    Monolith has spent the past million years eroding into their current form. 
+    When White Paddle constructed his tournament, they enlisted the massive 
+    paddle for the sole purpose of intimidating the opposition.
+
+Attributes
+    Size  - ********** (Very Large)
+    Speed - ******.... (Average)
+
+Abilities
+    Rock Toss (Projectile)  - Right, Left, Right, Action
+    Stone Wall (Shield)     - Right, Down, Left, Action
+    Rock'n'Roll (Dismantle) - Up, Down, Up, Action
+
+
+  5.2.3                         White Paddle                                   
+...............................................................................
+
+Mythology
+    White Paddle makes up for their lack of visual stimulation with pure heart 
+    and dedication. The early 1970’s generated an illustrious career for them, 
+    but the eventual evolution to color and then to clarity has placed them in 
+    times of yore.
+
+Attributes
+    Size  - ********.. (Large)
+    Speed - ********** (Very Fast)
+
+Abilities
+    Decoy (Projectile) - Down, Down, Right, Action
+    Replenish (Other)  - Right, Left, Left, Action
+    *No Dismantle*
+
+
+-------------------------------------------------------------------------------
+  5.3                         Other Characters
+-------------------------------------------------------------------------------
+
+  5.3.1                             Myst                                   
+...............................................................................
+
+After successfully landing particulary devastating attack, a person's face will
+sometimes appear from the  bottom of the screen, exclaiming "Whoopsie!" Hold 
+Start and press the Up button to access them.
+
+
+  5.3.2                           P9X-Bot                                   
+...............................................................................
+
+P9X-Bot is a robotic training dummy that helps you practice special abilities.
+From the title menu, choose the P9X Training item to access them. The P9X-Bot 
+is a non-playable character.
+
+  5.3.3                            Slayer                                      
+...............................................................................
+
+Similar to Myst, Slayer is only accessible after proving your worth. On the Pit
+battleground, defeat your opponent without taking any damage and perform any 
+Dismantle to acess them.
+
+
+-------------------------------------------------------------------------------
+  5.4                          Create-A-Paddle
+-------------------------------------------------------------------------------
+
+Looking to customize a competitor to compete against other combatants? With the
+create-a-paddle app, you can bring your idea to life, then try to take them to 
+the top of the leaderboards.
+
+Color
+    Choose your paddle's favorite color to differentiate them from the others
+
+Name
+    Create a custom name or generate a random one 
+
+Design
+    Upload a texture and tweak how your paddle looks
+    Add special effects, like smoke, fire, bubbles, and more
+
+Attributes
+    Distribute attribute points to increase or decrease your paddle's size and 
+    speed
+
+Abilities
+    Add special abilities--such as projectiles, shields, and dismantles--and 
+    configure your own button sequence to use them.
+
+
+===============================================================================
+  6                             BATTLEGROUNDS
+===============================================================================
+
+-------------------------------------------------------------------------------
+  6.1                              Default
+-------------------------------------------------------------------------------
+
+The Default level is the original level from the very first incarnation of 
+PONG.  All is black with a simple white, dashed line dividing the two halves of
+the playing field.
+
+
+-------------------------------------------------------------------------------
+  6.2                              Forest
+-------------------------------------------------------------------------------
+
+Enormous trees and vegetation grow from the ground up beyond the playing area. 
+The plant life rustles in the wind and as animals and rodents scurry across the
+landscape below.
+
+Dynamics
+    Dark shadows and the trees above dance in the wind, limiting visibility.
+
+
+-------------------------------------------------------------------------------
+  6.3                               Hell
+-------------------------------------------------------------------------------
+
+Hell is a pit of fire and skulls. The blazing inferno causes explosions of 
+magma and bubbling rivers of lava are below.
+
+Dynamics
+    The insane heat causes players to have to keep their paddles in motion. 
+    Sitting in one area too long will slowly deplete their health.
+
+Dismantle
+    Burnt Toast - Right, Left, Left, Action
+
+
+-------------------------------------------------------------------------------
+  6.4                             Highway
+-------------------------------------------------------------------------------
+
+The playing field is high above a multi-lane highway. At ground level, cars, 
+vans, and trucks race across the screen in both directions.
+
+Dismantle
+    Splat - Left, Right, Right, Action
+
+
+-------------------------------------------------------------------------------
+  6.5                            Ice River
+-------------------------------------------------------------------------------
+
+The takes place above a flowing river that contains large chunks of glacier and
+ice. It sure looks cold down there.
+
+Dismantle
+    Let It Go - Left, Left, Right, Action
+
+
+-------------------------------------------------------------------------------
+  6.6                               Pit
+-------------------------------------------------------------------------------
+
+The infamous Pit arena sets the combatants against one another high above a bed
+of spikes.
+
+Dismantle
+    Vlad - Left, Down, Right, Action
+
+
+-------------------------------------------------------------------------------
+  6.7                              Portal
+-------------------------------------------------------------------------------
+
+The Portal arena is an outdoor arena with a black-hole that slowly moves around
+the center of the screen.
+
+Dynamics
+    The ball, while in volley, will be affected by the slow-moving black hole’s 
+    gravitational pull, altering it's trajectory.
+
+Dismantle
+    This Sucks - Right, Down, Left, Action
+
+
+-------------------------------------------------------------------------------
+  6.8                              Storm
+-------------------------------------------------------------------------------
+
+The paddles duel high above the city streets admist a heavy storm.
+
+Dynamics
+    Strong winds of the storm cause the ball's speed to increase or decrease as
+    it travels across the screen. Frequent lightning strikes cause flashes of 
+    light that block large portions of the playing field.
+
+Dismantle
+    Shock To The System - Right, Right, Left, Action
+
+
+-------------------------------------------------------------------------------
+  6.9                              Tower
+-------------------------------------------------------------------------------
+
+The six-story Tower arena is a wooden floored structure built atop a cement 
+basement.
+
+Dismantle
+    Going Down - Down, Right, Up, Action
+
+
+-------------------------------------------------------------------------------
+  6.10                           Toxic Pool
+-------------------------------------------------------------------------------
+
+The Acid Pool is a place for punishment and sacrifice. Captives would be bound 
+with chains, and then lowered into the acid below.
+
+Dismantle
+    Acid 'n' Chains - Up, Right, Down, Action
+
+
+-------------------------------------------------------------------------------
+  6.11                           Watercolor
+-------------------------------------------------------------------------------
+
+This stage features a painting of a sun smiling down upon the landscape.
+
+
+===============================================================================
+  7                           COLLECT-A-BALLS
+===============================================================================
+
+At the start of the match, and after failure to return a volley, a ball is put 
+into the center of the playing field and launches at a random angle. When balls
+are put into play, they are randomly selected from a pool of available options.
+Each ball has a distinct size and bouncy-ness to them. New balls are unlocked 
+over time, based on the number of matches you have completed.
+
+As you progress, new balls are awarded less frequently, as to follow a pattern 
+known as the Fibonacci sequence. Balls will be unlocked after 1 match, again 
+after 2 matches, then 3, 5, 8, 13, 21, 34, 55, and so forth.
+
+Balls can also be unlocked individually, by encountering them while playing 
+against a human opponent in a Paddle-2-Paddle match.
+
+
+-------------------------------------------------------------------------------
+  7.1                              Sports
+-------------------------------------------------------------------------------
+
+Baseball
+    Generic (New), Generic (Dirty), MLB, Optic Yellow Softball
+
+Basketball
+    Generic (New), Generic (Old), NBA, FIBA, Red/White/Blue
+
+Billiards
+    Solids (1-7), Stripes (9-15), 8-Ball
+
+Bowling
+    Rose
+
+Croquet
+    Blue, Red, Black, Yellow
+
+Football
+    American Football,
+    Association Football (Soccer),
+    Kick/Dodgeball
+
+Tennis
+    3-Star Table, 4-Star Table, Optic Yellow
+
+
+-------------------------------------------------------------------------------
+  7.2                           Video Games
+-------------------------------------------------------------------------------
+
+Namco
+    Ms. Pac-Man, Pac-Man
+
+Super Mario Bros.
+    1-Up Mushroom, Coin, Koopa Shell, Star Coin, Super Mushroom
+
+The Legend of Zelda
+    Rupee (Green, Blue, Red, Silver, Gold)
+
+
+-------------------------------------------------------------------------------
+  7.3                          Science & Tech
+-------------------------------------------------------------------------------
+
+Atomic Elements
+    Carbon, Hydrogen, Nitrogen, Oxygen, Phosphorous, Sulfur
+
+Solar System
+    Mercury, Venus, Earth, Mars, Saturn, Neptune, Uranus, Jupiter, Pluto,
+    Sun, Moon, Asteroid
+
+
+-------------------------------------------------------------------------------
+  7.4                          Miscellaneous
+-------------------------------------------------------------------------------
+
+Dice
+    1-6 (White, Red), 12-Sided, 20-Sided
+
+Emoticon
+    Angry, Frowning, Grinning, Shocked, Smiling, Winking
+
+Eye
+    Amber, Blue, Brown, Cat, Gray, Green, Hazel, Red
+
+Food
+    Bagel (Plain, Salted), Chocolate Chip Cookie, Doughtnut with Sprinkles, 
+    Easter Egg (Blue, Green, Purple, Red, Yellow), Pepperoni Pizza, Waffle
+
+Icon
+    Apple Safari, Google Chrome, Microsoft Internet Explorer, Mozilla Firefox
+
+Logo
+    Apple, BMW, Facebook, Pinterest, Pepsi, Radio Shack, Starbucks, Twitter, 
+    WordPress, Volkswagen
+
+Marble
+    Brown, Lavendar, Mint, Orange, Pink, Teal
+
+Media
+    Cassette Tape, Compact Disc, Floppy Disk, Vinyl Record
+
+Presedential
+    Penny (Abraham Lincoln), Nickle (Thomas Jefferson), Dime (Franklin D. 
+    Roosevelt), Quarter (George Washington), Obama Logo
+
+Random
+    Pinball, Rubberband, Saw Blade, Skull, Super Bouncy, Tin Foil, Yarn,
+    Yin-Yang, White Square (Classic PONG)
+
+
+===============================================================================
+  8                               POWER-UPS
+===============================================================================
+
+In the middle of the playing field, Power-Up special abilities will pop up from
+time to time during battle. Race your competitor to pick them up to gain an 
+upper hand against them.
+
+-------------------------------------------------------------------------------
+  8.1                               Meat
+-------------------------------------------------------------------------------
+
+Pick up the Meat power-up and you will regain some life.
+
+
+-------------------------------------------------------------------------------
+  8.2                               Glue
+-------------------------------------------------------------------------------
+
+After collecting the Glue power-up, the ball will get stuck to your paddle for 
+a short period o time, enabling you to strategically toss it back by pressing 
+the Action button.
+
+
+-------------------------------------------------------------------------------
+  8.3                           Energy Wings
+-------------------------------------------------------------------------------
+
+Pick up the Energy Wings power-up to enjoy a temporary speed increase, allowing
+you to avoid attacks and return volleys. 
+
+
+-------------------------------------------------------------------------------
+  8.4                              Shield
+-------------------------------------------------------------------------------
+
+The Shield power-up protects your paddle from your competitors projectiles, but
+still allowing you to return the ball volley.
+
+
+-------------------------------------------------------------------------------
+  8.5                            Stopwatch
+-------------------------------------------------------------------------------
+
+As the ball approaches your side of the playing area, the Stopwatch power-up 
+causes it's speed to decrease, giving you more time to react.
+
+
+===============================================================================
+  9                               SECRETS
+===============================================================================
+
+-------------------------------------------------------------------------------
+  9.1                           Blasteroids
+-------------------------------------------------------------------------------
+
+If you go into the game's Dip Switches and enter in a special button sequence, 
+you are able to play a Pong Kombat-skinned version of Asteroids. Move around 
+the screen while trying to avoid and destroy various ball-like asteroids by
+shooting them with a projectile. The button sequence is:
+
+               Up, Right, Down, Left, Up, Right, Down, Left
+
+
+-------------------------------------------------------------------------------
+  9.2                       Blue Screen Of Death
+-------------------------------------------------------------------------------
+
+Most websites offer a standard 404 error screen for non-existent pages. On
+PongKombat.com, if you visit a non-existent page or encounter some other server
+error, you will be presented with an infamous Blue Screen Of Death. You can
+even change the death color by pressing the Spacebar or tapping the screen.
+
+
+-------------------------------------------------------------------------------
+  9.3                         Easy Difficulty
+-------------------------------------------------------------------------------
+
+After losing thirteen consecutive matches in the Free Play game mode, a new 
+difficulty dip switch is unlocked, giving frustrated players a chance to redeem
+their confidence...if they can get past the humility of playing on "Easy."
+
+
+-------------------------------------------------------------------------------
+  9.4                          Hidden Paddles
+-------------------------------------------------------------------------------
+
+Hold the the Up button or any direction for 11 seconds when choosing your 
+paddle to toggle a second page of playable characters, including bosses and 
+secret paddles.
+
+All of the paddles other than main characters must be unlocked by defeating 
+them at least once.
+
+
+-------------------------------------------------------------------------------
+  9.5                           Level Select
+-------------------------------------------------------------------------------
+
+Press the Up button or any direction 11 times on the character select to toggle
+a level select menu, allowing you to choose which battleground the next match 
+will take place within.
+
+
+-------------------------------------------------------------------------------
+  9.6                        Pacintosh System 1
+-------------------------------------------------------------------------------
+
+On some websites, when viewing the contents of a directory, the end-user is
+presented with a standard index listing that provides hyperlinks to all of the
+files within it. On PongKombat.com, the directory listing resembles an old
+black-and-white graphical user interface, complete with sizable windows,
+a working clock, and even a functional calculator.
+
+Here is a list of directories that can be navigated using the interface:
+
+- http://www.pongkombat.com/documents
+- http://www.pongkombat.com/icons
+- http://www.pongkombat.com/images
+- http://www.pongkombat.com/music
+- http://www.pongkombat.com/screenshots
+- http://www.pongkombat.com/videos
+
+
+-------------------------------------------------------------------------------
+  9.7                        Spamality Dismantle
+-------------------------------------------------------------------------------
+
+Spamalities are special finishing moves that can be performed by any character
+and result in a comedic transformation of the opponent into everyone's favorite
+processed meat-type food.
+
+To perform a Spamality on your opponent, you must defeat them without taking
+any damage and, then, enter in the following button sequence:
+
+                         Action, Action, Action, Up
+
+
+-------------------------------------------------------------------------------
+  9.8                        Super Pong Kombat
+-------------------------------------------------------------------------------
+
+The single player game mode that enables players to play a Pong Kombat-skinned 
+version of the classic Arkanoid game is unlocked after completing the single 
+player tournament with each of the five main characters. In it, players volley
+a ball inside of a playing field filled blocks. Players clear the blocks from
+the playing field by bouncing the ball off them or sending a projectile their
+way.
+
+
+-------------------------------------------------------------------------------
+  9.9                           White First
+-------------------------------------------------------------------------------
+
+The now infamous Konami Code makes an appearance in this edition, enabling 
+players to bypass all of the tournament competitors prior to White Paddle.
+
+Enter the following button sequence on the title screen, before opening the
+title menu:
+
+       Up, Up, Down, Down, Left, Right, Left, Right, Back, Action, Start
+
+
+===============================================================================
+  10                          ACKNOWLEDGEMENTS
+===============================================================================
+
+-------------------------------------------------------------------------------
+  10.1                    Pong Kombat (2014) Team
+-------------------------------------------------------------------------------
+
+Publisher
+    Quantastical.com
+
+Developer
+    Jeff Jenkins
+
+
+-------------------------------------------------------------------------------
+  10.2                    Pong Kombat (1994) Team
+-------------------------------------------------------------------------------
+
+Thank you to the team and individuals that thought up this creative video game.
+
+Developer/Publisher
+    Gagne Software
+
+Designer
+    Stefen Gagne
+
+Assistants
+    David Hunt
+    Josh Saxon
+    Nick Steele
+
+
+-------------------------------------------------------------------------------
+  10.3                    Pong Kombat 2 (1996) Team
+-------------------------------------------------------------------------------
+
+Thank you to the team and creative individuals that expanded upon the original.
+
+Publishers
+    Ryan Sadwick Productions
+    Art Entertainment
+
+Designers
+    Ryan Sadwick
+    Arturo Aquino
+
+
+-------------------------------------------------------------------------------
+  10.4                    Pong Kombat 3 (1996) Team
+-------------------------------------------------------------------------------
+
+Thank you to the team and individuals that helped fashion a franchise out of 
+such a simple concept.
+
+Publisher
+    Krappy Software
+
+Designer
+    Brandon Kuroda
+
+Assistants
+    Graeme Humphries
+    Nathan Rosen
+    Brandon Yowell
+
+
+-------------------------------------------------------------------------------
+  10.5                         Special Thanks
+-------------------------------------------------------------------------------
+
+Thank you to my friends, family, and colleagues for encouraging and challenging
+me to be the best person I can be:
+
+Duda, Eazy, Kabino, Moecool, Mom, nimaje, Senkus, Vectorform
+
+Thank you to the developers of the games that inspired and entertained me over 
+the years.
+
+Atari Inc., Capcom, Epic Games, Game Freak, id Software, Infinity Ward, Konami,
+Maxis, Midway Games, Namco, NetherRealm Studios, Neversoft, Nintendo, Polyphony
+Digital, Rare, Retro Studios, Rockstar Games, Sierra Entertainment, SquareSoft,
+Warner Bros. Interactive Entertainment
+
+
+-------------------------------------------------------------------------------
+  10.6                        Pong Kombat Fans
+-------------------------------------------------------------------------------
+
+Thank you to the fans of Pong Kombat for showing how powerful the Internet can 
+be and for participating in the learning process.
+
+Stay up-to-date with the latest Pong Kombat news, contests, and tournaments by 
+joining #PongKombat on your preferred social network.
+
+- http://Facebook.com/PongKombat
+- http://Pinterest.com/PongKombat
+- http://Twitter.com/PongKombat
+
+Want to learn more about the game development process and get involved with 
+future updates? Check out the code repository and developer blog:
+
+- http://GitHub.com/Quantastical/pong-kombat
+- http://Wordpress.Quantastical.com/category/projects/pong-kombat/
