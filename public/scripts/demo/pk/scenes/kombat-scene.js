@@ -20,6 +20,8 @@ function KombatScene( ) {
 	//this.startMatch( );
 	this.changeState( this.states.fighting );
 	this.layers['Kombat'].setBall( Balls.RANDOM );
+
+	this.screamSound = new Sound( 'Scream' );
 }
 
 KombatScene.prototype = new Scene;
@@ -160,7 +162,12 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.dismantling :
 			this.layers['HUD'].cinemaMode( );
 			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
-	
+			
+			if( this.stateTime > 2.5 && !this.screamSound.played && app.settings['SoundFX'] === true && !app.isMobile( ) )
+			{
+				this.screamSound.play( );
+			}
+
 			if( this.stateTime >= 7 ) {
 				this.changeState( this.states.ending );
 				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );

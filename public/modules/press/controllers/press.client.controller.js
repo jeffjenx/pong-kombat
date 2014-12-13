@@ -7,15 +7,10 @@ angular.module('press').controller('PressController', ['$scope', 'Authentication
 		$scope.authentication = Authentication;
 		$scope.scrolled = false;
 
-		$scope.activeScreenshot = 0;
-		$scope.navigateScreenshots = function()
-		{
-			console.log('test');
-			$scope.activeScreenshot += 1;
-			if( $scope.activeScreenshot >= 4 )
-			{
-				$scope.activeScreenshot = 0;
-			}
+		$scope.track = function( action ) {
+			$analytics.eventTrack(action, {  category: '/demo' });
 		};
+
+		$analytics.pageTrack('/demo');
 	}
 ]);

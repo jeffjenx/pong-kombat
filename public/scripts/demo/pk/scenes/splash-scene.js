@@ -35,7 +35,7 @@ SplashScene.prototype.update = function( deltaTime ) {
 		this.domain.opacity = ( this.timeElapsed - 1 ) / 2;
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed >= 8 )
+	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed >= 10 )
 	{
 		SceneManager.changeScene( new LegalScene( ), Transitions.FADE );
 	}

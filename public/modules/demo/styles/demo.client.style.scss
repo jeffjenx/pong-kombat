@@ -57,6 +57,17 @@
 		}
 	}
 
+	#loading
+	{
+		color: white;
+		font-family: 'DOS';
+		left: 0;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		width: 100%;
+	}
+
 	button
 	{
 		@include flipInY( $delay: 1s, $duration: 1.1s ); /* animation */

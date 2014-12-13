@@ -1,8 +1,9 @@
 {
 	"audio" :
 	{
-		"Beep" : "sounds/beep",
-		"Boop" : "sounds/boop"
+		"Beep"   : "sounds/beep",
+		"Boop"   : "sounds/boop",
+		"Scream" : "sounds/wilhelm-scream"
 	},
 	
 	"text" : { },

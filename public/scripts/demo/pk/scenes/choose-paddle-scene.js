@@ -13,7 +13,7 @@ function ChoosePaddleScene( ) {
 	this.mainLayer.addComponent( 'TitleText', titleText );
 	
 	for( var i = 0; i < 6; i++ ) {
-		var box = new Sprite( '0' );
+		var box = new Sprite( 'Black' );
 		box.opacity = 0.5;
 		box.size.x = viewport.width * 0.27;
 		box.size.y = viewport.height * 0.33;

@@ -1927,6 +1927,15 @@
 #demo #console a:hover {
   border-bottom: solid 2pt #9664ff;
 }
+#demo #loading {
+  color: white;
+  font-family: 'DOS';
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
 #demo button {
   -webkit-animation-name: flipInY;
   -moz-animation-name: flipInY;

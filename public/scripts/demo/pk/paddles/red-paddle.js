@@ -15,7 +15,7 @@ function RedPaddle( ) {
 	
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-BlackSmoke1'],Resources['Particle-BlackSmoke2']];
-	this.effect.count = 20;
+	this.effect.count = 5;
 	this.effect.minVelocity.x = -this.size.x * 0.25;
 	this.effect.minVelocity.y = this.size.y * 0.25;
 	this.effect.maxVelocity.x = this.size.x * 0.25;
@@ -23,7 +23,7 @@ function RedPaddle( ) {
 	this.effect.minParticleSize = this.size.x * 0.3;
 	this.effect.maxParticleSize = this.size.x * 0.5;
 	this.effect.minLife = 50;
-	this.effect.maxLife = 300;
+	this.effect.maxLife = 200;
 	this.effect.maxOpacity = 0.4;
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 5;

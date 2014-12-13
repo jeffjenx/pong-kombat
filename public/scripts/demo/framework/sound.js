@@ -6,6 +6,8 @@ function Sound( resource, unique ) {
 		this.audio = Resources[resource];
 		this.name = resource;
 	}
+
+	this.played = false;
 }
 
 Sound.prototype.constructor = Sound;
@@ -22,6 +24,8 @@ Sound.prototype.loop = function( ) {
 		this.audio.play( );
 		AudioManager.currentSounds[this.name] = this;
 	}
+	
+	this.played = true;
 };
 
 Sound.prototype.mute = function( ) {
@@ -43,6 +47,8 @@ Sound.prototype.play = function( ) {
 			delete AudioManager.currentSounds[this.name];
 		} );
 	}
+
+	this.played = true;
 };
 
 Sound.prototype.setVolume = function( volume ) {

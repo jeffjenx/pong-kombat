@@ -95,7 +95,15 @@ function ready( ) {
 	app.resize( );
 	
 	var loadingInterval;
+	var loadingPercentage;
 	var loadingTick = function( ) {
+		if( !loadingPercentage ) {
+			loadingPercentage = document.createElement( 'div' );
+			loadingPercentage.id = 'loading';
+			document.getElementById( 'demo' ).appendChild( loadingPercentage );
+		}
+		loadingPercentage.textContent = 'Loading... ' + Math.round( ResourceManager.loadedCount / ResourceManager.totalCount * 100 ) + '%';
+		//console.log('loading', ResourceManager.loadedCount, ResourceManager.totalCount);
 	};
 	
 	app.loading = function( ) {
@@ -111,6 +119,7 @@ function ready( ) {
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
+		loadingPercentage.parentNode.removeChild( loadingPercentage );
 		app.startupScene = new SplashScene();
 		app.initialize( );
 	};
