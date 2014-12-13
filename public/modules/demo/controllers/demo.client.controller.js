@@ -78,19 +78,12 @@ angular.module('demo').controller('DemoController', ['$scope', 'Authentication',
 
 		};
 
-		$scope.focusInput = function() {
-			if( !$scope.toggle ) {
-				document.getElementById( 'input' ).focus();
-			}
-		};
-
 		$scope.handleSocial = function(button) {
 			$scope.track('toggle');
 
 			$scope.toggle = !$scope.toggle;
 
 			document.getElementById( 'social_toggle' ).blur( );
-			$scope.focusInput();
 		};
 
 		$analytics.pageTrack('/demo');

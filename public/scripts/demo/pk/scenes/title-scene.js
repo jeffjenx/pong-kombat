@@ -33,7 +33,7 @@ function TitleScene( ) {
 	
 	this.yellow = new YellowPaddle( );
 	this.yellow.scale = 4;
-	this.yellow.startPosition = {x: viewport.width * -0.20, y:viewport.height * 0.45};
+	this.yellow.startPosition = {x: viewport.width * -0.30, y:viewport.height * 0.40};
 	this.yellow.endPosition = {x: viewport.width * 0.20, y:viewport.height * 0.75};
 	this.yellow.position.x = this.yellow.startPosition.x;
 	this.yellow.position.y = this.yellow.startPosition.y;
