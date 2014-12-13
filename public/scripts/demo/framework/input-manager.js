@@ -11,12 +11,19 @@ var Buttons = {
 
 var Keyboard = {
 	32 : Buttons.ACTION,   // <spacebar>
+	16 : Buttons.ACTION,   // <shift>
 	40 : Buttons.DOWN,     // <down_arrow>
+	83 : Buttons.DOWN,     // S
 	37 : Buttons.LEFT,     // <left_arrow>
+	65 : Buttons.LEFT,     // A
 	39 : Buttons.RIGHT,    // <right_arrow>
+	68 : Buttons.RIGHT,    // D
 	38 : Buttons.UP,       // <up_arrow>
+	87 : Buttons.UP,       // W
+	13 : Buttons.PAUSE,    // <enter>
 	80 : Buttons.PAUSE,    // P
 	77 : Buttons.MUTE,     // M
+	 8 : Buttons.BACK,     // <backspace>
 	27 : Buttons.BACK      // ESCAPE
 };
 
