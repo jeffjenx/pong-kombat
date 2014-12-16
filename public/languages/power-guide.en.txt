@@ -21,7 +21,7 @@
                                   CONTENTS
 ===============================================================================
 
- Introduction....................... 1   Battlegrounds...................... 6 
+ Introduction....................... 1   Battle Zones....................... 6 
                                          + Default........................ 6.1 
  Story.............................. 2   + Forest......................... 6.2 
                                          + Hell........................... 6.3 
@@ -42,7 +42,7 @@
  Controls........................... 4 
  + Basic Controls................. 4.1   Power-Ups.......................... 8 
  + Advanced Controls.............. 4.2   + Meat........................... 8.1 
- + Special Moves.................. 4.4   + Glue........................... 8.2 
+ + Special Abilites............... 4.4   + Glue........................... 8.2 
  + Using A Keyboard............... 4.5   + Energy Wings................... 8.3 
  + Using Touch-Enabled Devices.... 4.6   + Shield......................... 8.4 
  + Using A Gamepad Controller..... 4.7   + Stopwatch...................... 8.5 
@@ -271,7 +271,7 @@ Collect 'Em All
     Unlock all ball categories
 
 Dismantled!
-    Perform any character or battleground dismantle
+    Perform any character or battle zone dismantle
 
 Gone Viral
     Defeat the developer or another player with this achievement
@@ -286,7 +286,7 @@ Monolith
     Win matches playing as and against Monolith
 
 Mr. or Ms. Perfect
-    Unlocked all ball categories; performed every battleground dismantle and 
+    Unlocked all ball categories; performed every battle zone dismantle and 
     Spamality; performed every special ability and dismantle, and won the 
     tournament with every character 
 
@@ -660,7 +660,7 @@ is a non-playable character.
 ...............................................................................
 
 Similar to Myst, Slayer is only accessible after proving your worth. On the Pit
-battleground, defeat your opponent without taking any damage and perform any 
+battle zone, defeat your opponent without taking any damage and perform any 
 Dismantle to acess them.
 
 
@@ -692,7 +692,7 @@ Abilities
 
 
 ===============================================================================
-  6                             BATTLEGROUNDS
+  6                             BATTLE ZONES
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -882,6 +882,9 @@ Super Mario Bros.
 The Legend of Zelda
     Rupee (Green, Blue, Red, Silver, Gold)
 
+Miscellaneous
+    PokéBall
+
 
 -------------------------------------------------------------------------------
   7.3                          Science & Tech
@@ -1034,7 +1037,7 @@ them at least once.
 -------------------------------------------------------------------------------
 
 Press the Up button or any direction 11 times on the character select to toggle
-a level select menu, allowing you to choose which battleground the next match 
+a level select menu, allowing you to choose which battle zone the next match 
 will take place within.
 
 
@@ -1121,14 +1124,23 @@ Thank you to the team and individuals that thought up this creative video game.
 Developer/Publisher
     Gagne Software
 
-Designer
+Designer/Coder/Artist/Sound/3-D Renderer
     Stefen Gagne
 
-Assistants
-    David Hunt
+Music
     Josh Saxon
+
+Lead Beta Testing
     Nick Steele
 
+Beta Testing
+    Julio Deleon
+    David Hunt
+    George Sopko
+
+Computer Teacher
+    Mr. McCain
+    
 
 -------------------------------------------------------------------------------
   10.3                    Pong Kombat 2 (1996) Team

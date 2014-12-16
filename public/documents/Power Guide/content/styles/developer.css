@@ -1,0 +1,64 @@
+@import url( 'fonts.css' );
+
+body
+{
+	background: black;
+	font-size: 24pt;
+}
+
+#quantastical
+{
+	background-image: url('../images/quantastical-logo.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	color: transparent;
+	display: block;
+	height: 10em;
+	left: 50%;
+	margin: -5em 0 0 -5em;
+	position: absolute;
+	top: calc( 50% - 1em );
+	width: 10em;
+}
+
+#quantastical:after
+{
+	background-image: url( '../images/quantastical-domain.png' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	bottom: -2.5em;
+	content: '';
+	display: block;
+	height: 2em;
+	width: 100%;
+	position: absolute;
+}
+
+#pongkombat
+{
+	background-color: white;
+	background-image: url( '../images/qr-code.png' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: solid 0.5em white;
+	color: transparent;
+	display: block;
+	height: 4em;
+	position: absolute;
+	right: 3em;
+	top: 3em;
+	width: 4em;
+}
+
+#pongkombat:before
+{
+	color: white;
+	content: 'DECEMBER 2014';
+	font-family: 'Roboto';
+	font-size: 0.5em;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: -2.5em;
+	width: 100%;
+}

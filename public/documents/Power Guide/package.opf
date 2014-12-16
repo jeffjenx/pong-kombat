@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<package prefix="rendition: http://www.idpf.org/vocab/rendition/#" unique-identifier="unique-identifier" version="3.0" xmlns="http://www.idpf.org/2007/opf">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<!-- File Information -->
+		<dc:format id="format">application/epub+zip</dc:format>
+		<dc:identifier id="unique-identifier">www.pongkombat.com/documents/Strategy%20Guide.epub</dc:identifier>
+		<meta property="dcterms:modified">2014-12-15T06:33:00Z</meta>
+
+		<!-- Publication Information -->
+		<dc:title id="main-title">Pong Kombat Guide</dc:title>
+		<meta refines="#main-title" property="file-as">Pong Kombat (2014) Guide</meta>
+		<meta refines="#main-title" property="title-type">main</meta>
+
+		<dc:title id="extended-title">Pong Kombat (2014): Official Strategy Guide</dc:title>
+		<meta refines="#extended-title" property="title-type">extended</meta>
+
+		<dc:description id="description">
+			Pong Kombat returns twenty years after the parody franchise originally debuted.
+			Need some extra power?
+			This strategy guide features all the special abilities, dismantles, and uncovers all the secrets...delivered directly from the developer.
+		</dc:description>
+		<dc:subject id="subject">Pong Kombat freeware video game franchise</dc:subject>
+
+		<!-- Author Information -->
+		<dc:creator id="creator">Jeff Jenkins, Quantastical.com</dc:creator>
+
+		<!-- Publisher Information -->
+		<dc:publisher id="publisher">Quantastical.com</dc:publisher>
+		<meta refines="#publisher" property="role" scheme="marc:relators">pbl</meta>
+
+		<!-- Copyright Information -->
+		<dc:rights>GNU General Public License</dc:rights>
+
+		<!-- ePub Properties -->
+		<meta property="rendition:layout">pre-paginated</meta>
+		<meta property="rendition:orientation">auto</meta>
+		<meta property="rendition:spread">auto</meta>
+	</metadata>
+
+	<manifest>
+		<!-- Navigation Document (Table of Contents) -->
+		<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav" />
+
+		<!-- Images -->
+		<item id="advert-icade-image" href="content/images/advert-icade.jpg" media-type="image/jpeg" />
+		<item id="cover-image" href="content/images/cover.jpg" media-type="image/jpeg" properties="cover-image" />
+		<item id="title-sketch-image" href="content/images/title-sketch.jpg" media-type="image/jpeg" />
+		
+		<!-- XHTML -->
+		<item id="advert-icade" href="content/xhtml/advert-icade.xhtml" media-type="application/xhtml+xml" />
+		<item id="contents" href="nav.xhtml" media-type="application/xhtml+xml" />
+		<item id="cover" href="content/xhtml/cover.xhtml" media-type="application/xhtml+xml" />
+		<item id="developer" href="content/xhtml/developer.xhtml" media-type="application/xhtml+xml" />
+		<item id="introduction-1" href="content/xhtml/introduction-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="introduction-2" href="content/xhtml/introduction-2.xhtml" media-type="application/xhtml+xml" />
+
+		<!-- CSS, JavaScript, Audio, ... -->
+		<item id="advert-icade-style" href="content/styles/advert-icade.css" media-type="text/css" />
+		<item id="developer-style" href="content/styles/developer.css" media-type="text/css" />
+		<item id="fonts-style" href="content/styles/fonts.css" media-type="text/css" />
+		<item id="introduction-style" href="content/styles/introduction.css" media-type="text/css" />
+		<item id="nav-style" href="content/styles/nav.css" media-type="text/css" />
+	</manifest>
+
+	<spine>
+		<itemref idref="cover" linear="no" properties="rendition:page-spread-center" />
+		
+		<itemref idref="advert-icade" />
+		<itemref idref="contents" />
+		<itemref idref="introduction-1" />
+		<itemref idref="introduction-2" />
+
+		<itemref idref="developer" />
+	</spine>
+</package>
