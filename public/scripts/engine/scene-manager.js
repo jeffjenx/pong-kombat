@@ -1,9 +1,11 @@
-var Transitions = {
+var Transitions =
+{
 	FADE : 1,
 	NONE : 0
 };
 
-var SceneManager = {
+var SceneManager =
+{
 	currentScene : null,
 	nextScene : null,
 	transitioning : false,
@@ -12,7 +14,8 @@ var SceneManager = {
 	transitionPercent : 0.0,
 	transitionType : Transitions.NONE,
 	
-	changeScene : function( newScene, transitionType, transitionLength ) {
+	changeScene : function( newScene, transitionType, transitionLength )
+	{
 		if( this.currentScene == null )
 		{
 			this.nextScene = newScene;
@@ -44,8 +47,10 @@ var SceneManager = {
 		document.body.style.cursor = "";
 	},
 	
-	draw : function( context ) {
-		if( !(this.currentScene instanceof Object) ) {
+	draw : function( context )
+	{
+		if( !( this.currentScene instanceof Object ) )
+		{
 			return;
 		}
 		
@@ -69,12 +74,15 @@ var SceneManager = {
 		}
 	},
 	
-	transitionEnded : function( ) {
+	transitionEnded : function( )
+	{
 		this.currentScene = this.nextScene;
 		this.nextScene = null;
 		this.transitioning = false;
+		this.currentScene.updateIn( 1 );
 		InputManager.context = ( this.transitionContext == "Mouse" ) ? Mouse : Keyboard;
-		while( InputManager.history.length ) {
+		while( InputManager.history.length )
+		{
 			InputManager.history.pop( );
 		}
 		InputManager.mouse.x = viewport.width / 2;
@@ -82,26 +90,8 @@ var SceneManager = {
 		this.transitionContext = false;
 	},
 	
-	transitionFade : function( context ) {
-		/*
-		if( this.transitionPercent < 0.5 ) {
-			this.currentScene.draw( context );
-			context.save();
-			context.globalAlpha = this.transitionPercent * 2;
-			context.fillStyle = 'black';
-			context.rect(0,0,viewport.width,viewport.height);
-			context.fill();
-			context.restore();
-		} else {
-			this.nextScene.draw(context);
-			context.globalAlpha = (1 - this.transitionPercent) * 2;
-			context.fillStyle = 'black';
-			context.rect(0,0,viewport.width,viewport.height);
-			context.fill();
-			context.restore();
-		}
-		*/
-		
+	transitionFade : function( context )
+	{
 		this.currentScene.draw( context );
 		context.save( );
 		context.globalAlpha = this.transitionPercent;
@@ -114,14 +104,17 @@ var SceneManager = {
 		}
 	},
 	
-	transitionNone : function( context ) {
+	transitionNone : function( context )
+	{
 		this.currentScene.draw( context );
 		
 		this.transitionEnded( );
 	},
 	
-	update : function( deltaTime ) {
-		if( !(this.currentScene instanceof Object) ) {
+	update : function( deltaTime )
+	{
+		if( !(this.currentScene instanceof Object) )
+		{
 			return;
 		}
 		

@@ -42,7 +42,7 @@ function TitleScene( ) {
 	this.logo.scale = viewport.height / 1080;
 	titleLayer.addComponent( 'Logo', this.logo );
 	
-	this.text = new Text( Resources['Strings'].PRESS_SPACEBAR + ' ' + Resources['Strings'].TO_BEGIN );
+	this.text = new Text( Resources.Strings.PRESS_SPACEBAR + ' ' + Resources.Strings.TO_BEGIN );
 	this.text.fontFamily = 'MK Mythologies';
 	this.text.fontSize = viewport.height * 0.044;
 	this.text.position.y = viewport.height * 0.67;

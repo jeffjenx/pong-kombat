@@ -14,10 +14,26 @@
 	"GITHUB" : "GitHub",
 	"LEGAL_NOTICE" : "NOTICE",
 	"LEGALITIES" : "This game is a blatant parody of PONG and Mortal Kombat.\n\nIt is not affiliated with Atari Inc., NetherRealm Studios,\nWarner Bros. Interactive Entertainment or Midway Games.\n\nIt is created for the purpose of learning and sharing\nthat experience and knowledge with others.\n\nSupport independent developers and game on!",
+	"LEVELS" :
+	{
+		"RANDOM" : "Random Zone",
+		"DEFAULT" : "Default Zone",
+		"FOREST" : "Forest Zone",
+		"HELL" : "Hell Zone",
+		"HIGHWAY" : "Highway Zone",
+		"ICE_RIVER" : "Ice River Zone",
+		"PIT" : "Pit Zone",
+		"PORTAL" : "Portal Zone",
+		"STORM" : "Storm Zone",
+		"TOWER" : "Tower Zone",
+		"TOXIC_POOL" : "Toxic Pool Zone",
+		"WATERCOLOR" : "Watercolor Zone"
+	},
 	"LOAD" : "load pongkombat",
 	"LOADED" : "Done.",
 	"LOADING" : "Loading Pong Kombat...",
 	"PINTEREST" : "Pinterest",
+	"PICK_YOUR_PADDLE" : "PICK YOUR PADDLE",
 	"PRESS_SPACEBAR" : "PRESS SPACEBAR",
 	"TO_BEGIN" : "TO BEGIN",
 	"RETURN_TO_TITLE" : "Return to Main Menu",
@@ -25,6 +41,13 @@
 	{
 		"CENSORSHIP" : "Censorship",
 		"COINAGE" : "Coinage",
+		"COINAGES" :
+		{
+			"FREE_PLAY" : "Free Play",
+			"ONE_COIN" : "1 Coin/1 Credit",
+			"TWO_COINS" : "2 Coins/1 Credit",
+			"HALF_COIN" : "1 Coin/2 Credits"
+		},
 		"COMBAT" : "Combat",
 		"DIFFICULTIES" : 
 		{
@@ -50,46 +73,6 @@
 
 	"text" :
 	{
-		"CHOOSE YOUR PADDLE" : "CHOOSE YOUR PADDLE",
-		
-		"Background Music"    : "Background Music",
-		"Category:"           : "Category:",
-		"Close Menu"          : "Close Menu",
-		"Scene:"              : "Scene:",
-		"Language/Country"    : "Language/Country",
-		"Difficulty"          : "Difficulty",
-		"Powerups"            : "Powerups",
-		"Sound Effects"       : "Sound Effects",
-		"Configure Controls"  : "Configure Controls",
-		
-		"Test Scene"          : "Test Scene",
-		"Title Scene"         : "Title Scene",
-		
-		"Balls"               : "Balls",
-		"8-Ball"              : "8-Ball",
-		"Baseball"            : "Baseball",
-		"Basketball"          : "Basketball",
-		"Earth"               : "Earth",
-		"Soccer Ball"         : "Soccer Ball",
-		
-		"Paddles"       : "Paddles",
-		"Blue Paddle"   : "Blue Paddle",
-		"Green Paddle"  : "Green Paddle",
-		"Monolith"      : "Monolith",
-		"Red Paddle"    : "Red Paddle",
-		"Shifter"       : "Shifter",
-		"Yellow Paddle" : "Yellow Paddle",
-		"White Paddle"  : "White Paddle",
-		
-		"English" : "English",
-		"French"  : "French",
-		
-		"Canada"        : "Canada",
-		"United States" : "United States",
-		
-		"Off" : "Off",
-		"On"  : "On",
-		
 		"Attention!" : "Attention!",
 		
 		"Main Story" : "White Paddle bellows at your bloated filesize and lossy compression.\nDo you have what it takes to ascend the ranks and defeat them?\nEmerge victorious and you will be rewarded handsomely.\nShould your objective fail, your fate will be sealed by White Paddle.\nRegstration is at 3:30 on Thursday."

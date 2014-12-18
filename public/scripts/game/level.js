@@ -1,15 +1,16 @@
 Levels = {
 	RANDOM : 0,
 	DEFAULT : 1,
-	FOREST : 2/*,
+	FOREST : 2,
 	HELL : 3,
 	HIGHWAY : 4,
-	ICERIVER : 5,
+	ICE_RIVER : 5,
 	PIT : 6,
 	PORTAL : 7,
 	STORM : 8,
 	TOWER : 9,
-	TOXICPOOL : 10*/
+	TOXIC_POOL : 10,
+	WATERCOLOR : 11
 };
 
 // LEVELS are defined as a BACKGROUND and FOREGROUND

@@ -1,4 +1,5 @@
-function ChoosePaddleScene( ) {
+function PickPaddleScene( )
+{
 	Scene.call( this );
 
 	var paddleScale = 1.75;
@@ -6,13 +7,14 @@ function ChoosePaddleScene( ) {
 	this.mainLayer = this.addLayer( 'MainLayer', new Layer( ) );
 	this.mainLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
 	
-	var titleText = new Text( Resources['Localization']['CHOOSE YOUR PADDLE'] );
+	var titleText = new Text( Resources.Strings.PICK_YOUR_PADDLE );
 	titleText.fontFamily = 'MK Mythologies';
 	titleText.fontSize = viewport.height * 0.08;
 	titleText.position.y = viewport.height * 0.11;
 	this.mainLayer.addComponent( 'TitleText', titleText );
 	
-	for( var i = 0; i < 6; i++ ) {
+	for( var i = 0; i < 6; i++ )
+	{
 		var box = new Sprite( 'Black' );
 		box.opacity = 0.5;
 		box.size.x = viewport.width * 0.27;
@@ -22,17 +24,17 @@ function ChoosePaddleScene( ) {
 		this.mainLayer.addComponent( 'Box' + i, box );
 	}
 	
-	this.paddles = new Array();
+	this.paddles = new Array( );
 	this.currentIndex = -1;
 	
-	var yellowPaddle = new YellowPaddle();
+	var yellowPaddle = new YellowPaddle( );
 	yellowPaddle.position.x = viewport.width * 0.20;
 	yellowPaddle.position.y = viewport.height * 0.38;
 	yellowPaddle.rotation = 33;
 	yellowPaddle.scale = paddleScale;
 	this.paddles.push( yellowPaddle );
 	
-	var randomPaddle = new Sprite('Particle-Random1');
+	var randomPaddle = new Sprite( 'Particle-Random1' );
 	randomPaddle.color = new Color(0, 255, 255);
 	randomPaddle.enum = 'RANDOM';
 	randomPaddle.position.x = viewport.width * 0.50;
@@ -41,7 +43,7 @@ function ChoosePaddleScene( ) {
 	randomPaddle.size.y = randomPaddle.size.x;
 	this.paddles.push( randomPaddle );
 	
-	var bluePaddle = new BluePaddle();
+	var bluePaddle = new BluePaddle( );
 	bluePaddle.position.x = viewport.width * 0.80;
 	bluePaddle.position.y = viewport.height * 0.38;
 	bluePaddle.rotation = -20;
@@ -73,7 +75,7 @@ function ChoosePaddleScene( ) {
 	
 	// Setup random paddle effect
 	randomPaddle.effect = new ParticleSystem( );
-	randomPaddle.effect.particleImages = [Resources['Particle-Random2'],Resources['Particle-Random3'],Resources['Particle-Random4'],Resources['Particle-Random5'],Resources['Particle-Random6']];
+	randomPaddle.effect.particleImages = [ Resources['Particle-Random2'], Resources['Particle-Random3'], Resources['Particle-Random4'], Resources['Particle-Random5'], Resources['Particle-Random6'] ];
 	randomPaddle.effect.count = 20;
 	randomPaddle.effect.minVelocity.x = -randomPaddle.size.x * 0.25;
 	randomPaddle.effect.minVelocity.y = randomPaddle.size.y * 0.25;
@@ -87,12 +89,14 @@ function ChoosePaddleScene( ) {
 	randomPaddle.effect.rotationSpeed = 1;
 	randomPaddle.effect.scaleSpeed = 3;
 	
-	randomPaddle.draw = function( context ) {
-		Sprite.prototype.draw.call(this, context);
-		randomPaddle.effect.draw(context);
+	randomPaddle.draw = function( context )
+	{
+		Sprite.prototype.draw.call( this, context );
+		randomPaddle.effect.draw( context );
 	};
 	
-	randomPaddle.update = function( deltaTime ) {
+	randomPaddle.update = function( deltaTime )
+	{
 		Paddle.prototype.update.call( this, deltaTime );
 		
 		this.effect.position = this.position;
@@ -103,20 +107,37 @@ function ChoosePaddleScene( ) {
 		this.effect.update( deltaTime );
 	};
 	
-	for( var j = 0; j < 100; j++ ) {
-		for( var i in this.paddles ) {
-			this.paddles[i].update(1/60);
+	for( var j = 0; j < 100; j++ )
+	{
+		for( var i in this.paddles )
+		{
+			this.paddles[i].update( 1 / 60 );
 		}
 	}
 }
 
-ChoosePaddleScene.prototype = new Scene;
-ChoosePaddleScene.prototype.constructor = ChoosePaddleScene;
+PickPaddleScene.prototype = new Scene;
+PickPaddleScene.prototype.constructor = PickPaddleScene;
 
-ChoosePaddleScene.prototype.draw = function( context ) {
-	Scene.prototype.draw.call( this, context );
+PickPaddleScene.prototype.draw = function( context )
+{
+	// Override: Scene.prototype.draw.call( this, context );
+	for( i in this.layers )
+	{
+		if( i !== 'Menu' )
+		{
+			this.layers[i].draw( context );
+		}
+	}
 	
-	for( var i = 0; i < this.paddles.length; i++ ) {
+	for( i in this.components )
+	{
+		this.components[i].draw( context );
+	}
+	// End Override
+
+	for( var i = 0; i < this.paddles.length; i++ )
+	{
 		context.save();
 		context.beginPath();
 		context.rect(
@@ -125,7 +146,8 @@ ChoosePaddleScene.prototype.draw = function( context ) {
 			viewport.width * 0.27,
 			viewport.height * 0.33
 		);
-		if( this.currentIndex === i ){
+		if( this.currentIndex === i )
+		{
 			context.strokeStyle = this.paddles[i].color.RGB();
 			context.lineWidth = viewport.width * 0.01;
 			context.stroke();
@@ -134,31 +156,48 @@ ChoosePaddleScene.prototype.draw = function( context ) {
 		this.paddles[i].draw( context );
 		context.restore();
 	}
+
+	if( this.layers['Menu'] )
+	{
+		this.layers['Menu'].draw( context );
+	}
 };
 
-ChoosePaddleScene.prototype.selectNextPaddle = function( direction ) {
-	switch( direction ) {
+PickPaddleScene.prototype.selectNextPaddle = function( direction )
+{
+	switch( direction )
+	{
 		case 'Down' :this.currentIndex += 3; break;
 		case 'Left' : this.currentIndex -= 1; break;
 		case 'Right' : this.currentIndex += 1; break;
 		case 'Up' : this.currentIndex -= 3; break;
 	}
 	
-	if( this.currentIndex > this.paddles.length - 1 ) {
+	if( this.currentIndex > this.paddles.length - 1 )
+	{
 		this.currentIndex -= this.paddles.length;
 	}
-	if( this.currentIndex < 0 ) {
+	if( this.currentIndex < 0 )
+	{
 		this.currentIndex += this.paddles.length;
 	}
 };
 
-ChoosePaddleScene.prototype.update = function( deltaTime ) {
+PickPaddleScene.prototype.update = function( deltaTime )
+{
 	Scene.prototype.update.call( this, deltaTime );
 	
-	if( this.paddles[this.currentIndex] ) {
+	if( this.layers['Menu'] )
+	{
+		return;
+	}
+
+	if( this.paddles[this.currentIndex] )
+	{
 		var selectedPaddle = this.paddles[this.currentIndex];
 		selectedPaddle.offset += 0.003;
-		if( selectedPaddle.offset > 0.75 ) {
+		if( selectedPaddle.offset > 0.75 )
+		{
 			selectedPaddle.offset = -0.25;
 		}
 		selectedPaddle.update( deltaTime );
@@ -169,16 +208,22 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 		var player = new Player( );
 		player.setPaddle( Paddles[this.paddles[this.currentIndex].enum] );
 		
-		if( app.gameMode === GameModes.TOURNAMENT ) {
-			if( app.tournament ) {
+		if( app.gameMode === GameModes.TOURNAMENT )
+		{
+			if( app.tournament )
+			{
 				app.tournament.changePlayer( player );
 				SceneManager.changeScene( app.tournament, Transitions.NONE );
-			} else {
+			}
+			else
+			{
 				app.tournament = new TournamentScene( );
 				app.tournament.startPlayer( player );
 				SceneManager.changeScene( app.tournament, Transitions.NONE );
 			}
-		} else {
+		}
+		else
+		{
 			var computer = new Opponent( );
 			computer.setPaddle( Paddles.RANDOM );
 			
@@ -189,17 +234,34 @@ ChoosePaddleScene.prototype.update = function( deltaTime ) {
 			SceneManager.changeScene( kombatScene, Transitions.NONE );
 		}
 	}
+
+	var now = Date.now( );
+	var buttons = [ Buttons.DOWN, Buttons.UP, Buttons.LEFT, Buttons.RIGHT ];
+	for( var i in buttons )
+	{
+		if( InputManager.isButtonDown( buttons[i] ) )
+		{
+			if( now - InputManager.currentState[ buttons[i] ] > 3 * 1000 )
+			{
+				this.addLayer( 'Menu', new LevelMenu( this ) );
+			}
+		}
+	}
 	
-	if( InputManager.checkButtonPress( Buttons.DOWN ) ) {
+	if( InputManager.checkButtonPress( Buttons.DOWN ) )
+	{
 		this.selectNextPaddle( 'Down' );
 	}
-	if( InputManager.checkButtonPress( Buttons.UP ) ) {
+	if( InputManager.checkButtonPress( Buttons.UP ) )
+	{
 		this.selectNextPaddle( 'Up' );
 	}
-	if( InputManager.checkButtonPress( Buttons.LEFT ) ) {
+	if( InputManager.checkButtonPress( Buttons.LEFT ) )
+	{
 		this.selectNextPaddle( 'Left' );
 	}
-	if( InputManager.checkButtonPress( Buttons.RIGHT ) ) {
+	if( InputManager.checkButtonPress( Buttons.RIGHT ) )
+	{
 		this.selectNextPaddle( 'Right' );
 	}
 };

@@ -5,30 +5,38 @@ function SettingsScene( )
 	this.settingsLayer = this.addLayer( 'SettingsLayer', new Layer( ) );
 	this.settingsLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
 	
-	var titleText = new Text( Resources['Strings'].SETTINGS.DIP_SWITCHES );
-	titleText.fontFamily = 'MK Mythologies';
-	titleText.fontSize = viewport.height * 0.08;
-	titleText.position.y = viewport.height * 0.11;
-	titleText.opacity = 0;
-	this.settingsLayer.addComponent( 'TitleText', titleText );
+	this.titleText = new Text( Resources.Strings.SETTINGS.DIP_SWITCHES );
+	this.titleText.fontFamily = 'MK Mythologies';
+	this.titleText.fontSize = viewport.height * 0.08;
+	this.titleText.position.y = viewport.height * 0.11;
+	this.titleText.opacity = 0;
+	this.settingsLayer.addComponent( 'TitleText', this.titleText );
 	
 	this.labels =
 	{
-		'CENSORSHIP' : Resources['Strings'].SETTINGS.CENSORSHIP,
-		'COINAGE'    : Resources['Strings'].SETTINGS.COINAGE,
-		'COMBAT'     : Resources['Strings'].SETTINGS.COMBAT,
-		'DIFFICULTY' : Resources['Strings'].SETTINGS.DIFFICULTY,
-		'POWER_UPS'  : Resources['Strings'].SETTINGS.POWER_UPS,
-		'SOUND_FX'   : Resources['Strings'].SETTINGS.SOUND_FX,
-		'TUNES'      : Resources['Strings'].SETTINGS.TUNES
+		'CENSORSHIP' : Resources.Strings.SETTINGS.CENSORSHIP,
+		'COINAGE'    : Resources.Strings.SETTINGS.COINAGE,
+		'COMBAT'     : Resources.Strings.SETTINGS.COMBAT,
+		'DIFFICULTY' : Resources.Strings.SETTINGS.DIFFICULTY,
+		'POWER_UPS'  : Resources.Strings.SETTINGS.POWER_UPS,
+		'SOUND_FX'   : Resources.Strings.SETTINGS.SOUND_FX,
+		'TUNES'      : Resources.Strings.SETTINGS.TUNES
 	};
 	
 	this.difficulties =
 	[
-		Resources['Strings'].SETTINGS.DIFFICULTIES.EASY,
-		Resources['Strings'].SETTINGS.DIFFICULTIES.MEDIUM,
-		Resources['Strings'].SETTINGS.DIFFICULTIES.HARD,
-		Resources['Strings'].SETTINGS.DIFFICULTIES.EXTREME
+		Resources.Strings.SETTINGS.DIFFICULTIES.EASY,
+		Resources.Strings.SETTINGS.DIFFICULTIES.MEDIUM,
+		Resources.Strings.SETTINGS.DIFFICULTIES.HARD,
+		Resources.Strings.SETTINGS.DIFFICULTIES.EXTREME
+	];
+
+	this.coinages =
+	[
+		Resources.Strings.SETTINGS.COINAGES.FREE_PLAY,
+		Resources.Strings.SETTINGS.COINAGES.ONE_COIN,
+		Resources.Strings.SETTINGS.COINAGES.TWO_COINS,
+		Resources.Strings.SETTINGS.COINAGES.HALF_COIN
 	];
 	
 	// Settings Menu Items
@@ -49,17 +57,21 @@ function SettingsScene( )
 			var value = new Text( );
 			switch( i )
 			{
+				case 'COINAGE' :
+					value.text = this.coinages[ app.settings[i] ];
+				break;
+
 				case 'DIFFICULTY' :
 					value.text = this.difficulties[ app.settings[i] ];
 				break;
 
 				case 'SOUND_FX' :
 				case 'TUNES' :
-					value.text = ( app.settings[i] > 0 ) ? app.settings[i] : Resources['Strings'].SETTINGS.OFF;
+					value.text = ( app.settings[i] > 0 ) ? app.settings[i] : Resources.Strings.SETTINGS.OFF;
 				break;
 				
 				default :
-					value.text = app.settings[i] ? Resources['Strings'].SETTINGS.ON : Resources['Strings'].SETTINGS.OFF;
+					value.text = app.settings[i] ? Resources.Strings.SETTINGS.ON : Resources.Strings.SETTINGS.OFF;
 			}
 			
 			value.fontFamily = label.fontFamily;
@@ -75,7 +87,7 @@ function SettingsScene( )
 	}
 	
 	// Main Menu Item
-	var returnLabel = new Text( Resources['Strings'].RETURN_TO_TITLE );
+	var returnLabel = new Text( Resources.Strings.RETURN_TO_TITLE );
 	returnLabel.fontFamily = 'Apple Garamond';
 	returnLabel.fontSize = viewport.height * 0.05;
 	returnLabel.textAlign = 'center';
@@ -110,6 +122,16 @@ SettingsScene.prototype.decreaseSetting = function( )
 {
 	switch( this.currentSetting )
 	{
+		case 'COINAGE' :
+			var index = app.settings[ this.currentSetting ];
+			index -= 1;
+			if( index < 0 ) {
+				index = this.coinages.length - 1;
+			}
+			app.settings[this.currentSetting] = index;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.coinages[ index ];
+		break;
+
 		case 'DIFFICULTY' :
 			var index = app.settings[ this.currentSetting ];
 			index -= 1;
@@ -131,7 +153,7 @@ SettingsScene.prototype.decreaseSetting = function( )
 			}
 
 			app.settings[ this.currentSetting ] = volume;
-			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources['Strings'].SETTINGS.OFF;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources.Strings.SETTINGS.OFF;
 		break;
 		
 		case 'CENSORSHIP' :
@@ -139,7 +161,7 @@ SettingsScene.prototype.decreaseSetting = function( )
 		case 'COMBAT' :
 		case 'POWER_UPS' :
 			app.settings[ this.currentSetting ] = !app.settings[ this.currentSetting ];
-			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources['Strings'].SETTINGS.ON : Resources['Strings'].SETTINGS.OFF;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources.Strings.SETTINGS.ON : Resources.Strings.SETTINGS.OFF;
 		break;
 	}
 };
@@ -147,6 +169,19 @@ SettingsScene.prototype.decreaseSetting = function( )
 SettingsScene.prototype.increaseSetting = function( )
 {
 	switch( this.currentSetting ) {
+		case 'COINAGE' :
+			var index = app.settings[ this.currentSetting ];
+			
+			index += 1;
+			if( index >= this.coinages.length )
+			{
+				index = 0;
+			}
+
+			app.settings[ this.currentSetting ] = index;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.coinages[ index ];
+		break;
+
 		case 'DIFFICULTY' :
 			var index = app.settings[ this.currentSetting ];
 			
@@ -171,7 +206,7 @@ SettingsScene.prototype.increaseSetting = function( )
 			}
 
 			app.settings[ this.currentSetting ] = volume;
-			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources['Strings'].SETTINGS.OFF;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources.Strings.SETTINGS.OFF;
 		break;
 		
 		case 'CENSORSHIP' :
@@ -179,7 +214,7 @@ SettingsScene.prototype.increaseSetting = function( )
 		case 'COMBAT' :
 		case 'POWER_UPS' :
 			app.settings[ this.currentSetting ] = !app.settings[ this.currentSetting ];
-			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources['Strings'].SETTINGS.ON : Resources['Strings'].SETTINGS.OFF;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources.Strings.SETTINGS.ON : Resources.Strings.SETTINGS.OFF;
 		break;
 	}
 };
@@ -257,6 +292,11 @@ SettingsScene.prototype.update = function( deltaTime )
 	this.easePosition( 0, 2, this.green );
 	this.easePosition( 0.5, 2, this.purple );
 	
+	if( InputManager.checkSequence( [ Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT ] ) )
+	{
+		//console.log( 'Blasteroids' );
+	}
+
 	if( InputManager.checkButtonPress( Buttons.DOWN ) )
 	{
 		this.selectNextSetting( );

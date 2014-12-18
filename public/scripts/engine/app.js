@@ -109,7 +109,10 @@ App.prototype.initialize = function( ) {
 	
 	window.onkeydown = function( input ) {
 		InputManager.context = Keyboard;
-		InputManager.currentState[ Keyboard[ input.keyCode ] ] = Date.now( );
+		if( !InputManager.currentState[ Keyboard[ input.keyCode ] ] )
+		{
+			InputManager.currentState[ Keyboard[ input.keyCode ] ] = Date.now( );
+		}
 		clearTimeout( this.keySequenceTimer );
 	};
 	

@@ -44,6 +44,7 @@ load( 'scripts/game/', [
 	'menus/title-menu',
 	'menus/pause-menu',
 	'menus/test-menu',
+	'menus/level-menu',
 	
 	'paddles/yellow-paddle',
 	'paddles/blue-paddle',
@@ -58,7 +59,7 @@ load( 'scripts/game/', [
 	
 	'scenes/splash-scene',
 	'scenes/title-scene',
-	'scenes/choose-paddle-scene',
+	'scenes/pick-paddle-scene',
 	'scenes/kombat-scene',
 	'scenes/tournament-scene',
 	'scenes/story-scene',
@@ -118,7 +119,7 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new SettingsScene();
+		app.startupScene = new PickPaddleScene();
 		app.initialize( );
 	};
 };
