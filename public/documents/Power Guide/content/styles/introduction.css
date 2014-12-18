@@ -18,7 +18,7 @@ body
 	width: 100%;
 }
 
-body#continued
+body.alternate
 {
 	background-position: 100% 0;
 }

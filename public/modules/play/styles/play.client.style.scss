@@ -1,14 +1,33 @@
 #play
 {
 	background: black;
+	box-sizing: border-box;
+	left: 0;
+	height: 100%;
+	overflow: auto;
+	padding: 1em;
+	position: absolute;
+	top: 0;
+	width: 100%;
 
-	#pk
+	canvas
 	{
-		background: #6495ED;
-		height: 100%;
+		background-color: rgb(135, 206, 235); /* Sky Blue */
+		box-sizing: border-box;
+		display: block;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+	}
+	
+	#loading
+	{
+		color: white;
+		font-family: 'DOS';
 		left: 0;
 		position: absolute;
-		top: 0;
+		text-align: center;
+		top: 50%;
 		width: 100%;
 	}
 }

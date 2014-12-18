@@ -1,0 +1,38 @@
+html
+{
+	height: 100%;
+	width: 100%;
+}
+
+body
+{
+	background-image: url( '../images/classified-folder.jpg' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 100%;
+	margin: 0;
+	width: 100%;
+}
+
+h1
+{
+	background-image: url('../images/classified-header.png' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	color: transparent;
+	height: 17%;
+	left: 10%;
+	margin: 0;
+	position: absolute;
+	top: 6%;
+	width: 80%;
+}
+
+.alternate h1
+{
+	background-image: url( '../images/classified-header-small.png' );
+	height: 7%;
+	left: 36%;
+	top: 5%;
+	width: 55%;
+}

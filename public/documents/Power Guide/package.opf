@@ -7,8 +7,8 @@
 		<meta property="dcterms:modified">2014-12-15T06:33:00Z</meta>
 
 		<!-- Publication Information -->
-		<dc:title id="main-title">Pong Kombat Guide</dc:title>
-		<meta refines="#main-title" property="file-as">Pong Kombat (2014) Guide</meta>
+		<dc:title id="main-title">Pong Kombat Power Guide</dc:title>
+		<meta refines="#main-title" property="file-as">Pong Kombat (2014) Power Guide</meta>
 		<meta refines="#main-title" property="title-type">main</meta>
 
 		<dc:title id="extended-title">Pong Kombat (2014): Official Strategy Guide</dc:title>
@@ -43,23 +43,33 @@
 
 		<!-- Images -->
 		<item id="advert-icade-image" href="content/images/advert-icade.jpg" media-type="image/jpeg" />
+		<item id="classified-folder-image" href="content/images/classified-folder.jpg" media-type="image/jpeg" />
+		<item id="classified-header-small-image" href="content/images/classified-header-small.png" media-type="image/png" />
+		<item id="classified-header-image" href="content/images/classified-header.png" media-type="image/png" />
 		<item id="cover-image" href="content/images/cover.jpg" media-type="image/jpeg" properties="cover-image" />
+		<item id="poster-image" href="content/images/poster.jpg" media-type="image/jpeg" />
 		<item id="title-sketch-image" href="content/images/title-sketch.jpg" media-type="image/jpeg" />
 		
 		<!-- XHTML -->
 		<item id="advert-icade" href="content/xhtml/advert-icade.xhtml" media-type="application/xhtml+xml" />
+		<item id="classified-information-1" href="content/xhtml/classified-information-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="classified-information-2" href="content/xhtml/classified-information-2.xhtml" media-type="application/xhtml+xml" />
 		<item id="contents" href="nav.xhtml" media-type="application/xhtml+xml" />
 		<item id="cover" href="content/xhtml/cover.xhtml" media-type="application/xhtml+xml" />
 		<item id="developer" href="content/xhtml/developer.xhtml" media-type="application/xhtml+xml" />
 		<item id="introduction-1" href="content/xhtml/introduction-1.xhtml" media-type="application/xhtml+xml" />
 		<item id="introduction-2" href="content/xhtml/introduction-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="poster-1" href="content/xhtml/poster-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="poster-2" href="content/xhtml/poster-2.xhtml" media-type="application/xhtml+xml" />
 
 		<!-- CSS, JavaScript, Audio, ... -->
 		<item id="advert-icade-style" href="content/styles/advert-icade.css" media-type="text/css" />
+		<item id="classified-information-style" href="content/styles/classified-information.css" media-type="text/css" />
 		<item id="developer-style" href="content/styles/developer.css" media-type="text/css" />
 		<item id="fonts-style" href="content/styles/fonts.css" media-type="text/css" />
 		<item id="introduction-style" href="content/styles/introduction.css" media-type="text/css" />
 		<item id="nav-style" href="content/styles/nav.css" media-type="text/css" />
+		<item id="poster-style" href="content/styles/poster.css" media-type="text/css" />
 	</manifest>
 
 	<spine>
@@ -69,6 +79,10 @@
 		<itemref idref="contents" />
 		<itemref idref="introduction-1" />
 		<itemref idref="introduction-2" />
+		<itemref idref="poster-1" />
+		<itemref idref="poster-2" />
+		<itemref idref="classified-information-1" />
+		<itemref idref="classified-information-2" />
 
 		<itemref idref="developer" />
 	</spine>

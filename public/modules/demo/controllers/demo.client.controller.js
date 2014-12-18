@@ -42,9 +42,9 @@ angular.module('demo').controller('DemoController', ['$scope', 'Authentication',
 					case 'PLAY' :
 					case 'PLAY DEMO' :
 						document.getElementById( 'console' ).style.display = 'none';
-						var framework = $scope.loadScript('/scripts/demo/framework/load.js', 'text/javascript', 'utf-8');
+						var framework = $scope.loadScript('/demo/scripts/framework/load.js', 'text/javascript', 'utf-8');
 						framework.onload = function() {
-							$scope.loadScript('/scripts/demo/pk/main.js', 'text/javascript', 'utf-8');
+							$scope.loadScript('/demo/scripts/main.js', 'text/javascript', 'utf-8');
 						};
 					break;
 

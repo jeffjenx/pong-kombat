@@ -1,0 +1,221 @@
+{
+	"PONG_KOMBAT" : "Pong Kombat",
+	"DEVELOPERS" :
+	[
+		{
+			"NAME" : "Jeff Jenkins",
+			"EMAIL" : "jeff@pongkombat.com"
+		}
+	],
+	
+	"COMING_SOON" : "Coming Sometime...",
+	"EMAIL" : "E-mail",
+	"FACEBOOK" : "Facebook",
+	"GITHUB" : "GitHub",
+	"LEGAL_NOTICE" : "NOTICE",
+	"LEGALITIES" : "This game is a blatant parody of PONG and Mortal Kombat.\n\nIt is not affiliated with Atari Inc., NetherRealm Studios,\nWarner Bros. Interactive Entertainment or Midway Games.\n\nIt is created for the purpose of learning and sharing\nthat experience and knowledge with others.\n\nSupport independent developers and game on!",
+	"LOAD" : "load pongkombat",
+	"LOADED" : "Done.",
+	"LOADING" : "Loading Pong Kombat...",
+	"PINTEREST" : "Pinterest",
+	"PRESS_SPACEBAR" : "PRESS SPACEBAR",
+	"TO_BEGIN" : "TO BEGIN",
+	"RETURN_TO_TITLE" : "Return to Main Menu",
+	"SETTINGS" :
+	{
+		"CENSORSHIP" : "Censorship",
+		"COINAGE" : "Coinage",
+		"COMBAT" : "Combat",
+		"DIFFICULTIES" : 
+		{
+			"EASY" : "Easy",
+			"EXTREME" : "Extreme",
+			"HARD" : "Hard",
+			"MEDIUM" : "Medium"
+		},
+		"DIFFICULTY" : "Difficulty",
+		"DIP_SWITCHES" : "DIP SWITCHES",
+		"OFF" : "Off",
+		"ON" : "On",
+		"POWER_UPS" : "Power-Ups",
+		"SOUND_FX" : "Sound FX",
+		"TUNES" : "Tunes"
+	},
+	"THANK_YOU" : "Thank you for playing Pong Kombat!",
+	"TIME_PLAYED" : "Time Played: ",
+	"TWITTER" : "Twitter",
+	"STAY_NOTIFIED" : "Stay Notified",
+	"SUBMIT" : "Submit",
+	"WORDPRESS" : "WordPress",
+
+	"text" :
+	{
+		"CHOOSE YOUR PADDLE" : "CHOOSE YOUR PADDLE",
+		
+		"Background Music"    : "Background Music",
+		"Category:"           : "Category:",
+		"Close Menu"          : "Close Menu",
+		"Scene:"              : "Scene:",
+		"Language/Country"    : "Language/Country",
+		"Difficulty"          : "Difficulty",
+		"Powerups"            : "Powerups",
+		"Sound Effects"       : "Sound Effects",
+		"Configure Controls"  : "Configure Controls",
+		
+		"Test Scene"          : "Test Scene",
+		"Title Scene"         : "Title Scene",
+		
+		"Balls"               : "Balls",
+		"8-Ball"              : "8-Ball",
+		"Baseball"            : "Baseball",
+		"Basketball"          : "Basketball",
+		"Earth"               : "Earth",
+		"Soccer Ball"         : "Soccer Ball",
+		
+		"Paddles"       : "Paddles",
+		"Blue Paddle"   : "Blue Paddle",
+		"Green Paddle"  : "Green Paddle",
+		"Monolith"      : "Monolith",
+		"Red Paddle"    : "Red Paddle",
+		"Shifter"       : "Shifter",
+		"Yellow Paddle" : "Yellow Paddle",
+		"White Paddle"  : "White Paddle",
+		
+		"English" : "English",
+		"French"  : "French",
+		
+		"Canada"        : "Canada",
+		"United States" : "United States",
+		
+		"Off" : "Off",
+		"On"  : "On",
+		
+		"Attention!" : "Attention!",
+		
+		"Main Story" : "White Paddle bellows at your bloated filesize and lossy compression.\nDo you have what it takes to ascend the ranks and defeat them?\nEmerge victorious and you will be rewarded handsomely.\nShould your objective fail, your fate will be sealed by White Paddle.\nRegstration is at 3:30 on Thursday."
+	},
+
+	"URL" :
+	{
+		"PONG_KOMBAT" : "www.pongkombat.com",
+		"EMAIL"       :
+		{
+			"NOTIFICATIONS" : "mailto:jeff@pongkombat.com?subject=Subscribe%20Notifications&body=I%20would%20like%20to%20be%20notified%20via%20email%20whenever%20there%20is%20news%20about%20Pong%20Kombat."
+		},
+		"FACEBOOK"    : "http://facebook.com/PongKombat",
+		"GITHUB"      : "http://github.com/Quantastical/pong-kombat",
+		"PINTEREST"   : "http://pinterest.com/PongKombat",
+		"TWITTER"     : "http://twitter.com/pongkombat",
+		"WORDPRESS"   : "http://wordpress.quantastical.com/category/projects/pong-kombat/"
+	},
+
+	"FORMAT" :
+	{
+		"DATE_SHORT" : "%a %b %e"
+	},
+
+	
+	"ERROR" :
+	{
+		"CONTINUE" : "Press a key or click to continue",
+		"EMAIL"    : "Send an e-mail to notify us and try it later.",
+		"RESTART"  : "You can wait to see if it becomes available again, or your can restart your computer.",
+		"MAC_QUIT" : "Press <abbr title=\"Command\">&#8984;</abbr>+<abbr title=\"Option\">&#8997;</abbr>+<abbr title=\"Escape\">&#9099;</abbr> to force quit the program.",
+		"WIN_QUIT" : "'Press <abbr title=\"Control\">CTRL</abbr>+<abbr title=\"Alt\">ALT</abbr>+<abbr title=\"Delete\">DEL</abbr> to restart your computer.",
+		"WARNING"  : "You will lose unsaved information in any programs that are running.",
+
+		"UNKNOWN" :
+		{
+			"NAME" : "Unknown Error",
+			"TEXT" : "The server does not have a definition for the error message generated from this request."
+		},
+		"400" :
+		{
+			"NAME" : "Bad Request",
+			"TEXT" : "The request cannot be fulfilled due to bad syntax."
+		},
+		"401" : 
+		{
+			"NAME" : "Authorization Required",
+			"TEXT" : "This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g., bad password), or your browser doesn't understand how to supply the credentials required."
+		},
+		"403" : 
+		{
+			"NAME" : "Forbidden",
+			"TEXT" : "The server has refused to fulfill your request."
+		},
+		"404" : 
+		{
+			"NAME" : "Not Found",
+			"TEXT" : "The requested <abbr title=\"Uniform Resource Locator\">URL</abbr> ({{ URL }}) was not found on this server."
+		},
+		"405" : 
+		{
+			"NAME" : "Method Not Allowed",
+			"TEXT" : "The method used for the request is not allowed for the specified resource."
+		},
+		"408" : 
+		{
+			"NAME" : "Request Timeout",
+			"TEXT" : "Your browser failed to send a request in the time allowed by the server."
+		},
+		"414" : 
+		{
+			"NAME" : "Request Entity Too Large",
+			"TEXT" : "The URL you entered is longer than the maximum length."
+		},
+		"500" : 
+		{
+			"NAME" : "Internal Server Error",
+			"TEXT" : "The request was unsuccessful due to an unexpected condition encountered by the server."
+		},
+		"502" : 
+		{
+			"NAME" : "Bad Gateway",
+			"TEXT" : "The server received an invalid response from the upstream server while trying to fulfill the request."
+		},
+		"504" : 
+		{
+			"NAME" : "Gateway Timeout",
+			"TEXT" : "The upstream server failed to send a request in the time allowed by the server."
+		}
+	},
+
+	"FILE" :
+	{
+		"DATE"    : "Last Modified",
+		"LISTING" : "Index of {{ DIRECTORY }}",
+		"NAME"    : "Filename",
+		"SIZE"    : "Size",
+		"TYPE"    : "Type",
+		"TYPES" :
+		{
+			"AUDIO"      : "Audio File",
+			"DIRECTORY"  : "<Directory>",
+			"FONT"       : "Font File",
+			"HTML"       : "HTML File",
+			"ICON_MAC"   : "Apple Icon Image",
+			"ICON_WIN"   : "Windows Icon Image",
+			"JAVASCRIPT" : "JavaScript File",
+			"JPEG"       : "JPEG Image",
+			"JSON"       : "JavaScript Object",
+			"KNOWN"      : "{{ FILE.EXTENSION }} File",
+			"MAP"        : "Source Map",
+			"MARKDOWN"   : "Markdown Text File",
+			"PHP"        : "PHP Script",
+			"PNG"        : "PNG Image",
+			"SASS"       : "SASS Stylesheet",
+			"STYLESHEET" : "Stylesheet",
+			"SVG"        : "SVG Image",
+			"UNKNOWN"    : "Unknown"
+		}
+	},
+
+	"HOTKEYS" :
+	{
+		"PONG_KOMBAT" : "P",
+		"EMAIL"       : "E",
+		"FACEBOOK"    : "F",
+		"TWITTER"     : "T"
+	}
+}

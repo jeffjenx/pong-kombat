@@ -15,7 +15,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 			.useStaticFilesLoader(
 			{
 				prefix : 'languages/',
-				suffix: '.lang.json'
+				suffix: '/strings.lang.json'
 			} )
 			.registerAvailableLanguageKeys( [ 'en', 'es' ],
 			{
@@ -25,7 +25,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 				'es_MX' : 'es'
 			} )
 			.determinePreferredLanguage( function() {
-				return 'es';
+				return 'en';
 			} )
 			.fallbackLanguage( 'en' );
 	}
