@@ -4,8 +4,7 @@ Pong Kombat
 This documentation is intended for project developers and interested participants.
 For more information on *Pong Kombat* in general, consult your language-specific README file:
 
-- [English](/public/languages/README.en.md)
-- [Spanish](/public/languages/README.es.md)
+- [English](/public/languages/en/readme.lang.md)
 
 If you'd like, translate the project into your language and submit it to the repository, or send it directly to [jeff@pongkombat.com](mailto:jeff@pongkombat.com?subject=Internationalization).
 See the Internationalization section below until a GUI can be developed.
