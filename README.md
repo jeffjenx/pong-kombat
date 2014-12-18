@@ -91,7 +91,7 @@ Notice the keys in the generic Spanish example below:
 Since many languages utilize accented and special characters, translations can be provided using Unicode escaped characters.
 The Unicode character shown in the Spanish example, &#x00A1; (written `&#x00A1;`), references the inverted exclamation point character.
 
-Some strings may contain a placeholder variable, such as *DIRECTRY* as defined in `"LISTING" : "Index of {{ DIRECTORY }}"`.
+Some strings may contain a placeholder variable, such as *DIRECTORY* as defined in `"LISTING" : "Index of {{ DIRECTORY }}"`.
 These variables will be replaced by the appropriate controller file.
 
 One final note: Some languages might only be a slight variance to another language.
