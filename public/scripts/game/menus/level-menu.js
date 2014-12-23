@@ -12,4 +12,5 @@ LevelMenu.prototype.constructor = LevelMenu;
 
 LevelMenu.prototype.selectLevel = function( ) {
 	this.closeMenu( );
+	this.scene.level = this.currentIndex;
 };

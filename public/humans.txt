@@ -41,13 +41,17 @@
 	                MongoDB
 	                Node.js
 	                Pagedown
-	Services:       DreamHost
+	Services:       Animium
+	                DreamHost
+                   EVOX Stock Images
 	                Facebook
+	                FreeSFX
 	                GameFAQs
 	                GitHub
 	                Google Analytics
 	                Google Search
 	                nodejitsu
+	                Pinterest
 	                StackOverflow
 	                Twitter
 	                Wikipedia
@@ -58,7 +62,9 @@
 	                Apple OS X
 	                Apple Safari
 	                Audacity
+	                Autodesk 3D Studio Max
 	                Balsamiq Mockups
+	                Blender
 	                FileZilla
 	                GitHub
 	                Google Chrome
@@ -68,4 +74,10 @@
 	                Pinterest
 	                Sublime Text
 	                The Unarchiver
-	                TweetDeck 
+	                TweetDeck
+	                Zazona Modeler
+	Hardware:       Apple iPad mini
+	                Apple iPhone
+	                Apple MacBook Air
+	                eMachines
+	                Synology DiskStation

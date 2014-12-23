@@ -19,9 +19,10 @@ function KombatScene( ) {
 	
 	//this.startMatch( );
 	this.changeState( this.states.fighting );
-	this.layers['Kombat'].setBall( Balls.RANDOM );
+	//this.layers['Kombat'].setBall( Balls.RANDOM );
 
 	this.screamSound = new Sound( 'Scream' );
+	this.setLevel( Levels.HIGHWAY );
 }
 
 KombatScene.prototype = new Scene;
@@ -48,11 +49,6 @@ KombatScene.prototype.setLevel = function( level ) {
 			this.setLevel( Math.ceil( Math.random( ) * count ) );
 		break;
 		
-		case Levels.DEFAULT :
-			this.layers['Background'] = new DefaultBackgroundLayer( this );
-			this.layers['Foreground'] = new DefaultForegroundLayer( this );
-		break;
-		
 		case Levels.FOREST :
 			this.layers['Background'] = new ForestBackgroundLayer( this );
 			this.layers['Foreground'] = new ForestForegroundLayer( this );
@@ -68,7 +64,7 @@ KombatScene.prototype.setLevel = function( level ) {
 			this.layers['Foreground'] = new HighwayForegroundLayer( this );
 		break;
 		
-		case Levels.ICERIVER :
+		case Levels.ICE_RIVER :
 			this.layers['Background'] = new IceRiverBackgroundLayer( this );
 			this.layers['Foreground'] = new IceRiverForegroundLayer( this );
 		break;
@@ -93,9 +89,19 @@ KombatScene.prototype.setLevel = function( level ) {
 			this.layers['Foreground'] = new TowerForegroundLayer( this );
 		break;
 		
-		case Levels.TOXICPOOL :
+		case Levels.TOXIC_POOL :
 			this.layers['Background'] = new ToxicPoolBackgroundLayer( this );
 			this.layers['Foreground'] = new ToxicPoolForegroundLayer( this );
+		break;
+		
+		case Levels.WATERCOLOR :
+			this.layers['Background'] = new WatercolorBackgroundLayer( this );
+			this.layers['Foreground'] = new WatercolorForegroundLayer( this );
+		break;
+		
+		default :
+			this.layers['Background'] = new DefaultBackgroundLayer( this );
+			this.layers['Foreground'] = new DefaultForegroundLayer( this );
 		break;
 	}
 };
@@ -140,11 +146,24 @@ KombatScene.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.states.fighting :
-			if( leftKombatant.score >= this.winningScore || rightKombatant.score >= this.winningScore ) {
-				this.winner = ( leftKombatant.score > rightKombatant.score ) ? leftKombatant : rightKombatant;
-				this.layers['Kombat'].removeComponent( 'Ball' );
-				this.layers['HUD'].addAnnouncement( "Finish'em!" );
-				this.changeState( this.states.announcing );
+			if( leftKombatant )
+			{
+				if( leftKombatant.score >= this.winningScore ) {
+					this.winner = leftKombatant;
+					this.layers['Kombat'].removeComponent( 'Ball' );
+					this.layers['HUD'].addAnnouncement( "Finish'em!" );
+					this.changeState( this.states.announcing );
+				}
+			}
+
+			if( rightKombatant )
+			{
+				if( rightKombatant.score >= this.winningScore ) {
+					this.winner = rightKombatant;
+					this.layers['Kombat'].removeComponent( 'Ball' );
+					this.layers['HUD'].addAnnouncement( "Finish'em!" );
+					this.changeState( this.states.announcing );
+				}
 			}
 			
 			if( InputManager.checkButtonPress( Buttons.BACK ) ) {

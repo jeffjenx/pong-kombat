@@ -920,7 +920,7 @@ Icon
 
 Logo
     Apple, BMW, Facebook, Pinterest, Pepsi, Radio Shack, Starbucks, Twitter, 
-    WordPress, Volkswagen
+    Wikipedia, WordPress, Volkswagen
 
 Marble
     Brown, Lavendar, Mint, Orange, Pink, Teal

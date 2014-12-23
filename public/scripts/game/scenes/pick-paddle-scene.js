@@ -3,6 +3,8 @@ function PickPaddleScene( )
 	Scene.call( this );
 
 	var paddleScale = 1.75;
+
+	this.level = Levels.TOXIC_POOL;
 	
 	this.mainLayer = this.addLayer( 'MainLayer', new Layer( ) );
 	this.mainLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
@@ -230,11 +232,12 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			var kombatScene = new KombatScene( );
 			kombatScene.addKombatant( player );
 			kombatScene.addKombatant( computer );
-			kombatScene.setLevel( Levels.RANDOM );
+			kombatScene.setLevel( this.level );
 			SceneManager.changeScene( kombatScene, Transitions.NONE );
 		}
 	}
 
+	// Secret Level Select Menu (Hold direction for # seconds)
 	var now = Date.now( );
 	var buttons = [ Buttons.DOWN, Buttons.UP, Buttons.LEFT, Buttons.RIGHT ];
 	for( var i in buttons )

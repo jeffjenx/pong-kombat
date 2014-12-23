@@ -40,6 +40,8 @@ load( 'scripts/game/', [
 	'levels/tower-foreground',
 	'levels/toxic-pool-background',
 	'levels/toxic-pool-foreground',
+	'levels/watercolor-background',
+	'levels/watercolor-foreground',
 	
 	'menus/title-menu',
 	'menus/pause-menu',
@@ -119,7 +121,7 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new PickPaddleScene();
+		app.startupScene = new KombatScene();
 		app.initialize( );
 	};
 };

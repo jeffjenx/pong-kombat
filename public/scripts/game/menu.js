@@ -145,6 +145,9 @@ Menu.prototype.fadeIn = function( fadeTime ) {
 
 Menu.prototype.closeMenu = function( ) {
 	this.scene.removeLayer( 'Menu' );
+	InputManager.currentState = { };
+	InputManager.previousState = { };
+	InputManager.history = [ ];
 };
 
 Menu.prototype.update = function( deltaTime ) {

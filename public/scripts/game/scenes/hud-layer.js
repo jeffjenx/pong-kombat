@@ -114,11 +114,18 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
 	
 	// Drain health gradually
-	if( ( this.scene.winningScore - rightKombatant.score ) / this.scene.winningScore < this.leftHealthBar.size.x / this.healthBarWidth ) {
-		this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+	if( rightKombatant )
+	{
+		if( ( this.scene.winningScore - rightKombatant.score ) / this.scene.winningScore < this.leftHealthBar.size.x / this.healthBarWidth ) {
+			this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+		}
 	}
-	if( ( this.scene.winningScore - leftKombatant.score ) / this.scene.winningScore < this.rightHealthBar.size.x / this.healthBarWidth ) {
-		this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+	
+	if( leftKombatant )
+	{
+		if( ( this.scene.winningScore - leftKombatant.score ) / this.scene.winningScore < this.rightHealthBar.size.x / this.healthBarWidth ) {
+			this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+		}
 	}
 	
 	Layer.prototype.update.call( this, deltaTime );

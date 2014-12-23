@@ -11,38 +11,42 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	var leftKombatant = this.components['LeftKombatant'];
 	var rightKombatant = this.components['RightKombatant'];
 	
-	// Vertical
-	if( leftKombatant.paddle.position.y > viewport.height * 0.51 ) {
-		leftKombatant.paddle.moveUp( );
-	} else if( leftKombatant.paddle.position.y < viewport.height * 0.49 ) {
-		leftKombatant.paddle.moveDown( );
-	} else {
-		leftKombatant.paddle.position.y = viewport.height * 0.50;
+	if( leftKombatant )
+	{
+		if( leftKombatant.paddle.position.y > viewport.height * 0.51 ) {
+			leftKombatant.paddle.moveUp( );
+		} else if( leftKombatant.paddle.position.y < viewport.height * 0.49 ) {
+			leftKombatant.paddle.moveDown( );
+		} else {
+			leftKombatant.paddle.position.y = viewport.height * 0.50;
+		}
+	
+		if( leftKombatant.paddle.position.x > viewport.width * 0.03 ) {
+			leftKombatant.paddle.moveLeft( );
+		} else if( leftKombatant.paddle.position.x < viewport.width * 0.02 ) {
+			leftKombatant.paddle.moveRight( );
+		} else {
+			leftKombatant.paddle.position.x = viewport.width * 0.025;
+		}
 	}
 	
-	if( rightKombatant.paddle.position.y > viewport.height * 0.51 ) {
-		rightKombatant.paddle.moveUp( );
-	} else if( rightKombatant.paddle.position.y < viewport.height * 0.49 ) {
-		rightKombatant.paddle.moveDown( );
-	} else {
-		rightKombatant.paddle.position.y = viewport.height * 0.50;
-	}
+	if( rightKombatant )
+	{
+		if( rightKombatant.paddle.position.y > viewport.height * 0.51 ) {
+			rightKombatant.paddle.moveUp( );
+		} else if( rightKombatant.paddle.position.y < viewport.height * 0.49 ) {
+			rightKombatant.paddle.moveDown( );
+		} else {
+			rightKombatant.paddle.position.y = viewport.height * 0.50;
+		}
 
-	// Horizontal
-	if( leftKombatant.paddle.position.x > viewport.width * 0.03 ) {
-		leftKombatant.paddle.moveLeft( );
-	} else if( leftKombatant.paddle.position.x < viewport.width * 0.02 ) {
-		leftKombatant.paddle.moveRight( );
-	} else {
-		leftKombatant.paddle.position.x = viewport.width * 0.025;
-	}
-	
-	if( rightKombatant.paddle.position.x > viewport.width * 0.98 ) {
-		rightKombatant.paddle.moveLeft( );
-	} else if( rightKombatant.paddle.position.x < viewport.width * 0.97 ) {
-		rightKombatant.paddle.moveRight( );
-	} else {
-		rightKombatant.paddle.position.x = viewport.width * 0.975;
+		if( rightKombatant.paddle.position.x > viewport.width * 0.98 ) {
+			rightKombatant.paddle.moveLeft( );
+		} else if( rightKombatant.paddle.position.x < viewport.width * 0.97 ) {
+			rightKombatant.paddle.moveRight( );
+		} else {
+			rightKombatant.paddle.position.x = viewport.width * 0.975;
+		}
 	}
 };
 
@@ -108,44 +112,60 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.scene.states.fighting :
-			if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
+			if( ball )
 			{
-				ball.hitWall( );
+				if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
+				{
+					ball.hitWall( );
+				}
+
+				if( powerup )
+				{
+					if( Collision.RectRect( ball.boundingBox, powerup.boundingBox ) ) {
+						ball.hitPowerup( );
+					}
+				}
+
+				if( leftKombatant )
+				{
+					if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
+					{
+						ball.hitPaddle( leftKombatant );
+					}
+
+					if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
+					{
+						leftKombatant.score += 1;
+						this.setBall( Balls.RANDOM );
+					}
+				}
+
+				if( ball && rightKombatant )
+				{
+					if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) )
+					{
+						ball.hitPaddle( rightKombatant );
+					}
+
+					if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
+					{
+						rightKombatant.score += 1;
+						this.setBall( Balls.RANDOM );
+					}
+				}
 			}
-			
-			if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) )
+
+			if( leftKombatant && rightKombatant )
 			{
-				ball.hitPaddle( rightKombatant );
-			}
-			
-			if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
-			{
-				ball.hitPaddle( leftKombatant );
-			}
-			
-			if( powerup && Collision.RectRect( ball.boundingBox, powerup.boundingBox ) ) {
-				ball.hitPowerup( );
-			}
-			
-			if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
-			{
-				leftKombatant.score += 1;
-				this.setBall( Balls.RANDOM );
-			}
-			else if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
-			{
-				rightKombatant.score += 1;
-				this.setBall( Balls.RANDOM );
-			}
-			
-			if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
-				leftKombatant.score += 1;
-				leftKombatant.paddle.projectile = null;
-			}
-			
-			if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
-				rightKombatant.score += 1;
-				rightKombatant.paddle.projectile = null;
+				if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+					leftKombatant.score += 1;
+					leftKombatant.paddle.projectile = null;
+				}
+				
+				if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+					rightKombatant.score += 1;
+					rightKombatant.paddle.projectile = null;
+				}
 			}
 		break;
 		
