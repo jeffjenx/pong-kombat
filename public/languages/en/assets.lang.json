@@ -112,6 +112,13 @@
 		"Trees"                : "images/levels/trees.png",
 		"TV-Glare"             : "images/levels/tv-glare.png",
 		"Black-Hole"           : "images/levels/black-hole.png",
-		"Star"                 : "images/levels/star.png"
+		"Star"                 : "images/levels/star.png",
+		"Rope-1"               : "images/levels/rope-1.png",
+		"Rope-2"               : "images/levels/rope-2.png",
+		"Rope-3"               : "images/levels/rope-3.png",
+		"Rope-4"               : "images/levels/rope-4.png",
+		"Bell-Shadow"          : "images/levels/bell-shadow.png",
+		"Bell-Clapper-Shadow"  : "images/levels/bell-clapper-shadow.png",
+		"Bell-Ball-Shadow"     : "images/levels/bell-ball-shadow.png"
 	}
 }
