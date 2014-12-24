@@ -7,7 +7,7 @@ function Text( text ) {
 	this.fontStyle = "";
 	this.letterSpacing = 0;
 	this.lineHeight = 1;
-	this.text = text;
+	this.text = text || '';
 	this.textAlign = "center";
 	this.textBaseline = "middle";
 	this.textShadow = false;
