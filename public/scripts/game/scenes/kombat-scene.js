@@ -19,10 +19,10 @@ function KombatScene( ) {
 	
 	//this.startMatch( );
 	this.changeState( this.states.fighting );
-	//this.layers['Kombat'].setBall( Balls.RANDOM );
+	//this.layers['Kombat'].setBall( Balls.DEFAULT );
 
 	this.screamSound = new Sound( 'Scream' );
-	this.setLevel( Levels.TOWER );
+	this.setLevel( Levels.TOXIC_POOL );
 }
 
 KombatScene.prototype = new Scene;
@@ -35,6 +35,10 @@ KombatScene.prototype.addKombatant = function( kombatant ) {
 KombatScene.prototype.changeState = function( state ) {
 	this.state = state;
 	this.stateTime = 0;
+};
+
+KombatScene.prototype.setBall = function( ball ) {
+	this.layers['Kombat'].setBall( Balls.DEFAULT );
 };
 
 KombatScene.prototype.setLevel = function( level ) {

@@ -4,7 +4,7 @@ function PickPaddleScene( )
 
 	var paddleScale = 1.75;
 
-	this.level = Levels.TOXIC_POOL;
+	this.level = Levels.RANDOM;
 	
 	this.mainLayer = this.addLayer( 'MainLayer', new Layer( ) );
 	this.mainLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
@@ -233,6 +233,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			kombatScene.addKombatant( player );
 			kombatScene.addKombatant( computer );
 			kombatScene.setLevel( this.level );
+			kombatScene.setBall( Balls.DEFAULT );
 			SceneManager.changeScene( kombatScene, Transitions.NONE );
 		}
 	}

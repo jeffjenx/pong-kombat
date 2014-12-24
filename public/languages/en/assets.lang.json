@@ -119,6 +119,7 @@
 		"Rope-4"               : "images/levels/rope-4.png",
 		"Bell-Shadow"          : "images/levels/bell-shadow.png",
 		"Bell-Clapper-Shadow"  : "images/levels/bell-clapper-shadow.png",
-		"Bell-Ball-Shadow"     : "images/levels/bell-ball-shadow.png"
+		"Bell-Ball-Shadow"     : "images/levels/bell-ball-shadow.png",
+		"Sirens"               : "images/levels/sirens.png"
 	}
 }

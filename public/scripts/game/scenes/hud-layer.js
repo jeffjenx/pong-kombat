@@ -62,7 +62,7 @@ function HUDLayer( scene ) {
 HUDLayer.prototype = new Layer;
 HUDLayer.prototype.constructor = HUDLayer;
 
-HUDLayer.prototype.draw = function( context ) { };
+//HUDLayer.prototype.draw = function( context ) { };
 
 HUDLayer.prototype.addAnnouncement = function( announcement ) {
 	var announcement = new Text( announcement );
