@@ -110,6 +110,8 @@
 		"Quantastical-Painted" : "images/quantastical-logo.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
 		"Trees"                : "images/levels/trees.png",
-		"TV-Glare"             : "images/levels/tv-glare.png"
+		"TV-Glare"             : "images/levels/tv-glare.png",
+		"Black-Hole"           : "images/levels/black-hole.png",
+		"Star"                 : "images/levels/star.png"
 	}
 }
