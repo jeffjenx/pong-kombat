@@ -22,7 +22,7 @@ function KombatScene( ) {
 	//this.layers['Kombat'].setBall( Balls.DEFAULT );
 
 	this.screamSound = new Sound( 'Scream' );
-	this.setLevel( Levels.TOXIC_POOL );
+	this.setLevel( Levels.STORM );
 }
 
 KombatScene.prototype = new Scene;

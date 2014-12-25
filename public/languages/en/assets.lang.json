@@ -120,6 +120,9 @@
 		"Bell-Shadow"          : "images/levels/bell-shadow.png",
 		"Bell-Clapper-Shadow"  : "images/levels/bell-clapper-shadow.png",
 		"Bell-Ball-Shadow"     : "images/levels/bell-ball-shadow.png",
-		"Sirens"               : "images/levels/sirens.png"
+		"Sirens"               : "images/levels/sirens.png",
+		"Lightning-1"          : "images/levels/lightning-1.png",
+		"Lightning-2"          : "images/levels/lightning-2.png",
+		"Rain"                 : "images/levels/rain.png"
 	}
 }
