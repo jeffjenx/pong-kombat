@@ -121,7 +121,7 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new PickPaddleScene();
+		app.startupScene = new KombatScene();
 		app.initialize( );
 	};
 };

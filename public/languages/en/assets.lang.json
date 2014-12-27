@@ -123,6 +123,12 @@
 		"Sirens"               : "images/levels/sirens.png",
 		"Lightning-1"          : "images/levels/lightning-1.png",
 		"Lightning-2"          : "images/levels/lightning-2.png",
-		"Rain"                 : "images/levels/rain.png"
+		"Rain"                 : "images/levels/rain.png",
+		"Sun"                  : "images/levels/sun.png",
+		"Sun-Rays-1"           : "images/levels/sun-rays-1.png",
+		"Sun-Rays-2"           : "images/levels/sun-rays-2.png",
+		"Grass"                : "images/levels/grass.png",
+		"Flower"               : "images/levels/flower.png",
+		"Flower-Stem"          : "images/levels/flower-stem.png"
 	}
 }
