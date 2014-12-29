@@ -109,7 +109,6 @@
 		"PK"                   : "images/pk.png",
 		"Quantastical-Painted" : "images/quantastical-logo.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",
-		"Trees"                : "images/levels/trees.png",
 		"TV-Glare"             : "images/levels/tv-glare.png",
 		"Black-Hole"           : "images/levels/black-hole.png",
 		"Star"                 : "images/levels/star.png",
@@ -129,6 +128,11 @@
 		"Sun-Rays-2"           : "images/levels/sun-rays-2.png",
 		"Grass"                : "images/levels/grass.png",
 		"Flower"               : "images/levels/flower.png",
-		"Flower-Stem"          : "images/levels/flower-stem.png"
+		"Flower-Stem"          : "images/levels/flower-stem.png",
+		"Trees-1"              : "images/levels/trees-1.png",
+		"Trees-2"              : "images/levels/trees-2.png",
+		"Trees-3"              : "images/levels/trees-3.png",
+		"Mouse-1"              : "images/levels/mouse-1.png",
+		"Mouse-2"              : "images/levels/mouse-2.png"
 	}
 }
