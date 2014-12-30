@@ -695,13 +695,23 @@ Abilities
   6                             BATTLE ZONES
 ===============================================================================
 
+Each match in PONG KOMBAT takes place in a unique battle zone. Many of the 
+zones have special dynamics that can affect the gameplay, creating a 
+challenging experience.
+
+Some of them also feature a special, environment-specific dismantle move.
+
+Here’s an in-depth look into each zone, giving you an opportunity to learn all 
+about them and give you an advantage over your opponent.
+
+
 -------------------------------------------------------------------------------
   6.1                              Default
 -------------------------------------------------------------------------------
 
-The Default level is the original level from the very first incarnation of 
-PONG.  All is black with a simple white, dashed line dividing the two halves of
-the playing field.
+The Default zone is the original level from the very first incarnation of PONG.
+All is black with a simple white, dashed line dividing the two halves of the 
+playing field.
 
 
 -------------------------------------------------------------------------------
@@ -721,7 +731,7 @@ Dynamics
 -------------------------------------------------------------------------------
 
 Hell is a pit of fire and skulls. The blazing inferno causes explosions of 
-magma and bubbling rivers of lava are below.
+liquid hot magma and bubbling rivers of lava are below.
 
 Dynamics
     The insane heat causes players to have to keep their paddles in motion. 
@@ -801,6 +811,10 @@ Dismantle
 The six-story Tower arena is a wooden floored structure built atop a cement 
 basement.
 
+Dynamics
+    Ropes hanging above dangle to hinder visibility, while the bell's shadow 
+    serves as a distraction while tolls.
+
 Dismantle
     Going Down - Down, Right, Up, Action
 
@@ -809,7 +823,7 @@ Dismantle
   6.10                           Toxic Pool
 -------------------------------------------------------------------------------
 
-The Acid Pool is a place for punishment and sacrifice. Captives would be bound 
+The Toxic Pool is a place for punishment and sacrifice. Captives would be bound
 with chains, and then lowered into the acid below.
 
 Dismantle

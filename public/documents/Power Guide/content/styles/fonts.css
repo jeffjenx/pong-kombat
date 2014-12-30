@@ -42,8 +42,24 @@
 {
 	font-family: 'Apple Garamond';
 	font-style: normal;
+	font-weight: 300;
+	src: url( '../fonts/apple_garamond/AppleGaramond-Light.ttf' ) format( 'truetype' );
+}
+
+@font-face
+{
+	font-family: 'Apple Garamond';
+	font-style: normal;
 	font-weight: 400;
 	src: url( '../fonts/apple_garamond/AppleGaramond.ttf' ) format( 'truetype' );
+}
+
+@font-face
+{
+	font-family: 'Apple Garamond';
+	font-style: normal;
+	font-weight: 600;
+	src: url( '../fonts/apple_garamond/AppleGaramond-Bold.ttf' ) format( 'truetype' );
 }
 
 @font-face

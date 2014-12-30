@@ -43,6 +43,18 @@
 
 		<!-- Images -->
 		<item id="advert-icade-image" href="content/images/advert-icade.jpg" media-type="image/jpeg" />
+		<item id="battle-zone-default-image" href="content/images/battle-zone-default.png" media-type="image/png" />
+		<item id="battle-zone-forest-image" href="content/images/battle-zone-forest.png" media-type="image/png" />
+		<item id="battle-zone-hell-image" href="content/images/battle-zone-hell.png" media-type="image/png" />
+		<item id="battle-zone-highway-image" href="content/images/battle-zone-highway.png" media-type="image/png" />
+		<item id="battle-zone-ice-river-image" href="content/images/battle-zone-ice-river.png" media-type="image/png" />
+		<item id="battle-zone-introduction-image" href="content/images/battle-zone-introduction.png" media-type="image/png" />
+		<item id="battle-zone-pit-image" href="content/images/battle-zone-pit.png" media-type="image/png" />
+		<item id="battle-zone-portal-image" href="content/images/battle-zone-portal.png" media-type="image/png" />
+		<item id="battle-zone-storm-image" href="content/images/battle-zone-storm.png" media-type="image/png" />
+		<item id="battle-zone-tower-image" href="content/images/battle-zone-tower.png" media-type="image/png" />
+		<item id="battle-zone-toxic-pool-image" href="content/images/battle-zone-toxic-pool.png" media-type="image/png" />
+		<item id="battle-zone-watercolor-image" href="content/images/battle-zone-watercolor.png" media-type="image/png" />
 		<item id="classified-folder-image" href="content/images/classified-folder.jpg" media-type="image/jpeg" />
 		<item id="classified-header-small-image" href="content/images/classified-header-small.png" media-type="image/png" />
 		<item id="classified-header-image" href="content/images/classified-header.png" media-type="image/png" />
@@ -59,11 +71,18 @@
 		<item id="developer" href="content/xhtml/developer.xhtml" media-type="application/xhtml+xml" />
 		<item id="introduction-1" href="content/xhtml/introduction-1.xhtml" media-type="application/xhtml+xml" />
 		<item id="introduction-2" href="content/xhtml/introduction-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-1" href="content/xhtml/battle-zones-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-2" href="content/xhtml/battle-zones-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-3" href="content/xhtml/battle-zones-3.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-4" href="content/xhtml/battle-zones-4.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-5" href="content/xhtml/battle-zones-5.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-6" href="content/xhtml/battle-zones-6.xhtml" media-type="application/xhtml+xml" />
 		<item id="poster-1" href="content/xhtml/poster-1.xhtml" media-type="application/xhtml+xml" />
 		<item id="poster-2" href="content/xhtml/poster-2.xhtml" media-type="application/xhtml+xml" />
 
 		<!-- CSS, JavaScript, Audio, ... -->
 		<item id="advert-icade-style" href="content/styles/advert-icade.css" media-type="text/css" />
+		<item id="battle-zones-style" href="content/styles/battle-zones.css" media-type="text/css" />
 		<item id="classified-information-style" href="content/styles/classified-information.css" media-type="text/css" />
 		<item id="developer-style" href="content/styles/developer.css" media-type="text/css" />
 		<item id="fonts-style" href="content/styles/fonts.css" media-type="text/css" />
@@ -79,6 +98,12 @@
 		<itemref idref="contents" />
 		<itemref idref="introduction-1" />
 		<itemref idref="introduction-2" />
+		<itemref idref="battle-zones-1" />
+		<itemref idref="battle-zones-2" />
+		<itemref idref="battle-zones-3" />
+		<itemref idref="battle-zones-4" />
+		<itemref idref="battle-zones-5" />
+		<itemref idref="battle-zones-6" />
 		<itemref idref="poster-1" />
 		<itemref idref="poster-2" />
 		<itemref idref="classified-information-1" />
