@@ -158,11 +158,19 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			if( leftKombatant && rightKombatant )
 			{
 				if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+					if( !app.settings.CENSORSHIP ) {
+						// blood
+						rightKombatant.paddle.getHit( );
+					}
 					leftKombatant.score += 1;
 					leftKombatant.paddle.projectile = null;
 				}
 				
 				if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+					if( !app.settings.CENSORSHIP ) {
+						// blood
+						leftKombatant.paddle.getHit( );
+					}
 					rightKombatant.score += 1;
 					rightKombatant.paddle.projectile = null;
 				}

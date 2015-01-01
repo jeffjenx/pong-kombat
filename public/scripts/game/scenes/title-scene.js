@@ -19,7 +19,7 @@ function TitleScene( ) {
 	
 	this.blue = new BluePaddle( );
 	this.blue.scale = 4;
-	this.blue.startPosition = {x: viewport.width * 1.20, y: viewport.height * 0.50};
+	this.blue.startPosition = {x: viewport.width * 1.50, y: viewport.height * 0.70};
 	this.blue.endPosition = {x: viewport.width * 0.80, y: viewport.height * 0.20};
 	this.blue.position.x = this.blue.startPosition.x;
 	this.blue.position.y = this.blue.startPosition.y;

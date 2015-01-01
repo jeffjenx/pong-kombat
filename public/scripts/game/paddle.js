@@ -55,6 +55,7 @@ function Paddle( texture ) {
 	// 5.0 ~ 
 	
 	this.projectile = null;
+	this.bloodEffect = null;
 }
 
 Paddle.prototype = new Sprite;
@@ -163,6 +164,57 @@ Paddle.prototype.draw = function( context ) {
 	if( this.projectile ) {
 		this.projectile.draw( context );
 	}
+
+	if( this.bloodEffect ) {
+		this.bloodEffect.draw( context );
+	}
+};
+
+Paddle.prototype.getHit = function( ) {
+	this.bloodEffect = new ParticleSystem( );
+	this.bloodEffect.particleImages = [Resources['Particle-Blood1'],Resources['Particle-Blood2']];
+	this.bloodEffect.compositeOperation = 'normal';
+	this.bloodEffect.count = 50;
+	this.bloodEffect.minVelocity.x = -this.size.x / 2;
+	this.bloodEffect.minVelocity.y = -this.size.y * 3;
+	this.bloodEffect.maxVelocity.x = this.size.x / 2;
+	this.bloodEffect.maxVelocity.y = -this.size.y;
+	this.bloodEffect.minParticleSize = this.size.x * 0.3;
+	this.bloodEffect.maxParticleSize = this.size.x * 0.5;
+	this.bloodEffect.minLife = 500;
+	this.bloodEffect.maxLife = 500;
+	this.bloodEffect.rotationSpeed = 0;
+	this.bloodEffect.scaleSpeed = 0.01;
+	this.bloodEffect.maxOpacity = 10;
+	this.bloodEffect.fadeSpeed = 0.9;
+	this.bloodEffect.attachTo( this );
+	this.bloodEffect.size.x = 0;
+	this.bloodEffect.size.y = 0;
+	this.bloodEffect.update = function( deltaTime ) {
+		ParticleSystem.prototype.update.call( this, deltaTime );
+
+		var i = this.particles.length;
+		while( i-- )
+		{
+			var p = this.particles[i];
+			p.velocity.y += viewport.height * 0.01;
+			
+			if( p.position.y > viewport.height ) {
+				p.velocity.y = 0;
+			}
+
+			if( p.remainingLife <= 0 ) {
+				this.particles.splice( this.particles.indexOf(i), 1 );
+			}
+		}
+	};
+	this.bloodEffect.start = function( ) {
+		this.started = true;
+		for( var i = 0; i < this.count; i++ )
+		{
+			this.particles.push( new Particle( this ) );
+		}
+	};
 };
 
 Paddle.prototype.moveDown = function( ) {
@@ -248,4 +300,11 @@ Paddle.prototype.update = function( deltaTime ) {
 	}
 	
 	this.velocity = this.velocity.multiply( 0.95 );
+	
+	if( this.bloodEffect ) {
+		this.bloodEffect.update( deltaTime );
+		if( this.bloodEffect.particles.count === 0 ) {
+			this.bloodEffect = null;
+		}
+	}
 };

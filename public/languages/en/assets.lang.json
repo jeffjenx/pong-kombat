@@ -42,6 +42,8 @@
 		
 		"Particle-BlackSmoke1" : "images/effects/particle-black-smoke-1.png",
 		"Particle-BlackSmoke2" : "images/effects/particle-black-smoke-2.png",
+		"Particle-Blood1"      : "images/effects/particle-blood-1.png",
+		"Particle-Blood2"      : "images/effects/particle-blood-2.png",
 		"Particle-Fire1"       : "images/effects/particle-fire-1.png",
 		"Particle-Fire2"       : "images/effects/particle-fire-2.png",
 		"Particle-Fire3"       : "images/effects/particle-fire-3.png",
