@@ -155,8 +155,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 				if( leftKombatant.score >= this.winningScore ) {
 					this.winner = leftKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
-					this.layers['HUD'].addAnnouncement( "Finish'em!" );
-					this.changeState( this.states.announcing );
+
+					if( app.settings.COMBAT ) {
+						this.layers['HUD'].addAnnouncement( "Finish'em!" );
+						this.changeState( this.states.announcing );
+					} else {
+						this.changeState( this.states.ending );
+						this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+					}
 				}
 			}
 
@@ -165,8 +171,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 				if( rightKombatant.score >= this.winningScore ) {
 					this.winner = rightKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
-					this.layers['HUD'].addAnnouncement( "Finish'em!" );
-					this.changeState( this.states.announcing );
+
+					if( app.settings.COMBAT ) {
+						this.layers['HUD'].addAnnouncement( "Finish'em!" );
+						this.changeState( this.states.announcing );
+					} else {
+						this.changeState( this.states.ending );
+						this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+					}
 				}
 			}
 			

@@ -111,6 +111,11 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 		this.speed += 1;
 		this.velocity = this.velocity.multiply( 1.25 );
 	}
+	else
+	{
+		this.speed += 0.2;
+		this.velocity = this.velocity.multiply( 1.05 );
+	}
 	
 	if( app.settings['SoundFX'] === true && !app.isMobile( ) )
 	{
@@ -193,7 +198,7 @@ Ball.prototype.update = function( deltaTime ) {
 	
 	this.sourceRotation = this.glare.rotation;
 	this.targetRotation = this.rotation;
-	if( this.velocity.x > 0 || this.velocity.y > 0 ) {
+	if( this.velocity.x !== 0 || this.velocity.y !== 0 ) {
 		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
 	}
 	
@@ -204,7 +209,7 @@ Ball.prototype.updateGlare = function( ) {
 	if( this.glare ){
 		this.glare.position.x = this.position.x;
 		this.glare.position.y = this.position.y;
-		
+
 		// Rotate glare to match ball direction
 		if( Math.abs( this.glare.rotation - this.targetRotation ) <= 3 ) {
 			this.glare.rotation = this.targetRotation;

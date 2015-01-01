@@ -7,7 +7,7 @@ GameModes = {
 function TitleMenu( scene ) {
 	Menu.call( this, scene );
 	
-	//this.addItem( 'Free Play', this.selectFreePlay );
+	this.addItem( 'Free Play', this.selectFreePlay );
 	//this.addItem( 'Tournament', this.selectTournament );
 	//this.addItem( 'Super PK', null );
 	this.addItem( 'Dip Switches', this.selectSettings );
@@ -19,7 +19,7 @@ TitleMenu.prototype.constructor = TitleMenu;
 
 TitleMenu.prototype.selectFreePlay = function( ) {
 	app.gameMode = GameModes.FREEPLAY;
-	SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
+	SceneManager.changeScene( new PickPaddleScene( ), Transitions.FADE, 0.5 );
 };
 
 TitleMenu.prototype.selectSettings = function( ) {
@@ -29,7 +29,7 @@ TitleMenu.prototype.selectSettings = function( ) {
 
 TitleMenu.prototype.selectTournament = function( ) {
 	app.gameMode = GameModes.TOURNAMENT;
-	SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
+	SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE, 0.5 );
 };
 
 TitleMenu.prototype.selectQuit = function( ) {

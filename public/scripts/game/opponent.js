@@ -2,6 +2,7 @@ function Opponent( ) {
 	this.paddle = null;
 	this.score = 0;
 	this.nextProjectileTime = app.gameTime + 2000 + Math.random( ) * 8000;
+	this.targetPosition = viewport.height * 0.5;
 }
 
 Opponent.prototype.constructor = Opponent;
@@ -15,22 +16,78 @@ Opponent.prototype.applyAI = function( ) {
 		case this.layer.scene.states.fighting :
 			var ball = this.layer.components['Ball'];
 			
-			if( ball.velocity.x > 0 )
+			if( app.settings.DIFFICULTY === 0 )
 			{
-				if( this.paddle.position.y < ball.position.y - ball.size.y * 0.5 )
+				// EASY
+				// Move to ball on return volley
+				if( ball.velocity.x > 0 )
 				{
-					this.paddle.moveDown( );
+					if( this.paddle.position.y < ball.position.y - ball.size.y * 0.5 )
+					{
+						this.paddle.moveDown( );
+					}
+					else if( this.paddle.position.y > ball.position.y + ball.size.y * 0.5 )
+					{
+						this.paddle.moveUp( );
+					}
 				}
-				else if( this.paddle.position.y > ball.position.y + ball.size.y * 0.5 )
+
+				// No Projectiles
+			}
+			else if( app.settings.DIFFICULTY === 1 ) 
+			{
+				// MEDIUM
+				// Move to ball on return volley
+				if( ball.velocity.x > 0 )
 				{
-					this.paddle.moveUp( );
+					if( this.paddle.position.y < ball.position.y - ball.size.y * 0.5 )
+					{
+						this.paddle.moveDown( );
+					}
+					else if( this.paddle.position.y > ball.position.y + ball.size.y * 0.5 )
+					{
+						this.paddle.moveUp( );
+					}
+				}
+
+				// Random Projectiles
+				if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
+				{
+					this.paddle.shootProjectile( );
+					this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
 				}
 			}
-			
-			if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
+			else if( app.settings.DIFFICULTY === 2 )
 			{
-				this.paddle.shootProjectile( );
-				this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+				// HARD
+				// Move to ball target on return
+				if( ball.velocity.x > 0 )
+				{
+					this.targetPosition = (this.paddle.position.x - ball.position.x) / ball.velocity.x * ball.velocity.y + ball.position.y;
+					
+					if( this.paddle.position.y < this.targetPosition + 10 )
+					{
+						this.paddle.moveDown( );
+					}
+					else if( this.paddle.position.y > this.targetPosition - 10 )
+					{
+						this.paddle.moveUp( );
+					}
+				}
+
+				// Random Projectiles
+				if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
+				{
+					this.paddle.shootProjectile( );
+					this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+				}
+			}
+			else if( app.settings.difficulty === 3 )
+			{
+				// EXTREME
+				// Move to avoid projectiles
+				// Move to ball target on return
+				// Projectiles aimed at return volley
 			}
 		break;
 		

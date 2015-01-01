@@ -20,6 +20,8 @@ function SplashScene( )
 	this.domain.position.y = viewport.height * 0.75;
 	this.domain.scale = viewport.height / 1080;
 	splashLayer.addComponent( 'Domain', this.domain );
+
+	this.firstUpdate = false; // see update function
 }
 
 SplashScene.prototype = new Scene;
@@ -33,6 +35,13 @@ SplashScene.prototype.draw = function( context )
 SplashScene.prototype.update = function( deltaTime )
 {
 	Scene.prototype.update.call( this, deltaTime );
+
+	// for some reason timeElapsed after the first update is significant (> 2s)
+	// causing the fade in to not look good.
+	if( !this.firstUpdate ) {
+		this.timeElapsed = 0;
+		this.firstUpdate = true;
+	}
 	
 	if( this.timeElapsed > 2 && this.timeElapsed < 4 )
 	{

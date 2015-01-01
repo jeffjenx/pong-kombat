@@ -140,7 +140,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					}
 				}
 
-				if( ball && rightKombatant )
+				if( rightKombatant )
 				{
 					if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) )
 					{

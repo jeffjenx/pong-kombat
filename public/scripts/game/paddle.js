@@ -61,7 +61,7 @@ Paddle.prototype = new Sprite;
 Paddle.prototype.constructor = Paddle;
 
 Paddle.prototype.canShootProjectile = function( ) {
-	return this.projectile === null;
+	return app.settings.COMBAT && this.projectile === null;
 };
 
 Paddle.prototype.draw = function( context ) {
