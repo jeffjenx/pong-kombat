@@ -82,12 +82,68 @@ Opponent.prototype.applyAI = function( ) {
 					this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
 				}
 			}
-			else if( app.settings.difficulty === 3 )
+			else if( app.settings.DIFFICULTY === 3 )
 			{
+				var enemy = this.layer.components['LeftKombatant'];
+
 				// EXTREME
 				// Move to avoid projectiles
+				if( Math.abs( enemy.paddle.position.y - this.paddle.position.y ) < this.paddle.size.y * this.paddle.scale )
+				{
+					if( this.paddle.position.y < viewport.height * 0.5 )
+					{
+						this.paddle.moveDown( );
+					}
+					else
+					{
+						this.paddle.moveUp( );
+					}
+				}
+
+				if( enemy.paddle.position.x > viewport.width * 0.25 )
+				{
+					this.paddle.moveRight( );
+				}
+				else
+				{
+					this.paddle.moveLeft( );
+				}
+
 				// Move to ball target on return
+				if( ball.velocity.x > 0 )
+				{
+					this.targetPosition = (this.paddle.position.x - ball.position.x) / ball.velocity.x * ball.velocity.y + ball.position.y;
+					
+					if( this.paddle.position.y < this.targetPosition + 10 )
+					{
+						this.paddle.moveDown( );
+					}
+					else if( this.paddle.position.y > this.targetPosition - 10 )
+					{
+						this.paddle.moveUp( );
+					}
+				}
+
 				// Projectiles aimed at return volley
+				if( ball.velocity.x < 0 )
+				{
+					this.targetPosition = (enemy.paddle.position.x - ball.position.x) / ball.velocity.x * ball.velocity.y + ball.position.y;
+					
+					if( this.paddle.position.y < this.targetPosition + 10 )
+					{
+						this.paddle.moveDown( );
+					}
+					else if( this.paddle.position.y > this.targetPosition - 10 )
+					{
+						this.paddle.moveUp( );
+					}
+					
+					if( this.paddle.canShootProjectile( ) && Math.abs( this.paddle.position.y - this.targetPosition ) < this.paddle.size.y * this.paddle.scale )
+					{
+						this.paddle.shootProjectile( );
+						this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+					}
+				}
 			}
 		break;
 		
@@ -116,6 +172,23 @@ Opponent.prototype.setPaddle = function( paddle ) {
 		case Paddles.SHIFTER : this.paddle = new ShifterPaddle( ); break;
 		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
 	}
+
+	this.paddle.restrictToBounds = function( ) {
+		var paddingBottom = viewport.height;
+		var paddingTop = SceneManager.currentScene.layers['HUD'].components['HUD'].size.y;
+		var paddingLeft = viewport.width * 0.5;
+		var paddingRight = viewport.width;
+		
+		if( ( this.velocity.y > 0 && this.boundingBox.bottom >= paddingBottom ) || ( this.velocity.y < 0 && this.boundingBox.top <= paddingTop ) )
+		{
+			this.velocity.y = 0;
+		}
+
+		if( ( this.velocity.x > 0 && this.boundingBox.right >= paddingRight ) || ( this.velocity.x < 0 && this.boundingBox.left <= paddingLeft ) )
+		{
+			this.velocity.x = 0;
+		}
+	};
 };
 
 Opponent.prototype.update = function( deltaTime ) {
