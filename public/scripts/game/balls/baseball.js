@@ -1,5 +1,7 @@
 function Baseball( ) {
-	Ball.call( this, 'Ball-Baseball' );
+	var textures = [ 'Ball-Baseball', 'Ball-Baseball-MLB', 'Ball-Baseball-Old', 'Ball-Softball' ];
+
+	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
@@ -10,7 +12,7 @@ function Baseball( ) {
 	this.patternContext.rect( 0, 0, this.patternCanvas.width, this.patternCanvas.width );
 	this.patternContext.fill( );
 	
-	this.size.x = viewport.width * 0.035;
+	this.size.x = (this.resource === 'Ball-Softball') ? viewport.width * 0.04 : viewport.width * 0.035;
 	this.size.y = this.size.x;
 	this.addGlare( );
 }

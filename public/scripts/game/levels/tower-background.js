@@ -49,7 +49,7 @@ TowerBackgroundLayer.prototype.constructor = TowerBackgroundLayer;
 TowerBackgroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
 
-	var bellFrequency = Math.sin( app.gameTime / 3000 );
+	var bellFrequency = Math.sin( app.gameTime / 2000 );
 
 	this.bell.position.y = viewport.height / 2 + bellFrequency * viewport.width * 0.33;
 	this.bellClapper.position.y = viewport.height / 2 + bellFrequency * viewport.width * 0.22;

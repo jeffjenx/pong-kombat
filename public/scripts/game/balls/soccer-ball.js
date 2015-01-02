@@ -1,10 +1,10 @@
 function SoccerBall( ) {
-	Ball.call( this, 'Ball-SoccerBall' );
+	Ball.call( this, 'Ball-Soccer' );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
-	this.patternCanvas.width = 300;
-	this.patternCanvas.height = 300;
+	this.patternCanvas.width = 420;
+	this.patternCanvas.height = 420;
 	
 	this.patternContext.fillStyle = this.pattern;
 	this.patternContext.rect( 0, 0, this.patternCanvas.width, this.patternCanvas.width );

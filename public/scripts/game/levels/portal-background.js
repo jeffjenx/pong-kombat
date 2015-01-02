@@ -79,4 +79,19 @@ PortalBackgroundLayer.prototype.update = function( deltaTime ) {
 	if( this.innerHole.rotation > 360 ) {
 		this.innerHole.rotation -= 360;
 	}
+
+	// Affect the ball movement
+	var ball = this.scene.layers['Kombat'].components['Ball'];
+	if( ball ) {
+		var distance = this.blackHole.position.distance( ball.position );
+		var gravity = distance / 33000;
+		if( distance < viewport.height * 0.25 ) {
+			if( ball.velocity.x < 0 ) {
+				ball.velocity = ball.velocity.rotate( ( ball.position.y < this.blackHole.position.y ) ? -gravity : gravity );
+			} else {
+				ball.velocity = ball.velocity.rotate( ( ball.position.y < this.blackHole.position.y ) ? gravity : -gravity );
+			}
+			//ball.velocity = ball.velocity.rotate( ( ball.velocity.x < this.blackHole.position.y ) ? 0.01 : -0.01 );
+		}
+	}
 };

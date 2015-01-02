@@ -185,7 +185,7 @@ Paddle.prototype.getHit = function( ) {
 	this.bloodEffect.maxLife = 500;
 	this.bloodEffect.rotationSpeed = 0;
 	this.bloodEffect.scaleSpeed = 0.01;
-	this.bloodEffect.maxOpacity = 10;
+	this.bloodEffect.maxOpacity = 50;
 	this.bloodEffect.fadeSpeed = 0.9;
 	this.bloodEffect.attachTo( this );
 	this.bloodEffect.size.x = 0;
@@ -197,7 +197,7 @@ Paddle.prototype.getHit = function( ) {
 		while( i-- )
 		{
 			var p = this.particles[i];
-			p.velocity.y += viewport.height * 0.01;
+			p.velocity.y += viewport.height * 0.02;
 			
 			if( p.position.y > viewport.height ) {
 				p.velocity.y = 0;

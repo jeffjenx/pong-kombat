@@ -234,7 +234,9 @@ App.prototype.render = function( ) {
 	{	
 		// Update objects
 		app.gameTime += delta;
-		SceneManager.update( delta / 1000 ); // Use s instead of ms for update calls
+		if( delta < 1000 ) { // trying to avoid: first render cycle is like 2+ seconds, for some reason
+			SceneManager.update( delta / 1000 ); // Use s instead of ms for update calls
+		}
 	}
 	else if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{

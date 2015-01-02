@@ -863,7 +863,7 @@ Baseball
     Generic (New), Generic (Dirty), MLB, Optic Yellow Softball
 
 Basketball
-    Generic (New), Generic (Old), NBA, FIBA, Red/White/Blue
+    Generic (New), Generic (Old), NBA, ABA (Red, White, Blue)
 
 Billiards
     Solids (1-7), Stripes (9-15), 8-Ball

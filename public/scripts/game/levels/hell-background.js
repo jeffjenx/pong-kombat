@@ -28,6 +28,7 @@ function HellBackgroundLayer( scene ) {
 		this.heatEffect.update( 1 / 60 );
 	}
 
+	/*
 	this.smokeEffect = new ParticleSystem( );
 	this.smokeEffect.compositeOperation = 'normal';
 	this.smokeEffect.particleImages = [Resources['Particle-Smoke2']];
@@ -51,6 +52,7 @@ function HellBackgroundLayer( scene ) {
 	{
 		this.smokeEffect.update( 1 / 60 );
 	}
+	*/
 }
 
 HellBackgroundLayer.prototype = new Layer;

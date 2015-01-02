@@ -8,13 +8,16 @@ load( 'scripts/game/', [
 	'powerup',
 	'projectile',
 	
-	'balls/base-ball',
-	'balls/basket-ball',
+	'balls/baseball',
+	'balls/basketball',
+	'balls/billiards-ball',
+	'balls/croquet-ball',
 	'balls/default-ball',
 	'balls/earth-globe',
-	'balls/eight-ball',
+	'balls/football',
 	'balls/smiley-ball',
 	'balls/soccer-ball',
+	'balls/tennis-ball',
 	
 	'effects/stackblur',
 //	'effects/fastblur',
@@ -86,15 +89,17 @@ function ready( ) {
 	app.resources = '/';
 	app.language = 'en';
 	app.settings = {
-		'CENSORSHIP' : true,
-		'COINAGE' : 0,
-		'COMBAT' : true,
-		'DIFFICULTY' : 1,
-		'POWER_UPS' : true,
-		'SOUND_FX' : 10,
-		'TUNES' : 10
+		'CENSORSHIP' : (localStorage && localStorage['PongKombat.settings.CENSORSHIP'] === "false") ? false : true,
+		'COINAGE'    : (localStorage && localStorage['PongKombat.settings.COINAGE']) ? parseInt( localStorage['PongKombat.settings.COINAGE'] ) : 0,
+		'COMBAT'     : (localStorage && localStorage['PongKombat.settings.COMBAT'] === "false") ? false : true,
+		'DIFFICULTY' : (localStorage && localStorage['PongKombat.settings.DIFFICULTY']) ? parseInt( localStorage['PongKombat.settings.DIFFICULTY'] ) : 1,
+		'POWER_UPS'  : (localStorage && localStorage['PongKombat.settings.POWER_UPS'] === "false") ? false : true,
+		'SOUND_FX'   : (localStorage && localStorage['PongKombat.settings.SOUND_FX']) ? parseInt( localStorage['PongKombat.settings.SOUND_FX'] ) : 10,
+		'TUNES'      : (localStorage && localStorage['PongKombat.settings.TUNES']) ? parseInt( localStorage['PongKombat.settings.TUNES'] ) : 10
 	};
 	app.resize( );
+
+
 	
 	var loadingInterval;
 	var loadingPercentage;
@@ -121,7 +126,7 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new SplashScene();
+		app.startupScene = new TestScene();
 		app.initialize( );
 	};
 };

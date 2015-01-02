@@ -164,6 +164,8 @@ SettingsScene.prototype.decreaseSetting = function( )
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources.Strings.SETTINGS.ON : Resources.Strings.SETTINGS.OFF;
 		break;
 	}
+
+	localStorage['PongKombat.settings.' + this.currentSetting] = app.settings[this.currentSetting];
 };
 
 SettingsScene.prototype.increaseSetting = function( )
@@ -217,6 +219,8 @@ SettingsScene.prototype.increaseSetting = function( )
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( app.settings[ this.currentSetting ] ) ? Resources.Strings.SETTINGS.ON : Resources.Strings.SETTINGS.OFF;
 		break;
 	}
+	
+	localStorage['PongKombat.settings.' + this.currentSetting] = app.settings[this.currentSetting];
 };
 
 SettingsScene.prototype.selectSetting = function( setting )
