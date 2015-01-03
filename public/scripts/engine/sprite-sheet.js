@@ -3,10 +3,20 @@ function SpriteSheet( resource ) {
 	
 	if( Resources[resource] !== undefined )
 	{
+		this.flipH = false;
+		this.resource = resource;
 		this.image = Resources[resource];
 	}
 	
 	this.animations = { };
+	/* Example:
+	** {
+	** 	'MyAnimation' : {
+	** 		'frames' : [ 0, 1, 2, 1 ],
+	** 		'step' : 1000
+	** 	}
+	** }
+	*/
 	this.currentAnimation = null;
 	this.currentFrame = 0;
 	this.currentStep = 0;

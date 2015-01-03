@@ -1,5 +1,5 @@
-function SmileyBall( ) {
-	Ball.call( this, 'Ball-Smiley' );
+function PokeBall( ) {
+	Ball.call( this, 'Ball-PokeBall' );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
@@ -10,8 +10,10 @@ function SmileyBall( ) {
 	this.patternContext.rect( 0, 0, this.patternCanvas.width, this.patternCanvas.width );
 	this.patternContext.fill( );
 	
+	this.size.x = viewport.width * 0.035;
+	this.size.y = this.size.x;
 	this.addGlare( );
 }
 
-SmileyBall.prototype = new Ball;
-SmileyBall.prototype.constructor = SmileyBall;
+PokeBall.prototype = new Ball;
+PokeBall.prototype.constructor = PokeBall;

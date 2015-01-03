@@ -863,13 +863,10 @@ Baseball
     Generic (New), Generic (Dirty), MLB, Optic Yellow Softball
 
 Basketball
-    Generic (New), Generic (Old), NBA, ABA (Red, White, Blue)
+    ABA (Red, White, Blue), Generic (New), Generic (Old), NBA
 
 Billiards
-    Solids (1-7), Stripes (9-15), 8-Ball
-
-Bowling
-    Rose
+    8-Ball, Solids (1-7), Stripes (9-15)
 
 Croquet
     Blue, Red, Black, Yellow
@@ -880,7 +877,7 @@ Football
     Kick/Dodgeball
 
 Tennis
-    3-Star Table, 4-Star Table, Optic Yellow
+    3-Star Nittaku (Table), 3-Star Stiga (Table), Optic Yellow
 
 
 -------------------------------------------------------------------------------
@@ -890,26 +887,23 @@ Tennis
 Namco
     Ms. Pac-Man, Pac-Man
 
+Pokémon
+    PokéBall
+
 Super Mario Bros.
     1-Up Mushroom, Coin, Koopa Shell, Star Coin, Super Mushroom
-
-The Legend of Zelda
-    Rupee (Green, Blue, Red, Silver, Gold)
-
-Miscellaneous
-    PokéBall
 
 
 -------------------------------------------------------------------------------
   7.3                          Science & Tech
 -------------------------------------------------------------------------------
 
-Atomic Elements
-    Carbon, Hydrogen, Nitrogen, Oxygen, Phosphorous, Sulfur
+Software Icons
+    Apple Safari, Google Chrome, Microsoft Internet Explorer, Mozilla Firefox
 
 Solar System
     Mercury, Venus, Earth, Mars, Saturn, Neptune, Uranus, Jupiter, Pluto,
-    Sun, Moon, Asteroid
+    Asteroid, Moon, Sun 
 
 
 -------------------------------------------------------------------------------
@@ -928,9 +922,6 @@ Eye
 Food
     Bagel (Plain, Salted), Chocolate Chip Cookie, Doughtnut with Sprinkles, 
     Easter Egg (Blue, Green, Purple, Red, Yellow), Pepperoni Pizza, Waffle
-
-Icon
-    Apple Safari, Google Chrome, Microsoft Internet Explorer, Mozilla Firefox
 
 Logo
     Apple, BMW, Facebook, Pinterest, Pepsi, Radio Shack, Starbucks, Twitter, 

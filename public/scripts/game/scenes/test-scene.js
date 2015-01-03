@@ -7,7 +7,7 @@ function TestScene( ) {
 	this.background = new Background( 'Background-Portal' );
 	this.layer.addComponent( 'Background', this.background );
 
-	this.ball = new Football( );
+	this.ball = new Emoticon( );
 	this.layer.addComponent( 'Ball', this.ball );
 
 	this.ball.set( );
@@ -21,11 +21,11 @@ TestScene.prototype.update = function( deltaTime ) {
 	
 	if( this.ball.boundingBox.right > viewport.width || this.ball.boundingBox.left < 0 ) {
 		this.ball.velocity.x *= -1;
-		//this.ball.hitPaddle();
+		this.ball.changedRotation();
 	}
 
 	if( this.ball.boundingBox.bottom > viewport.height || this.ball.boundingBox.top < 0 ) {
-		//this.ball.velocity.y *= -1;
-		this.ball.hitWall();
+		this.ball.velocity.y *= -1;
+		this.ball.changedRotation();
 	}
 };
