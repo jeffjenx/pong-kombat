@@ -1,32 +1,40 @@
-function Football( ) {
-	Ball.call( this, 'Ball-Football-NFL' );
+function StorageMedia( ) {
+	var textures = [ 'Ball-Compact-Disc', 'Ball-Cassette-Tape', 'Ball-Vinyl-Record', 'Ball-Floppy-Disk' ];
+
+	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
-	this.size.x = viewport.width * 0.045;
+	//this.size.x = viewport.width * 0.05;
+	switch( this.resource ) {
+		case 'Ball-Cassette-Tape' : this.size.x = viewport.width * 0.045; break;
+		case 'Ball-Compact-Disc' : this.size.x = viewport.width * 0.04; break;
+		case 'Ball-Vinyl-Record' : this.size.x = viewport.width * 0.05; break;
+		case 'Ball-Floppy-Disk' : this.size.x = viewport.width * 0.035; break;
+	}
 	this.size.y = this.size.x;
 
 	this.rotationDirection = 1;
 }
 
-Football.prototype = new Ball;
-Football.prototype.constructor = Football;
+StorageMedia.prototype = new Ball;
+StorageMedia.prototype.constructor = Logo;
 
-Football.prototype.hitPaddle = function(kombatant) {
+StorageMedia.prototype.hitPaddle = function(kombatant) {
 	Ball.prototype.hitPaddle.call( this, kombatant );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.hitWall = function() {
+StorageMedia.prototype.hitWall = function() {
 	Ball.prototype.hitWall.call( this );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.draw = function( context ) {
+StorageMedia.prototype.draw = function( context ) {
 	Component.prototype.draw.call( this, context );
 
 	Sprite.prototype.draw.call( this, context );
 };
 
-Football.prototype.update = function( deltaTime ) {
+StorageMedia.prototype.update = function( deltaTime ) {
 	//Ball.prototype.update.call( this, deltaTime );
 	
 	if( this.scale < 1 ) {

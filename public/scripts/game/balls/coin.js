@@ -1,32 +1,41 @@
-function Football( ) {
-	Ball.call( this, 'Ball-Football-NFL' );
+function Coin( ) {
+	var textures = [ 'Ball-Coin-Penny', 'Ball-Coin-Nickle', 'Ball-Coin-Dime', 'Ball-Coin-Quarter' ];
+
+	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
-	this.size.x = viewport.width * 0.045;
+	//this.size.x = viewport.width * 0.05;
+	switch( this.resource ) {
+		case 'Ball-Coin-Penny' : this.size.x = viewport.width * 0.035; break;
+		case 'Ball-Coin-Nickle' : this.size.x = viewport.width * 0.04; break;
+		case 'Ball-Coin-Dime' : this.size.x = viewport.width * 0.03; break;
+		case 'Ball-Coin-Quarter' : this.size.x = viewport.width * 0.045; break;
+
+	}
 	this.size.y = this.size.x;
 
 	this.rotationDirection = 1;
 }
 
-Football.prototype = new Ball;
-Football.prototype.constructor = Football;
+Coin.prototype = new Ball;
+Coin.prototype.constructor = Coin;
 
-Football.prototype.hitPaddle = function(kombatant) {
+Coin.prototype.hitPaddle = function(kombatant) {
 	Ball.prototype.hitPaddle.call( this, kombatant );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.hitWall = function() {
+Coin.prototype.hitWall = function() {
 	Ball.prototype.hitWall.call( this );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.draw = function( context ) {
+Coin.prototype.draw = function( context ) {
 	Component.prototype.draw.call( this, context );
 
 	Sprite.prototype.draw.call( this, context );
 };
 
-Football.prototype.update = function( deltaTime ) {
+Coin.prototype.update = function( deltaTime ) {
 	//Ball.prototype.update.call( this, deltaTime );
 	
 	if( this.scale < 1 ) {

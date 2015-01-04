@@ -63,7 +63,7 @@
  + Other Characters............... 5.3   + Pong Kombat (1994) Team....... 10.2 
    - Myst....................... 5.3.1   + Pong Kombat 2 (1996) Team..... 10.3 
    - P9X-Bot.................... 5.3.2   + Pong Kombat 3 (1996) Team..... 10.4 
-   - Slayer..................... 5.3.3   + Special Thanks................ 10.5 
+   - Mr. Slayer................. 5.3.3   + Special Thanks................ 10.5 
  + Create-A-Paddle................ 5.4   + Pong Kombat Fans.............. 10.6 
 
 
@@ -645,7 +645,7 @@ Abilities
 ...............................................................................
 
 After successfully landing particulary devastating attack, a person's face will
-sometimes appear from the  bottom of the screen, exclaiming "Whoopsie!" Hold 
+sometimes appear from the bottom of the screen, exclaiming "Whoopsie!"  Hold 
 Start and press the Up button to access them.
 
 
@@ -656,11 +656,12 @@ P9X-Bot is a robotic training dummy that helps you practice special abilities.
 From the title menu, choose the P9X Training item to access them. The P9X-Bot 
 is a non-playable character.
 
-  5.3.3                            Slayer                                      
+
+  5.3.3                          Mr. Slayer                                      
 ...............................................................................
 
-Similar to Myst, Slayer is only accessible after proving your worth. On the Pit
-battle zone, defeat your opponent without taking any damage and perform any 
+Similar to Myst, Mr. Slayer is only accessible after proving your worth. On the
+Pit battle zone, defeat your opponent without taking any damage and perform any
 Dismantle to acess them.
 
 
@@ -851,8 +852,8 @@ As you progress, new balls are awarded less frequently, as to follow a pattern
 known as the Fibonacci sequence. Balls will be unlocked after 1 match, again 
 after 2 matches, then 3, 5, 8, 13, 21, 34, 55, and so forth.
 
-Balls can also be unlocked individually, by encountering them while playing 
-against a human opponent in a Paddle-2-Paddle match.
+Balls can also be unlocked by encountering them while playing against a human 
+opponent in a Paddle-2-Paddle match.
 
 
 -------------------------------------------------------------------------------
@@ -863,7 +864,7 @@ Baseball
     Generic (New), Generic (Dirty), MLB, Optic Yellow Softball
 
 Basketball
-    ABA (Red, White, Blue), Generic (New), Generic (Old), NBA
+    ABA (Red/White/Blue), Generic (New), Generic (Old), NBA
 
 Billiards
     8-Ball, Solids (1-7), Stripes (9-15)
@@ -898,12 +899,22 @@ Super Mario Bros.
   7.3                          Science & Tech
 -------------------------------------------------------------------------------
 
+Company Logos
+    Android, Apple, BMW, Facebook, Pinterest, Pepsi, Starbucks, Twitter, 
+    Wikipedia, WordPress, Volkswagen
+
+Emoticon/Emoji
+    Angry, Frowning, Grinning, Shocked, Smiling, Winking
+
 Software Icons
     Apple Safari, Google Chrome, Microsoft Internet Explorer, Mozilla Firefox
 
 Solar System
     Mercury, Venus, Earth, Mars, Saturn, Neptune, Uranus, Jupiter, Pluto,
     Asteroid, Moon, Sun 
+
+Storage Media
+    Cassette Tape, Compact Disc, Floppy Disk, Vinyl Record
 
 
 -------------------------------------------------------------------------------
@@ -913,9 +924,6 @@ Solar System
 Dice
     1-6 (White, Red), 12-Sided, 20-Sided
 
-Emoticon
-    Angry, Frowning, Grinning, Shocked, Smiling, Winking
-
 Eye
     Amber, Blue, Brown, Cat, Gray, Green, Hazel, Red
 
@@ -923,23 +931,16 @@ Food
     Bagel (Plain, Salted), Chocolate Chip Cookie, Doughtnut with Sprinkles, 
     Easter Egg (Blue, Green, Purple, Red, Yellow), Pepperoni Pizza, Waffle
 
-Logo
-    Apple, BMW, Facebook, Pinterest, Pepsi, Radio Shack, Starbucks, Twitter, 
-    Wikipedia, WordPress, Volkswagen
-
 Marble
     Brown, Lavendar, Mint, Orange, Pink, Teal
-
-Media
-    Cassette Tape, Compact Disc, Floppy Disk, Vinyl Record
 
 Presedential
     Penny (Abraham Lincoln), Nickle (Thomas Jefferson), Dime (Franklin D. 
     Roosevelt), Quarter (George Washington), Obama Logo
 
 Random
-    Pinball, Rubberband, Saw Blade, Skull, Super Bouncy, Tin Foil, Yarn,
-    Yin-Yang, White Square (Classic PONG)
+    Clock, Rubberband, Saw Blade, Skull, Super Bouncy, Tin Foil, Tron Disc,
+    Yarn, Yin-Yang, White Square (Classic PONG)
 
 
 ===============================================================================

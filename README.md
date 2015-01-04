@@ -27,7 +27,7 @@ This project intends to stand as an example for the following web development to
 1. [MEAN.JS](http://meanjs.org) - An open-source full-stack application solution  
   1.1 [MongoDB](http://mongodb.org) - An open-source NoSQL document database  
   1.2 [Express](http://expressjs.org) - A back-end web application framework  
-  1.3 [AngularJS](http://angularjs.org) - An front-end MVW (Model-View-*Whatever*) web application framework  
+  1.3 [AngularJS](http://angularjs.org) - A front-end MVW (Model-View-*Whatever*) web application framework  
   1.4 [Node.js](http://nodejs.org) - An open-source JavaScript based runtime environment and application server
 2. [SASS](http://sass-lang.com) - A front-end styling extension  
   2.1 [CSS](http://www.w3.org/Style/CSS/Overview.en.html) - Latest web standards include transitions, animations, transformations, etc.

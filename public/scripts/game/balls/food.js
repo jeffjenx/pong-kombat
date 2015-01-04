@@ -1,32 +1,40 @@
-function Football( ) {
-	Ball.call( this, 'Ball-Football-NFL' );
+function Food( ) {
+	var textures = [
+		'Ball-Easter-Egg-Blue', 'Ball-Easter-Egg-Green', 'Ball-Easter-Egg-Purple', 'Ball-Easter-Egg-Red', 'Ball-Easter-Egg-Yellow',
+		'Ball-Food-Cookie', 'Ball-Food-Donut', 'Ball-Food-Pizza', 'Ball-Food-Plain-Bagel', 'Ball-Food-Salted-Bagel', 'Ball-Food-Waffle'
+	];
+
+	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
-	this.size.x = viewport.width * 0.045;
+	this.size.x = viewport.width * 0.04;
+	if( this.resource === 'Ball-Food-Pizza' ) {
+		this.size.x = viewport.width * 0.06;
+	}
 	this.size.y = this.size.x;
 
 	this.rotationDirection = 1;
 }
 
-Football.prototype = new Ball;
-Football.prototype.constructor = Football;
+Food.prototype = new Ball;
+Food.prototype.constructor = Food;
 
-Football.prototype.hitPaddle = function(kombatant) {
+Food.prototype.hitPaddle = function(kombatant) {
 	Ball.prototype.hitPaddle.call( this, kombatant );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.hitWall = function() {
+Food.prototype.hitWall = function() {
 	Ball.prototype.hitWall.call( this );
 	this.rotationDirection *= -1;
-};
+}
 
-Football.prototype.draw = function( context ) {
+Food.prototype.draw = function( context ) {
 	Component.prototype.draw.call( this, context );
 
 	Sprite.prototype.draw.call( this, context );
 };
 
-Football.prototype.update = function( deltaTime ) {
+Food.prototype.update = function( deltaTime ) {
 	//Ball.prototype.update.call( this, deltaTime );
 	
 	if( this.scale < 1 ) {
