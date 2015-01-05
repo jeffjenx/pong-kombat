@@ -63,4 +63,6 @@ Dice.prototype.update = function( deltaTime ) {
 	if( this.rotation < 0 ) {
 		this.rotation += 360;
 	}
+	
+	this.updateCollision( );
 };

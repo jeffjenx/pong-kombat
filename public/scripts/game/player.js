@@ -79,4 +79,5 @@ Player.prototype.update = function( deltaTime ) {
 		break;
 	}
 	this.paddle.update( deltaTime );
+	this.paddle.restrictToBounds( );
 };

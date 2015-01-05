@@ -61,13 +61,29 @@ KombatLayer.prototype.setBall = function( ballType ) {
 			}
 			return this.setBall( Math.ceil( Math.random( ) * count ) );
 		break;
-		case Balls.BASKETBALL : ball = new Basketball( ); break;
-		case Balls.EIGHTBALL : ball = new EightBall( ); break;
 		case Balls.BASEBALL : ball = new Baseball( ); break;
-		case Balls.EARTH : ball = new EarthGlobe( ); break;
-		case Balls.SMILEY : ball = new SmileyBall( ); break;
+		case Balls.BASKETBALL : ball = new Basketball( ); break;
+		case Balls.BILLIARDS_BALL : ball = new BilliardsBall( ); break;
+		case Balls.COIN : ball = new Coin( ); break;
+		case Balls.CROQUET_BALL : ball = new CroquetBall( ); break;
+		case Balls.DICE : ball = new Dice( ); break;
+		case Balls.EMOTICON : ball = new Emoticon( ); break;
+		case Balls.EYE_BALL : ball = new EyeBall( ); break;
+		case Balls.FOIL_BALL : ball = new FoilBall( ); break;
+		case Balls.FOOD : ball = new Food( ); break;
+		case Balls.FOOTBALL : ball = new Football( ); break;
+		case Balls.LOGO : ball = new Logo( ); break;
+		case Balls.MARBLE : ball = new Marble( ); break;
+		case Balls.PAC_MAN : ball = new PacMan( ); break;
+		case Balls.POKEBALL : ball = new PokeBall( ); break;
+		case Balls.PONG_BALL : ball = new PongBall( ); break;
+		case Balls.SOCCER_BALL : ball = new SoccerBall( ); break;
+		case Balls.SOLAR_SYSTEM : ball = new SolarSystem( ); break;
+		case Balls.STORAGE_MEDIA : ball = new StorageMedia( ); break;
+		case Balls.SUPER_MARIO : ball = new SuperMario( ); break;
+		case Balls.TENNIS_BALL : ball = new TennisBall( ); break;
 		
-		case Balls.DEFAULT :
+		case Balls.DEFAULT_BALL :
 		default :
 			ball = new DefaultBall( );
 		break;
@@ -128,7 +144,12 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 				if( leftKombatant )
 				{
-					if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) )
+					//if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) && ball.position.x > leftKombatant.paddle.position.x )
+					if( ball.velocity.x < 0 &&
+					    Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) && 
+					    Collision.CircleRect( ball.collisionAreas[0], leftKombatant.paddle.boundingBox ) && 
+					    ball.position.x > leftKombatant.paddle.position.x
+					)
 					{
 						ball.hitPaddle( leftKombatant );
 					}
@@ -142,7 +163,12 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 				if( rightKombatant )
 				{
-					if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) )
+					//if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) && ball.position.x < rightKombatant.paddle.position.x )
+					if( ball.velocity.x > 0 &&
+					    Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) && 
+					    Collision.CircleRect( ball.collisionAreas[0], rightKombatant.paddle.boundingBox ) && 
+					    ball.position.x < rightKombatant.paddle.position.x
+					)
 					{
 						ball.hitPaddle( rightKombatant );
 					}

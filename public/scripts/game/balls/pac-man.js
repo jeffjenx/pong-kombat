@@ -78,5 +78,6 @@ PacMan.prototype.update = function( deltaTime ) {
 		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
 	}
 	
+	this.updateCollision( );
 	this.updateGlare( );
 };

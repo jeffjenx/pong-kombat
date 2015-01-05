@@ -32,9 +32,9 @@ function Paddle( texture ) {
 	this.patternContext = this.patternCanvas.getContext( '2d' );
 	
 	this.offset = 0.5;
-	this.size.x = viewport.width * 0.025;
+	this.size.x = viewport.width * 0.03;
 	//this.size.y = viewport.height * 0.2;
-	this.size.y = viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.08 ); 
+	this.size.y = viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ); 
 	
 	// Bigness Scale (size.y)
 	// 2.0 ~ .12

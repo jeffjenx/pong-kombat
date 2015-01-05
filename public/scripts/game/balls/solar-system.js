@@ -94,5 +94,6 @@ SolarSystem.prototype.update = function( deltaTime ) {
 	
 	this.offset.x += 64 * deltaTime;
 	
+	this.updateCollision( );
 	this.updateGlare( deltaTime );
 };

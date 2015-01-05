@@ -101,6 +101,7 @@ EyeBall.prototype.update = function( deltaTime ) {
 		this.nextMovement += Math.random( ) * 5000;
 	}
 
+	this.updateCollision( );
 	this.updateGlare( );
 	this.updateBoundingBox( );
 };

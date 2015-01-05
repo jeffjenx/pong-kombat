@@ -1,12 +1,27 @@
 var Balls = {
 	RANDOM : 0,
-	BASKETBALL : 1,
-	EIGHTBALL : 2,
-	BASEBALL : 3,
-	DEFAULT : 4,
-	EARTH : 5,
-	SMILEYFACE : 6,
-	/*SOCCERBALL : 7,*/
+	BASEBALL : 1,
+	BASKETBALL : 2,
+	BILLIARDS_BALL : 3,
+	COIN : 4,
+	CROQUET_BALL : 5,
+	DEFAULT_BALL : 6,
+	DICE : 7,
+	EMOTICON : 8,
+	EYE_BALL : 9,
+	FOIL_BALL : 10,
+	FOOD : 11,
+	FOOTBALL : 12,
+	LOGO : 13,
+	MARBLE : 14,
+	PAC_MAN : 15,
+	POKEBALL : 16,
+	PONG_BALL : 18,
+	SOCCER_BALL : 19,
+	SOLAR_SYSTEM : 20,
+	STORAGE_MEDIA : 21,
+	SUPER_MARIO : 22,
+	TENNIS_BALL : 23
 };
 
 function Ball( texture ) {
@@ -31,6 +46,10 @@ function Ball( texture ) {
 	this.lastPaddle = null;
 	this.sourceRotation = this.rotation;
 	this.targetRotation = this.rotation;
+
+	this.collisionAreas = [
+		{ type : 'circle', radius : this.width / 2, center : this.position } 
+	];
 	
 	this.addGlare( );
 }
@@ -175,6 +194,8 @@ Ball.prototype.changedRotation = function( ) {
 	} else {
 		this.targetRotation = this.rotation;
 	}
+
+	console.log( this.rotation );
 };
 
 Ball.prototype.update = function( deltaTime ) {
@@ -201,9 +222,15 @@ Ball.prototype.update = function( deltaTime ) {
 	if( this.velocity.x !== 0 || this.velocity.y !== 0 ) {
 		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
 	}
-	
+
+	this.updateCollision( );
 	this.updateGlare( );
 };
+
+Ball.prototype.updateCollision = function( ) {
+	this.collisionAreas[0].radius = this.width / 2 * this.scale;
+	this.collisionAreas[0].center = this.position;
+}
 
 Ball.prototype.updateGlare = function( ) {
 	if( this.glare ){

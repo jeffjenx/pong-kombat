@@ -14,7 +14,7 @@ TestScene.prototype = new Scene;
 TestScene.prototype.constructor = TestScene;
 
 TestScene.prototype.resetBall = function( ) {
-	this.ball = new Logo( );
+	this.ball = new DefaultBall( );
 	this.layer.addComponent( 'Ball', this.ball );
 	this.ball.set( );
 };
