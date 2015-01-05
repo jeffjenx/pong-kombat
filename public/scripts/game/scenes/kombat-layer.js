@@ -1,7 +1,7 @@
 function KombatLayer( scene ) {
 	Layer.call( this, scene );
 	
-	this.nextPowerup = this.scene.timeElapsed + 5 + Math.random( ) * 5;
+	this.nextPowerup = 0;//this.scene.timeElapsed + 5 + Math.random( ) * 5;
 }
 
 KombatLayer.prototype = new Layer;
@@ -106,7 +106,7 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 };
 
 KombatLayer.prototype.addPowerup = function( ) {
-	this.addComponent( 'Powerup', new SpeedPowerup( ) );
+	this.addComponent( 'Powerup', new TimePowerup( ) );
 };
 
 KombatLayer.prototype.update = function( deltaTime ) {
@@ -116,30 +116,21 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	var powerup = this.components['Powerup'];
 	var hud = this.scene.layers['HUD'].components['HUD'];
 	
-	/*
-	if( !powerup && this.scene.timeElapsed >= this.nextPowerup ) {
-		this.addPowerup( );
-	}
-	*/
-	
 	switch( this.scene.state ) {
 		case this.scene.states.starting :
 			return;
 		break;
 		
 		case this.scene.states.fighting :
+			if( app.settings.POWER_UPS && !powerup && this.scene.timeElapsed >= this.nextPowerup ) {
+				this.addPowerup( );
+			}
+
 			if( ball )
 			{
 				if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
 				{
 					ball.hitWall( );
-				}
-
-				if( powerup )
-				{
-					if( Collision.RectRect( ball.boundingBox, powerup.boundingBox ) ) {
-						ball.hitPowerup( );
-					}
 				}
 
 				if( leftKombatant )
@@ -201,9 +192,20 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					rightKombatant.paddle.projectile = null;
 				}
 			}
+
+			if( leftKombatant && powerup && Collision.RectRect( leftKombatant.paddle.boundingBox, powerup.boundingBox ) ) {
+				powerup.collect( leftKombatant );
+			}
+
+			if( rightKombatant && powerup && Collision.RectRect( rightKombatant.paddle.boundingBox, powerup.boundingBox ) ) {
+				powerup.collect( rightKombatant );
+			}
 		break;
 		
 		case this.scene.states.finishing :
+			if( powerup ) {
+				powerup.timedOut( );
+			}
 		break;
 	}
 	

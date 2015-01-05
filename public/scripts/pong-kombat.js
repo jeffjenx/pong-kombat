@@ -72,7 +72,11 @@ load( 'scripts/game/', [
 	'paddles/monolith-paddle',
 	'paddles/white-paddle',
 	
+	'powerups/glue-powerup',
+	'powerups/life-powerup',
+	'powerups/shield-powerup',
 	'powerups/speed-powerup',
+	'powerups/time-powerup',
 	
 	'scenes/splash-scene',
 	'scenes/title-scene',

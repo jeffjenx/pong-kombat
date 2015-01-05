@@ -972,7 +972,7 @@ the Action button.
 -------------------------------------------------------------------------------
 
 Pick up the Energy Wings power-up to enjoy a temporary speed increase, allowing
-you to avoid attacks and return volleys. 
+you to avoid attacks and return volleys a bit more easily.
 
 
 -------------------------------------------------------------------------------

@@ -4,6 +4,10 @@
   font-weight: 400;
   src: url("/fonts/ufonts.com_chicago.ttf") format("truetype");
 }
+#font-chicago {
+  font-family: 'Chicago';
+}
+
 @font-face {
   font-family: 'Inconsolata';
   font-style: normal;
@@ -16,6 +20,10 @@
   font-weight: 600;
   src: url("/fonts/Inconsolata/Inconsolata-Bold.ttf") format("truetype");
 }
+#font-inconsolata {
+  font-family: 'Inconsolata';
+}
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -46,6 +54,10 @@
   font-weight: 800;
   src: url("/fonts/Open_Sans/OpenSans-ExtraBold.ttf") format("truetype");
 }
+#font-open-sans {
+  font-family: 'Open Sans';
+}
+
 @media screen {
   body, html {
     background: url("/images/backgrounds/system1.png") repeat;

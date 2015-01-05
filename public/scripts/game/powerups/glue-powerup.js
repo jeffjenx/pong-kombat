@@ -1,8 +1,8 @@
-function SpeedPowerup( ) {
-	Sprite.call( this, 'Powerup-Speed' );
+function GluePowerup( ) {
+	Sprite.call( this, 'Powerup-Glue' );
 	
-	this.size.x = viewport.height * 0.04;
-	this.size.y = this.size.x * 2.5;
+	this.size.x = viewport.height * 0.06;
+	this.size.y = this.size.x * 2.1;
 	
 	this.position.x = viewport.width * 0.5;
 	this.position.y = Math.random( ) * viewport.height * 0.6 + viewport.height * 0.2;
@@ -30,19 +30,19 @@ function SpeedPowerup( ) {
 	}
 }
 
-SpeedPowerup.prototype = new Powerup;
-SpeedPowerup.prototype.constructor = SpeedPowerup;
+GluePowerup.prototype = new Powerup;
+GluePowerup.prototype.constructor = GluePowerup;
 
-SpeedPowerup.prototype.collect = function( kombatant ) {
+GluePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
 };
 
-SpeedPowerup.prototype.draw = function( context ) {
-	this.effect.draw( context );
+GluePowerup.prototype.draw = function( context ) {
 	Powerup.prototype.draw.call( this, context );
+	this.effect.draw( context );
 }
 
-SpeedPowerup.prototype.update = function( deltaTime ) {
+GluePowerup.prototype.update = function( deltaTime ) {
 	Powerup.prototype.update.call( this, deltaTime );
 	this.effect.update( deltaTime );
 }
