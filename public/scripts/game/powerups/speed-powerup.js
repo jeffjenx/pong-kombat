@@ -35,6 +35,7 @@ SpeedPowerup.prototype.constructor = SpeedPowerup;
 
 SpeedPowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.speedPowerup = app.gameTime + 10 * 1000;
 };
 
 SpeedPowerup.prototype.draw = function( context ) {

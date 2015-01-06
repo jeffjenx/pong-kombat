@@ -35,6 +35,7 @@ GluePowerup.prototype.constructor = GluePowerup;
 
 GluePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.gluePowerup = app.gameTime + 10 * 1000;
 };
 
 GluePowerup.prototype.draw = function( context ) {

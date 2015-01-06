@@ -6,7 +6,7 @@ function KombatScene( ) {
 	this.addLayer( 'Foreground', new ForegroundLayer( this ) );
 	this.addLayer( 'HUD', new HUDLayer( this ) );
 	
-	this.winningScore = 5;
+	this.startLife = 5;
 	this.states = {
 		announcing : 0,
 		starting : 1,
@@ -29,6 +29,7 @@ KombatScene.prototype = new Scene;
 KombatScene.prototype.constructor = KombatScene;
 
 KombatScene.prototype.addKombatant = function( kombatant ) {
+	kombatant.life = this.startLife;
 	this.layers['Kombat'].addKombatant( kombatant );
 };
 
@@ -152,8 +153,8 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.fighting :
 			if( leftKombatant )
 			{
-				if( leftKombatant.score >= this.winningScore ) {
-					this.winner = leftKombatant;
+				if( leftKombatant.life <= 0 ) {
+					this.winner = rightKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
 
 					if( app.settings.COMBAT ) {
@@ -168,7 +169,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 
 			if( rightKombatant )
 			{
-				if( rightKombatant.score >= this.winningScore ) {
+				if( rightKombatant.life <= 0 ) {
 					this.winner = rightKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
 

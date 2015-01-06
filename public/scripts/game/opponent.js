@@ -1,6 +1,6 @@
 function Opponent( ) {
 	this.paddle = null;
-	this.score = 0;
+	this.life = 0;
 	this.nextProjectileTime = app.gameTime + 2000 + Math.random( ) * 8000;
 	this.targetPosition = viewport.height * 0.5;
 }
@@ -15,6 +15,15 @@ Opponent.prototype.applyAI = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.fighting :
 			var ball = this.layer.components['Ball'];
+
+			if( ball.glued && ball.lastPaddle === this )
+			{
+				ball.glued = false;
+				var speed = viewport.width * 0.1;
+				ball.velocity.x = Math.round( speed * Math.cos( ball.rotation * Math.TO_RADIANS ) );
+				ball.velocity.y = Math.round( speed * Math.sin( ball.rotation * Math.TO_RADIANS ) );
+				ball.speed = ball.startSpeed;
+			}
 			
 			if( app.settings.DIFFICULTY === 0 )
 			{

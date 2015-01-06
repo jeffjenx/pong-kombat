@@ -25,6 +25,8 @@ function Paddle( texture ) {
 	}
 	
 	this.gloss = new Sprite( 'Paddle-Gloss' );
+
+	this.drag = 0.95;
 	
 	this.patternCanvas = document.createElement( 'canvas' );
 	this.patternCanvas.width = ( this.image ) ? this.image.width : 512;
@@ -54,6 +56,8 @@ function Paddle( texture ) {
 	// 4.5 ~ 
 	// 5.0 ~ 
 	
+	this.speedPowerup = false;
+	this.gluePowerup = false;
 	this.projectile = null;
 	this.bloodEffect = null;
 }
@@ -218,30 +222,38 @@ Paddle.prototype.getHit = function( ) {
 };
 
 Paddle.prototype.moveDown = function( ) {
+	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+
 	this.offset = this.position.y / viewport.height * 0.75;
 	
-	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 );
+	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveUp = function( ) {
+	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+
 	this.offset = this.position.y / viewport.height * 0.75;
 	
-	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 );
+	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveLeft = function( ) {
+	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+
 	//this.offset = this.position.y / viewport.height * 0.75;
 	
-	this.velocity.x = -viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 );
+	this.velocity.x = -viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveRight = function( ) {
+	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+
 	//this.offset = this.position.y / viewport.height * 0.75;
 	
-	this.velocity.x = viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 );
+	this.velocity.x = viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
 
@@ -299,12 +311,20 @@ Paddle.prototype.update = function( deltaTime ) {
 		this.projectile.update( deltaTime );
 	}
 	
-	this.velocity = this.velocity.multiply( 0.95 );
+	this.velocity = this.velocity.multiply( this.drag );
 	
 	if( this.bloodEffect ) {
 		this.bloodEffect.update( deltaTime );
 		if( this.bloodEffect.particles.count === 0 ) {
 			this.bloodEffect = null;
 		}
+	}
+
+	if( this.speedPowerup && app.gameTime > this.speedPowerup ) {
+		this.speedPowerup = false;
+	}
+
+	if( this.gluePowerup && app.gameTime > this.gluePowerup ) {
+		this.gluePowerup = false;
 	}
 };

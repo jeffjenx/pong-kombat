@@ -1,5 +1,5 @@
 function Player( ) {
-	this.score = 0;
+	this.life = 0;
 	this.paddle = null;
 }
 
@@ -45,6 +45,16 @@ Player.prototype.handleInput = function( ) {
 			if( this.paddle.canShootProjectile( ) && InputManager.checkSequence( this.paddle.projectileSequence ) )
 			{
 				this.paddle.shootProjectile( );
+			}
+
+			var ball = this.layer.components['Ball'];
+			if( ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
+			{
+				ball.glued = false;
+				var speed = viewport.width * 0.1;
+				ball.velocity.x = Math.round( speed * Math.cos( ball.rotation * Math.TO_RADIANS ) );
+				ball.velocity.y = Math.round( speed * Math.sin( ball.rotation * Math.TO_RADIANS ) );
+				ball.speed = ball.startSpeed;
 			}
 		break;
 	}

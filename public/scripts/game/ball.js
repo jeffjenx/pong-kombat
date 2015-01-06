@@ -52,6 +52,8 @@ function Ball( texture ) {
 	];
 	
 	this.addGlare( );
+	this.glued = false;
+	this.glueOffset = new Vector( [0,0] );
 }
 
 Ball.prototype = new Sprite;
@@ -114,8 +116,22 @@ Ball.prototype.drawGlare = function( context ) {
 };
 
 Ball.prototype.hitPaddle = function( kombatant ) {
+	this.lastPaddle = kombatant;
+
 	// Reflect ball
 	this.velocity.x *= -1;
+	
+	this.changedRotation();
+
+	if( kombatant.paddle.gluePowerup ) {
+		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
+		this.velocity.x = 0;
+		this.velocity.y = 0;
+		this.glueOffset.x = this.position.x - kombatant.paddle.position.x;
+		this.glueOffset.y = this.position.y - kombatant.paddle.position.y;
+		this.glued = true;
+		return;
+	}
 	
 	// Handle "paddle friction"
 	var x = this.velocity.x;
@@ -141,9 +157,6 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 		this.beepSound.stop( );
 		this.beepSound.play( );
 	}
-	
-	this.lastPaddle = kombatant;
-	this.changedRotation();
 };
 
 Ball.prototype.hitPowerup = function( ) {
@@ -194,8 +207,6 @@ Ball.prototype.changedRotation = function( ) {
 	} else {
 		this.targetRotation = this.rotation;
 	}
-
-	console.log( this.rotation );
 };
 
 Ball.prototype.update = function( deltaTime ) {
@@ -221,6 +232,13 @@ Ball.prototype.update = function( deltaTime ) {
 	this.targetRotation = this.rotation;
 	if( this.velocity.x !== 0 || this.velocity.y !== 0 ) {
 		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
+	}
+
+	if( this.glued ) {
+		this.position = this.lastPaddle.paddle.position.add( this.glueOffset );
+		//this.position = this.position.add( this.lastPaddle.paddle.velocity.multiply( deltaTime ) );
+		//this.position.x += this.lastPaddle.paddle.velocity.x;
+		//this.position.y += this.lastPaddle.paddle.velocity.y;
 	}
 
 	this.updateCollision( );

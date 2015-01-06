@@ -106,7 +106,7 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 };
 
 KombatLayer.prototype.addPowerup = function( ) {
-	this.addComponent( 'Powerup', new TimePowerup( ) );
+	this.addComponent( 'Powerup', new GluePowerup( ) );
 };
 
 KombatLayer.prototype.update = function( deltaTime ) {
@@ -128,6 +128,10 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 			if( ball )
 			{
+				if( ball.scale > 1 ) {
+					ball.scale = 1;
+				}
+
 				if( ( ball.velocity.y > 0 && ball.boundingBox.bottom > viewport.height ) || ( ball.velocity.y < 0 && ball.boundingBox.top < hud.size.y ) )
 				{
 					ball.hitWall( );
@@ -147,7 +151,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 					if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
 					{
-						leftKombatant.score += 1;
+						rightKombatant.life -= 1;
 						this.setBall( Balls.RANDOM );
 					}
 				}
@@ -166,7 +170,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 					if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
 					{
-						rightKombatant.score += 1;
+						leftKombatant.life -= 1;
 						this.setBall( Balls.RANDOM );
 					}
 				}
@@ -179,7 +183,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						// blood
 						rightKombatant.paddle.getHit( );
 					}
-					leftKombatant.score += 1;
+					rightKombatant.life -= 1;
 					leftKombatant.paddle.projectile = null;
 				}
 				
@@ -188,7 +192,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						// blood
 						leftKombatant.paddle.getHit( );
 					}
-					rightKombatant.score += 1;
+					leftKombatant.life -= 1;
 					rightKombatant.paddle.projectile = null;
 				}
 			}
