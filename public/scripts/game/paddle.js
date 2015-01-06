@@ -56,8 +56,10 @@ function Paddle( texture ) {
 	// 4.5 ~ 
 	// 5.0 ~ 
 	
+	this.shieldPowerup = false;
 	this.speedPowerup = false;
 	this.gluePowerup = false;
+	this.timePowerup = false;
 	this.projectile = null;
 	this.bloodEffect = null;
 }
@@ -320,11 +322,19 @@ Paddle.prototype.update = function( deltaTime ) {
 		}
 	}
 
+	if( this.shieldPowerup && app.gameTime > this.shieldPowerup ) {
+		this.shieldPowerup = false;
+	}
+
 	if( this.speedPowerup && app.gameTime > this.speedPowerup ) {
 		this.speedPowerup = false;
 	}
 
 	if( this.gluePowerup && app.gameTime > this.gluePowerup ) {
 		this.gluePowerup = false;
+	}
+
+	if( this.timePowerup && app.gameTime > this.timePowerup ) {
+		this.timePowerup = false;
 	}
 };

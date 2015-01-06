@@ -35,6 +35,7 @@ ShieldPowerup.prototype.constructor = ShieldPowerup;
 
 ShieldPowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.shieldPowerup = app.gameTime + 10 * 1000;
 };
 
 ShieldPowerup.prototype.draw = function( context ) {

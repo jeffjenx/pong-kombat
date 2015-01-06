@@ -43,7 +43,7 @@
  + Basic Controls................. 4.1   Power-Ups.......................... 8 
  + Advanced Controls.............. 4.2   + Meat........................... 8.1 
  + Special Abilites............... 4.4   + Glue........................... 8.2 
- + Using A Keyboard............... 4.5   + Energy Wings................... 8.3 
+ + Using A Keyboard............... 4.5   + Energy Drink................... 8.3 
  + Using Touch-Enabled Devices.... 4.6   + Shield......................... 8.4 
  + Using A Gamepad Controller..... 4.7   + Stopwatch...................... 8.5 
    - Supported Gamepads......... 4.7.1 
@@ -963,15 +963,15 @@ Pick up the Meat power-up and you will regain some life.
 -------------------------------------------------------------------------------
 
 After collecting the Glue power-up, the ball will get stuck to your paddle for 
-a short period o time, enabling you to strategically toss it back by pressing 
+a short period of time, enabling you to strategically toss it back by pressing 
 the Action button.
 
 
 -------------------------------------------------------------------------------
-  8.3                           Energy Wings
+  8.3                           Energy Drink
 -------------------------------------------------------------------------------
 
-Pick up the Energy Wings power-up to enjoy a temporary speed increase, allowing
+Pick up the Energy Drink power-up to enjoy a temporary speed increase, allowing
 you to avoid attacks and return volleys a bit more easily.
 
 

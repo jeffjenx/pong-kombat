@@ -35,6 +35,7 @@ TimePowerup.prototype.constructor = TimePowerup;
 
 TimePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.timePowerup = app.gameTime + 10 * 1000;
 };
 
 TimePowerup.prototype.draw = function( context ) {

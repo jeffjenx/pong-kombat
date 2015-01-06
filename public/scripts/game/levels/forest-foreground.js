@@ -4,16 +4,19 @@ function ForestForegroundLayer( scene ) {
 	this.trees1 = new Sprite( 'Trees-1' );
 	this.trees1.size.x = viewport.width;
 	this.trees1.size.y = viewport.height;
+	this.trees1.opacity = 0.75;
 	this.addComponent( 'Trees1', this.trees1 );
 
 	this.trees2 = new Sprite( 'Trees-2' );
 	this.trees2.size.x = viewport.width;
 	this.trees2.size.y = viewport.height;
+	this.trees2.opacity = this.trees1.opacity;
 	this.addComponent( 'Trees2', this.trees2 );
 
 	this.trees3 = new Sprite( 'Trees-3' );
 	this.trees3.size.x = viewport.width;
 	this.trees3.size.y = viewport.height;
+	this.trees3.opacity = this.trees1.opacity;
 	this.addComponent( 'Trees3', this.trees3 );
 }
 

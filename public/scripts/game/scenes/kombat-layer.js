@@ -106,7 +106,7 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 };
 
 KombatLayer.prototype.addPowerup = function( ) {
-	this.addComponent( 'Powerup', new GluePowerup( ) );
+	this.addComponent( 'Powerup', new TimePowerup( ) );
 };
 
 KombatLayer.prototype.update = function( deltaTime ) {
@@ -154,6 +154,10 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						rightKombatant.life -= 1;
 						this.setBall( Balls.RANDOM );
 					}
+
+					if( leftKombatant.paddle.timePowerup && ball.velocity.x < 0 && ball.position.x < viewport.width / 2 && !ball.bulletTimed ) {
+						ball.bulletTimed = true;
+					}
 				}
 
 				if( rightKombatant )
@@ -173,12 +177,16 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						leftKombatant.life -= 1;
 						this.setBall( Balls.RANDOM );
 					}
+
+					if( rightKombatant.paddle.timePowerup && ball.velocity.x > 0 && ball.position.x > viewport.width / 2 && !ball.bulletTimed ) {
+						ball.bulletTimed = true;
+					}
 				}
 			}
 
 			if( leftKombatant && rightKombatant )
 			{
-				if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+				if( leftKombatant.paddle.projectile && !rightKombatant.paddle.shieldPowerup && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
 					if( !app.settings.CENSORSHIP ) {
 						// blood
 						rightKombatant.paddle.getHit( );
@@ -187,7 +195,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					leftKombatant.paddle.projectile = null;
 				}
 				
-				if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+				if( rightKombatant.paddle.projectile && !leftKombatant.paddle.shieldPowerup && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
 					if( !app.settings.CENSORSHIP ) {
 						// blood
 						leftKombatant.paddle.getHit( );

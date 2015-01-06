@@ -54,6 +54,7 @@ function Ball( texture ) {
 	this.addGlare( );
 	this.glued = false;
 	this.glueOffset = new Vector( [0,0] );
+	this.bulletTimed = false;
 }
 
 Ball.prototype = new Sprite;
@@ -131,6 +132,10 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 		this.glueOffset.y = this.position.y - kombatant.paddle.position.y;
 		this.glued = true;
 		return;
+	}
+
+	if( ball.bulletTimed ) {
+		this.bulletTimed = false;
 	}
 	
 	// Handle "paddle friction"
@@ -222,7 +227,15 @@ Ball.prototype.update = function( deltaTime ) {
 			this.glare.scale = this.scale;
 			this.glare.opacity = 0.666 * this.opacity;
 		}
-		Sprite.prototype.update.call( this, deltaTime );
+
+		if( this.bulletTimed ) {
+			this.position = this.position.add( this.velocity.multiply( deltaTime * 0.5 ) );
+			
+			this.updateBoundingBox( );
+			this.updateSize( );
+		} else {
+			Sprite.prototype.update.call( this, deltaTime );
+		}
 	}
 	
 	this.offset.x += this.velocity.x * deltaTime * 3;
