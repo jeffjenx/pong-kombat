@@ -1,13 +1,14 @@
-function Projectile( sourcePaddle ) {
-	Sprite.call( this, sourcePaddle.resource || '1' );
+function Projectile( ) {
+	Sprite.call( this, 'White' );
 	
 	this.size.x = viewport.height * 0.07;
 	this.size.y = viewport.height * 0.07;
-	this.position.x = sourcePaddle.position.x;
-	this.position.y = sourcePaddle.position.y;
-	this.sourcePaddle = sourcePaddle;
+	//this.position.x = sourcePaddle.position.x;
+	//this.position.y = sourcePaddle.position.y;
+	//this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
 
+	/*
 	if( sourcePaddle.effect ) {
 		this.effect = new ParticleSystem();
 		this.effect.particleImages = sourcePaddle.effect.particleImages;
@@ -26,6 +27,8 @@ function Projectile( sourcePaddle ) {
 		this.effect.fadeSpeed = sourcePaddle.effect.fadeSpeed;
 		this.effect.attachTo( this );
 	}
+	*/
+
 	/*
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Fire1'],Resources['Particle-Fire2'],Resources['Particle-Fire3']];
@@ -77,8 +80,10 @@ Projectile.prototype.hitPaddle = function( ) {
 Projectile.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
-	if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
-		this.sourcePaddle.projectile = null;
+	if( this.sourcePaddle ) {
+		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
+			this.sourcePaddle.projectile = null;
+		}	
 	}
 
 	if( this.scale < 1 ) {

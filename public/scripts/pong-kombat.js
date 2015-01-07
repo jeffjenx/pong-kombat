@@ -78,6 +78,8 @@ load( 'scripts/game/', [
 	'powerups/speed-powerup',
 	'powerups/time-powerup',
 	
+	'projectiles/ice-blast-projectile',
+
 	'scenes/splash-scene',
 	'scenes/title-scene',
 	'scenes/pick-paddle-scene',

@@ -55,6 +55,8 @@ function Paddle( texture ) {
 	// 4.0 ~ 
 	// 4.5 ~ 
 	// 5.0 ~ 
+
+	this.shield = null;
 	
 	this.shieldPowerup = false;
 	this.speedPowerup = false;
@@ -69,6 +71,10 @@ Paddle.prototype.constructor = Paddle;
 
 Paddle.prototype.canShootProjectile = function( ) {
 	return app.settings.COMBAT && this.projectile === null;
+};
+
+Paddle.prototype.canShield = function( ) {
+	return false;
 };
 
 Paddle.prototype.draw = function( context ) {
@@ -174,6 +180,10 @@ Paddle.prototype.draw = function( context ) {
 	if( this.bloodEffect ) {
 		this.bloodEffect.draw( context );
 	}
+};
+
+Paddle.prototype.enableShield = function( ) {
+	return false;
 };
 
 Paddle.prototype.getHit = function( ) {
@@ -311,6 +321,10 @@ Paddle.prototype.update = function( deltaTime ) {
 	
 	if( this.projectile ) {
 		this.projectile.update( deltaTime );
+
+		if( this.projectile.boundingBox.right < 0 || this.projectile.boundingBox.left > viewport.width ) {
+			this.projectile = null;
+		}
 	}
 	
 	this.velocity = this.velocity.multiply( this.drag );

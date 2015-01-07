@@ -167,7 +167,7 @@
 		"Paddle-Red"           : "images/paddles/red-texture.png",
 		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
 		"Paddle-Gloss"         : "images/paddles/paddle-gloss.png",
-		
+
 		"Particle-BlackSmoke1" : "images/effects/particle-black-smoke-1.png",
 		"Particle-BlackSmoke2" : "images/effects/particle-black-smoke-2.png",
 		"Particle-Blood1"      : "images/effects/particle-blood-1.png",
@@ -208,6 +208,8 @@
 		"Powerup-Shield" : "images/powerups/shield.png",
 		"Powerup-Speed" : "images/powerups/energy-wings.png",
 		"Powerup-Time" : "images/powerups/stopwatch.png",
+		
+		"Projectile-Ice-Blast" : "images/paddles/ice-blast.png",
 		
 		"Vehicle1"  : "images/vehicles/1970-dodge-charger.png",
 		"Vehicle2"  : "images/vehicles/1987-toyota-pickup.png",

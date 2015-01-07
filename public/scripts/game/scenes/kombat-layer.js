@@ -186,7 +186,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 			if( leftKombatant && rightKombatant )
 			{
-				if( leftKombatant.paddle.projectile && !rightKombatant.paddle.shieldPowerup && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+				if( leftKombatant.paddle.projectile && !rightKombatant.paddle.shieldPowerup && !rightKombatant.paddle.shield && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
 					if( !app.settings.CENSORSHIP ) {
 						// blood
 						rightKombatant.paddle.getHit( );
@@ -195,7 +195,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					leftKombatant.paddle.projectile = null;
 				}
 				
-				if( rightKombatant.paddle.projectile && !leftKombatant.paddle.shieldPowerup && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+				if( rightKombatant.paddle.projectile && !leftKombatant.paddle.shieldPowerup && !leftKombatant.paddle.shield && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
 					if( !app.settings.CENSORSHIP ) {
 						// blood
 						leftKombatant.paddle.getHit( );

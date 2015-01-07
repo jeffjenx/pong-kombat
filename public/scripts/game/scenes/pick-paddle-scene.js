@@ -238,6 +238,16 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		}
 	}
 
+	// Secret Level Select Menu (any direction 11 times)
+	if( InputManager.checkSequence([Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP,Buttons.UP])
+	 || InputManager.checkSequence([Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN,Buttons.DOWN])
+	 || InputManager.checkSequence([Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT])
+	 || InputManager.checkSequence([Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT])
+	) {
+		this.addLayer( 'Menu', new LevelMenu( this ) );	
+	}
+
+	/*
 	// Secret Level Select Menu (Hold direction for # seconds)
 	var now = Date.now( );
 	var buttons = [ Buttons.DOWN, Buttons.UP, Buttons.LEFT, Buttons.RIGHT ];
@@ -251,6 +261,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			}
 		}
 	}
+	*/
 	
 	if( InputManager.checkButtonPress( Buttons.DOWN ) )
 	{
