@@ -502,7 +502,6 @@ Attributes
 
 Abilities
     Ice Blast (Projectile)    - Left, Down, Right, Action
-    Ice Replica (Shield)      - Down, Up, Down, Action
     Frozen Shards (Dismantle) - Left, Right, Down, Action
 
 
@@ -519,9 +518,8 @@ Attributes
     Speed - ****...... (Slow)
 
 Abilites
-    Acid Blast (Projectile) - Left, Right, Right, Action
-    Arrow (Projectile)      - Left, Left, Right, Action
-    300+1 (Dismantle)       - Left, Right, Left, Action
+    Arrow (Projectile) - Left, Up, Right, Action
+    300+1 (Dismantle)  - Left, Right, Left, Action
 
 
   5.1.3                         Purple Paddle                                   
@@ -538,7 +536,6 @@ Attributes
 
 Abilites
     Lightning Sai (Projectile) - Up, Right, Down, Action
-    Control Orb (Projectile)   - Down, Left, Right, Action
     1.21 Gigawatts (Dismantle) - Right, Down, Left, Action
 
 
@@ -555,9 +552,8 @@ Attributes
     Speed - *****..... (Slow)
 
 Abilities
-    Shadow Ball (Projectile) - Left, Left, Right, Action
-    Shadow Paddle (Shield)   - Left, Right, Down, Action
-    Black Mass (Dismantle)   - Left, Right, Right, Action
+    Shadow Paddle (Projectile) - Left, Right, Right, Action
+    Black Mass (Dismantle)     - Right, Left, Right, Action
 
 
   5.1.5                         Yellow Paddle                                   
@@ -573,9 +569,8 @@ Attributes
     Speed - ******.... (Average)
 
 Abilities
-    Fireball (Projectile)     - Left, Left, Right, Action
-    Flamethrower (Projectile) - Left, Left, Up, Action
-    Hellfire (Dismantle)      - Left, Up, Right, Action
+    Fireball (Projectile) - Left, Left, Right, Action
+    Hellfire (Dismantle)  - Down, Right, Up, Action
 
 
 -------------------------------------------------------------------------------
@@ -595,9 +590,8 @@ Attributes
     Speed - *******... (Quick)
 
 Abilities
-    Laser (Projectile)         - Right, Left, Right, Action
-    Cloak (Shield)             - Left, Left, Left, Action
-    Prey For Mercy (Dismantle) - Left, Up, Right, Action
+    Laser (Projectile)         - Right, Right, Left, Action
+    Prey For Mercy (Dismantle) - Up, Left, Right, Action
 
 
   5.2.2                           Monolith                                   
@@ -613,8 +607,7 @@ Attributes
     Speed - ******.... (Average)
 
 Abilities
-    Rock Toss (Projectile)  - Right, Left, Right, Action
-    Stone Wall (Shield)     - Right, Down, Left, Action
+    Rock Toss (Projectile)  - Down, Up, Down, Action
     Rock'n'Roll (Dismantle) - Up, Down, Up, Action
 
 

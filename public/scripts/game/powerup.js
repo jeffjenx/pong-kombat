@@ -1,7 +1,9 @@
 var Powerups = {
-	SPEED : 0,
-	SHIELD : 1,
-	SIZE : 2
+	GLUE : 0,
+	LIFE : 1,
+	SHIELD : 3,
+	SPEED : 4,
+	TIME : 5
 };
 
 function Powerup( ) {
@@ -20,12 +22,12 @@ Powerup.prototype.constructor = Powerup;
 
 Powerup.prototype.collect = function( kombatant ) {
 	this.layer.removeComponent( this.id );
-	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 5;
+	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 10;
 };
 
 Powerup.prototype.timedOut = function( ) {
 	this.layer.removeComponent( this.id );
-	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 5;
+	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 10;
 }
 
 Powerup.prototype.update = function( deltaTime ) {

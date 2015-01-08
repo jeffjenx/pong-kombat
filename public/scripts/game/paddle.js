@@ -55,13 +55,13 @@ function Paddle( texture ) {
 	// 4.0 ~ 
 	// 4.5 ~ 
 	// 5.0 ~ 
-
-	this.shield = null;
 	
 	this.shieldPowerup = false;
 	this.speedPowerup = false;
 	this.gluePowerup = false;
 	this.timePowerup = false;
+
+	this.shield = null;
 	this.projectile = null;
 	this.bloodEffect = null;
 }
@@ -71,10 +71,6 @@ Paddle.prototype.constructor = Paddle;
 
 Paddle.prototype.canShootProjectile = function( ) {
 	return app.settings.COMBAT && this.projectile === null;
-};
-
-Paddle.prototype.canShield = function( ) {
-	return false;
 };
 
 Paddle.prototype.draw = function( context ) {
@@ -172,6 +168,10 @@ Paddle.prototype.draw = function( context ) {
 	);
 	context.restore( );
 	*/
+
+	if( this.shield ) {
+		this.shield.draw( context );
+	}
 	
 	if( this.projectile ) {
 		this.projectile.draw( context );
@@ -180,10 +180,6 @@ Paddle.prototype.draw = function( context ) {
 	if( this.bloodEffect ) {
 		this.bloodEffect.draw( context );
 	}
-};
-
-Paddle.prototype.enableShield = function( ) {
-	return false;
 };
 
 Paddle.prototype.getHit = function( ) {
@@ -320,10 +316,10 @@ Paddle.prototype.update = function( deltaTime ) {
 	//this.offset = this.position.y / viewport.height * 0.75;
 	
 	if( this.projectile ) {
-		this.projectile.update( deltaTime );
-
 		if( this.projectile.boundingBox.right < 0 || this.projectile.boundingBox.left > viewport.width ) {
 			this.projectile = null;
+		} else {
+			this.projectile.update( deltaTime );
 		}
 	}
 	
@@ -336,7 +332,26 @@ Paddle.prototype.update = function( deltaTime ) {
 		}
 	}
 
+	if( this.shield )
+	{
+		this.shield.position.x = this.position.x;
+		this.shield.position.y = this.position.y;
+		this.shield.size.y = this.size.y * this.scale;
+		this.shield.size.x = this.shield.size.y;
+		this.shield.rotation += 45 * deltaTime;
+		if( this.shield.scale < 1 ) {
+			this.shield.scale += 3 * deltaTime;
+		} else {
+			this.shield.scale = (Math.sin( app.gameTime / 250 ) * 0.5 + 0.5) * 0.15 + 1;
+		}
+
+		if( this.shield.rotation > 360 ) {
+			this.shield.rotation -= 360;
+		}
+	}
+
 	if( this.shieldPowerup && app.gameTime > this.shieldPowerup ) {
+		this.shield = null;
 		this.shieldPowerup = false;
 	}
 

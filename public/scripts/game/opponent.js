@@ -157,13 +157,15 @@ Opponent.prototype.applyAI = function( ) {
 		break;
 		
 		case this.layer.scene.states.finishing :
-			if( !this.randomizer ) {
-				this.randomizer = Math.random( );
-			}
-			if( this.randomizer < 0.11 ) {
-				this.layer.scene.changeState( this.layer.scene.states.dismantling );
-			} else if( this.paddle.canShootProjectile( ) ) {
-				this.paddle.shootProjectile( );
+			if( SceneManager.currentScene.winner === this ) {
+				if( !this.randomizer ) {
+					this.randomizer = Math.random( );
+				}
+				if( this.randomizer < 0.11 ) {
+					this.layer.scene.changeState( this.layer.scene.states.dismantling );
+				} else if( this.paddle.canShootProjectile( ) ) {
+					this.paddle.shootProjectile( );
+				}
 			}
 		break;
 	}

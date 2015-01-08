@@ -5,8 +5,8 @@ function ShifterPaddle( ) {
 	this.bigness = 2.50;
 	this.quickness = 3.50;
 	
-	this.projectileSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
-	this.dismantleSequence = [ Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.ACTION ];
+	this.projectileSequence = [ Buttons.RIGHT, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
+	this.dismantleSequence = [ Buttons.UP, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 
 	this.endStory = "shifter end story";
 	this.story = "shifter story";

@@ -90,22 +90,17 @@ function PickPaddleScene( )
 	randomPaddle.effect.maxOpacity = 0.3;
 	randomPaddle.effect.rotationSpeed = 1;
 	randomPaddle.effect.scaleSpeed = 3;
+	randomPaddle.effect.attachTo( randomPaddle );
 	
 	randomPaddle.draw = function( context )
 	{
+		this.effect.draw( context );
 		Sprite.prototype.draw.call( this, context );
-		randomPaddle.effect.draw( context );
 	};
 	
 	randomPaddle.update = function( deltaTime )
 	{
-		Paddle.prototype.update.call( this, deltaTime );
-		
-		this.effect.position = this.position;
-		this.effect.rotation = this.rotation;
-		this.effect.size.x = this.size.x * this.scale;
-		this.effect.size.y = this.size.y * this.scale;
-		this.effect.scale = this.scale;
+		Sprite.prototype.update.call( this, deltaTime );
 		this.effect.update( deltaTime );
 	};
 	

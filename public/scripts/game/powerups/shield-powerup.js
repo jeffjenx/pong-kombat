@@ -35,6 +35,9 @@ ShieldPowerup.prototype.constructor = ShieldPowerup;
 
 ShieldPowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.shield = new Sprite( 'Particle-Bubble' );
+	kombatant.paddle.shield.opacity = 0.5;
+	kombatant.paddle.shield.scale = 0;
 	kombatant.paddle.shieldPowerup = app.gameTime + 10 * 1000;
 };
 

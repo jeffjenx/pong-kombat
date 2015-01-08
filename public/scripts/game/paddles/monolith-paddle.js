@@ -5,7 +5,7 @@ function MonolithPaddle( ) {
 	this.bigness = 5.00;
 	this.quickness = 3.00;
 
-	this.projectileSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
+	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
 	this.endStory = "monolith end story";

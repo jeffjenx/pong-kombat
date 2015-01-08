@@ -22,7 +22,7 @@ function KombatScene( ) {
 	//this.layers['Kombat'].setBall( Balls.DEFAULT );
 
 	this.screamSound = new Sound( 'Scream' );
-	this.setLevel( Levels.FOREST );
+	this.setLevel( Levels.RANDOM );
 }
 
 KombatScene.prototype = new Scene;
@@ -170,7 +170,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 			if( rightKombatant )
 			{
 				if( rightKombatant.life <= 0 ) {
-					this.winner = rightKombatant;
+					this.winner = leftKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
 
 					if( app.settings.COMBAT ) {

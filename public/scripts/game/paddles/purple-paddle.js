@@ -56,7 +56,7 @@ PurplePaddle.prototype.addEffect = function( ) {
 			context.save();
 			context.globalAlpha = p.opacity;
 			if( this.attachedObject ) {
-				context.translate( this.attachedObject.position.x + p.position.x - p.startPosition.x, this.addatchedObject.position.y + p.position.y - p.startPosition.y );
+				context.translate( this.attachedObject.position.x + p.position.x - p.startPosition.x, this.attachedObject.position.y + p.position.y - p.startPosition.y );
 			} else {
 				context.translate( this.position.x + p.position.x - p.startPosition.x, this.position.y + p.position.y - p.startPosition.y );
 			}
@@ -131,10 +131,22 @@ PurplePaddle.prototype.draw = function( context ) {
 	}
 };
 
-
 PurplePaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+	this.projectile = new LightningSaiProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+		this.projectile.flipH = true;
+	}
 };
 
 PurplePaddle.prototype.update = function( deltaTime ) {

@@ -6,7 +6,6 @@ function BluePaddle( ) {
 	this.quickness = 3.00;
 	
 	this.projectileSequence = [ Buttons.LEFT, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
-	this.shieldSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.DOWN, Buttons.ACTION ];
 	
 	this.endStory = "blue end story";
@@ -33,16 +32,10 @@ function BluePaddle( ) {
 	//for( var i = 0; i < this.effect.maxLife; i++ ) {
 	//	this.effect.update( 1 / 60 );
 	//}
-
-	this.shield = null;
 }
 
 BluePaddle.prototype = new Paddle;
 BluePaddle.prototype.constructor = BluePaddle;
-
-Paddle.prototype.canShield = function( ) {
-	return app.settings.COMBAT && this.shield === null;
-};
 
 BluePaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
@@ -60,13 +53,6 @@ BluePaddle.prototype.draw = function( context ) {
 	if( this.shield ) {
 		this.shield.draw( context );
 	}
-};
-
-BluePaddle.prototype.enableShield = function( ) {
-	this.shield = new Sprite( 'Particle-Bubble' );
-	this.shield.opacity = 0.33;
-	this.shield.scale = 0;
-	this.shield.endTime = app.gameTime + 10 * 1000;
 };
 
 BluePaddle.prototype.shootProjectile = function( ) {
@@ -102,33 +88,7 @@ BluePaddle.prototype.shootProjectile = function( ) {
 	}
 };
 
-BluePaddle.prototype.removeShield = function( ) {
-	this.shield = null;
-};
-
 BluePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.effect.update( deltaTime );
-
-	if( this.shield ) {
-		this.shield.position.x = this.position.x;
-		this.shield.position.y = this.position.y;
-		this.shield.size.y = this.size.y * this.scale * 1.25;
-		this.shield.size.x = this.shield.size.y;
-		this.shield.rotation += 45 * deltaTime;
-		if( this.shield.scale < 1 ) {
-			this.shield.scale += 2 * deltaTime;
-		} else {
-			this.shield.scale = 1;
-		}
-
-		if( this.shield.rotation > 360 ) {
-			this.shield.rotation -= 360;
-		}
-
-		if( app.gameTime > this.shield.endTime ) {
-			this.removeShield( );
-		}
-	}
-	
+	this.effect.update( deltaTime );	
 };

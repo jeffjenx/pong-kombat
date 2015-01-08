@@ -78,7 +78,11 @@ load( 'scripts/game/', [
 	'powerups/speed-powerup',
 	'powerups/time-powerup',
 	
+	'projectiles/fireball-projectile',
 	'projectiles/ice-blast-projectile',
+	'projectiles/green-arrow-projectile',
+	'projectiles/lightning-sai-projectile',
+	'projectiles/shadow-projectile',
 
 	'scenes/splash-scene',
 	'scenes/title-scene',

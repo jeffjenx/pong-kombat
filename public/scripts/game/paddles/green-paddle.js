@@ -5,7 +5,7 @@ function GreenPaddle( ) {
 	this.bigness = 2.50;
 	this.quickness = 2.00;
 	
-	this.projectileSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
+	this.projectileSequence = [ Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 
 	this.endStory = "green end story";
@@ -88,9 +88,17 @@ GreenPaddle.prototype.draw = function( context ) {
 		height * 1.15
 	);
 	context.restore();
+
+	if( this.shield ) {
+		this.shield.draw( context );
+	}
 	
 	if( this.projectile ) {
 		this.projectile.draw( context );
+	}
+
+	if( this.bloodEffect ) {
+		this.bloodEffect.draw( context );
 	}
 };
 
@@ -104,8 +112,21 @@ GreenPaddle.prototype.dismantle = function( opponent ) {
 };
 
 GreenPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+	this.projectile = new GreenArrowProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+		this.projectile.flipH = true;
+	}
 };
 
 GreenPaddle.prototype.update = function( deltaTime ) {

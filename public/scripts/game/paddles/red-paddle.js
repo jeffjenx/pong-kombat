@@ -5,8 +5,8 @@ function RedPaddle( ) {
 	this.bigness = 2.00;
 	this.quickness = 2.50;
 	
-	this.projectileSequence = [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
-	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
+	this.projectileSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
+	this.dismantleSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 
 	this.endStory = "red end story";
 	this.story = "red story";
@@ -23,8 +23,8 @@ function RedPaddle( ) {
 	this.effect.minParticleSize = this.size.x * 0.3;
 	this.effect.maxParticleSize = this.size.x * 0.5;
 	this.effect.minLife = 50;
-	this.effect.maxLife = 200;
-	this.effect.maxOpacity = 0.4;
+	this.effect.maxLife = 150;
+	this.effect.maxOpacity = 0.8;
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 5;
 	this.effect.compositeOperation = 'darker';
@@ -49,8 +49,21 @@ RedPaddle.prototype.draw = function( context ) {
 
 
 RedPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+	this.projectile = new ShadowProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+		this.projectile.flipH = true;
+	}
 };
 
 RedPaddle.prototype.update = function( deltaTime ) {

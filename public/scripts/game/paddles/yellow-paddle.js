@@ -6,7 +6,7 @@ function YellowPaddle( ) {
 	this.quickness = 3.00;
 
 	this.projectileSequence = [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
-	this.dismantleSequence = [ Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.ACTION ];
+	this.dismantleSequence = [ Buttons.DOWN, Buttons.RIGHT, Buttons.UP, Buttons.ACTION ];
 	
 	this.endStory = "yellow end story";
 	this.story = "yellow story";
@@ -50,8 +50,28 @@ YellowPaddle.prototype.draw = function( context ) {
 };
 
 YellowPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+
+	this.projectile = new FireballProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+	}
+	
+	if( this.projectile.effect ) {
+		this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
+		this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
+		this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
+		this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
+	}
 };
 
 YellowPaddle.prototype.update = function( deltaTime ) {

@@ -47,11 +47,6 @@ Player.prototype.handleInput = function( ) {
 				this.paddle.shootProjectile( );
 			}
 
-			if( this.paddle.canShield( ) && InputManager.checkSequence( this.paddle.shieldSequence ) )
-			{
-				this.paddle.enableShield( );
-			}
-
 			var ball = this.layer.components['Ball'];
 			if( ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
 			{

@@ -106,7 +106,23 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 };
 
 KombatLayer.prototype.addPowerup = function( ) {
-	this.addComponent( 'Powerup', new TimePowerup( ) );
+	var count = 0;
+	for( var i in Powerups) {
+		if( Powerups.hasOwnProperty(i) && i !== "RANDOM" ) {
+			++count;
+		}
+	}
+	var randomPowerup = Math.floor( Math.random( ) * count );
+	var powerup;
+	switch( randomPowerup ) {
+		case Powerups.GLUE : powerup = new GluePowerup( ); break;
+		case Powerups.LIFE : powerup = new LifePowerup( ); break;
+		case Powerups.SHIELD : powerup = new ShieldPowerup( ); break;
+		case Powerups.SPEED : powerup = new SpeedPowerup( ); break;
+		case Powerups.TIME : powerup = new TimePowerup( ); break;
+		default : powerup = new SpeedPowerup( ); break;
+	}
+	this.addComponent( 'Powerup', powerup );
 };
 
 KombatLayer.prototype.update = function( deltaTime ) {
@@ -186,21 +202,27 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 			if( leftKombatant && rightKombatant )
 			{
-				if( leftKombatant.paddle.projectile && !rightKombatant.paddle.shieldPowerup && !rightKombatant.paddle.shield && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
-					if( !app.settings.CENSORSHIP ) {
-						// blood
-						rightKombatant.paddle.getHit( );
+				if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+					if( !rightKombatant.paddle.shieldPowerup )
+					{
+						if( !app.settings.CENSORSHIP ) {
+							// blood
+							rightKombatant.paddle.getHit( );
+						}
+						rightKombatant.life -= 1;
 					}
-					rightKombatant.life -= 1;
 					leftKombatant.paddle.projectile = null;
 				}
 				
-				if( rightKombatant.paddle.projectile && !leftKombatant.paddle.shieldPowerup && !leftKombatant.paddle.shield && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
-					if( !app.settings.CENSORSHIP ) {
-						// blood
-						leftKombatant.paddle.getHit( );
+				if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+					if( !leftKombatant.paddle.shieldPowerup )
+					{
+						if( !app.settings.CENSORSHIP ) {
+							// blood
+							leftKombatant.paddle.getHit( );
+						}
+						leftKombatant.life -= 1;
 					}
-					leftKombatant.life -= 1;
 					rightKombatant.paddle.projectile = null;
 				}
 			}
