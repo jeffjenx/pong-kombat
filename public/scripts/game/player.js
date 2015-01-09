@@ -50,11 +50,7 @@ Player.prototype.handleInput = function( ) {
 			var ball = this.layer.components['Ball'];
 			if( ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
 			{
-				ball.glued = false;
-				var speed = viewport.width * 0.1;
-				ball.velocity.x = Math.round( speed * Math.cos( ball.rotation * Math.TO_RADIANS ) );
-				ball.velocity.y = Math.round( speed * Math.sin( ball.rotation * Math.TO_RADIANS ) );
-				ball.speed = ball.startSpeed;
+				ball.unglue( );
 			}
 		break;
 	}
@@ -71,6 +67,8 @@ Player.prototype.setPaddle = function( paddle ) {
 		case Paddles.WHITE : this.paddle = new WhitePaddle( ); break;
 		case Paddles.SHIFTER : this.paddle = new ShifterPaddle( ); break;
 		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
+		case Paddles.MRSLAYER : this.paddle = new MrSlayerPaddle( ); break;
+		case Paddles.MYST : this.paddle = new MystPaddle( ); break;
 	}
 	
 	return this.paddle;

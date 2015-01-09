@@ -10,7 +10,9 @@ var Paddles = {
 	
 	SHIFTER  : 7,
 	MONOLITH : 8,
-	WHITE    : 9
+	WHITE    : 9,
+	MRSLAYER : 10,
+	MYST     : 11
 };
 
 function Paddle( texture ) {
@@ -61,6 +63,7 @@ function Paddle( texture ) {
 	this.gluePowerup = false;
 	this.timePowerup = false;
 
+	this.glue = null;
 	this.shield = null;
 	this.projectile = null;
 	this.bloodEffect = null;
@@ -169,6 +172,10 @@ Paddle.prototype.draw = function( context ) {
 	context.restore( );
 	*/
 
+	if( this.glue ) {
+		this.glue.draw( context );
+	}
+
 	if( this.shield ) {
 		this.shield.draw( context );
 	}
@@ -232,7 +239,7 @@ Paddle.prototype.getHit = function( ) {
 Paddle.prototype.moveDown = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = this.position.y / viewport.height * 0.75;
+	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
 	
 	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
@@ -241,7 +248,7 @@ Paddle.prototype.moveDown = function( ) {
 Paddle.prototype.moveUp = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = this.position.y / viewport.height * 0.75;
+	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
 	
 	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
@@ -250,7 +257,7 @@ Paddle.prototype.moveUp = function( ) {
 Paddle.prototype.moveLeft = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	//this.offset = this.position.y / viewport.height * 0.75;
+	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
 	
 	this.velocity.x = -viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
@@ -259,7 +266,7 @@ Paddle.prototype.moveLeft = function( ) {
 Paddle.prototype.moveRight = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	//this.offset = this.position.y / viewport.height * 0.75;
+	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
 	
 	this.velocity.x = viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
@@ -332,6 +339,20 @@ Paddle.prototype.update = function( deltaTime ) {
 		}
 	}
 
+	if( this.glue )
+	{
+		this.glue.position.x = this.position.x;
+		this.glue.position.y = this.position.y;
+		//this.glue.size.y = this.size.y * this.scale * 1.2;
+		this.glue.size.x = this.size.x * this.scale * 6;
+		
+		if( this.glue.size.y < this.size.y * this.scale * 1.2 ) {
+			this.glue.size.y += this.size.y * 3 * deltaTime;
+		} else if( this.glue.size.y !== this.size.y * this.scale * 1.2) {
+			this.glue.size.y = this.size.y * this.scale * 1.2;
+		}
+	}
+
 	if( this.shield )
 	{
 		this.shield.position.x = this.position.x;
@@ -360,7 +381,13 @@ Paddle.prototype.update = function( deltaTime ) {
 	}
 
 	if( this.gluePowerup && app.gameTime > this.gluePowerup ) {
+		this.glue = null;
 		this.gluePowerup = false;
+
+		var ball = SceneManager.currentScene.layers['Kombat'].components['Ball'];
+		if( ball && ball.glued ) {
+			ball.unglue( );
+		}
 	}
 
 	if( this.timePowerup && app.gameTime > this.timePowerup ) {

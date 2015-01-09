@@ -49,10 +49,6 @@ BluePaddle.prototype.dismantle = function( opponent ) {
 BluePaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
 	this.effect.draw( context );
-
-	if( this.shield ) {
-		this.shield.draw( context );
-	}
 };
 
 BluePaddle.prototype.shootProjectile = function( ) {
@@ -90,5 +86,11 @@ BluePaddle.prototype.shootProjectile = function( ) {
 
 BluePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
+	
+	this.offset += 0.11 * deltaTime;
+	if( this.offset > 1 ) {
+		this.offset = 0;
+	}
+
 	this.effect.update( deltaTime );	
 };

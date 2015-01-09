@@ -1,25 +1,25 @@
-function MonolithPaddle( ) {
-	this.color = new Color( 155, 50, 0 );
-	this.enum = "MONOLITH"
-	this.name = "Monolith";
-	this.bigness = 5.00;
+function MrSlayerPaddle( ) {
+	this.color = new Color( 160, 33, 33 );
+	this.enum = "MRSLAYER"
+	this.name = "Mr. Slayer";
+	this.bigness = 3.00;
 	this.quickness = 3.00;
 
 	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
-	this.endStory = "monolith end story";
-	this.story = "monolith story";
+	this.endStory = "mr. slayer end story";
+	this.story = "mr. slayer story";
 	
-	Paddle.call( this, 'Paddle-Monolith' );
+	Paddle.call( this, 'Paddle-MrSlayer' );
 	
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
 }
 
-MonolithPaddle.prototype = new Paddle;
-MonolithPaddle.prototype.constructor = MonolithPaddle;
+MrSlayerPaddle.prototype = new Paddle;
+MrSlayerPaddle.prototype.constructor = MrSlayerPaddle;
 
-MonolithPaddle.prototype.dismantle = function( opponent ) {
+MrSlayerPaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
 	
 	if( sceneTime < 2 ) {
@@ -28,12 +28,12 @@ MonolithPaddle.prototype.dismantle = function( opponent ) {
 	}
 };
 
-MonolithPaddle.prototype.shootProjectile = function( ) {
+MrSlayerPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 };
 
-MonolithPaddle.prototype.update = function( deltaTime ) {
+MrSlayerPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
 };

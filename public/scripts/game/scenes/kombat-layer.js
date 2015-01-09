@@ -113,6 +113,7 @@ KombatLayer.prototype.addPowerup = function( ) {
 		}
 	}
 	var randomPowerup = Math.floor( Math.random( ) * count );
+	randomPowerup = Powerups.GLUE;
 	var powerup;
 	switch( randomPowerup ) {
 		case Powerups.GLUE : powerup = new GluePowerup( ); break;

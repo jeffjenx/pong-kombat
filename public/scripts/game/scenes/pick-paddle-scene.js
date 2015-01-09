@@ -6,14 +6,18 @@ function PickPaddleScene( )
 
 	this.level = Levels.RANDOM;
 	
-	this.mainLayer = this.addLayer( 'MainLayer', new Layer( ) );
-	this.mainLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
+	this.backgroundLayer = this.addLayer( 'BackgroundLayer', new Layer( ) );
+	this.backgroundLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
+
+	this.primaryLayer = new Layer( );
+	this.secondaryLayer = new Layer( );
+	this.currentPage = this.secondaryLayer;//this.primaryLayer;
 	
 	var titleText = new Text( Resources.Strings.PICK_YOUR_PADDLE );
 	titleText.fontFamily = 'MK Mythologies';
 	titleText.fontSize = viewport.height * 0.08;
 	titleText.position.y = viewport.height * 0.11;
-	this.mainLayer.addComponent( 'TitleText', titleText );
+	this.backgroundLayer.addComponent( 'TitleText', titleText );
 	
 	for( var i = 0; i < 6; i++ )
 	{
@@ -23,10 +27,11 @@ function PickPaddleScene( )
 		box.size.y = viewport.height * 0.33;
 		box.position.x = viewport.width * 0.20 + viewport.width * 0.30 * (i % 3);
 		box.position.y = viewport.height * 0.38 + viewport.height * 0.38 * (i<3 ? 0 : 1);
-		this.mainLayer.addComponent( 'Box' + i, box );
+		this.backgroundLayer.addComponent( 'Box' + i, box );
 	}
 	
-	this.paddles = new Array( );
+	this.primaryPaddles = new Array( );
+	this.secondaryPaddles = new Array( );
 	this.currentIndex = -1;
 	
 	var yellowPaddle = new YellowPaddle( );
@@ -34,7 +39,7 @@ function PickPaddleScene( )
 	yellowPaddle.position.y = viewport.height * 0.38;
 	yellowPaddle.rotation = 33;
 	yellowPaddle.scale = paddleScale;
-	this.paddles.push( yellowPaddle );
+	this.primaryPaddles.push( yellowPaddle );
 	
 	var randomPaddle = new Sprite( 'Particle-Random1' );
 	randomPaddle.color = new Color(0, 255, 255);
@@ -43,35 +48,79 @@ function PickPaddleScene( )
 	randomPaddle.position.y = viewport.height * 0.38;
 	randomPaddle.size.x = viewport.width * 0.15;
 	randomPaddle.size.y = randomPaddle.size.x;
-	this.paddles.push( randomPaddle );
+	this.primaryPaddles.push( randomPaddle );
 	
 	var bluePaddle = new BluePaddle( );
 	bluePaddle.position.x = viewport.width * 0.80;
 	bluePaddle.position.y = viewport.height * 0.38;
 	bluePaddle.rotation = -20;
 	bluePaddle.scale = paddleScale;
-	this.paddles.push( bluePaddle );
+	this.primaryPaddles.push( bluePaddle );
 	
 	var redPaddle = new RedPaddle( );
 	redPaddle.position.x = viewport.width * 0.20;
 	redPaddle.position.y = viewport.height * 0.76;
 	redPaddle.rotation = -69;
 	redPaddle.scale = paddleScale;
-	this.paddles.push( redPaddle );
+	this.primaryPaddles.push( redPaddle );
 	
 	var greenPaddle = new GreenPaddle( );
 	greenPaddle.position.x = viewport.width * 0.50;
 	greenPaddle.position.y = viewport.height * 0.76;
 	greenPaddle.rotation = 10;
 	greenPaddle.scale = paddleScale;
-	this.paddles.push( greenPaddle );
+	this.primaryPaddles.push( greenPaddle );
 	
 	var purplePaddle = new PurplePaddle( );
 	purplePaddle.position.x = viewport.width * 0.80;
 	purplePaddle.position.y = viewport.height * 0.76;
 	purplePaddle.rotation = 45;
 	purplePaddle.scale = paddleScale;
-	this.paddles.push( purplePaddle );
+	this.primaryPaddles.push( purplePaddle );
+
+	var myst = new MystPaddle( );
+	myst.position.x = viewport.width * 0.20;
+	myst.position.y = viewport.height * 0.38;
+	myst.rotation = -33;
+	myst.scale = paddleScale;
+	this.secondaryPaddles.push( myst );
+
+	var customPaddle = new Sprite( 'Particle-Random1' );
+	customPaddle.color = new Color(0, 255, 255);
+	customPaddle.enum = 'RANDOM';
+	customPaddle.position.x = viewport.width * 0.50;
+	customPaddle.position.y = viewport.height * 0.38;
+	customPaddle.size.x = viewport.width * 0.15;
+	customPaddle.size.y = customPaddle.size.x;
+	this.secondaryPaddles.push( customPaddle );
+
+	var mrSlayer = new MrSlayerPaddle( );
+	mrSlayer.position.x = viewport.width * 0.80;
+	mrSlayer.position.y = viewport.height * 0.38;
+	mrSlayer.rotation = 20;
+	mrSlayer.scale = paddleScale;
+	this.secondaryPaddles.push( mrSlayer );
+
+	var shifter = new ShifterPaddle( );
+	shifter.position.x = viewport.width * 0.20;
+	shifter.position.y = viewport.height * 0.76;
+	shifter.rotation = -80;
+	shifter.scale = paddleScale;
+	this.secondaryPaddles.push( shifter );
+
+	var monolith = new MonolithPaddle( );
+	monolith.position.x = viewport.width * 0.50;
+	monolith.position.y = viewport.height * 0.76;
+	monolith.rotation = 55;
+	monolith.scale = paddleScale * 0.75;
+	this.secondaryPaddles.push( monolith );
+
+	var whitePaddle = new WhitePaddle( );
+	whitePaddle.position.x = viewport.width * 0.80;
+	whitePaddle.position.y = viewport.height * 0.76;
+	whitePaddle.rotation = 0;
+	whitePaddle.scale = paddleScale * 0.70;
+	this.secondaryPaddles.push( whitePaddle );
 	
 	this.selectNextPaddle( 'Right' );
 	
@@ -106,9 +155,14 @@ function PickPaddleScene( )
 	
 	for( var j = 0; j < 100; j++ )
 	{
-		for( var i in this.paddles )
+		for( var i in this.primaryPaddles )
 		{
-			this.paddles[i].update( 1 / 60 );
+			this.primaryPaddles[i].update( 1 / 60 );
+		}
+
+		for( var i in this.secondaryPaddles )
+		{
+			this.secondaryPaddles[i].update( 1 / 60 );
 		}
 	}
 }
@@ -133,7 +187,9 @@ PickPaddleScene.prototype.draw = function( context )
 	}
 	// End Override
 
-	for( var i = 0; i < this.paddles.length; i++ )
+	var paddles = ( this.currentPage === this.secondaryLayer ) ? this.secondaryPaddles : this.primaryPaddles;
+
+	for( var i = 0; i < paddles.length; i++ )
 	{
 		context.save();
 		context.beginPath();
@@ -145,12 +201,12 @@ PickPaddleScene.prototype.draw = function( context )
 		);
 		if( this.currentIndex === i )
 		{
-			context.strokeStyle = this.paddles[i].color.RGB();
+			context.strokeStyle = paddles[i].color.RGB();
 			context.lineWidth = viewport.width * 0.01;
 			context.stroke();
 		}
 		context.clip();
-		this.paddles[i].draw( context );
+		paddles[i].draw( context );
 		context.restore();
 	}
 
@@ -170,13 +226,13 @@ PickPaddleScene.prototype.selectNextPaddle = function( direction )
 		case 'Up' : this.currentIndex -= 3; break;
 	}
 	
-	if( this.currentIndex > this.paddles.length - 1 )
+	if( this.currentIndex > 5 )
 	{
-		this.currentIndex -= this.paddles.length;
+		this.currentIndex -= 6;
 	}
 	if( this.currentIndex < 0 )
 	{
-		this.currentIndex += this.paddles.length;
+		this.currentIndex += 6;
 	}
 };
 
@@ -189,9 +245,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		return;
 	}
 
-	if( this.paddles[this.currentIndex] )
+	var paddles = ( this.currentPage === this.secondaryLayer ) ? this.secondaryPaddles : this.primaryPaddles;
+
+	if( paddles[this.currentIndex] )
 	{
-		var selectedPaddle = this.paddles[this.currentIndex];
+		var selectedPaddle = paddles[this.currentIndex];
 		selectedPaddle.offset += 0.003;
 		if( selectedPaddle.offset > 0.75 )
 		{
@@ -203,7 +261,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
 		var player = new Player( );
-		player.setPaddle( Paddles[this.paddles[this.currentIndex].enum] );
+		player.setPaddle( Paddles[paddles[this.currentIndex].enum] );
 		
 		if( app.gameMode === GameModes.TOURNAMENT )
 		{
@@ -242,7 +300,6 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		this.addLayer( 'Menu', new LevelMenu( this ) );	
 	}
 
-	/*
 	// Secret Level Select Menu (Hold direction for # seconds)
 	var now = Date.now( );
 	var buttons = [ Buttons.DOWN, Buttons.UP, Buttons.LEFT, Buttons.RIGHT ];
@@ -252,11 +309,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		{
 			if( now - InputManager.currentState[ buttons[i] ] > 3 * 1000 )
 			{
-				this.addLayer( 'Menu', new LevelMenu( this ) );
+				this.currentPage = ( this.currentPage === this.primaryLayer ) ? this.secondaryLayer : this.primaryLayer;
+				InputManager.currentState[ buttons[i] ]  = now;
 			}
 		}
 	}
-	*/
 	
 	if( InputManager.checkButtonPress( Buttons.DOWN ) )
 	{

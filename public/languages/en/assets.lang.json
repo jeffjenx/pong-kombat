@@ -163,11 +163,19 @@
 		
 		"Paddle-Blue"          : "images/paddles/blue-texture.png",
 		"Paddle-Green"         : "images/paddles/green-texture.png",
+		"Paddle-Monolith"      : "images/paddles/monolith-texture.png",
+		"Paddle-MrSlayer"      : "images/paddles/mr-slayer-texture.png",
+		"Paddle-Myst"          : "images/paddles/myst-texture.png",
 		"Paddle-Purple"        : "images/paddles/purple-texture.png",
 		"Paddle-Red"           : "images/paddles/red-texture.png",
+		"Paddle-Shifter"       : "images/paddles/shifter-texture.png",
 		"Paddle-Yellow"        : "images/paddles/yellow-texture.png",
 		"Paddle-Gloss"         : "images/paddles/paddle-gloss.png",
-
+		"Paddle-Gloss-Monolith" : "images/paddles/monolith-gloss.png",
+		"Paddle-Gloss-MrSlayer" : "images/paddles/mr-slayer-gloss.png",
+		"Paddle-Gloss-Shifter" : "images/paddles/shifter-gloss.png",
+		"Paddle-Glue"         : "images/paddles/paddle-glue.png",
+		
 		"Particle-BlackSmoke1" : "images/effects/particle-black-smoke-1.png",
 		"Particle-BlackSmoke2" : "images/effects/particle-black-smoke-2.png",
 		"Particle-Blood1"      : "images/effects/particle-blood-1.png",

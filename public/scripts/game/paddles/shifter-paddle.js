@@ -10,8 +10,12 @@ function ShifterPaddle( ) {
 
 	this.endStory = "shifter end story";
 	this.story = "shifter story";
-	
-	Paddle.call( this, 'Paddle-Shifter' );
+
+	Paddle.call( this, 'Background-Title' );
+	this.gloss = new Sprite( 'Paddle-Gloss-Shifter' );
+
+	this.patternCanvas.width = viewport.width;
+	this.patternCanvas.height = viewport.height;
 }
 
 ShifterPaddle.prototype = new Paddle;
@@ -34,4 +38,15 @@ ShifterPaddle.prototype.shootProjectile = function( ) {
 ShifterPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
+	
+	this.offset *= -1;
+
+	if( SceneManager.currentScene
+	 && SceneManager.currentScene.layers['Background'] 
+	 && SceneManager.currentScene.layers['Background'].components['Background']
+	 && SceneManager.currentScene.layers['Background'].components['Background'].resource !== this.resource )
+	{
+		this.resource = SceneManager.currentScene.layers['Background'].components['Background'].resource;
+		this.image = Resources[this.resource];
+	}
 };

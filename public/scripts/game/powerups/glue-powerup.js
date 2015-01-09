@@ -35,6 +35,12 @@ GluePowerup.prototype.constructor = GluePowerup;
 
 GluePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
+	kombatant.paddle.glue = new Sprite( 'Paddle-Glue' );
+	kombatant.paddle.glue.size.y = 0;
+	/*
+	kombatant.paddle.glue.opacity = 0.5;
+	kombatant.paddle.glue.scale = 0;
+	*/
 	kombatant.paddle.gluePowerup = app.gameTime + 10 * 1000;
 };
 

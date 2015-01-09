@@ -10,7 +10,7 @@ function WhitePaddle( ) {
 	this.endStory = "white end story";
 	this.story = "white story";
 	
-	Paddle.call( this, 'Paddle-White' );
+	Paddle.call( this, 'White' );
 }
 
 WhitePaddle.prototype = new Paddle;
@@ -22,6 +22,23 @@ WhitePaddle.prototype.dismantle = function( opponent ) {
 	if( sceneTime < 2 ) {
 	} else if( sceneTime < 5 ) {
 		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
+	}
+};
+
+WhitePaddle.prototype.draw = function( context ) {
+	//Paddle.prototype.draw.call( this, context );
+	Sprite.prototype.draw.call( this, context );
+
+	if( this.shield ) {
+		this.shield.draw( context );
+	}
+	
+	if( this.projectile ) {
+		this.projectile.draw( context );
+	}
+
+	if( this.bloodEffect ) {
+		this.bloodEffect.draw( context );
 	}
 };
 

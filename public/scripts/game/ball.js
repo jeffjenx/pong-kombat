@@ -116,6 +116,14 @@ Ball.prototype.drawGlare = function( context ) {
 	}
 };
 
+Ball.prototype.unglue = function( ) {
+	this.glued = false;
+	var speed = viewport.width * 0.1;
+	this.velocity.x = Math.round( speed * Math.cos( this.rotation * Math.TO_RADIANS ) );
+	this.velocity.y = Math.round( speed * Math.sin( this.rotation * Math.TO_RADIANS ) );
+	this.speed = this.startSpeed;
+}
+
 Ball.prototype.hitPaddle = function( kombatant ) {
 	this.lastPaddle = kombatant;
 

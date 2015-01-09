@@ -3,6 +3,7 @@ function Background( resource ) {
 	
 	if( Resources[resource] !== undefined )
 	{
+		this.resource = resource;
 		this.image = Resources[resource];
 	}
 

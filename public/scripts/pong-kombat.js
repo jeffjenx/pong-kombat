@@ -68,6 +68,8 @@ load( 'scripts/game/', [
 	'paddles/green-paddle',
 	'paddles/red-paddle',
 	'paddles/purple-paddle',
+	'paddles/myst-paddle',
+	'paddles/mr-slayer-paddle',
 	'paddles/shifter-paddle',
 	'paddles/monolith-paddle',
 	'paddles/white-paddle',
