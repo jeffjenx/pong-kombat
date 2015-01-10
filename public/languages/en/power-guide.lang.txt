@@ -61,9 +61,9 @@
    - Monolith................... 5.2.2   Acknolwedgements.................. 10 
    - White Paddle............... 5.2.3   + Pong Kombat (2014) Team....... 10.1 
  + Other Characters............... 5.3   + Pong Kombat (1994) Team....... 10.2 
-   - Myst....................... 5.3.1   + Pong Kombat 2 (1996) Team..... 10.3 
-   - P9X-Bot.................... 5.3.2   + Pong Kombat 3 (1996) Team..... 10.4 
-   - Mr. Slayer................. 5.3.3   + Special Thanks................ 10.5 
+   - Mr. Slayer................. 5.3.1   + Pong Kombat 2 (1996) Team..... 10.3 
+   - Myst....................... 5.3.2   + Pong Kombat 3 (1996) Team..... 10.4 
+   - P9X-Bot.................... 5.3.3   + Special Thanks................ 10.5 
  + Create-A-Paddle................ 5.4   + Pong Kombat Fans.............. 10.6 
 
 
@@ -634,28 +634,48 @@ Abilities
   5.3                         Other Characters
 -------------------------------------------------------------------------------
 
-  5.3.1                             Myst                                   
+  5.3.1                          Mr. Slayer                                      
+...............................................................................
+
+Similar to Myst, Mr. Slayer is only accessible after proving your worth. On the
+Pit battle zone, defeat your opponent without taking any damage and perform any
+Dismantle to acess them.
+
+Mythology
+
+Attributes
+    Size  - ******.... (Average)
+    Speed - ******.... (Average)
+
+Abilities
+    Bloodball (Projectile) - Down, Up, Up, Action
+    Bloodbath & Beyond (Dismantle) - Up, Up, Down, Action
+
+
+  5.3.2                             Myst                                   
 ...............................................................................
 
 After successfully landing particulary devastating attack, a person's face will
 sometimes appear from the bottom of the screen, exclaiming "Whoopsie!"  Hold 
 Start and press the Up button to access them.
 
+Mythology
 
-  5.3.2                           P9X-Bot                                   
+Attributes
+    Size  - ******.... (Average)
+    Speed - ******.... (Average)
+
+Abilities
+    The Finger (Projectile) - Down, Left, Right, Action
+    Flyswatter (Dismantle) - Down, Right, Left, Action
+
+
+  5.3.3                           P9X-Bot                                   
 ...............................................................................
 
 P9X-Bot is a robotic training dummy that helps you practice special abilities.
 From the title menu, choose the P9X Training item to access them. The P9X-Bot 
 is a non-playable character.
-
-
-  5.3.3                          Mr. Slayer                                      
-...............................................................................
-
-Similar to Myst, Mr. Slayer is only accessible after proving your worth. On the
-Pit battle zone, defeat your opponent without taking any damage and perform any
-Dismantle to acess them.
 
 
 -------------------------------------------------------------------------------

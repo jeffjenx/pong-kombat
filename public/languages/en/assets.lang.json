@@ -217,6 +217,7 @@
 		"Powerup-Speed" : "images/powerups/energy-wings.png",
 		"Powerup-Time" : "images/powerups/stopwatch.png",
 		
+		"Projectile-Finger" : "images/paddles/finger.png",
 		"Projectile-Fireball" : "images/paddles/fireball.png",
 		"Projectile-Green-Arrow" : "images/paddles/green-arrow.png",
 		"Projectile-Ice-Blast" : "images/paddles/ice-blast.png",

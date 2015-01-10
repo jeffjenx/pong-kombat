@@ -87,10 +87,12 @@ BluePaddle.prototype.shootProjectile = function( ) {
 BluePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	
+	/*
 	this.offset += 0.11 * deltaTime;
 	if( this.offset > 1 ) {
 		this.offset = 0;
 	}
+	*/
 
 	this.effect.update( deltaTime );	
 };

@@ -80,11 +80,13 @@ load( 'scripts/game/', [
 	'powerups/speed-powerup',
 	'powerups/time-powerup',
 	
+	'projectiles/finger-projectile',
 	'projectiles/fireball-projectile',
 	'projectiles/ice-blast-projectile',
 	'projectiles/green-arrow-projectile',
 	'projectiles/laser-projectile',
 	'projectiles/lightning-sai-projectile',
+	'projectiles/bloodball-projectile',
 	'projectiles/rock-projectile',
 	'projectiles/shadow-projectile',
 
@@ -152,7 +154,7 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new PickPaddleScene();
+		app.startupScene = new SplashScene();
 		app.initialize( );
 	};
 };

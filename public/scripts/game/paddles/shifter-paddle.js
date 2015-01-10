@@ -33,7 +33,7 @@ ShifterPaddle.prototype.dismantle = function( opponent ) {
 };
 
 ShifterPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
 	this.projectile = new LaserProjectile( this );

@@ -12,7 +12,7 @@ Player.prototype.draw = function( context ) {
 Player.prototype.handleInput = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.finishing :
-			if( InputManager.checkSequence( this.paddle.dismantleSequence ) ) {
+			if( this.paddle.dismantleSequence && InputManager.checkSequence( this.paddle.dismantleSequence ) ) {
 				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}
 
@@ -47,6 +47,11 @@ Player.prototype.handleInput = function( ) {
 				this.paddle.shootProjectile( );
 			}
 
+			if( this.paddle.replenishSequence && InputManager.checkSequence( this.paddle.replenishSequence ) )
+			{
+				this.paddle.replenish( );
+			}
+
 			var ball = this.layer.components['Ball'];
 			if( ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
 			{
@@ -70,6 +75,8 @@ Player.prototype.setPaddle = function( paddle ) {
 		case Paddles.MRSLAYER : this.paddle = new MrSlayerPaddle( ); break;
 		case Paddles.MYST : this.paddle = new MystPaddle( ); break;
 	}
+
+	this.paddle.kombatant = this;
 	
 	return this.paddle;
 };

@@ -87,8 +87,30 @@ Opponent.prototype.applyAI = function( ) {
 				// Random Projectiles
 				if( this.paddle.canShootProjectile( ) && app.gameTime > this.nextProjectileTime )
 				{
-					this.paddle.shootProjectile( );
-					this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+					if( this.paddle.replenishSequence )
+					{
+						// White Paddle 
+						if( this.paddle.quickness == 5.00 && this.life < SceneManager.currentScene.startLife
+						 || this.paddle.quickness == 4.75 && this.life < SceneManager.currentScene.startLife * 0.75 
+						 || this.paddle.quickness == 4.50 && this.life < SceneManager.currentScene.startLife * 0.50 
+						 || this.paddle.quickness == 4.25 && this.life < SceneManager.currentScene.startLife * 0.25 
+						 || this.paddle.quickness == 4.00 && this.life < SceneManager.currentScene.startLife * 0.20 )
+						{
+							this.paddle.replenish( );
+							this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+						}
+						else
+						{
+							this.paddle.shootProjectile( );
+							this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+						}
+					}
+					else
+					{
+						// Other Paddles
+						this.paddle.shootProjectile( );
+						this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
+					}
 				}
 			}
 			else if( app.settings.DIFFICULTY === 3 )
@@ -130,6 +152,20 @@ Opponent.prototype.applyAI = function( ) {
 					else if( this.paddle.position.y > this.targetPosition - 10 )
 					{
 						this.paddle.moveUp( );
+					}
+				}
+
+				// White Paddle
+				if( this.paddle.replenishSequence )
+				{
+					if( this.paddle.quickness == 5.00 && this.life < SceneManager.currentScene.startLife
+					 || this.paddle.quickness == 4.75 && this.life < SceneManager.currentScene.startLife * 0.75 
+					 || this.paddle.quickness == 4.50 && this.life < SceneManager.currentScene.startLife * 0.50 
+					 || this.paddle.quickness == 4.25 && this.life < SceneManager.currentScene.startLife * 0.25 
+					 || this.paddle.quickness == 4.00 && this.life < SceneManager.currentScene.startLife * 0.20 )
+					{
+						this.paddle.replenish( );
+						this.nextProjectileTime = app.gameTime + Math.random( ) * 5000;
 					}
 				}
 
@@ -183,6 +219,8 @@ Opponent.prototype.setPaddle = function( paddle ) {
 		case Paddles.SHIFTER : this.paddle = new ShifterPaddle( ); break;
 		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
 	}
+
+	this.paddle.kombatant = this;
 
 	this.paddle.restrictToBounds = function( ) {
 		var paddingBottom = viewport.height;

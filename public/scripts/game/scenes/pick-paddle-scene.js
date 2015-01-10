@@ -11,7 +11,7 @@ function PickPaddleScene( )
 
 	this.primaryLayer = new Layer( );
 	this.secondaryLayer = new Layer( );
-	this.currentPage = this.secondaryLayer;//this.primaryLayer;
+	this.currentPage = this.primaryLayer;
 	
 	var titleText = new Text( Resources.Strings.PICK_YOUR_PADDLE );
 	titleText.fontFamily = 'MK Mythologies';

@@ -6,6 +6,7 @@ function WhitePaddle( ) {
 	this.quickness = 5.00;
 
 	this.projectileSequence = [ Buttons.DOWN, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
+	this.replenishSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.LEFT, Buttons.ACTION ];
 	
 	this.endStory = "white end story";
 	this.story = "white story";
@@ -42,8 +43,19 @@ WhitePaddle.prototype.draw = function( context ) {
 	}
 };
 
+WhitePaddle.prototype.replenish = function( ) {
+	if( this.quickness <= 4 ) {
+		return;
+	}
+
+	this.bigness -= 0.25;
+	this.quickness -= 0.25;
+	this.kombatant.life = Math.min( this.kombatant.life + 0.5, SceneManager.currentScene.startLife );
+	InputManager.history = [ ];
+};
+
 WhitePaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
 	this.projectile = new DefaultBall( this );
@@ -64,6 +76,19 @@ WhitePaddle.prototype.shootProjectile = function( ) {
 WhitePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
+
+	if( Math.abs( this.size.y - viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) ) < 0.03 )
+	{
+		this.size.y = viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 );
+	}
+	else if( this.size.y > viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) )
+	{
+		this.size.y -= viewport.height * 0.03 * deltaTime;
+	}
+	else if( this.size.y < viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) )
+	{
+		this.size.y += viewport.height * 0.03 * deltaTime;
+	}
 
 	if( this.projectile && SceneManager.currentScene && SceneManager.currentScene.layers['HUD'] ) {
 		var layer = SceneManager.currentScene.layers['HUD'];

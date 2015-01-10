@@ -29,8 +29,21 @@ MrSlayerPaddle.prototype.dismantle = function( opponent ) {
 };
 
 MrSlayerPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+
+	this.projectile = new BloodballProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+	}
 };
 
 MrSlayerPaddle.prototype.update = function( deltaTime ) {

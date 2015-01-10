@@ -76,6 +76,6 @@ YellowPaddle.prototype.shootProjectile = function( ) {
 
 YellowPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 	this.effect.update( deltaTime );
 };

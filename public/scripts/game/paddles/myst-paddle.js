@@ -5,8 +5,8 @@ function MystPaddle( ) {
 	this.bigness = 3.00;
 	this.quickness = 3.00;
 
-	this.projectileSequence = [ Buttons.LEFT, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
-	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.DOWN, Buttons.ACTION ];
+	this.projectileSequence = [ Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
+	this.dismantleSequence = [ Buttons.DOWN, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	
 	this.endStory = "myst end story";
 	this.story = "myst story";
@@ -51,8 +51,21 @@ MystPaddle.prototype.draw = function( context ) {
 
 
 MystPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this );
+	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+
+	this.projectile = new FingerProjectile( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+	}
 };
 
 MystPaddle.prototype.update = function( deltaTime ) {
