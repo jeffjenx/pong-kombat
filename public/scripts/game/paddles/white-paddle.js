@@ -45,9 +45,36 @@ WhitePaddle.prototype.draw = function( context ) {
 WhitePaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+
+	this.projectile = new DefaultBall( this );
+	this.projectile.sourcePaddle = this;
+	this.projectile.position.x = this.position.x;
+	this.projectile.position.y = this.position.y;
+	
+	var direction = Math.random( ) * 90 - 45;
+	this.projectile.velocity.x = Math.cos( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
+	this.projectile.velocity.y = Math.sin( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
+	
+	if( this.position.x > viewport.width * 0.50 )
+	{
+		this.projectile.velocity.x *= -1;
+	}
 };
 
 WhitePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	this.velocity = this.velocity.multiply( 0.9 );
+
+	if( this.projectile && SceneManager.currentScene && SceneManager.currentScene.layers['HUD'] ) {
+		var layer = SceneManager.currentScene.layers['HUD'];
+		var hud = ( layer ) ? layer.components['HUD'] : null;
+		var top = ( hud ) ? hud.size.y : 0;
+		if( this.projectile.velocity.y < 0 && this.projectile.boundingBox.top <= top ) {
+			this.projectile.velocity.y *= -1;
+		}
+
+		if( this.projectile.velocity.y > 0 && this.projectile.boundingBox.bottom >= viewport.height ) {
+			this.projectile.velocity.y *= -1;
+		}
+	}
 };

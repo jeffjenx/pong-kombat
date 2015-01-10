@@ -220,6 +220,7 @@
 		"Projectile-Fireball" : "images/paddles/fireball.png",
 		"Projectile-Green-Arrow" : "images/paddles/green-arrow.png",
 		"Projectile-Ice-Blast" : "images/paddles/ice-blast.png",
+		"Projectile-Laser" : "images/paddles/laser.png",
 		"Projectile-Lightning-Sai" : "images/paddles/lightning-sai.png",
 		"Projectile-Shadow" : "images/paddles/black-texture.png",
 		

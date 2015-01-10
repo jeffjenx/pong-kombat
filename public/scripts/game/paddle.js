@@ -239,8 +239,12 @@ Paddle.prototype.getHit = function( ) {
 Paddle.prototype.moveDown = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
+	this.offset = this.position.y / viewport.height * 0.75;
+	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
+	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) );
+	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
+
 	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
@@ -248,8 +252,12 @@ Paddle.prototype.moveDown = function( ) {
 Paddle.prototype.moveUp = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
+	this.offset = this.position.y / viewport.height * 0.75;
+	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
+	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
+	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
+
 	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
@@ -257,8 +265,12 @@ Paddle.prototype.moveUp = function( ) {
 Paddle.prototype.moveLeft = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
+	//this.offset = this.position.y / viewport.height * 0.75;
+	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
+	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
+	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
+
 	this.velocity.x = -viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
@@ -266,8 +278,12 @@ Paddle.prototype.moveLeft = function( ) {
 Paddle.prototype.moveRight = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
 
-	this.offset = (this.position.x / viewport.height * 0.75 + this.position.y / viewport.height * 0.75) / 2;
+	//this.offset = this.position.y / viewport.height * 0.75;	
+	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
+	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
+	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
+
 	this.velocity.x = viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
 };

@@ -35,7 +35,7 @@ LifePowerup.prototype.constructor = LifePowerup;
 
 LifePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
-	kombatant.life += 0.5;
+	kombatant.life = Math.min( kombatant.life + 0.5, SceneManager.currentScene.startLife );
 };
 
 LifePowerup.prototype.draw = function( context ) {

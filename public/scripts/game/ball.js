@@ -54,6 +54,7 @@ function Ball( texture ) {
 	this.addGlare( );
 	this.glued = false;
 	this.glueOffset = new Vector( [0,0] );
+	this.glueSpeed = null;
 	this.bulletTimed = false;
 }
 
@@ -118,10 +119,10 @@ Ball.prototype.drawGlare = function( context ) {
 
 Ball.prototype.unglue = function( ) {
 	this.glued = false;
-	var speed = viewport.width * 0.1;
-	this.velocity.x = Math.round( speed * Math.cos( this.rotation * Math.TO_RADIANS ) );
-	this.velocity.y = Math.round( speed * Math.sin( this.rotation * Math.TO_RADIANS ) );
-	this.speed = this.startSpeed;
+	//var speed = viewport.width * 0.1;
+	this.velocity.x = Math.round( this.glueSpeed * Math.cos( this.rotation * Math.TO_RADIANS ) );
+	this.velocity.y = Math.round( this.glueSpeed * Math.sin( this.rotation * Math.TO_RADIANS ) );
+	//this.speed = this.startSpeed;
 }
 
 Ball.prototype.hitPaddle = function( kombatant ) {
@@ -134,6 +135,7 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 
 	if( kombatant.paddle.gluePowerup ) {
 		this.rotation = Math.atan2( this.velocity.y, this.velocity.x ) * Math.TO_DEGREES;
+		this.glueSpeed = this.velocity.length( );
 		this.velocity.x = 0;
 		this.velocity.y = 0;
 		this.glueOffset.x = this.position.x - kombatant.paddle.position.x;

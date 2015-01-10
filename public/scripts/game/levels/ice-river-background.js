@@ -1,14 +1,12 @@
 function IceRiverBackgroundLayer( scene ) {
 	Layer.call( this, scene );
 
-	/*
 	this.background = new Sprite( 'Background-Ice-River' );
 	this.background.size.x = viewport.width;
 	this.background.size.y = viewport.height;
 	this.background.position.x = viewport.width / 2;
 	this.background.position.y = viewport.height / 2;
 	this.addComponent( 'Background', this.background );
-	*/
 	
 	var waterOverlayCount = 3;
 	this.waterOverlays = [ ];

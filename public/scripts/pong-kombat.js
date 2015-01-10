@@ -83,7 +83,9 @@ load( 'scripts/game/', [
 	'projectiles/fireball-projectile',
 	'projectiles/ice-blast-projectile',
 	'projectiles/green-arrow-projectile',
+	'projectiles/laser-projectile',
 	'projectiles/lightning-sai-projectile',
+	'projectiles/rock-projectile',
 	'projectiles/shadow-projectile',
 
 	'scenes/splash-scene',

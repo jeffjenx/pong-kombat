@@ -1,7 +1,7 @@
 function KombatLayer( scene ) {
 	Layer.call( this, scene );
 	
-	this.nextPowerup = 0;//this.scene.timeElapsed + 5 + Math.random( ) * 5;
+	this.nextPowerup = this.scene.timeElapsed + 5 + Math.random( ) * 5;
 }
 
 KombatLayer.prototype = new Layer;
@@ -113,7 +113,7 @@ KombatLayer.prototype.addPowerup = function( ) {
 		}
 	}
 	var randomPowerup = Math.floor( Math.random( ) * count );
-	randomPowerup = Powerups.GLUE;
+	//randomPowerup = Powerups.GLUE;
 	var powerup;
 	switch( randomPowerup ) {
 		case Powerups.GLUE : powerup = new GluePowerup( ); break;
@@ -203,7 +203,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 			if( leftKombatant && rightKombatant )
 			{
-				if( leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+				if(leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
 					if( !rightKombatant.paddle.shieldPowerup )
 					{
 						if( !app.settings.CENSORSHIP ) {
