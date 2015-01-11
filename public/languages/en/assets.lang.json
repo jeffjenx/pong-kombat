@@ -161,6 +161,9 @@
 		"Ball-Yarn"           : "images/balls/yarn.png",
 		"Ball-Yin-Yang"           : "images/balls/yin-yang.png",
 		
+		"Icon-Hourglass"          : "images/icon-hourglass.png",
+		"Icon-Trophy"         : "images/icon-trophy.png",
+		
 		"Paddle-Blue"          : "images/paddles/blue-texture.png",
 		"Paddle-Green"         : "images/paddles/green-texture.png",
 		"Paddle-Monolith"      : "images/paddles/monolith-texture.png",

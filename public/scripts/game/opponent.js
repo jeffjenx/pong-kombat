@@ -16,7 +16,7 @@ Opponent.prototype.applyAI = function( ) {
 		case this.layer.scene.states.fighting :
 			var ball = this.layer.components['Ball'];
 
-			if( ball.glued && ball.lastPaddle === this )
+			if( ball && ball.glued && ball.lastPaddle === this )
 			{
 				ball.glued = false;
 				var speed = viewport.width * 0.1;
@@ -47,7 +47,7 @@ Opponent.prototype.applyAI = function( ) {
 			{
 				// MEDIUM
 				// Move to ball on return volley
-				if( ball.velocity.x > 0 )
+				if( ball && ball.velocity.x > 0 )
 				{
 					if( this.paddle.position.y < ball.position.y - ball.size.y * 0.5 )
 					{
@@ -70,7 +70,7 @@ Opponent.prototype.applyAI = function( ) {
 			{
 				// HARD
 				// Move to ball target on return
-				if( ball.velocity.x > 0 )
+				if( ball && ball.velocity.x > 0 )
 				{
 					this.targetPosition = (this.paddle.position.x - ball.position.x) / ball.velocity.x * ball.velocity.y + ball.position.y;
 					
@@ -170,7 +170,7 @@ Opponent.prototype.applyAI = function( ) {
 				}
 
 				// Projectiles aimed at return volley
-				if( ball.velocity.x < 0 )
+				if( ball && ball.velocity.x < 0 )
 				{
 					this.targetPosition = (enemy.paddle.position.x - ball.position.x) / ball.velocity.x * ball.velocity.y + ball.position.y;
 					

@@ -29,6 +29,8 @@ function YellowPaddle( ) {
 	this.effect.maxOpacity = 0.9;
 	this.effect.fadeSpeed = 0.666;
 	this.effect.attachTo( this );
+	this.effect.size.x = this.size.x * this.scale;
+	this.effect.size.y = this.size.y * this.scale;
 	//this.effect.start( );
 }
 

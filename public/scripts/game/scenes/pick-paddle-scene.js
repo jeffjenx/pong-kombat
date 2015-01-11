@@ -268,13 +268,13 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			if( app.tournament )
 			{
 				app.tournament.changePlayer( player );
-				SceneManager.changeScene( app.tournament, Transitions.NONE );
+				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 			}
 			else
 			{
 				app.tournament = new TournamentScene( );
 				app.tournament.startPlayer( player );
-				SceneManager.changeScene( app.tournament, Transitions.NONE );
+				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 			}
 		}
 		else
@@ -330,5 +330,12 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	if( InputManager.checkButtonPress( Buttons.RIGHT ) )
 	{
 		this.selectNextPaddle( 'Right' );
+	}
+
+
+	if( InputManager.checkButtonPress( Buttons.BACK ) )
+	{
+		var titleScene = new TitleScene( );
+		SceneManager.changeScene( titleScene, Transitions.FADE, 0.33 );
 	}
 };

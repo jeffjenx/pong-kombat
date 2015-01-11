@@ -53,7 +53,7 @@ Player.prototype.handleInput = function( ) {
 			}
 
 			var ball = this.layer.components['Ball'];
-			if( ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
+			if( ball && ball.glued && ball.lastPaddle === this && InputManager.checkButtonPress( Buttons.ACTION ) )
 			{
 				ball.unglue( );
 			}

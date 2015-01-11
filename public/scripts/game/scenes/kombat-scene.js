@@ -16,9 +16,11 @@ function KombatScene( ) {
 		ending : 5,
 		paused : 6
 	};
+
+	this.state = null;
 	
 	//this.startMatch( );
-	this.changeState( this.states.fighting );
+	//this.changeState( this.states.fighting );
 	//this.layers['Kombat'].setBall( Balls.DEFAULT );
 
 	this.screamSound = new Sound( 'Scream' );
@@ -114,11 +116,35 @@ KombatScene.prototype.setLevel = function( level ) {
 KombatScene.prototype.startMatch = function( ) {
 	this.layers['HUD'].addAnnouncement( 'Bounce' );
 	this.stateTime = 0;
-	this.state = this.states.announcing;
+	this.state = this.states.starting;
 	this.winner = null;
+
+	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
+	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
+
+	if( leftKombatant )
+	{
+		leftKombatant.paddle.opacity = 1;
+		leftKombatant.paddle.scale = 1;
+		leftKombatant.paddle.position.x = viewport.width * 0.02;
+		leftKombatant.paddle.position.y = viewport.height * 0.50;
+	}
+
+	if( rightKombatant )
+	{
+		rightKombatant.paddle.opacity = 1;
+		rightKombatant.paddle.scale = 1;
+		rightKombatant.paddle.position.x = viewport.width * 0.98;
+		rightKombatant.paddle.position.y = viewport.height * 0.50;
+	}
 };
 
 KombatScene.prototype.update = function( deltaTime ) {
+	if( this.state === null ) {
+		this.startMatch( );
+		return;
+	}
+
 	if( this.state === this.states.paused ) {
 		if( !this.layers['Menu'] ) {
 			this.addLayer( 'Menu', new PauseMenu( this ) );
@@ -137,6 +163,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 	
 	switch( this.state ) {
 		case this.states.announcing :
+		case this.states.starting :
 			if( this.stateTime >= 3 ) {
 				this.layers['HUD'].removeComponent( 'Announcement' );
 				if( this.winner === null ) {
@@ -225,10 +252,11 @@ KombatScene.prototype.update = function( deltaTime ) {
 							storyScene.setStory( 'end' );
 							SceneManager.changeScene( storyScene, Transitions.NONE );
 						} else {
+							app.tournament.changePlayer( app.tournament.player );
 							SceneManager.changeScene( app.tournament, Transitions.NONE );
 						}
 					} else {
-						SceneManager.changeScene( new ChoosePaddleScene( ), Transitions.NONE );
+						SceneManager.changeScene( new PickPaddleScene( ), Transitions.NONE );
 					}
 				} else {
 					SceneManager.changeScene( new TitleScene( ), Transitions.NONE );

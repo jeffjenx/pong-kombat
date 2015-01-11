@@ -21,11 +21,11 @@
                                   CONTENTS
 ===============================================================================
 
- Introduction....................... 1   Battle Zones....................... 6 
+ Introduction..................... 1.0   Battle Zones..................... 6.0 
                                          + Default........................ 6.1 
- Story.............................. 2   + Forest......................... 6.2 
+ Story............................ 2.0   + Forest......................... 6.2 
                                          + Hell........................... 6.3 
- Gameplay........................... 3   + Highway........................ 6.4 
+ Gameplay......................... 3.0   + Highway........................ 6.4 
  + Free Play...................... 3.1   + Ice River...................... 6.5 
  + P9X Training................... 3.2   + Pit............................ 6.6 
  + Tournament Edition............. 3.3   + Portal......................... 6.7 
@@ -34,22 +34,22 @@
  + Dip Switches................... 3.6   + Toxic Pool.................... 6.10 
  + Analytics...................... 3.7   + Watercolor.................... 6.11 
    - Leaderboards............... 3.7.1 
-   - General Statistics......... 3.7.2   Collect-A-Balls.................... 7 
+   - General Statistics......... 3.7.2   Collect-A-Balls.................. 7.0 
    - Pong Statistics............ 3.7.3   + Sports......................... 7.1 
    - Kombat Statistics.......... 3.7.4   + Video Games.................... 7.2 
    - Achievements............... 3.7.5   + Science & Tech................. 7.3 
                                          + Miscellaneous.................. 7.4 
- Controls........................... 4 
- + Basic Controls................. 4.1   Power-Ups.......................... 8 
+ Controls......................... 4.0 
+ + Basic Controls................. 4.1   Power-Ups........................ 8.0 
  + Advanced Controls.............. 4.2   + Meat........................... 8.1 
  + Special Abilites............... 4.4   + Glue........................... 8.2 
  + Using A Keyboard............... 4.5   + Energy Drink................... 8.3 
  + Using Touch-Enabled Devices.... 4.6   + Shield......................... 8.4 
  + Using A Gamepad Controller..... 4.7   + Stopwatch...................... 8.5 
    - Supported Gamepads......... 4.7.1 
-   - Retro Gamepads............. 4.7.2   Secrets...........................§ 9 
+   - Retro Gamepads............. 4.7.2   Secrets.......................... 9.0 
                                          + Blasteroids.................... 9.1 
- Characters......................... 5   + Blue Screen Of Death........... 9.2 
+ Characters....................... 5.0   + Blue Screen Of Death........... 9.2 
  + Main Characters................ 5.1   + Easy Difficulty................ 9.3 
    - Blue Paddle................ 5.1.1   + Hidden Paddles................. 9.4 
    - Green Paddle............... 5.1.2   + Level Select................... 9.5 
@@ -58,7 +58,7 @@
    - Yellow Paddle.............. 5.1.5   + Super Pong Kombat.............. 9.8 
  + Boss Characters................ 5.2   + White First.................... 9.9 
    - Shifter.................... 5.2.1 
-   - Monolith................... 5.2.2   Acknolwedgements.................. 10 
+   - Monolith................... 5.2.2   Acknolwedgements................ 10.0 
    - White Paddle............... 5.2.3   + Pong Kombat (2014) Team....... 10.1 
  + Other Characters............... 5.3   + Pong Kombat (1994) Team....... 10.2 
    - Mr. Slayer................. 5.3.1   + Pong Kombat 2 (1996) Team..... 10.3 
@@ -69,7 +69,7 @@
 
 
 ===============================================================================
-  1                             INTRODUCTION
+  1.0                           INTRODUCTION
 ===============================================================================
 
 The popular freeware title, Pong Kombat, was originally developed as a school
@@ -83,7 +83,7 @@ enhancements.
 
 
 ===============================================================================
-  2                                STORY
+  2.0                              STORY
 ===============================================================================
 
 White Paddle has reclaimed his place atop the porcelan throne of the Pong Lao 
@@ -99,7 +99,7 @@ ranks and defeat White Paddle?
 
 
 ===============================================================================
-  3                               GAMEPLAY
+  3.0                             GAMEPLAY
 ===============================================================================
 
 Pong Kombat combines elments of Atari's PONG and the fighting franchise, Mortal
@@ -313,7 +313,7 @@ Yellow Paddle
 
 
 ===============================================================================
-  4                               CONTROLS
+  4.0                             CONTROLS
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -480,7 +480,7 @@ them off by *Dismantling* them (using the same criteria).
 
 
 ===============================================================================
-  5                              CHARACTERS
+  5.0                            CHARACTERS
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -706,7 +706,7 @@ Abilities
 
 
 ===============================================================================
-  6                             BATTLE ZONES
+  6.0                           BATTLE ZONES
 ===============================================================================
 
 Each match in PONG KOMBAT takes place in a unique battle zone. Many of the 
@@ -852,7 +852,7 @@ This stage features a painting of a sun smiling down upon the landscape.
 
 
 ===============================================================================
-  7                           COLLECT-A-BALLS
+  7.0                         COLLECT-A-BALLS
 ===============================================================================
 
 At the start of the match, and after failure to return a volley, a ball is put 
@@ -957,7 +957,7 @@ Random
 
 
 ===============================================================================
-  8                               POWER-UPS
+  8.0                             POWER-UPS
 ===============================================================================
 
 In the middle of the playing field, Power-Up special abilities will pop up from
@@ -1005,7 +1005,7 @@ causes it's speed to decrease, giving you more time to react.
 
 
 ===============================================================================
-  9                               SECRETS
+  9.0                             SECRETS
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -1043,9 +1043,9 @@ their confidence...if they can get past the humility of playing on "Easy."
   9.4                          Hidden Paddles
 -------------------------------------------------------------------------------
 
-Hold the the Up button or any direction for 11 seconds when choosing your 
-paddle to toggle a second page of playable characters, including bosses and 
-secret paddles.
+Hold the the Up button or any direction for more than 3 seconds when choosing 
+your paddle to toggle a second page of playable characters, including bosses 
+and secret paddles.
 
 All of the paddles other than main characters must be unlocked by defeating 
 them at least once.
@@ -1120,7 +1120,7 @@ title menu:
 
 
 ===============================================================================
-  10                          ACKNOWLEDGEMENTS
+  10.0                        ACKNOWLEDGEMENTS
 ===============================================================================
 
 -------------------------------------------------------------------------------
