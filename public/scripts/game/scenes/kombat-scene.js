@@ -248,15 +248,16 @@ KombatScene.prototype.update = function( deltaTime ) {
 						app.tournament.increaseRank( );
 						if( app.tournament.currentIndex >= app.tournament.opponents.length ) {
 							var storyScene = new StoryScene( );
-							storyScene.setPaddle( app.tournament.player.paddle );
-							storyScene.setStory( 'end' );
-							SceneManager.changeScene( storyScene, Transitions.NONE );
+							storyScene.setPaddle( Paddles[app.tournament.player.paddle.enum] );
+							storyScene.setStory( app.tournament.player.paddle.endStory );
+							SceneManager.changeScene( storyScene, Transitions.FADE, 0.5 );
 						} else {
 							app.tournament.changePlayer( app.tournament.player );
-							SceneManager.changeScene( app.tournament, Transitions.NONE );
+							app.tournament.timeElapsed = 0;
+							SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 						}
 					} else {
-						SceneManager.changeScene( new PickPaddleScene( ), Transitions.NONE );
+						SceneManager.changeScene( new PickPaddleScene( ), Transitions.NONE, 0.5 );
 					}
 				} else {
 					SceneManager.changeScene( new TitleScene( ), Transitions.NONE );

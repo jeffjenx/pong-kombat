@@ -119,6 +119,7 @@ Paddle.prototype.draw = function( context ) {
 		width,
 		height
 	);
+	context.globalAlpha *= this.gloss.opacity;
 	context.drawImage(
 		this.gloss.image,
 		-width * this.registration.x * 6.5,

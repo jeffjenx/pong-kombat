@@ -154,7 +154,15 @@ function ready( ) {
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
-		app.startupScene = new TitleScene();
+		
+		// var paddle = new WhitePaddle();
+		// var storyScene = new StoryScene( );
+		// storyScene.setPaddle( paddle );
+		// storyScene.setStory( paddle.endStory );
+		// app.startupScene = storyScene;
+		
+		app.startupScene = new SplashScene();
+		
 		app.initialize( );
 	};
 };

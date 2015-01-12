@@ -8,12 +8,12 @@ function MonolithPaddle( ) {
 	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
-	this.endStory = "monolith end story";
-	this.story = "monolith story";
+	this.endStory = "After the tournament, Monolith was found lifeless in the barren regions of northern Chile. They were taken to a local facility where their chemical makeup was determined to be that of a MGP Pallasite meteorite, Imilac, and are held captive to this day.";
+	this.story = "Monolith has spent the past million years eroding into their current form. When White Paddle constructed his tournament, they enlisted the massive paddle for the sole purpose of intimidating the opposition.";
 	
 	Paddle.call( this, 'Paddle-Monolith' );
 	
-	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
+	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );
 
 	// Monolith throws 3 rocks at a time
 	this.projectile2 = null;

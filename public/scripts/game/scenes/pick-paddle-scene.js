@@ -274,6 +274,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			{
 				app.tournament = new TournamentScene( );
 				app.tournament.startPlayer( player );
+				if( app.godMode === 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r' ) {
+					for( var i = 0; i < app.tournament.opponents.length - 1; i++ ) {
+						app.tournament.increaseRank( );
+					}
+				}
 				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 			}
 		}

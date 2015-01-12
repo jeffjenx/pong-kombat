@@ -8,8 +8,8 @@ function YellowPaddle( ) {
 	this.projectileSequence = [ Buttons.LEFT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.DOWN, Buttons.RIGHT, Buttons.UP, Buttons.ACTION ];
 	
-	this.endStory = "yellow end story";
-	this.story = "yellow story";
+	this.endStory = "With great power comes great responsibility, and Yellow Paddle has neither. Despite their conquering of White Paddle, Yellow Paddle goes on an alcoholic binge, drinking themself into oblivion.";
+	this.story = "Yellow Paddle is the only entrant to be personally selected by White Paddle to enter the tournament. White Paddle knows of their weak mind and the troubled past that they've endured.";
 	
 	Paddle.call( this, 'Paddle-Yellow' );
 	

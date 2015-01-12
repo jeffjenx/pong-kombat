@@ -8,8 +8,8 @@ function WhitePaddle( ) {
 	this.projectileSequence = [ Buttons.DOWN, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
 	this.replenishSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.LEFT, Buttons.ACTION ];
 	
-	this.endStory = "white end story";
-	this.story = "white story";
+	this.endStory = "White Paddle defeats their twin sibling, White Paddle, in an epic battle of classic Pong. The competition went on for days, but the real victory was defeating the colorized, high-def paddles in the tournament and proving that, it's not the number of pixels and hues, but the content within.";
+	this.story = "White Paddle makes up for their lack of visual stimulation with pure heart and dedication. The early 1970’s generated an illustrious career for them, but the eventual evolution to color and then to clarity has placed them in times of yore.";
 	
 	Paddle.call( this, 'White' );
 }

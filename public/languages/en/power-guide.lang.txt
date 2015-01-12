@@ -56,7 +56,7 @@
    - Purple Paddle.............. 5.1.3   + Pacintosh System 1............. 9.6 
    - Red Paddle................. 5.1.4   + Spamality Dismantle............ 9.7 
    - Yellow Paddle.............. 5.1.5   + Super Pong Kombat.............. 9.8 
- + Boss Characters................ 5.2   + White First.................... 9.9 
+ + Boss Characters................ 5.2   + God Mode....................... 9.9 
    - Shifter.................... 5.2.1 
    - Monolith................... 5.2.2   Acknolwedgements................ 10.0 
    - White Paddle............... 5.2.3   + Pong Kombat (2014) Team....... 10.1 
@@ -86,13 +86,13 @@ enhancements.
   2.0                              STORY
 ===============================================================================
 
-White Paddle has reclaimed his place atop the porcelan throne of the Pong Lao 
+White Paddle has reclaimed their place atop the porcelan throne of the Pong Lao
 Tournament, with the help of some friends. As they look down upon the citizens 
 of the pong world, *Pongea*, they can only laugh and bellow at their bloated 
 filesize and lossy compression.
 
-With new powers, and an old attitude, it's just a matter of time before White 
-Paddle destroys the universe in a greedy grab for attention.
+With new powers, and a Monolithic attitude, it's just a matter of time before 
+White Paddle destroys the universe in a greedy grab for attention.
 
 The next tournament is about to begin. Do you have what it takes to ascend the
 ranks and defeat White Paddle?
@@ -642,6 +642,10 @@ Pit battle zone, defeat your opponent without taking any damage and perform any
 Dismantle to acess them.
 
 Mythology
+    The year is 1994 and things are different than the years of yore; violence 
+    is what Mr. Slayer adores. It is their passion and it likely cannot be 
+    contained. Uninvited to the game, they cause unexpected chaos, mayhem and 
+    anarchy with no regrets.
 
 Attributes
     Size  - ******.... (Average)
@@ -660,6 +664,9 @@ sometimes appear from the bottom of the screen, exclaiming "Whoopsie!"  Hold
 Start and press the Up button to access them.
 
 Mythology
+    Little is known about the mystical paddle known as, uhhh, Myst. One minute 
+    they're here, and the next minute their gone. Seems like they show up when 
+    you least expect them to. And, why are they always yelling?
 
 Attributes
     Size  - ******.... (Average)
@@ -1107,7 +1114,7 @@ way.
 
 
 -------------------------------------------------------------------------------
-  9.9                           White First
+  9.9                             God Mode
 -------------------------------------------------------------------------------
 
 The now infamous Konami Code makes an appearance in this edition, enabling 
@@ -1117,6 +1124,9 @@ Enter the following button sequence on the title screen, before opening the
 title menu:
 
        Up, Up, Down, Down, Left, Right, Left, Right, Back, Action, Start
+
+Upon completion, you will hear a tone and see the text "GOD MODE" appear above 
+the logo.
 
 
 ===============================================================================

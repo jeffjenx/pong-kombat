@@ -8,8 +8,8 @@ function ShifterPaddle( ) {
 	this.projectileSequence = [ Buttons.RIGHT, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 
-	this.endStory = "shifter end story";
-	this.story = "shifter story";
+	this.endStory = "No one knows what Shifter has been up to since prevailing in the Pong Lao Tournament. I mean, they are practically invisible.";
+	this.story = "Shifter has entered the tournament as a joke and for personal entertainment since the sport of battle has intrigued them as long as they can remember, and they have adapted their appearance to guarantee victory.";
 
 	Paddle.call( this, 'Background-Title' );
 	this.gloss = new Sprite( 'Paddle-Gloss-Shifter' );

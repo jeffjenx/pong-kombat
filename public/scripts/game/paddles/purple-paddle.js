@@ -8,8 +8,8 @@ function PurplePaddle( ) {
 	this.projectileSequence = [ Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT, Buttons.ACTION ];
 	
-	this.endStory = "purple end story";
-	this.story = "purple story";
+	this.endStory = "The victorious bout with White Paddle goes right to the head of Purple Paddle. The power and command that they possess is too much for one paddle to handle. They seek world domination and eventually achieve it, resulting in total global destruction.";
+	this.story = "After ascending the ranks of their local underground Pong Club tournaments, Purple Paddle feels the competition no longer feeds their growing desire to compete, so they enter the Pong Lao Tournament seeking greater challenge.";
 	
 	Paddle.call( this, 'Paddle-Purple' );
 

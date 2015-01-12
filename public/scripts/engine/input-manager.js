@@ -1,30 +1,27 @@
 var Buttons = {
-	ACTION : 0,
+	UP : 0,
 	DOWN : 1,
 	LEFT : 2,
 	RIGHT : 3,
-	UP : 4,
-	PAUSE : 5,
-	MUTE : 6,
-	BACK : 7
+	
+	BACK : 4,
+	ACTION : 5,
+	START : 6
 };
 
 var Keyboard = {
-	32 : Buttons.ACTION,   // <spacebar>
-	16 : Buttons.ACTION,   // <shift>
+	38 : Buttons.UP,       // <up_arrow>
+	87 : Buttons.UP,       // W
 	40 : Buttons.DOWN,     // <down_arrow>
 	83 : Buttons.DOWN,     // S
 	37 : Buttons.LEFT,     // <left_arrow>
 	65 : Buttons.LEFT,     // A
 	39 : Buttons.RIGHT,    // <right_arrow>
 	68 : Buttons.RIGHT,    // D
-	38 : Buttons.UP,       // <up_arrow>
-	87 : Buttons.UP,       // W
-	13 : Buttons.PAUSE,    // <enter>
-	80 : Buttons.PAUSE,    // P
-	77 : Buttons.MUTE,     // M
 	 8 : Buttons.BACK,     // <backspace>
-	27 : Buttons.BACK      // ESCAPE
+	27 : Buttons.BACK,     // ESCAPE
+	32 : Buttons.ACTION,   // <spacebar>
+	16 : Buttons.ACTION,   // <shift>
 };
 
 var Mouse = {

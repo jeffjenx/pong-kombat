@@ -8,8 +8,8 @@ function BluePaddle( ) {
 	this.projectileSequence = [ Buttons.LEFT, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.DOWN, Buttons.ACTION ];
 	
-	this.endStory = "blue end story";
-	this.story = "blue story";
+	this.endStory = "Shortly after their victory, Blue Paddle decides that the Pong Lao Tournament would make for an interesting video game. They spend entirely too much time making the game work with 3D television sets, and go bankrupt when the technology fails to succeed.";
+	this.story = "Blue Paddle spends their days (and nights) alone behind the glow of a computer screen. After noticing a registration form for the tournament on Reddit, they decide to enter and attempt to prove they are more than just another nobody.";
 	
 	Paddle.call( this, 'Paddle-Blue' );
 	

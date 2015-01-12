@@ -10,6 +10,20 @@ function TournamentScene( ) {
 	var background = new Background( 'Background-Title' );
 	backgroundLayer.addComponent( 'Background', background );
 
+	this.titleText = new Text( 'PONG LAO' );
+	this.titleText.fontFamily = 'MK Mythologies';
+	this.titleText.fontSize = viewport.height * 0.11;
+	this.titleText.position.y = viewport.height * 0.10;
+	this.titleText.opacity = 1;
+	backgroundLayer.addComponent( 'TitleText', this.titleText );
+
+	this.tournamentText = new Text( 'TOURNAMENT' );
+	this.tournamentText.fontFamily = 'MK Mythologies';
+	this.tournamentText.fontSize = viewport.height * 0.07;
+	this.tournamentText.position.y = viewport.height * 0.20;
+	this.tournamentText.opacity = 1;
+	backgroundLayer.addComponent( 'TournamentText', this.tournamentText );
+
 	var backgroundLogo = new Sprite( 'Ball-Yin-Yang' );
 	backgroundLogo.size.y = viewport.height * 1.25;
 	backgroundLogo.size.x = backgroundLogo.size.y;
@@ -52,37 +66,37 @@ function TournamentScene( ) {
 	this.opponentName.textBaseline = 'bottom';
 	this.textLayer.addComponent( 'OpponentName', this.opponentName );
 
-	this.rankIcon = new Sprite( 'Icon-Trophy' );
-	this.rankIcon.size.y = viewport.height * 0.1;
-	this.rankIcon.size.x = this.rankIcon.size.y;
-	this.rankIcon.position.x = viewport.width * 0.45;
-	this.rankIcon.position.y = viewport.height * 0.40;
-	this.textLayer.addComponent( 'RankIcon', this.rankIcon );
-
 	this.matchRank = new Text( '0 of 0' );
 	this.matchRank.color = 'white';
 	this.matchRank.fontFamily = 'Apple Garamond';
-	this.matchRank.fontSize = viewport.height * 0.07;
-	this.matchRank.position.x = viewport.width * 0.50;
-	this.matchRank.position.y = viewport.height * 0.40;
-	this.matchRank.textAlign = 'left';
+	this.matchRank.fontSize = viewport.height * 0.05;
+	this.matchRank.position.x = viewport.width * 0.48;
+	this.matchRank.position.y = viewport.height * 0.90;
+	this.matchRank.textAlign = 'right';
 	this.textLayer.addComponent( 'MatchRank', this.matchRank );
 
-	this.timeIcon = new Sprite( 'Icon-Hourglass' );
-	this.timeIcon.size.y = viewport.height * 0.1;
-	this.timeIcon.size.x = this.timeIcon.size.y;
-	this.timeIcon.position.x = viewport.width * 0.55;
-	this.timeIcon.position.y = viewport.height * 0.60;
-	this.textLayer.addComponent( 'TimeIcon', this.timeIcon );
+	this.rankIcon = new Sprite( 'Icon-Trophy' );
+	this.rankIcon.size.y = viewport.height * 0.06;
+	this.rankIcon.size.x = this.rankIcon.size.y;
+	this.rankIcon.position.x = this.matchRank.position.x - this.matchRank.size.x * 0.75;
+	this.rankIcon.position.y = viewport.height * 0.90;
+	this.textLayer.addComponent( 'RankIcon', this.rankIcon );
 
-	this.tournamentTime = new Text( '0:00' );
+	this.tournamentTime = new Text( '00:00' );
 	this.tournamentTime.color = this.matchRank.color;
 	this.tournamentTime.fontFamily = this.matchRank.fontFamily;
 	this.tournamentTime.fontSize = this.matchRank.fontSize;
-	this.tournamentTime.position.x = viewport.width * 0.50;
-	this.tournamentTime.position.y = viewport.height * 0.60;
-	this.tournamentTime.textAlign = 'right';
+	this.tournamentTime.position.x = viewport.width * 0.52;
+	this.tournamentTime.position.y = viewport.height * 0.90;
+	this.tournamentTime.textAlign = 'left';
 	this.textLayer.addComponent( 'TournamentTime', this.tournamentTime );
+
+	this.timeIcon = new Sprite( 'Icon-Hourglass' );
+	this.timeIcon.size.y = viewport.height * 0.06;
+	this.timeIcon.size.x = this.timeIcon.size.y;
+	this.timeIcon.position.x = this.tournamentTime.position.x + this.tournamentTime.size.x * 0.75;
+	this.timeIcon.position.y = viewport.height * 0.90;
+	this.textLayer.addComponent( 'TimeIcon', this.timeIcon );
 	
 	this.ladderLayer = this.addLayer( 'Ladder', new Layer( ) );
 }
@@ -135,6 +149,9 @@ TournamentScene.prototype.startPlayer = function( player ) {
 		opponent.position.y = viewport.height * 0.5 - (i+1) * viewport.height;
 		//opponent.position.x = viewport.width / ( this.opponents.length + 1 ) * ( i + 1 );
 		//opponent.position.y = viewport.height * 0.67;
+		if( opponent.enum === 'MONOLITH' ) {
+			opponent.size.y *= 0.88;
+		}
 		this.layers['Ladder'].addComponent( 'Opponent' + i, opponent );
 	}
 	//this.currentIndex = this.opponents.length - 2;
@@ -143,15 +160,19 @@ TournamentScene.prototype.startPlayer = function( player ) {
 
 TournamentScene.prototype.increaseRank = function( ) {
 	this.currentIndex++;
-	this.opponentName.text = this.opponents[this.currentIndex].name.toUpperCase( );
-	this.opponentName.color = this.opponents[this.currentIndex].color.Hex();
 
-	for( var i = 0; i < this.opponents.length; i++ ) {
-		var opponent = this.opponents[i];
-		opponent.position.y += viewport.height;
+	if( this.currentIndex < this.opponents.length ) {
+		this.opponentName.text = this.opponents[this.currentIndex].name.toUpperCase( );
+		this.opponentName.color = this.opponents[this.currentIndex].color.Hex();
+	
+		for( var i = 0; i < this.opponents.length; i++ ) {
+			var opponent = this.opponents[i];
+			opponent.position.y += viewport.height;
+		}
+	
+		this.matchRank.text = (this.currentIndex + 1) + ' of ' + (this.opponents.length);
 	}
 
-	this.matchRank.text = (this.currentIndex + 1) + ' of ' + (this.opponents.length + 1);
 	//this.player.paddle.position.x = viewport.width / ( this.opponents.length + 1 ) * ( this.currentIndex + 1 );
 	//this.player.paddle.position.y = viewport.height * 0.33;
 };
@@ -159,7 +180,7 @@ TournamentScene.prototype.increaseRank = function( ) {
 TournamentScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
+	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed > 11 ) {
 		var computer = new Opponent( );
 		computer.setPaddle( Paddles[this.opponents[this.currentIndex].enum] );
 		

@@ -114,6 +114,9 @@ App.prototype.initialize = function( ) {
 			InputManager.currentState[ Keyboard[ input.keyCode ] ] = Date.now( );
 		}
 		clearTimeout( this.keySequenceTimer );
+		if( Keyboard[ input.keyCode ] ) {
+			input.preventDefault();
+		}
 	};
 	
 	this.keySequenceTimer = null;
@@ -238,19 +241,9 @@ App.prototype.render = function( ) {
 			SceneManager.update( delta / 1000 ); // Use s instead of ms for update calls
 		}
 	}
-	else if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	else if( InputManager.checkButtonPress( Buttons.ACTION ) || InputManager.checkButtonPress( Buttons.BACK ) )
 	{
 		app.togglePause( );
-	}
-	
-	if( InputManager.checkButtonPress( Buttons.PAUSE ) )
-	{
-		app.togglePause( );
-	}
-	
-	if( InputManager.checkButtonPress( Buttons.MUTE ) )
-	{
-		app.toggleMute( );
 	}
 	
 	InputManager.previousState = copy( InputManager.currentState );
@@ -415,11 +408,6 @@ App.prototype.togglePause = function( ) {
 	{
 		app.pauseMuted = false;
 		AudioManager.unmute( );
-	}
-
-	if( app.controls )
-	{
-		document.getElementById( 'pause' ).className = ( app.paused ) ? "paused" : "";
 	}
 };
 

@@ -8,8 +8,8 @@ function MrSlayerPaddle( ) {
 	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
-	this.endStory = "mr. slayer end story";
-	this.story = "mr. slayer story";
+	this.endStory = "Mr. Slayer teaches White Paddle the meaning of pain. They become renowned as the Angel of Death, but are quickly banished to the kingdom of the dead.";
+	this.story = "The year is 1994 and things are different than the years of yore; violence is what Mr. Slayer adores. It is their passion and it likely cannot be contained. Uninvited to the game, they cause unexpected chaos, mayhem and anarchy with no regrets.";
 	
 	Paddle.call( this, 'Paddle-MrSlayer' );
 	

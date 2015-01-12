@@ -8,11 +8,14 @@ function MystPaddle( ) {
 	this.projectileSequence = [ Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.DOWN, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	
-	this.endStory = "myst end story";
-	this.story = "myst story";
+	this.endStory = "After reaching the top of Pong Lao Tournament, Myst decides that combat is a senseless act of rage. After renouncing their throne, they set forth on an adventure to explore uncharted islands in hopes of solving an ancient puzzle.";
+	this.story = "Little is known about the mystical paddle known as, uhhh, Myst. One minute they're here, and the next minute their gone. Seems like they show up when you least expect them to. And, why are they always yelling?";
 	
 	Paddle.call( this, 'Paddle-Myst' );
-	
+
+	this.opacity = 0.33;
+	//this.gloss.opacity = 0.33;
+
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Smoke2'],Resources['Particle-Smoke2']];
 	this.effect.count = 50;

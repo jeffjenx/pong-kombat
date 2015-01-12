@@ -8,8 +8,8 @@ function RedPaddle( ) {
 	this.projectileSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 
-	this.endStory = "red end story";
-	this.story = "red story";
+	this.endStory = "The triumphant defeat of White Paddle indeed intrigues film director Quentiño, who enlists Red Paddle in his next major project. A tragic boating accident, however, leaves Red Paddle warped and misshapen. They leave the film industry, aspiring to be a super-villain.";
+	this.story = "Although they have yet to see the fame that comes with it, Red Paddle has a satisfying career as a movie star. They hope to catch the eye of notable director, Trent Quentiño, with an underdog victory in the tournament.";
 	
 	Paddle.call( this, 'Paddle-Red' );
 	

@@ -8,8 +8,8 @@ function GreenPaddle( ) {
 	this.projectileSequence = [ Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 
-	this.endStory = "green end story";
-	this.story = "green story";
+	this.endStory = "The victory has earned them much respect and notoriety. And, although the tournament has brought much joy to them, Green Paddle returns to their love of writing and goes on to pen best-selling romance novels \"Potent Potables\" and \"Under the Pale Moon Light.\"";
+	this.story = "Green Paddle is currently working through a mid-life crisis. They enter the Pong Lao Tournament with hopes of finding inner peace and, perhaps, a new career.";
 	
 	Paddle.call( this, 'Paddle-Green' );
 }

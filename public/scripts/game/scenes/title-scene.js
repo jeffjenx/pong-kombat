@@ -48,6 +48,13 @@ function TitleScene( ) {
 	this.text.position.y = viewport.height * 0.67;
 	this.text.opacity = 0;
 	titleLayer.addComponent( 'Text', this.text );
+
+	this.message = new Text( );
+	this.message.fontFamily = 'Open Sans';
+	this.message.fontSize = viewport.height * 0.05;
+	this.message.position.y = viewport.height * 0.25;
+	this.message.opacity = 0;
+	titleLayer.addComponent( 'Message', this.message );
 }
 
 TitleScene.prototype = new Scene;
@@ -73,9 +80,18 @@ TitleScene.prototype.update = function( deltaTime ) {
 		this.text.opacity = 0.5 * Math.cos( 2 * Math.PI * this.timeElapsed * 0.5 ) + 0.5;
 	}
 	
-	if( !this.layers['Menu'] && InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( !this.layers['Menu'] && (InputManager.checkButtonPress( Buttons.ACTION ) || InputManager.checkButtonPress( Buttons.START ) ) )
 	{
-		this.addLayer( 'Menu', new TitleMenu( this ) );
+		var sequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION ];
+
+		if( InputManager.checkSequence( sequence ) ) {
+			app.godMode = 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r';
+			this.message.text = 'GOD MODE';
+			this.message.opacity = 1;
+		}
+		else {
+			this.addLayer( 'Menu', new TitleMenu( this ) );
+		}
 	}
 	
 	this.easePosition( 0.5, 3, this.ball );
@@ -85,6 +101,12 @@ TitleScene.prototype.update = function( deltaTime ) {
 	this.ball.targetRotation = 150;
 	this.ball.glare.rotation = 150;
 	
+	if( this.message.opacity > 0 ) {
+		this.message.opacity = Math.max( this.message.opacity - deltaTime * 0.5, 0 );
+	} else {
+		this.message.opacity = 0;
+	}
+
 	/*
 	if( !this.layers['Menu'] && this.timeElapsed > 20 ) {
 		var storyScene = new MainStoryScene( );
