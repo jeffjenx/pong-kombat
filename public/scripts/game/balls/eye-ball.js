@@ -1,6 +1,6 @@
-function EyeBall( ) {
+function EyeBall( texture ) {
 	var textures = [ 'Ball-Eye-Amber', 'Ball-Eye-Blue', 'Ball-Eye-Brown', 'Ball-Eye-Cat', 'Ball-Eye-Green', 'Ball-Eye-Grey', 'Ball-Eye-Hazel', 'Ball-Eye-Red' ];
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	

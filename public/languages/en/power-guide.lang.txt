@@ -254,7 +254,7 @@ Special Move Percentage
 Dismantle Success Rate
     Number of successful dismantles and finishing opportunities
 
-Flawless Victories
+Mint Condition Victories
     Number of match wins without taking any damage
 
 Tournament Rank
@@ -642,7 +642,7 @@ Pit battle zone, defeat your opponent without taking any damage and perform any
 Dismantle to acess them.
 
 Mythology
-    The year is 1994 and things are different than the years of yore; violence 
+    The year is 1994 and things are different than the years before; violence 
     is what Mr. Slayer adores. It is their passion and it likely cannot be 
     contained. Uninvited to the game, they cause unexpected chaos, mayhem and 
     anarchy with no regrets.
@@ -905,6 +905,9 @@ Tennis
   7.2                           Video Games
 -------------------------------------------------------------------------------
 
+The Legend of Zelda
+    Game Cartridge, Rupee (Green, Blue, Yellow, Red, Purple, Orange, Silver)
+
 Namco
     Ms. Pac-Man, Pac-Man
 
@@ -912,7 +915,7 @@ Pokémon
     PokéBall
 
 Super Mario Bros.
-    1-Up Mushroom, Coin, Koopa Shell, Star Coin, Super Mushroom
+    1-Up Mushroom, Coin, Game Cartridge, Koopa Shell, Star Coin, Super Mushroom
 
 
 -------------------------------------------------------------------------------

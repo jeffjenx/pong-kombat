@@ -77,6 +77,7 @@ KombatLayer.prototype.setBall = function( ballType ) {
 		case Balls.PAC_MAN : ball = new PacMan( ); break;
 		case Balls.POKEBALL : ball = new PokeBall( ); break;
 		case Balls.PONG_BALL : ball = new PongBall( ); break;
+		case Balls.RUPEE : ball = new Rupee( ); break;
 		case Balls.SOCCER_BALL : ball = new SoccerBall( ); break;
 		case Balls.SOLAR_SYSTEM : ball = new SolarSystem( ); break;
 		case Balls.STORAGE_MEDIA : ball = new StorageMedia( ); break;

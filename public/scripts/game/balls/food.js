@@ -1,10 +1,9 @@
-function Food( ) {
+function Food( texture ) {
 	var textures = [
 		'Ball-Easter-Egg-Blue', 'Ball-Easter-Egg-Green', 'Ball-Easter-Egg-Purple', 'Ball-Easter-Egg-Red', 'Ball-Easter-Egg-Yellow',
 		'Ball-Food-Cookie', 'Ball-Food-Donut', 'Ball-Food-Pizza', 'Ball-Food-Plain-Bagel', 'Ball-Food-Salted-Bagel', 'Ball-Food-Waffle'
 	];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.size.x = viewport.width * 0.04;
 	if( this.resource === 'Ball-Food-Pizza' ) {

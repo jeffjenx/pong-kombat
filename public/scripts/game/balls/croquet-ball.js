@@ -1,7 +1,6 @@
-function CroquetBall( ) {
+function CroquetBall( texture ) {
 	var textures = [ 'Ball-Croquet-Black', 'Ball-Croquet-Blue', 'Ball-Croquet-Red', 'Ball-Croquet-Yellow' ];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	

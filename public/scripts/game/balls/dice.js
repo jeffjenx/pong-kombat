@@ -1,11 +1,10 @@
-function Dice( ) {
+function Dice( texture ) {
 	var textures = [
 		'Ball-Dice-Red-1', 'Ball-Dice-Red-2', 'Ball-Dice-Red-3', 'Ball-Dice-Red-4', 'Ball-Dice-Red-5', 'Ball-Dice-Red-6',
 		'Ball-Dice-White-1', 'Ball-Dice-White-2', 'Ball-Dice-White-3', 'Ball-Dice-White-4', 'Ball-Dice-White-5', 'Ball-Dice-White-6',
 		'Ball-Dice-12-Sided', 'Ball-Dice-20-Sided'
 	];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	if( this.resource === 'Ball-Dice-20-Sided' ) {
 		this.size.x = viewport.width * 0.033;

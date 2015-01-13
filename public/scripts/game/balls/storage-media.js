@@ -1,7 +1,6 @@
-function StorageMedia( ) {
-	var textures = [ 'Ball-Compact-Disc', 'Ball-Cassette-Tape', 'Ball-Vinyl-Record', 'Ball-Floppy-Disk' ];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+function StorageMedia( texture ) {
+	var textures = [ 'Ball-Compact-Disc', 'Ball-Cassette-Tape', 'Ball-Vinyl-Record', 'Ball-Floppy-Disk', 'Ball-Cartridge-Mario', 'Ball-Cartridge-Zelda' ];
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	//this.size.x = viewport.width * 0.05;
 	switch( this.resource ) {

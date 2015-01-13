@@ -57,21 +57,82 @@ function HUDLayer( scene ) {
 	rightName.position.x = this.rightHealthBar.position.x - viewport.width * 0.01;
 	rightName.position.y = this.rightHealthBar.position.y;
 	this.addComponent( 'RightName', rightName );
+
+	this.bounce = new Sprite( 'Bounce' );
+	this.bounce.size.y = viewport.height * 0.2;
+	this.bounce.size.x = this.bounce.size.y * 3;
+
+	this.winner = new Text( );
+	this.winner.color = 'white';
+	this.winner.fontFamily = 'Apple Garamond';
+	this.winner.fontSize = viewport.height * 0.08;
+	this.winner.position.y = viewport.height * 0.30;
+	this.winner.textShadow = {
+		color : 'black',
+		blur : 1,
+		x : 1,
+		y : 1
+	};
+
+	this.flawless = new Text( 'Mint Condition' );
+	this.flawless.color = this.winner.color;
+	this.flawless.fontFamily = this.winner.fontFamily;
+	this.flawless.fontSize = viewport.height * 0.05;
+	this.flawless.position.y = viewport.height * 0.7;
+
+	this.dismantled = new Sprite( 'Dismantled' );
+	this.dismantled.size.y = viewport.height * 0.13;
+	this.dismantled.size.x = this.dismantled.size.y * 6;
+	this.dismantled.position.y = viewport.height * 0.45;
+	this.dismantled.rotation = -5;
+
+	this.finishem = new Sprite( 'Finish-Em' );
+	this.finishem.size.y = viewport.height * 0.2;
+	this.finishem.size.x = this.finishem.size.y * 4;
 }
 
 HUDLayer.prototype = new Layer;
 HUDLayer.prototype.constructor = HUDLayer;
 
-//HUDLayer.prototype.draw = function( context ) { };
+HUDLayer.prototype.draw = function( context ) {
+	Layer.prototype.draw.call( this, context );
+
+	if( this.scene.state === this.scene.states.starting ) {
+		this.bounce.draw( context );
+	}
+
+	if( this.scene.state === this.scene.states.ending ) {
+		this.winner.draw( context );
+
+		if( this.scene.finishType === this.scene.finishTypes.dismantled ) {
+			this.dismantled.draw( context );
+		}
+
+		if( this.scene.winner.life === this.scene.startLife ) {
+			this.flawless.draw( context );
+		}
+	}
+
+	if( this.scene.state === this.scene.states.announcing ) {
+		this.finishem.draw( context );
+	}
+};
 
 HUDLayer.prototype.addAnnouncement = function( announcement ) {
 	var announcement = new Text( announcement );
-	announcement.color = 'white';
+	announcement.color = 'yellow';
 	announcement.fontSize = viewport.height * 0.10;
 	announcement.textAlign = 'center';
+	announcement.opacity = 1;
 	announcement.position.x = viewport.width * 0.50;
 	announcement.position.y = viewport.height * 0.50;
 	this.addComponent( 'Announcement', announcement );
+};
+
+HUDLayer.prototype.updateWinner = function( ) {
+	if( this.scene.winner ) {
+		this.winner.text = this.scene.winner.paddle.name + ' Wins';
+	}
 };
 
 HUDLayer.prototype.cinemaMode = function( ) {
@@ -114,7 +175,12 @@ HUDLayer.prototype.cinemaMode = function( ) {
 HUDLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.scene.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
-	
+
+	if( this.scene.state === this.scene.states.dismantling )
+ 	{
+ 		this.cinemaMode( );
+ 	}	
+
 	// Drain health gradually
 	if( leftKombatant )
 	{
@@ -135,6 +201,14 @@ HUDLayer.prototype.update = function( deltaTime ) {
 			this.rightHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
 	}
+
+	/*
+	var announcement = this.components['Announcement'];
+	if( announcement && announcement.opacity > 0 ) {
+		announcement.opacity = Math.max( announcement.opacity - deltaTime / 2.5, 0 );
+		announcement.scale = (1 - announcement.opacity / 3) + 1;
+	}
+	*/
 	
 	Layer.prototype.update.call( this, deltaTime );
 };

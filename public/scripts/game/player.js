@@ -13,6 +13,7 @@ Player.prototype.handleInput = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.finishing :
 			if( this.paddle.dismantleSequence && InputManager.checkSequence( this.paddle.dismantleSequence ) ) {
+				this.layer.scene.finishType = this.layer.scene.finishTypes.dismantled;
 				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}
 

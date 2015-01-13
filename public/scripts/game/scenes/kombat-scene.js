@@ -23,6 +23,13 @@ function KombatScene( ) {
 	//this.changeState( this.states.fighting );
 	//this.layers['Kombat'].setBall( Balls.DEFAULT );
 
+	this.finishTypes = {
+		dismantled : 0,
+		spamality : 1
+	}
+	this.finishType = null;
+	this.winner = null;
+
 	this.screamSound = new Sound( 'Scream' );
 	this.setLevel( Levels.RANDOM );
 }
@@ -114,9 +121,7 @@ KombatScene.prototype.setLevel = function( level ) {
 };
 
 KombatScene.prototype.startMatch = function( ) {
-	this.layers['HUD'].addAnnouncement( 'Bounce' );
-	this.stateTime = 0;
-	this.state = this.states.starting;
+	this.changeState( this.states.starting );
 	this.winner = null;
 
 	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
@@ -165,7 +170,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.announcing :
 		case this.states.starting :
 			if( this.stateTime >= 3 ) {
-				this.layers['HUD'].removeComponent( 'Announcement' );
+				//this.layers['HUD'].removeComponent( 'Announcement' );
 				if( this.winner === null ) {
 					this.changeState( this.states.fighting );
 					this.layers['Kombat'].setBall( );
@@ -183,13 +188,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 				if( leftKombatant.life <= 0 ) {
 					this.winner = rightKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
+					this.layers['HUD'].updateWinner( );
 
 					if( app.settings.COMBAT ) {
-						this.layers['HUD'].addAnnouncement( "Finish'em!" );
+						//this.layers['HUD'].addAnnouncement( "Finish'em!" );
 						this.changeState( this.states.announcing );
 					} else {
 						this.changeState( this.states.ending );
-						this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+						//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 					}
 				}
 			}
@@ -199,13 +205,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 				if( rightKombatant.life <= 0 ) {
 					this.winner = leftKombatant;
 					this.layers['Kombat'].removeComponent( 'Ball' );
+					this.layers['HUD'].updateWinner( );
 
 					if( app.settings.COMBAT ) {
-						this.layers['HUD'].addAnnouncement( "Finish'em!" );
+						//this.layers['HUD'].addAnnouncement( "Finish'em!" );
 						this.changeState( this.states.announcing );
 					} else {
 						this.changeState( this.states.ending );
-						this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+						//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 					}
 				}
 			}
@@ -216,14 +223,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.states.finishing :
-			if( this.stateTime >= 3 ) {
+			if( this.stateTime >= 5 ) {
 				this.changeState( this.states.ending );
-				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+				//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 			}
 		break;
 		
 		case this.states.dismantling :
-			this.layers['HUD'].cinemaMode( );
+			//this.layers['HUD'].cinemaMode( );
 			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
 			
 			if( this.stateTime > 2.5 && !this.screamSound.played && app.settings['SoundFX'] === true && !app.isMobile( ) )
@@ -233,11 +240,11 @@ KombatScene.prototype.update = function( deltaTime ) {
 
 			if( this.stateTime >= 7 ) {
 				this.changeState( this.states.ending );
-				this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
-				
-				var dismantled = new Text( 'Dismantled!' );
-				dismantled.position.y = viewport.height * 0.60;
-				this.layers['HUD'].addComponent( 'Dismantled', dismantled );
+				//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
+				//
+				//var dismantled = new Text( 'Dismantled!' );
+				//dismantled.position.y = viewport.height * 0.60;
+				//this.layers['HUD'].addComponent( 'Dismantled', dismantled );
 			}
 		break;
 		

@@ -1,7 +1,6 @@
-function Marble( ) {
+function Marble( texture ) {
 	var textures = [ 'Ball-Marble-Brown', 'Ball-Marble-Lavender', 'Ball-Marble-Mint', 'Ball-Marble-Orange', 'Ball-Marble-Pink', 'Ball-Marble-Teal', 'Ball-Bouncy' ];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	

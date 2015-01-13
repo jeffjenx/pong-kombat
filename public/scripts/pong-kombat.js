@@ -25,6 +25,7 @@ load( 'scripts/game/', [
 	'balls/pac-man',
 	'balls/pong-ball',
 	'balls/pokeball',
+	'balls/rupee',
 	'balls/soccer-ball',
 	'balls/solar-system',
 	'balls/storage-media',

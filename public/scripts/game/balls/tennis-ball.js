@@ -1,7 +1,6 @@
-function TennisBall( ) {
+function TennisBall( texture ) {
 	var textures = [ 'Ball-Table-Tennis-Orange', 'Ball-Table-Tennis-White', 'Ball-Tennis' ];
-
-	Ball.call( this, textures[ Math.floor( Math.random( ) * textures.length ) ] );
+	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	

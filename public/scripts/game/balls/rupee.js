@@ -1,23 +1,23 @@
-function PacMan( texture ) {
-	var textures = [ 'Ball-Pac-Man', 'Ball-Ms-Pac-Man' ];
+function Rupee( texture ) {
+	var textures = [ 'Ball-Rupee-Green', 'Ball-Rupee-Blue', 'Ball-Rupee-Yellow', 'Ball-Rupee-Red', 'Ball-Rupee-Purple', 'Ball-Rupee-Orange', 'Ball-Rupee-Silver' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
 	this.size.x = viewport.width * 0.035;
 	this.size.y = this.size.x;
 
 	this.animations = {
-		'chomp' : { frames : [0, 1, 2, 3, 2, 1], step : 50 },
+		'rupee' : { frames : [0, 1, 2, 3], step : 213 }
 	};
-	this.currentAnimation = 'chomp';
+	this.currentAnimation = 'rupee';
 	this.currentFrame = 0;
 	this.currentStep = 0;
 	this.frame = { x : 0, y : 0, width : 256, height : 256 };
 }
 
-PacMan.prototype = new Ball;
-PacMan.prototype.constructor = PacMan;
+Rupee.prototype = new Ball;
+Rupee.prototype.constructor = Rupee;
 
-PacMan.prototype.draw = function( context ) {
+Rupee.prototype.draw = function( context ) {
 	//SpriteSheet.prototype.draw.call( this, context );
 	Component.prototype.draw.call( this, context );
 	
@@ -34,7 +34,7 @@ PacMan.prototype.draw = function( context ) {
 	context.save( );
 	context.globalAlpha = this.opacity;
 	context.translate( this.position.x, this.position.y );
-	context.rotate( this.rotation * Math.TO_RADIANS );
+	context.rotate( (this.offset.x / 2) * Math.TO_RADIANS );
 	if( Math.abs(this.rotation) > 90 && Math.abs(this.rotation) < 180 ) {
 		context.scale( 1, -1 );
 	}
@@ -52,7 +52,7 @@ PacMan.prototype.draw = function( context ) {
 	context.restore( );
 };
 
-PacMan.prototype.update = function( deltaTime ) {
+Rupee.prototype.update = function( deltaTime ) {
 	if( this.scale < 1 ) {
 		this.scale += 3.3 * deltaTime;
 		if( this.glare ) {

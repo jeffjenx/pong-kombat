@@ -7,19 +7,18 @@ function TestScene( ) {
 	this.background = new Background( 'Black' );
 	this.layer.addComponent( 'Background', this.background );
 
-	this.tester = new BilliardsBall( 'Ball-Billiards-3' );
+	this.tester = new Rupee( 'Ball-Rupee-Green' );
 	this.tester.scale = 5;
 	this.layer.addComponent( 'Tester', this.tester );
 
-	//this.resetBall( );
+	this.resetBall( );
 }
 
 TestScene.prototype = new Scene;
 TestScene.prototype.constructor = TestScene;
 
-/*
 TestScene.prototype.resetBall = function( ) {
-	this.tester = new Basketball( 'Ball-Basketball-ABA' );
+	this.tester = new Rupee( );
 	this.layer.addComponent( 'Tester', this.tester );
 	this.tester.set( );
 };
@@ -41,4 +40,3 @@ TestScene.prototype.update = function( deltaTime ) {
 		this.resetBall( );
 	}
 };
-*/

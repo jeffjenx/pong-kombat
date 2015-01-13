@@ -198,6 +198,7 @@ Opponent.prototype.applyAI = function( ) {
 					this.randomizer = Math.random( );
 				}
 				if( this.randomizer < 0.11 ) {
+					this.layer.scene.finishType = this.layer.scene.finishTypes.dismantled;
 					this.layer.scene.changeState( this.layer.scene.states.dismantling );
 				} else if( this.paddle.canShootProjectile( ) ) {
 					this.paddle.shootProjectile( );
