@@ -1,5 +1,5 @@
 function TimePowerup( ) {
-	Sprite.call( this, 'Powerup-Time' );
+	Powerup.call( this, 'Powerup-Time' );
 	
 	this.size.x = viewport.height * 0.07;
 	this.size.y = this.size.x * 1.3;
@@ -28,6 +28,8 @@ function TimePowerup( ) {
 	for( var x = 0; x < 100; x++ ) {
 		this.effect.update( 1 / 60 );
 	}
+
+	this.timeoutTime *= 1000 + app.gameTime;
 }
 
 TimePowerup.prototype = new Powerup;

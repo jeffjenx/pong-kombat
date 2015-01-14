@@ -6,15 +6,16 @@ var Powerups = {
 	TIME : 5
 };
 
-function Powerup( ) {
-	/*
-	Sprite.call( this, 'Ball' );
+function Powerup( texture ) {
+	Sprite.call( this, texture );
 	
+	/*
 	this.position.x = viewport.width * 0.50;
 	this.position.y = viewport.height * 0.50;
 	this.size.x = viewport.height * 0.05;
 	this.size.y = viewport.height * 0.05;
 	*/
+	this.timeoutTime = 8; // 8 seconds
 }
 
 Powerup.prototype = new Sprite;
@@ -39,5 +40,9 @@ Powerup.prototype.update = function( deltaTime ) {
 		this.scale += deltaTime;
 	} else if( this.scale !== 1 ) {
 		this.scale = 1;
+	}
+
+	if( app.gameTime >= this.timeoutTime ) {
+		this.timedOut();
 	}
 }

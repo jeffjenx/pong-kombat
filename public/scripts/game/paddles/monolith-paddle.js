@@ -13,6 +13,7 @@ function MonolithPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Monolith' );
 	
+	this.lifeModifier = 0.5;
 	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );
 
 	// Monolith throws 3 rocks at a time

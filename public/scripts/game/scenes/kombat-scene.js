@@ -6,7 +6,7 @@ function KombatScene( ) {
 	this.addLayer( 'Foreground', new ForegroundLayer( this ) );
 	this.addLayer( 'HUD', new HUDLayer( this ) );
 	
-	this.startLife = 5;
+	this.startLife = 1;
 	this.states = {
 		announcing : 0,
 		starting : 1,
@@ -233,13 +233,17 @@ KombatScene.prototype.update = function( deltaTime ) {
 			//this.layers['HUD'].cinemaMode( );
 			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
 			
+			/*
 			if( this.stateTime > 2.5 && !this.screamSound.played && app.settings['SoundFX'] === true && !app.isMobile( ) )
 			{
 				this.screamSound.play( );
 			}
+			*/
 
 			if( this.stateTime >= 7 ) {
-				this.changeState( this.states.ending );
+				//this.changeState( this.states.ending );
+
+
 				//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 				//
 				//var dismantled = new Text( 'Dismantled!' );
@@ -257,6 +261,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 							var storyScene = new StoryScene( );
 							storyScene.setPaddle( Paddles[app.tournament.player.paddle.enum] );
 							storyScene.setStory( app.tournament.player.paddle.endStory );
+							storyScene.ending = true;
 							SceneManager.changeScene( storyScene, Transitions.FADE, 0.5 );
 						} else {
 							app.tournament.changePlayer( app.tournament.player );

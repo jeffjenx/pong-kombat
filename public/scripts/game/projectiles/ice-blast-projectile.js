@@ -6,6 +6,7 @@ function IceBlastProjectile( sourcePaddle ) {
 	this.size.y = this.size.x;
 	this.position.x = sourcePaddle.position.x;
 	this.position.y = sourcePaddle.position.y;
+	this.startPosition = this.position.y;
 	this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
 
@@ -42,3 +43,9 @@ IceBlastProjectile.prototype.draw = function( context ) {
 		this.effect.draw( context );
 	}
 }
+
+IceBlastProjectile.prototype.update = function( deltaTime ) {
+	Projectile.prototype.update.call( this, deltaTime );
+
+	this.position.y = this.startPosition + Math.cos( app.gameTime / 213 ) * this.size.y * this.scale;
+};

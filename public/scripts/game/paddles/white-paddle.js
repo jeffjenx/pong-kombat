@@ -12,6 +12,8 @@ function WhitePaddle( ) {
 	this.story = "White Paddle makes up for their lack of visual stimulation with pure heart and dedication. The early 1970’s generated an illustrious career for them, but the eventual evolution to color and then to clarity has placed them in times of yore.";
 	
 	Paddle.call( this, 'White' );
+
+	this.lifeModifier = 0.75;
 }
 
 WhitePaddle.prototype = new Paddle;

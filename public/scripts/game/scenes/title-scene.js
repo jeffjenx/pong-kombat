@@ -107,12 +107,12 @@ TitleScene.prototype.update = function( deltaTime ) {
 		this.message.opacity = 0;
 	}
 
-	/*
-	if( !this.layers['Menu'] && this.timeElapsed > 20 ) {
-		var storyScene = new MainStoryScene( );
-			SceneManager.changeScene( storyScene, Transitions.FADE );
+	if( !this.layers['Menu'] && this.timeElapsed > 15 ) {
+		var storyScene = new StoryScene( );
+		storyScene.setPaddle( Paddles.RANDOM );
+		storyScene.setStory( storyScene.paddle.story );
+		SceneManager.changeScene( storyScene, Transitions.FADE );
 	}
-	*/
 };
 
 TitleScene.prototype.ballInterpolation = function( startTime, endTime ) {

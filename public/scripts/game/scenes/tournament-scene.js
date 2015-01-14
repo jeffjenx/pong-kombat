@@ -40,16 +40,15 @@ function TournamentScene( ) {
 
 	this.playerName = new Text( 'Player Name' );
 	this.playerName.color = 'white';
-	this.playerName.fontFamily = 'Open Sans';
+	this.playerName.fontFamily = 'Anton';
 	this.playerName.fontStyle = '800';
 	this.playerName.fontSize = viewport.height * 0.25;
-	this.playerName.position.x = 0;
+	this.playerName.position.x = -this.playerName.fontSize * 0.3;
 	this.playerName.position.y = 0;
 	this.playerName.textAlign = 'left';
 	this.playerName.textBaseline = 'bottom';
 	this.playerName.opacity = 0.11;
 	this.playerName.rotation = 90;
-	this.playerName.letterSpacing = -viewport.height * 0.022;
 	this.textLayer.addComponent( 'PlayerName', this.playerName );
 
 	this.opponentName = new Text( 'Opponent Name' );
@@ -58,11 +57,10 @@ function TournamentScene( ) {
 	this.opponentName.fontStyle = this.playerName.fontStyle;
 	this.opponentName.fontSize = this.playerName.fontSize;
 	this.opponentName.position.y = viewport.height;
-	this.opponentName.position.x = viewport.width;
+	this.opponentName.position.x = viewport.width + this.opponentName.fontSize * 0.3;
 	this.opponentName.textAlign = 'left';
 	this.opponentName.opacity = this.playerName.opacity;
 	this.opponentName.rotation = -90;
-	this.opponentName.letterSpacing = this.playerName.letterSpacing;
 	this.opponentName.textBaseline = 'bottom';
 	this.textLayer.addComponent( 'OpponentName', this.opponentName );
 

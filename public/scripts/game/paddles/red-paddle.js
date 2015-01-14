@@ -49,21 +49,24 @@ RedPaddle.prototype.draw = function( context ) {
 
 
 RedPaddle.prototype.shootProjectile = function( ) {
+	Paddle.prototype.shootProjectile.call( this, new ShadowProjectile( this ) );
+
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
-	this.projectile = new ShadowProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	// this.projectile = new ShadowProjectile( this );
+	// this.projectile.sourcePaddle = this;
+	// this.projectile.position.x = this.position.x;
+	// this.projectile.position.y = this.position.y;
 	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-		this.projectile.flipH = true;
-	}
+	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	
+	// if( this.position.x > viewport.width * 0.50 )
+	// {
+	// 	this.projectile.velocity.x *= -1;
+	// 	this.projectile.flipH = true;
+	// }
 };
 
 RedPaddle.prototype.update = function( deltaTime ) {

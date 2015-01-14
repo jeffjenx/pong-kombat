@@ -242,6 +242,10 @@ Opponent.prototype.setPaddle = function( paddle ) {
 };
 
 Opponent.prototype.update = function( deltaTime ) {
+	if( this.life < 0 ) {
+		this.life = 0;
+	}
+	
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.fighting :
 			this.applyAI( );

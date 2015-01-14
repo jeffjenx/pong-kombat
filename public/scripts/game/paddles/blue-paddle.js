@@ -1,5 +1,5 @@
 function BluePaddle( ) {
-	this.color = new Color( 0, 0, 255 );
+	this.color = new Color( 33, 90, 255 );
 	this.enum = "BLUE";
 	this.name = "Blue Paddle";
 	this.bigness = 3.00;
@@ -52,22 +52,24 @@ BluePaddle.prototype.draw = function( context ) {
 };
 
 BluePaddle.prototype.shootProjectile = function( ) {
+	Paddle.prototype.shootProjectile.call( this, new IceBlastProjectile( this ) );
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
 
-	this.projectile = new IceBlastProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
+	// this.projectile = new IceBlastProjectile( this );
+	// this.projectile.sourcePaddle = this;
+	// this.projectile.position.x = this.position.x;
+	// this.projectile.position.y = this.position.y;
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
 	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-	}
+	// if( this.position.x > viewport.width * 0.50 )
+	// {
+	// 	this.projectile.velocity.x *= -1;
+	// }
+	
 	/*
 	if( this.position.x < viewport.width * 0.50 ) {
 		this.projectile.velocity.x = viewport.width * 0.25;
@@ -76,12 +78,12 @@ BluePaddle.prototype.shootProjectile = function( ) {
 	}
 	*/
 
-	if( this.projectile.effect ) {
-		this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
-		this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
-		this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
-		this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
-	}
+	// if( this.projectile.effect ) {
+	// 	this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
+	// 	this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
+	// 	this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
+	// 	this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
+	// }
 };
 
 BluePaddle.prototype.update = function( deltaTime ) {

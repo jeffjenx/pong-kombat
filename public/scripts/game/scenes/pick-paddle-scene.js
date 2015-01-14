@@ -268,6 +268,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			if( app.tournament )
 			{
 				app.tournament.changePlayer( player );
+				app.tournament.timeElapsed = 0;
 				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 			}
 			else
@@ -291,7 +292,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			kombatScene.addKombatant( player );
 			kombatScene.addKombatant( computer );
 			kombatScene.setLevel( this.level );
-			kombatScene.setBall( Balls.DEFAULT );
+			//kombatScene.setBall( Balls.DEFAULT );
 			SceneManager.changeScene( kombatScene, Transitions.NONE );
 		}
 	}

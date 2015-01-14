@@ -101,6 +101,10 @@ Component.prototype.update = function( deltaTime ) {
 	this.updateSize( );
 };
 
+Component.prototype.isWithinViewport = function() {
+	return (this.boundingBox.right < 0 || this.boundingBox.left > viewport.width || this.boundingBox.top < 0 || this.boundingBox.bottom > viewport.height);
+};
+
 Component.prototype.updateBoundingBox = function( ) {
 	// componentBox is boundingBox before appling rotation
 	var componentBox = {

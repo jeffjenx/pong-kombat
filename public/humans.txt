@@ -49,6 +49,7 @@
 	                GameFAQs
 	                GitHub
 	                Google Analytics
+	                Google Fonts
 	                Google Images
 	                Google Search
 	                nodejitsu

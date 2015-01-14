@@ -1,5 +1,5 @@
 function ShieldPowerup( ) {
-	Sprite.call( this, 'Powerup-Shield' );
+	Powerup.call( this, 'Powerup-Shield' );
 	
 	this.size.x = viewport.height * 0.08;
 	this.size.y = this.size.x * 1.25;
@@ -28,6 +28,8 @@ function ShieldPowerup( ) {
 	for( var x = 0; x < 100; x++ ) {
 		this.effect.update( 1 / 60 );
 	}
+
+	this.timeoutTime *= 1000 + app.gameTime;
 }
 
 ShieldPowerup.prototype = new Powerup;

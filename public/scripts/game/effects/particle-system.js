@@ -122,7 +122,11 @@ ParticleSystem.prototype.update = function( deltaTime ) {
 		// Regenerate particles
 		if( p.remainingLife < 0 )
 		{
-			this.particles[i] = new Particle( this );
+			this.particles.splice(i, 1);
+			--i;
+			if( this.particles.length < this.count ) {
+				this.particles.push( new Particle( this ) );
+			}
 		}
 	}
 };

@@ -127,8 +127,6 @@ function ready( ) {
 		'TUNES'      : (localStorage && localStorage['PongKombat.settings.TUNES']) ? parseInt( localStorage['PongKombat.settings.TUNES'] ) : 10
 	};
 	app.resize( );
-
-
 	
 	var loadingInterval;
 	var loadingPercentage;
@@ -162,7 +160,7 @@ function ready( ) {
 		// storyScene.setStory( paddle.endStory );
 		// app.startupScene = storyScene;
 		
-		app.startupScene = new SplashScene();
+		app.startupScene = new PickPaddleScene();
 		
 		app.initialize( );
 	};

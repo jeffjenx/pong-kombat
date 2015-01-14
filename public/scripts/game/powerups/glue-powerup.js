@@ -1,5 +1,5 @@
 function GluePowerup( ) {
-	Sprite.call( this, 'Powerup-Glue' );
+	Powerup.call( this, 'Powerup-Glue' );
 	
 	this.size.x = viewport.height * 0.06;
 	this.size.y = this.size.x * 2.1;
@@ -28,6 +28,8 @@ function GluePowerup( ) {
 	for( var x = 0; x < 100; x++ ) {
 		this.effect.update( 1 / 60 );
 	}
+
+	this.timeoutTime *= 1000 + app.gameTime;
 }
 
 GluePowerup.prototype = new Powerup;

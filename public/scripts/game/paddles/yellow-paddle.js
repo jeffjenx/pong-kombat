@@ -39,11 +39,62 @@ YellowPaddle.prototype.constructor = YellowPaddle;
 
 YellowPaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
+
+	if( !this.dismantleAnimationFrames ) {
+		this.dismantleAnimationFrames = [
+			// end = start?? call only once, end < 0?? call indefinitely
+			{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 1.0, end : 1.5, action : function(winner) { winner.moveUp(); } },
+			{ start : 1.25, end : 1.25, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 1.5, end : 1.5, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 1.5, end : 2.5, action : function(winner) { winner.moveDown(); } },
+			{ start : 1.75, end : 1.75, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 2.0, end : 2.0, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 2.25, end : 2.25, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 2.5, end : 2.5, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 2.5, end : 3.0, action : function(winner) { winner.moveUp(); } },
+			{ start : 2.75, end : 2.75, action : function(winner) { winner.shootProjectile(); } },
+			{ start : 3.0, end : 3.0, action : function(winner) { winner.shootProjectile(); } },
+			{
+			  start : 3.0, end :  -1, action : function(winner) {
+					if(winner.position.y != viewport.height / 2) {
+						winner.moveDown();
+					}
+					if( winner.position.y > viewport.height / 2) {
+						winner.position.y = viewport.height / 2;
+						winner.velocity.y = 0;
+					}
+				}
+			},
+			{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleBurning(percentComplete); } },
+			{ start : 6.0, end : 9.0, action : function(winner, loser, percentComplete) { loser.dismantleCharring(percentComplete); } },
+			{ start : 10.0, end :  -1, action : function(winner, loser) { loser.dismantleCharred(); } },
+			{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+		];
+	}
+
+	for( var i = 0; i < this.dismantleAnimationFrames.length; i++ ) {
+		var frame = this.dismantleAnimationFrames[i];
+		if( sceneTime >= frame.start ) {
+			if( frame.start === frame.end ) {
+				// called once
+				frame.action( this, opponent.paddle );
+				this.dismantleAnimationFrames.splice(i, 1);
+				--i;
+			}
+			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
+				frame['action']( this, opponent.paddle, percentComplete );
+			}
+		}
+	}
 	
+	/*
 	if( sceneTime < 2 ) {
 	} else if( sceneTime < 5 ) {
 		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
 	}
+	*/
 };
 
 YellowPaddle.prototype.draw = function( context ) {
@@ -52,28 +103,30 @@ YellowPaddle.prototype.draw = function( context ) {
 };
 
 YellowPaddle.prototype.shootProjectile = function( ) {
+	var projectile = new FireballProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
-	this.projectile = new FireballProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
+	// this.projectile = new FireballProjectile( this );
+	// this.projectile.sourcePaddle = this;
+	// this.projectile.position.x = this.position.x;
+	// this.projectile.position.y = this.position.y;
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
 	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-	}
+	// if( this.position.x > viewport.width * 0.50 )
+	// {
+	// 	this.projectile.velocity.x *= -1;
+	// }
 	
-	if( this.projectile.effect ) {
-		this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
-		this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
-		this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
-		this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
-	}
+	// if( this.projectile.effect ) {
+	// 	this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
+	// 	this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
+	// 	this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
+	// 	this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
+	// }
 };
 
 YellowPaddle.prototype.update = function( deltaTime ) {

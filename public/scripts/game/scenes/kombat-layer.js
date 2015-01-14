@@ -171,7 +171,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 					if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
 					{
-						rightKombatant.life -= 1;
+						rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
 						this.setBall( Balls.RANDOM );
 					}
 
@@ -194,40 +194,13 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 					if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
 					{
-						leftKombatant.life -= 1;
+						leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
 						this.setBall( Balls.RANDOM );
 					}
 
 					if( rightKombatant.paddle.timePowerup && ball.velocity.x > 0 && ball.position.x > viewport.width / 2 && !ball.bulletTimed ) {
 						ball.bulletTimed = true;
 					}
-				}
-			}
-
-			if( leftKombatant && rightKombatant )
-			{
-				if(leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
-					if( !rightKombatant.paddle.shieldPowerup )
-					{
-						if( !app.settings.CENSORSHIP ) {
-							// blood
-							rightKombatant.paddle.getHit( );
-						}
-						rightKombatant.life -= 1;
-					}
-					leftKombatant.paddle.projectile = null;
-				}
-				
-				if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
-					if( !leftKombatant.paddle.shieldPowerup )
-					{
-						if( !app.settings.CENSORSHIP ) {
-							// blood
-							leftKombatant.paddle.getHit( );
-						}
-						leftKombatant.life -= 1;
-					}
-					rightKombatant.paddle.projectile = null;
 				}
 			}
 
@@ -238,11 +211,87 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			if( rightKombatant && powerup && Collision.RectRect( rightKombatant.paddle.boundingBox, powerup.boundingBox ) ) {
 				powerup.collect( rightKombatant );
 			}
-		break;
-		
+		// no break; want to fall down into the code below
+
 		case this.scene.states.finishing :
+		case this.scene.states.dismantling :
+			if( leftKombatant && rightKombatant )
+			{
+				if( leftKombatant.paddle.projectiles.length > 0 ) {
+					for( var i = 0; i < leftKombatant.paddle.projectiles.length; i++ ) {
+						var projectile = leftKombatant.paddle.projectiles[i];
+
+						if(Collision.RectRect( projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+							if( !rightKombatant.paddle.shieldPowerup )
+							{
+								if( !app.settings.CENSORSHIP ) {
+									// blood
+									rightKombatant.paddle.getHit( );
+								}
+								rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
+							}
+							leftKombatant.paddle.projectiles.splice( i, 1 );
+							--i;
+						}
+					}
+				}
+
+				// if(leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
+				// 	if( !rightKombatant.paddle.shieldPowerup )
+				// 	{
+				// 		if( !app.settings.CENSORSHIP ) {
+				// 			// blood
+				// 			rightKombatant.paddle.getHit( );
+				// 		}
+				// 		rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
+				// 	}
+				// 	leftKombatant.paddle.projectile = null;
+				// }
+
+				if( rightKombatant.paddle.projectiles.length > 0 ) {
+					for( var i = 0; i < rightKombatant.paddle.projectiles.length; i++ ) {
+						var projectile = rightKombatant.paddle.projectiles[i];
+
+						if(Collision.RectRect( projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+							if( !leftKombatant.paddle.shieldPowerup )
+							{
+								if( !app.settings.CENSORSHIP ) {
+									// blood
+									leftKombatant.paddle.getHit( );
+								}
+								leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
+							}
+							rightKombatant.paddle.projectiles.splice( i, 1 );
+							--i;
+						}
+					}
+				}
+				
+				// if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
+				// 	if( !leftKombatant.paddle.shieldPowerup )
+				// 	{
+				// 		if( !app.settings.CENSORSHIP ) {
+				// 			// blood
+				// 			leftKombatant.paddle.getHit( );
+				// 		}
+				// 		leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
+				// 	}
+				// 	rightKombatant.paddle.projectile = null;
+				// }
+			}
+		break;
+
+		case this.scene.states.announcing :
 			if( powerup ) {
 				powerup.timedOut( );
+			}
+
+			if( leftKombatant && leftKombatant.paddle.projectiles.length > 0 ) {
+				leftKombatant.paddle.projectiles = [ ];
+			}
+
+			if( rightKombatant && rightKombatant.paddle.projectiles.length > 0 ) {
+				rightKombatant.paddle.projectiles = [ ];
 			}
 		break;
 	}

@@ -42,7 +42,7 @@
  Controls......................... 4.0 
  + Basic Controls................. 4.1   Power-Ups........................ 8.0 
  + Advanced Controls.............. 4.2   + Meat........................... 8.1 
- + Special Abilites............... 4.4   + Glue........................... 8.2 
+ + Special Abilities.............. 4.4   + Glue........................... 8.2 
  + Using A Keyboard............... 4.5   + Energy Drink................... 8.3 
  + Using Touch-Enabled Devices.... 4.6   + Shield......................... 8.4 
  + Using A Gamepad Controller..... 4.7   + Stopwatch...................... 8.5 
@@ -359,7 +359,7 @@ English
 
 
 -------------------------------------------------------------------------------
-  4.4                         Special Abilites
+  4.4                         Special Abilities
 -------------------------------------------------------------------------------
 
 Each character has their own special abilities, so be sure to try out different

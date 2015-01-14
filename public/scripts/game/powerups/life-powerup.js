@@ -1,5 +1,5 @@
 function LifePowerup( ) {
-	Sprite.call( this, 'Powerup-Life' );
+	Powerup.call( this, 'Powerup-Life' );
 	
 	this.size.x = viewport.height * 0.11;
 	this.size.y = this.size.x * 0.7;
@@ -28,6 +28,8 @@ function LifePowerup( ) {
 	for( var x = 0; x < 100; x++ ) {
 		this.effect.update( 1 / 60 );
 	}
+	
+	this.timeoutTime *= 1000 + app.gameTime;
 }
 
 LifePowerup.prototype = new Powerup;

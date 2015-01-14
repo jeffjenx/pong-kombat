@@ -81,7 +81,7 @@ Projectile.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
 	if( this.sourcePaddle ) {
-		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
+		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 ) {
 			this.sourcePaddle.projectile = null;
 		}	
 	}

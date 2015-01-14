@@ -2,6 +2,7 @@ function StoryScene( ) {
 	Scene.call( this );
 	
 	this.paddle;
+	this.ending = false;
 
 	var storyLayer = this.addLayer( 'Story', new Layer( ) );
 	
@@ -9,15 +10,17 @@ function StoryScene( ) {
 	storyLayer.addComponent( 'Background', this.background );
 
 	this.box = new Sprite( 'Black' );
-	this.box.opacity = 0.5;
+	this.box.opacity = 0;
+	//this.box.opacity = 0.5;
 	this.box.size.x = viewport.width;
 	this.box.size.y = viewport.height * 0.55;
 	this.box.registration.y = 0;
 	this.box.position.x = viewport.width * 0.50;
 	this.box.position.y = viewport.height * 0.07;
-	storyLayer.addComponent( 'Box', this.box );	
+	storyLayer.addComponent( 'Box', this.box );
 	
 	this.storyText = new Text( '' );
+	this.storyText.opacity = 0;
 	this.storyText.color = "#FFE8B8";
 	this.storyText.fontFamily = "Helvetica";
 	this.storyText.fontSize = viewport.height * 0.045;
@@ -40,6 +43,18 @@ function StoryScene( ) {
 	};
 	
 	storyLayer.addComponent( 'StoryText', this.storyText );
+
+	this.paddleName = new Text( 'Player Name' );
+	this.paddleName.opacity = 0;
+	this.paddleName.color = 'white';
+	this.paddleName.fontFamily = 'Anton';
+	this.paddleName.fontSize = viewport.height * 0.25;
+	this.paddleName.position.x = viewport.width / 2;
+	this.paddleName.position.y = viewport.height * 0.06;
+	this.paddleName.textAlign = 'center';
+	this.paddleName.textBaseline = 'top';
+	//this.paddleName.opacity = 0.11;
+	storyLayer.addComponent( 'PlayerName', this.paddleName );
 }
 
 StoryScene.prototype = new Scene;
@@ -60,6 +75,7 @@ StoryScene.prototype.draw = function( context ) {
 	if( this.paddle ) {
 		this.paddle.draw( context );
 	}
+	context.restore();
 };
 
 StoryScene.prototype.setPaddle = function( paddle ) {
@@ -83,8 +99,13 @@ StoryScene.prototype.setPaddle = function( paddle ) {
 
 	this.paddle.scale = 6;
 	this.paddle.position.x = viewport.width * 0.5;
-	this.paddle.position.y = viewport.height * 0.11 + this.paddle.size.y * this.paddle.scale / 2;
-	this.paddle.velocity.x = viewport.width * 0.005;
+	this.paddle.position.y = viewport.height + this.paddle.size.y * this.paddle.scale / 2;
+	//this.paddle.position.y = viewport.height * 0.11 + this.paddle.size.y * this.paddle.scale / 2;
+	//this.paddle.velocity.x = viewport.width * 0.005;
+	this.paddle.velocity.y = -viewport.height * 0.2;
+
+	this.paddleName.text = this.paddle.name.toUpperCase( );
+	this.paddleName.color = this.paddle.color.Hex( );
 };
 
 StoryScene.prototype.setStory = function( story ) {
@@ -98,21 +119,40 @@ StoryScene.prototype.setStory = function( story ) {
 	}
 };
 
+StoryScene.prototype.updateIn = function( transitionPercent ) {
+	this.box.opacity = transitionPercent * 0.5;
+	this.storyText.opacity = transitionPercent;
+	this.paddleName.opacity = transitionPercent * 0.11;
+};
+
 StoryScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 
 	if( this.paddle ) {
 		this.paddle.update( deltaTime );
 		this.paddle.offset = (Math.sin( app.gameTime / 10000) * 0.5 + 0.5 ) * 0.5;
+
+		if( this.paddle.position.y < viewport.height * 0.11 + this.paddle.size.y * this.paddle.scale / 2 )
+		{
+			this.paddle.velocity.y = 0;
+			this.paddle.position.y = viewport.height * 0.11 + this.paddle.size.y * this.paddle.scale / 2;
+		}
+		else {
+			this.paddle.velocity.y = Math.min( -viewport.height * 0.3 + this.timeElapsed * viewport.height * 0.051, 0 );
+		}
 	}
 	
 	if( InputManager.checkButtonPress( Buttons.ACTION ) )
 	{
-		app.tournament = null;
-		SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
+		if( this.ending ) {
+			app.tournament = null;
+			SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
+		} else {
+			SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
+		}
 	}
 	
-	if( !app.tournament && this.timeElapsed >= 3 ) {
-	//	SceneManager.changeScene( new TitleScene( ), Transitions.NONE );
+	if( !app.tournament && this.timeElapsed >= 15 ) {
+		SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
 	}
 };

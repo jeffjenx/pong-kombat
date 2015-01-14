@@ -59,6 +59,7 @@ function HUDLayer( scene ) {
 	this.addComponent( 'RightName', rightName );
 
 	this.bounce = new Sprite( 'Bounce' );
+	this.bounce.opacity = 0;
 	this.bounce.size.y = viewport.height * 0.2;
 	this.bounce.size.x = this.bounce.size.y * 3;
 
@@ -77,7 +78,7 @@ function HUDLayer( scene ) {
 	this.flawless = new Text( 'Mint Condition' );
 	this.flawless.color = this.winner.color;
 	this.flawless.fontFamily = this.winner.fontFamily;
-	this.flawless.fontSize = viewport.height * 0.05;
+	this.flawless.fontSize = viewport.height * 0.04;
 	this.flawless.position.y = viewport.height * 0.7;
 
 	this.dismantled = new Sprite( 'Dismantled' );
@@ -104,11 +105,11 @@ HUDLayer.prototype.draw = function( context ) {
 	if( this.scene.state === this.scene.states.ending ) {
 		this.winner.draw( context );
 
-		if( this.scene.finishType === this.scene.finishTypes.dismantled ) {
+		if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
 			this.dismantled.draw( context );
 		}
 
-		if( this.scene.winner.life === this.scene.startLife ) {
+		if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
 			this.flawless.draw( context );
 		}
 	}
@@ -143,8 +144,8 @@ HUDLayer.prototype.cinemaMode = function( ) {
 		letterBox = new Sprite( 'Black' );
 		letterBox.registration.y = 1;
 		letterBox.size.x = viewport.width;
-		letterBox.size.y = viewport.height;// * 0.10;
-		letterBox.size.y *= 0.51; //( app.settings.censored ) ? 0.51 : 0.10;
+		letterBox.size.y = viewport.height;
+		letterBox.size.y *= ( app.settings.CENSORSHIP ) ? 0.51 : 0.10;
 		letterBox.position.x = viewport.width * 0.50;
 		letterBox.position.y = viewport.height + letterBox.size.y;
 		letterBox.velocity.y = -viewport.height * 0.22;
@@ -153,8 +154,8 @@ HUDLayer.prototype.cinemaMode = function( ) {
 		letterBoxTop = new Sprite( 'Black' );
 		letterBoxTop.registration.y = 0;
 		letterBoxTop.size.x = viewport.width;
-		letterBoxTop.size.y = viewport.height;// * 0.10;
-		letterBoxTop.size.y *= 0.51; //( app.settings.censored ) ? 0.51 : 0.10;
+		letterBoxTop.size.y = viewport.height;
+		letterBoxTop.size.y *= ( app.settings.CENSORSHIP ) ? 0.51 : 0.10;
 		letterBoxTop.position.x = viewport.width * 0.50;
 		letterBoxTop.position.y = -letterBoxTop.size.y;
 		letterBoxTop.velocity.y = viewport.height * 0.22;
@@ -164,11 +165,14 @@ HUDLayer.prototype.cinemaMode = function( ) {
 		letterBoxTop = this.components['LetterBoxTop'];
 	}
 	
-	if( letterBoxTop.position.y >= 0 ) {
-		letterBox.position.y = viewport.height;
-		letterBox.velocity.y = 0;
+	if( letterBoxTop.position.y > 0 ) {
 		letterBoxTop.position.y = 0;
 		letterBoxTop.velocity.y = 0;
+	}
+
+	if( letterBox.position.y < viewport.height ) {
+		letterBox.position.y = viewport.height;
+		letterBox.velocity.y = 0;
 	}
 };
 
@@ -176,29 +180,34 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.scene.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
 
-	if( this.scene.state === this.scene.states.dismantling )
- 	{
- 		this.cinemaMode( );
- 	}	
+
+	if( this.scene.state === this.scene.states.starting ) {
+		this.bounce.scale = 0.5 + (this.scene.stateTime - 1) / 2;
+		this.bounce.opacity = Math.max( 1 - (this.scene.stateTime - 1) / 2, 0 );
+	}
 
 	// Drain health gradually
 	if( leftKombatant )
 	{
 		if( leftKombatant.life / this.scene.startLife < this.leftHealthBar.size.x / this.healthBarWidth ) {
-			this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x - viewport.width * 0.05 * deltaTime, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
+			//this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 		}
 		else if( leftKombatant.life / this.scene.startLife > this.leftHealthBar.size.x / this.healthBarWidth ) {
-			this.leftHealthBar.size.x += viewport.width * 0.05 * deltaTime;
+			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x + viewport.width * 0.05 * deltaTime, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
+			//this.leftHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
 	}
 	
 	if( rightKombatant )
 	{
 		if( rightKombatant.life / this.scene.startLife < this.rightHealthBar.size.x / this.healthBarWidth ) {
-			this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
+			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x - viewport.width * 0.05 * deltaTime, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
+			//this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 		}
 		else if( rightKombatant.life / this.scene.startLife > this.rightHealthBar.size.x / this.healthBarWidth ) {
-			this.rightHealthBar.size.x += viewport.width * 0.05 * deltaTime;
+			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x + viewport.width * 0.05 * deltaTime, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
+			//this.rightHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
 	}
 
@@ -211,4 +220,10 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	*/
 	
 	Layer.prototype.update.call( this, deltaTime );
+
+	// after layer call
+	if( this.scene.state === this.scene.states.dismantling )
+ 	{
+ 		this.cinemaMode( );
+ 	}	
 };

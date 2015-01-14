@@ -1,5 +1,5 @@
 function SpeedPowerup( ) {
-	Sprite.call( this, 'Powerup-Speed' );
+	Powerup.call( this, 'Powerup-Speed' );
 	
 	this.size.x = viewport.height * 0.04;
 	this.size.y = this.size.x * 2.5;
@@ -28,6 +28,8 @@ function SpeedPowerup( ) {
 	for( var x = 0; x < 100; x++ ) {
 		this.effect.update( 1 / 60 );
 	}
+
+	this.timeoutTime *= 1000 + app.gameTime;
 }
 
 SpeedPowerup.prototype = new Powerup;

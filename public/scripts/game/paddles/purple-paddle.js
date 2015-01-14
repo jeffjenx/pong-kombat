@@ -132,21 +132,24 @@ PurplePaddle.prototype.draw = function( context ) {
 };
 
 PurplePaddle.prototype.shootProjectile = function( ) {
+	Paddle.prototype.shootProjectile.call( this, LightningSaiProjectile( this ) );
+
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
-	this.projectile = new LightningSaiProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
+	// this.projectile = new LightningSaiProjectile( this );
+	// this.projectile.sourcePaddle = this;
+	// this.projectile.position.x = this.position.x;
+	// this.projectile.position.y = this.position.y;
 	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-		this.projectile.flipH = true;
-	}
+	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
+	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
+	
+	// if( this.position.x > viewport.width * 0.50 )
+	// {
+	// 	this.projectile.velocity.x *= -1;
+	// 	this.projectile.flipH = true;
+	// }
 };
 
 PurplePaddle.prototype.update = function( deltaTime ) {
