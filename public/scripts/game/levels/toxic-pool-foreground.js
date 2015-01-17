@@ -5,6 +5,12 @@ function ToxicPoolForegroundLayer( scene ) {
 	this.sirens.size.x = viewport.width * 1.25;
 	this.sirens.size.y = viewport.height * 1.25;
 	this.addComponent( 'Sirens', this.sirens );
+
+	this.acidSound = new Sound( 'Acid' );
+	this.sirenSound = new Sound( 'Siren' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.acidSound.loop();
+	}
 }
 
 ToxicPoolForegroundLayer.prototype = new Layer;
@@ -17,5 +23,8 @@ ToxicPoolForegroundLayer.prototype.update = function( deltaTime ) {
 	this.sirens.rotation += 180 * deltaTime;
 	if( this.sirens.rotation > 360 ) {
 		this.sirens.rotation -= 360;
+		if( app.settings.SOUND_FX > 0 ) {
+			this.sirenSound.play();
+		}
 	}
 };

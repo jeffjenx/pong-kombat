@@ -1,4 +1,5 @@
 var AudioManager = {
+	audioCounter : 0,
 	currentSounds : { },
 	
 	mute : function( ) {

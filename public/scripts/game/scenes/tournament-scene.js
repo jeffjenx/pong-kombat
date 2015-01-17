@@ -185,7 +185,7 @@ TournamentScene.prototype.update = function( deltaTime ) {
 		var kombatScene = new KombatScene( );
 		kombatScene.addKombatant( this.player );
 		kombatScene.addKombatant( computer );
-		kombatScene.setLevel( Levels.RANDOM );
+		kombatScene.setLevel( (this.opponents[this.currentIndex].enum === 'WHITE' ) ? Levels.DEFAULT : Levels.RANDOM );
 		kombatScene.setBall( Balls.DEFAULT );
 		SceneManager.changeScene( kombatScene, Transitions.NONE );
 		//this.player.paddle.opacity = 0;

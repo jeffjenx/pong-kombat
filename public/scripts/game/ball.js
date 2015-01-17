@@ -28,8 +28,8 @@ var Balls = {
 function Ball( texture ) {
 	Sprite.call( this, texture );
 	
-	this.startSpeed = 5;
-	this.maxSpeed = 10;
+	this.startSpeed = 8;
+	this.maxSpeed = 13;
 	
 	this.patternCanvas = document.createElement( 'canvas' );
 	this.patternCanvas.width = (this.image) ? this.image.width : 512;
@@ -43,6 +43,15 @@ function Ball( texture ) {
 	// Audio
 	this.beepSound = new Sound( 'Beep' );
 	this.boopSound = new Sound( 'Boop' );
+
+	this.hitSounds = [];
+	this.hitSounds.push( new Sound( 'Kick-1' ) );
+	this.hitSounds.push( new Sound( 'Kick-2' ) );
+	this.hitSounds.push( new Sound( 'Kick-3' ) );
+	this.hitSounds.push( new Sound( 'Punch-1' ) );
+	this.hitSounds.push( new Sound( 'Punch-2' ) );
+	this.hitSounds.push( new Sound( 'Punch-3' ) );
+	this.hitSounds.push( new Sound( 'Punch-4' ) );
 	
 	this.lastPaddle = null;
 	this.sourceRotation = this.rotation;
@@ -168,10 +177,16 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 		this.velocity = this.velocity.multiply( 1.05 );
 	}
 	
-	if( app.settings['SoundFX'] === true && !app.isMobile( ) )
+	if( app.settings.SOUND_FX > 0 && !app.isMobile( ) )
 	{
-		this.beepSound.stop( );
-		this.beepSound.play( );
+		if( app.settings.COMBAT ) {
+			var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
+			randomHitSound.stop();
+			randomHitSound.play();
+		} else {
+			this.beepSound.stop( );
+			this.beepSound.play( );
+		}
 	}
 };
 
@@ -182,12 +197,18 @@ Ball.prototype.hitPowerup = function( ) {
 Ball.prototype.hitWall = function( ) {
 	this.velocity.y *= -1;
 	
-	if( app.settings['SoundFX'] === true && !app.isMobile( ) )
+	if( app.settings.SOUND_FX > 0 && !app.isMobile( ) )
 	{
-		this.boopSound.stop( );
-		this.boopSound.play( );
+		if( app.settings.COMBAT ) {
+			var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
+			randomHitSound.stop();
+			randomHitSound.play();
+		} else {
+			this.boopSound.stop( );
+			this.boopSound.play( );
+		}
 	}
-	
+
 	this.changedRotation();
 };
 
@@ -198,7 +219,7 @@ Ball.prototype.set = function( ) {
 	this.position.y = viewport.height * 0.50;
 	
 	var angle;
-	var speed = viewport.width * 0.1; // Always start at the same speed
+	var speed = viewport.width * 0.2; // Always start at the same speed
 	
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg

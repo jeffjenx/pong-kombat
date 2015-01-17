@@ -30,6 +30,8 @@ function TimePowerup( ) {
 	}
 
 	this.timeoutTime *= 1000 + app.gameTime;
+
+	this.clockSound = new Sound( 'Clock' );
 }
 
 TimePowerup.prototype = new Powerup;
@@ -38,6 +40,11 @@ TimePowerup.prototype.constructor = TimePowerup;
 TimePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
 	kombatant.paddle.timePowerup = app.gameTime + 10 * 1000;
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.clockSound.stop();
+		this.clockSound.play();
+	}
 };
 
 TimePowerup.prototype.draw = function( context ) {

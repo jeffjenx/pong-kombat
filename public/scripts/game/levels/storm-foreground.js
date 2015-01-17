@@ -2,6 +2,11 @@ function StormForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
 	this.addLightning( );
+
+	this.rainSound = new Sound( 'Rain' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.rainSound.loop();
+	}
 }
 
 StormForegroundLayer.prototype = new Layer;

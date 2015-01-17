@@ -30,6 +30,7 @@ function SpeedPowerup( ) {
 	}
 
 	this.timeoutTime *= 1000 + app.gameTime;
+	this.canOpenSound = new Sound( 'Can-Open' );
 }
 
 SpeedPowerup.prototype = new Powerup;
@@ -38,6 +39,11 @@ SpeedPowerup.prototype.constructor = SpeedPowerup;
 SpeedPowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
 	kombatant.paddle.speedPowerup = app.gameTime + 10 * 1000;
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.canOpenSound.stop();
+		this.canOpenSound.play();
+	}
 };
 
 SpeedPowerup.prototype.draw = function( context ) {

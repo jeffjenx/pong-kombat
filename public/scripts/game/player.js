@@ -1,12 +1,17 @@
 function Player( ) {
 	this.life = 0;
 	this.paddle = null;
+	this.roundsWon = 0;
 }
 
 Player.prototype.constructor = Player;
 
 Player.prototype.draw = function( context ) {
 	this.paddle.draw( context );
+};
+
+Player.prototype.getNameSound = function() {
+	return( this.paddle.nameSound ) ? this.paddle.nameSound : new Sound( 'Your Paddle' );
 };
 
 Player.prototype.handleInput = function( ) {

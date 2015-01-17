@@ -12,6 +12,7 @@ function BluePaddle( ) {
 	this.story = "Blue Paddle spends their days (and nights) alone behind the glow of a computer screen. After noticing a registration form for the tournament on Reddit, they decide to enter and attempt to prove they are more than just another nobody.";
 	
 	Paddle.call( this, 'Paddle-Blue' );
+	this.icon = Resources['Paddle-Icon-Blue'];
 	
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Smoke1'],Resources['Particle-Smoke2']];
@@ -32,27 +33,63 @@ function BluePaddle( ) {
 	//for( var i = 0; i < this.effect.maxLife; i++ ) {
 	//	this.effect.update( 1 / 60 );
 	//}
+
+	this.whooshSound = new Sound( 'Whoosh-2' );
+	this.nameSound = new Sound( 'Blue-Paddle' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.0, end : 1.5, action : function(winner) { winner.moveDown(); winner.velocity.y *= 0.5; } },
+		{ start : 1.25, end : 1.25, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.5, end : 1.5, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.5, end : 2.5, action : function(winner) { winner.moveUp(); winner.velocity.y *= 0.5; } },
+		{ start : 1.75, end : 1.75, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.0, end : 2.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.25, end : 2.25, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.5, end : 2.5, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.5, end : 3.0, action : function(winner) { winner.moveDown(); winner.velocity.y *= 0.5; } },
+		{ start : 2.75, end : 2.75, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 3.0, end : 3.0, action : function(winner) { winner.shootProjectile(); } },
+		{
+		  start : 3.0, end :  -1, action : function(winner) {
+				if(winner.position.y != viewport.height / 2) {
+					winner.moveUp();
+				}
+				if( winner.position.y < viewport.height / 2) {
+					winner.position.y = viewport.height / 2;
+					winner.velocity.y = 0;
+				}
+			}
+		},
+		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleFreezing(percentComplete); } },
+		{ start : 8.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.position.x += viewport.width * 0.06 * percentComplete; } },
+		{ start : 9.25, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 BluePaddle.prototype = new Paddle;
 BluePaddle.prototype.constructor = BluePaddle;
 
-BluePaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-
 BluePaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
-	this.effect.draw( context );
 };
 
 BluePaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this, new IceBlastProjectile( this ) );
+	var projectile = new IceBlastProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
+
+	projectile.effect.minVelocity.x -= projectile.velocity.x * 0.9;
+	projectile.effect.maxVelocity.x += projectile.velocity.x * 0.9;
+	projectile.effect.minVelocity.y -= projectile.velocity.y * 0.7;
+	projectile.effect.maxVelocity.y += projectile.velocity.y * 0.7;
+	
+	if( app.settings.SOUND_FX > 0 ) {
+		this.whooshSound.stop();
+		this.whooshSound.play();
+	}
+
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
@@ -88,7 +125,7 @@ BluePaddle.prototype.shootProjectile = function( ) {
 
 BluePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	
+
 	/*
 	this.offset += 0.11 * deltaTime;
 	if( this.offset > 1 ) {
@@ -96,5 +133,5 @@ BluePaddle.prototype.update = function( deltaTime ) {
 	}
 	*/
 
-	this.effect.update( deltaTime );	
+	//this.effect.update( deltaTime );	
 };

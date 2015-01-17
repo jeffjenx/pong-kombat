@@ -12,12 +12,35 @@ function GreenPaddle( ) {
 	this.story = "Green Paddle is currently working through a mid-life crisis. They enter the Pong Lao Tournament with hopes of finding inner peace and, perhaps, a new career.";
 	
 	Paddle.call( this, 'Paddle-Green' );
+	this.icon = Resources['Paddle-Icon-Green'];
+
+	this.nameSound = new Sound( 'Green-Paddle' );
+	this.arrowSound = new Sound( 'Arrow-Fired' );
+
+	this.currentStep = 0;
+	this.dismantleAnimationFrames = [
+		// (end = start) ? call only once, (end < 0) ? call indefinitely
+		{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.0, end : 6.0, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
+		{ start : 6.0, end : 7.0, action : function(winner, loser, percentComplete) { winner.rotation -= 15 * percentComplete; } },
+		{ start : 8.0, end : 12.0, action : function(winner, loser, percentComplete) { winner.rotation += 30 * percentComplete; } },
+		{ start : 8.0, end : 8.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 8.5, end : 8.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 9.0, end : 9.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 9.5, end : 9.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 10.5, end : 10.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 11.5, end : 11.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
+		{ start : 12.0, end : 12.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } }
+	];
 }
 
 GreenPaddle.prototype = new Paddle;
 GreenPaddle.prototype.constructor = GreenPaddle;
 
 GreenPaddle.prototype.draw = function( context ) {
+	// Paddle.prototype.draw.call( this, context );
 	Component.prototype.draw.call( this, context );
 	
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
@@ -89,21 +112,32 @@ GreenPaddle.prototype.draw = function( context ) {
 	);
 	context.restore();
 
+	if( this.glue ) {
+		this.glue.draw( context );
+	}
+
 	if( this.shield ) {
 		this.shield.draw( context );
 	}
 	
-	if( this.projectile ) {
-		this.projectile.draw( context );
+	if( this.projectiles.length > 0 ) {
+		for( var i = 0; i < this.projectiles.length; i++ ) {
+			this.projectiles[i].draw( context );
+		}
 	}
 
 	if( this.effect ) {
 		this.effect.draw( context );
 	}
 
-	if( this.bloodEffect ) {
-		this.bloodEffect.draw( context );
+	if( this.bloods.length > 0 ) {
+		for( var i = 0; i < this.bloods.length; i++ ) {
+			this.bloods[i].draw( context );
+		}
 	}
+	// if( this.bloodEffect ) {
+	// 	this.bloodEffect.draw( context );
+	// }
 };
 
 GreenPaddle.prototype.dismantle = function( opponent ) {
@@ -117,6 +151,11 @@ GreenPaddle.prototype.dismantle = function( opponent ) {
 
 GreenPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this, new GreenArrowProjectile( this ) );
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.arrowSound.stop();
+		this.arrowSound.play();
+	}
 
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
@@ -138,7 +177,7 @@ GreenPaddle.prototype.shootProjectile = function( ) {
 
 GreenPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 
 	this.offset += 0.11 * deltaTime;
 	if( this.offset > 1 ) {

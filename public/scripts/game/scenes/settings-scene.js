@@ -19,6 +19,7 @@ function SettingsScene( )
 		'COMBAT'     : Resources.Strings.SETTINGS.COMBAT,
 		'DIFFICULTY' : Resources.Strings.SETTINGS.DIFFICULTY,
 		'POWER_UPS'  : Resources.Strings.SETTINGS.POWER_UPS,
+		'ROUNDS'     : 'Rounds',
 		'SOUND_FX'   : Resources.Strings.SETTINGS.SOUND_FX,
 		'TUNES'      : Resources.Strings.SETTINGS.TUNES
 	};
@@ -63,6 +64,10 @@ function SettingsScene( )
 
 				case 'DIFFICULTY' :
 					value.text = this.difficulties[ app.settings[i] ];
+				break;
+
+				case 'ROUNDS' :
+					value.text = 'Best of ' + app.settings[i];
 				break;
 
 				case 'SOUND_FX' :
@@ -142,6 +147,17 @@ SettingsScene.prototype.decreaseSetting = function( )
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.difficulties[ index ];
 		break;
 		
+		case 'ROUNDS' :
+			var rounds = app.settings[ this.currentSetting ];
+			rounds -= 2;
+			if( rounds < 1 )
+			{
+				rounds = 1;
+			}
+			app.settings[ this.currentSetting ] = rounds;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = 'Best of ' + rounds;
+		break;
+
 		case 'SOUND_FX' :
 		case 'TUNES' :
 			var volume = app.settings[ this.currentSetting ];
@@ -195,6 +211,19 @@ SettingsScene.prototype.increaseSetting = function( )
 
 			app.settings[ this.currentSetting ] = index;
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.difficulties[ index ];
+		break;
+
+		case 'ROUNDS' :
+			var rounds = app.settings[ this.currentSetting ];
+
+			rounds += 2;
+			if( rounds > 11 )
+			{
+				rounds = 11;
+			}
+
+			app.settings[ this.currentSetting ] = rounds;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = 'Best of ' + rounds;
 		break;
 
 		case 'SOUND_FX' :

@@ -1,6 +1,7 @@
 function Opponent( ) {
 	this.paddle = null;
 	this.life = 0;
+	this.roundsWon = 0;
 	this.nextProjectileTime = app.gameTime + 2000 + Math.random( ) * 8000;
 	this.targetPosition = viewport.height * 0.5;
 }
@@ -9,6 +10,10 @@ Opponent.prototype.constructor = Opponent;
 
 Opponent.prototype.draw = function( context ) {
 	this.paddle.draw( context );
+};
+
+Opponent.prototype.getNameSound = function() {
+	return( this.paddle.nameSound ) ? this.paddle.nameSound : new Sound( 'Their Paddle' );
 };
 
 Opponent.prototype.applyAI = function( ) {

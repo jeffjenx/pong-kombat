@@ -12,12 +12,16 @@ function ShifterPaddle( ) {
 	this.story = "Shifter has entered the tournament as a joke and for personal entertainment since the sport of battle has intrigued them as long as they can remember, and they have adapted their appearance to guarantee victory.";
 
 	Paddle.call( this, 'Background-Title' );
+	this.icon = Resources['Paddle-Icon-Shifter'];
 	this.gloss = new Sprite( 'Paddle-Gloss-Shifter' );
 	this.opacity = 0.6;
 	this.gloss.opacity = 0.6;
 
 	this.patternCanvas.width = viewport.width;
 	this.patternCanvas.height = viewport.height;
+
+	this.nameSound = new Sound( 'Shifter' );
+	this.laserSound = new Sound( 'Laser' );
 }
 
 ShifterPaddle.prototype = new Paddle;
@@ -48,11 +52,16 @@ ShifterPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.laserSound.stop();
+		this.laserSound.play();
+	}
 };
 
 ShifterPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 	
 	this.offset *= -1;
 

@@ -122,8 +122,6 @@ function PickPaddleScene( )
 	whitePaddle.scale = paddleScale * 0.70;
 	this.secondaryPaddles.push( whitePaddle );
 	
-	this.selectNextPaddle( 'Right' );
-	
 	// Setup random paddle effect
 	randomPaddle.effect = new ParticleSystem( );
 	randomPaddle.effect.particleImages = [ Resources['Particle-Random2'], Resources['Particle-Random3'], Resources['Particle-Random4'], Resources['Particle-Random5'], Resources['Particle-Random6'] ];
@@ -165,6 +163,13 @@ function PickPaddleScene( )
 			this.secondaryPaddles[i].update( 1 / 60 );
 		}
 	}
+
+	this.clickSound = new Sound( 'Click' );
+	this.confirmSound = new Sound( 'Confirm' );
+	this.denySound = new Sound( 'Deny' );
+
+	// must be after sounds
+	this.selectNextPaddle( 'Right' );
 }
 
 PickPaddleScene.prototype = new Scene;
@@ -234,6 +239,11 @@ PickPaddleScene.prototype.selectNextPaddle = function( direction )
 	{
 		this.currentIndex += 6;
 	}
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.clickSound.stop();
+		this.clickSound.play();
+	}
 };
 
 PickPaddleScene.prototype.update = function( deltaTime )
@@ -262,6 +272,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	{
 		var player = new Player( );
 		player.setPaddle( Paddles[paddles[this.currentIndex].enum] );
+
+		if( app.settings.SOUND_FX > 0 ) {
+			this.confirmSound.stop();
+			this.confirmSound.play();
+		}
 		
 		if( app.gameMode === GameModes.TOURNAMENT )
 		{
@@ -341,6 +356,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 
 	if( InputManager.checkButtonPress( Buttons.BACK ) )
 	{
+		if( app.settings.SOUND_FX > 0 ) {
+			this.denySound.stop();
+			this.denySound.play();
+		}
+
 		var titleScene = new TitleScene( );
 		SceneManager.changeScene( titleScene, Transitions.FADE, 0.33 );
 	}

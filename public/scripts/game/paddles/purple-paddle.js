@@ -4,7 +4,7 @@ function PurplePaddle( ) {
 	this.name = "Purple Paddle";
 	this.bigness = 3.50;
 	this.quickness = 4.00;
-
+	
 	this.projectileSequence = [ Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT, Buttons.ACTION ];
 	
@@ -13,6 +13,7 @@ function PurplePaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Purple' );
 
+	this.icon = Resources['Paddle-Icon-Purple'];
 	this.addEffect( );
 	
 	this.boltCanvas = document.createElement( 'canvas' );
@@ -23,6 +24,9 @@ function PurplePaddle( ) {
 	this.bolt = this.boltContext.createPattern( this.image, 'repeat' );
 	this.bolt.maxLife = 100;
 	this.bolt.life = 0;
+
+	this.nameSound = new Sound( 'Purple-Paddle' );
+	this.boltSound = new Sound( 'Bolt' );
 }
 
 PurplePaddle.prototype = new Paddle;
@@ -126,13 +130,39 @@ PurplePaddle.prototype.draw = function( context ) {
 	);
 	context.restore();
 	
+	if( this.glue ) {
+		this.glue.draw( context );
+	}
+
+	if( this.shield ) {
+		this.shield.draw( context );
+	}
+	
+	if( this.projectiles.length > 0 ) {
+		for( var i = 0; i < this.projectiles.length; i++ ) {
+			this.projectiles[i].draw( context );
+		}
+	}
+
 	if( this.effect ) {
 		this.effect.draw( context );
+	}
+
+	if( this.bloods.length > 0 ) {
+		for( var i = 0; i < this.bloods.length; i++ ) {
+			this.bloods[i].draw( context );
+		}
 	}
 };
 
 PurplePaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this, LightningSaiProjectile( this ) );
+	Paddle.prototype.shootProjectile.call( this, new LightningSaiProjectile( this ) );
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.boltSound.stop();
+		this.boltSound.play();
+	}
+
 
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
@@ -154,7 +184,7 @@ PurplePaddle.prototype.shootProjectile = function( ) {
 
 PurplePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 	
 	this.bolt.life -= 1;
 

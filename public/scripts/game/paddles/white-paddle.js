@@ -4,7 +4,7 @@ function WhitePaddle( ) {
 	this.name = "White Paddle";
 	this.bigness = 4.00;
 	this.quickness = 5.00;
-
+	
 	this.projectileSequence = [ Buttons.DOWN, Buttons.DOWN, Buttons.RIGHT, Buttons.ACTION ];
 	this.replenishSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.LEFT, Buttons.ACTION ];
 	
@@ -12,8 +12,12 @@ function WhitePaddle( ) {
 	this.story = "White Paddle makes up for their lack of visual stimulation with pure heart and dedication. The early 1970’s generated an illustrious career for them, but the eventual evolution to color and then to clarity has placed them in times of yore.";
 	
 	Paddle.call( this, 'White' );
+	this.icon = Resources['Paddle-Icon-White'];
 
 	this.lifeModifier = 0.75;
+
+	this.nameSound = new Sound( 'White-Paddle' );
+	this.whooshSound = new Sound( 'Whoosh-3' );
 }
 
 WhitePaddle.prototype = new Paddle;
@@ -32,16 +36,28 @@ WhitePaddle.prototype.draw = function( context ) {
 	//Paddle.prototype.draw.call( this, context );
 	Sprite.prototype.draw.call( this, context );
 
+	if( this.glue ) {
+		this.glue.draw( context );
+	}
+
 	if( this.shield ) {
 		this.shield.draw( context );
 	}
 	
-	if( this.projectile ) {
-		this.projectile.draw( context );
+	if( this.projectiles.length > 0 ) {
+		for( var i = 0; i < this.projectiles.length; i++ ) {
+			this.projectiles[i].draw( context );
+		}
 	}
 
-	if( this.bloodEffect ) {
-		this.bloodEffect.draw( context );
+	if( this.effect ) {
+		this.effect.draw( context );
+	}
+
+	if( this.bloods.length > 0 ) {
+		for( var i = 0; i < this.bloods.length; i++ ) {
+			this.bloods[i].draw( context );
+		}
 	}
 };
 
@@ -73,11 +89,16 @@ WhitePaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.whooshSound.stop();
+		this.whooshSound.play();
+	}
 };
 
 WhitePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 
 	if( Math.abs( this.size.y - viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) ) < 0.03 )
 	{

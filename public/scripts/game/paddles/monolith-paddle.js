@@ -4,7 +4,7 @@ function MonolithPaddle( ) {
 	this.name = "Monolith";
 	this.bigness = 5.00;
 	this.quickness = 3.00;
-
+	
 	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
@@ -12,13 +12,17 @@ function MonolithPaddle( ) {
 	this.story = "Monolith has spent the past million years eroding into their current form. When White Paddle constructed his tournament, they enlisted the massive paddle for the sole purpose of intimidating the opposition.";
 	
 	Paddle.call( this, 'Paddle-Monolith' );
-	
+	this.icon = Resources['Paddle-Icon-Monolith'];
+
 	this.lifeModifier = 0.5;
 	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );
 
 	// Monolith throws 3 rocks at a time
 	this.projectile2 = null;
 	this.projectile3 = null;
+
+	this.nameSound = new Sound( 'Monolith' );
+	this.throwSound = new Sound( 'Throw' );
 }
 
 MonolithPaddle.prototype = new Paddle;
@@ -74,6 +78,12 @@ MonolithPaddle.prototype.shootProjectile = function( ) {
 	this.projectile3.position.y = this.projectile.position.y + this.size.y * 0.11;
 	this.projectile3.velocity.x = Math.cos( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
 	this.projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.throwSound.stop();
+		this.throwSound.play();
+	}
+
 	
 	//if( this.position.x > viewport.width * 0.50 )
 	//{
@@ -91,7 +101,7 @@ MonolithPaddle.prototype.updateRocksBoundingBox = function( ) {
 
 MonolithPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 
 	if( this.projectile === null ) {
 		this.projectile2 = null;

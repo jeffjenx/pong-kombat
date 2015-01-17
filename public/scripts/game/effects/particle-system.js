@@ -69,6 +69,14 @@ ParticleSystem.prototype.start = function( ) {
 	}
 };
 
+ParticleSystem.prototype.restart = function() {
+	this.particles = [];
+	for( var i = 0; i < this.count; i++ )
+	{
+		this.particles.push( new Particle( this ) );
+	}
+}
+
 ParticleSystem.prototype.draw = function( context ) {
 	context.save( );
 	context.globalCompositeOperation = this.compositeOperation;

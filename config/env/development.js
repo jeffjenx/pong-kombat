@@ -6,8 +6,8 @@ module.exports = {
 		title: 'PK-DEV'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '812287352147860' || 'APP_ID',
+		clientSecret: process.env.FACEBOOK_SECRET || 'd3c65a222194213dab798eff3962ff20' || 'APP_SECRET',
 		callbackURL: '/auth/facebook/callback'
 	},
 	twitter: {

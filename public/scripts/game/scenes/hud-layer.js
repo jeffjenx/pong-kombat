@@ -20,18 +20,18 @@ function HUDLayer( scene ) {
 	
 	this.leftHealthBar = new Sprite( 'Health' );
 	this.leftHealthBar.position.x = viewport.width * 0.043;
-	this.leftHealthBar.position.y = viewport.height * 0.009;
+	this.leftHealthBar.position.y = hud.size.y * 0.48;
 	this.leftHealthBar.registration.x = 0;
-	this.leftHealthBar.registration.y = 0;
+	this.leftHealthBar.registration.y = 0.5;
 	this.leftHealthBar.size.x = this.healthBarWidth;
-	this.leftHealthBar.size.y = viewport.height * 0.038;
+	this.leftHealthBar.size.y = hud.size.y * 0.42;
 	this.addComponent( 'LeftHealthBar', this.leftHealthBar );
 	
 	this.rightHealthBar = new Sprite( 'Health' );
 	this.rightHealthBar.position.x = viewport.width - this.leftHealthBar.position.x;
 	this.rightHealthBar.position.y = this.leftHealthBar.position.y;
 	this.rightHealthBar.registration.x = 1;
-	this.rightHealthBar.registration.y = 0;
+	this.rightHealthBar.registration.y = 0.5;
 	this.rightHealthBar.size.x = this.leftHealthBar.size.x;
 	this.rightHealthBar.size.y = this.leftHealthBar.size.y;
 	this.addComponent( 'RightHealthBar', this.rightHealthBar );
@@ -39,12 +39,13 @@ function HUDLayer( scene ) {
 	var leftName = new Text( );
 	leftName.color = 'white';
 	leftName.fontFamily = 'Apple Garamond';
-	leftName.fontSize = viewport.height * 0.03;
+	leftName.fontSize = this.leftHealthBar.size.y * 0.75;
 	leftName.fontStyle = 200;
 	leftName.textAlign = 'left';
-	leftName.textBaseline = 'top';
-	leftName.position.x = this.leftHealthBar.position.x + viewport.width * 0.01;
-	leftName.position.y = this.leftHealthBar.position.y;
+	leftName.textBaseline = 'middle';
+	leftName.opacity = 0.5;
+	leftName.position.x = this.leftHealthBar.position.x + viewport.width * 0.005;
+	leftName.position.y = this.leftHealthBar.position.y * 0.95;
 	this.addComponent( 'LeftName', leftName );
 	
 	var rightName = new Text( );
@@ -53,10 +54,126 @@ function HUDLayer( scene ) {
 	rightName.fontSize = leftName.fontSize;
 	rightName.fontStyle = leftName.fontStyle;
 	rightName.textAlign = 'right';
-	rightName.textBaseline = 'top';
-	rightName.position.x = this.rightHealthBar.position.x - viewport.width * 0.01;
-	rightName.position.y = this.rightHealthBar.position.y;
+	rightName.textBaseline = 'middle';
+	rightName.opacity = leftName.opacity;
+	rightName.position.x = this.rightHealthBar.position.x - viewport.width * 0.005;
+	rightName.position.y = this.leftHealthBar.position.y;
 	this.addComponent( 'RightName', rightName );
+
+	var leftIcon = new Sprite( 'White' );
+	leftIcon.size.y = hud.size.y * 0.80;
+	leftIcon.size.x = leftIcon.size.y;
+	leftIcon.position.x = viewport.width * 0.024;
+	leftIcon.position.y = hud.size.y * 0.47;
+	// component added to layer after icon border below
+
+	var leftIconBorder = new Component( );
+	leftIconBorder.color = new Color(150, 150, 150);
+	leftIconBorder.size.x = leftIcon.size.x;
+	leftIconBorder.size.y = leftIcon.size.y;
+	leftIconBorder.position.x = leftIcon.position.x;
+	leftIconBorder.position.y = leftIcon.position.y;
+	leftIconBorder.draw = function( context ) {
+		context.save();
+		context.beginPath();
+		context.rect(
+			this.position.x - this.size.x / 2,
+			this.position.y - this.size.y / 2,
+			this.size.x,
+			this.size.y
+		);
+		context.strokeStyle = this.color.RGB();
+		context.lineWidth = viewport.height * 0.005;
+		context.stroke();
+		context.restore();
+	};
+	this.addComponent( 'LeftIconBorder', leftIconBorder );
+	this.addComponent( 'LeftIcon', leftIcon ); // layer ordering
+
+	var leftIconBlood = new Sprite( 'Paddle-Icon-Full-Life' );
+	leftIconBlood.size.x = leftIcon.size.x;
+	leftIconBlood.size.y = leftIcon.size.y;
+	leftIconBlood.position.x = leftIcon.position.x;
+	leftIconBlood.position.y = leftIcon.position.y;
+	this.addComponent( 'LeftIconBlood', leftIconBlood );
+
+	var rightIcon = new Sprite( 'White' );
+	rightIcon.size.y = leftIcon.size.x;
+	rightIcon.size.x = leftIcon.size.y;
+	rightIcon.position.x = viewport.width - leftIcon.position.x;
+	rightIcon.position.y = leftIcon.position.y;
+	rightIcon.flipH = true;
+	// component added to layer after icon border below
+
+	var rightIconBorder = new Component( );
+	rightIconBorder.color = new Color(150, 150, 150);
+	rightIconBorder.size.x = rightIcon.size.x;
+	rightIconBorder.size.y = rightIcon.size.y;
+	rightIconBorder.position.x = rightIcon.position.x;
+	rightIconBorder.position.y = rightIcon.position.y;
+	rightIconBorder.draw = function( context ) {
+		context.save();
+		context.beginPath();
+		context.rect(
+			this.position.x - this.size.x / 2,
+			this.position.y - this.size.y / 2,
+			this.size.x,
+			this.size.y
+		);
+		context.strokeStyle = this.color.RGB();
+		context.lineWidth = viewport.height * 0.005;
+		context.stroke();
+		context.restore();
+	};
+	this.addComponent( 'RightIconBorder', rightIconBorder );
+	this.addComponent( 'RightIcon', rightIcon );
+
+	var rightIconBlood = new Sprite( 'Paddle-Icon-Full-Life' );
+	rightIconBlood.size.x = rightIcon.size.x;
+	rightIconBlood.size.y = rightIcon.size.y;
+	rightIconBlood.position.x = rightIcon.position.x;
+	rightIconBlood.position.y = rightIcon.position.y;
+	this.addComponent( 'RightIconBlood', rightIconBlood );
+
+	var leftStats = new Text( '' );
+	leftStats.color = 'white';
+	leftStats.fontFamily = 'Open Sans';
+	leftStats.fontSize = hud.size.y * 0.15;
+	leftStats.position.x = this.leftHealthBar.position.x + leftStats.fontSize;
+	leftStats.position.y = this.leftHealthBar.position.y * 1.75;
+	leftStats.textAlign = 'left';
+	leftStats.opacity = 0.5;
+	this.addComponent( 'LeftStats', leftStats );
+
+	var leftRounds = new Text( '' );
+	leftRounds.color = leftStats.color;
+	leftRounds.fontFamily = leftStats.fontFamily;
+	leftRounds.fontSize = leftStats.fontSize;
+	leftRounds.position.x = leftStats.position.x + this.healthBarWidth - leftStats.fontSize * 2;
+	leftRounds.position.y = leftStats.position.y;
+	leftRounds.textAlign = 'right';
+	leftStats.opacity = 0.5;
+	this.addComponent( 'LeftRounds', leftRounds );
+
+	var rightStats = new Text( '' );
+	rightStats.color = 'white';
+	rightStats.fontFamily = 'Open Sans';
+	rightStats.fontSize = hud.size.y * 0.15;
+	rightStats.position.x = this.rightHealthBar.position.x - rightStats.fontSize;
+	rightStats.position.y = this.rightHealthBar.position.y * 1.75;
+	rightStats.textAlign = 'right';
+	rightStats.opacity = 0.5;
+	this.addComponent( 'RightStats', rightStats );
+
+	var rightRounds = new Text( '' );
+	rightRounds.color = rightStats.color;
+	rightRounds.fontFamily = rightStats.fontFamily;
+	rightRounds.fontSize = rightStats.fontSize;
+	rightRounds.position.x = rightStats.position.x - this.healthBarWidth + rightStats.fontSize * 2;
+	rightRounds.position.y = rightStats.position.y;
+	rightRounds.textAlign = 'right';
+	rightStats.opacity = 0.5;
+	this.addComponent( 'RightRounds', rightRounds );
 
 	this.bounce = new Sprite( 'Bounce' );
 	this.bounce.opacity = 0;
@@ -90,32 +207,71 @@ function HUDLayer( scene ) {
 	this.finishem = new Sprite( 'Finish-Em' );
 	this.finishem.size.y = viewport.height * 0.2;
 	this.finishem.size.x = this.finishem.size.y * 4;
+
+	this.currentRound = new Text( 'Round 1' );
+	this.currentRound.color = this.flawless.color;
+	this.currentRound.fontFamily = this.flawless.fontFamily;
+	this.currentRound.fontSize = this.flawless.fontSize;
+	this.currentRound.position.y = this.flawless.position.y;
+	this.currentRound.opacity = 0;
+
+	this.dismantledSound = new Sound( 'Dismantled!' );
+	this.flawlessSound = new Sound( 'Mint-Condition' );
+	this.finishEmSound = new Sound( 'Finish-Em!' );
+	this.winsSound = new Sound( 'Wins' );
+	this.bounceSound = new Sound( 'Bounce!' );
+	this.roundSound = new Sound( 'Round' );
+	this.roundNumberSounds = [];
+	for( var i = 1; i <= 11; i++ ) {
+		this.roundNumberSounds.push( new Sound( this.numberToWord(i) ) );
+	}
 }
 
 HUDLayer.prototype = new Layer;
 HUDLayer.prototype.constructor = HUDLayer;
 
+HUDLayer.prototype.resetSounds = function() {
+	this.dismantledSound.started = false;
+	this.flawlessSound.started = false;
+	this.finishEmSound.started = false;
+	this.bounceSound.started = false;
+	this.roundSound.started = false;
+	this.winsSound.started = false;
+
+	this.dismantledSound.played = false;
+	this.flawlessSound.played = false;
+	this.finishEmSound.played = false;
+	this.bounceSound.played = false;
+	this.roundSound.played = false;
+	this.winsSound.played = false;
+};
+
 HUDLayer.prototype.draw = function( context ) {
 	Layer.prototype.draw.call( this, context );
 
-	if( this.scene.state === this.scene.states.starting ) {
-		this.bounce.draw( context );
-	}
+	switch( this.scene.state ) {
+		case this.scene.states.starting :
+			this.currentRound.draw( context );
+			this.bounce.draw( context );
+		break;
 
-	if( this.scene.state === this.scene.states.ending ) {
-		this.winner.draw( context );
+		case this.scene.states.ending :
+			this.winner.draw( context );
 
-		if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
-			this.dismantled.draw( context );
-		}
+			if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
+				this.dismantled.draw( context );
+			}
 
-		if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
-			this.flawless.draw( context );
-		}
-	}
+			if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
+				this.flawless.draw( context );
+			}
+		break;
 
-	if( this.scene.state === this.scene.states.announcing ) {
-		this.finishem.draw( context );
+		case this.scene.states.announcing :
+			if( this.scene.stateTime > 1) {
+				this.finishem.draw( context );
+			}
+		break;
 	}
 };
 
@@ -134,6 +290,16 @@ HUDLayer.prototype.updateWinner = function( ) {
 	if( this.scene.winner ) {
 		this.winner.text = this.scene.winner.paddle.name + ' Wins';
 	}
+};
+
+HUDLayer.prototype.setLeft = function( kombatant ) {
+	this.components['LeftIcon'].image = kombatant.paddle.icon;
+	this.components['LeftName'].text = kombatant.paddle.name;
+};
+
+HUDLayer.prototype.setRight = function( kombatant ) {
+	this.components['RightIcon'].image = kombatant.paddle.icon;
+	this.components['RightName'].text = kombatant.paddle.name;
 };
 
 HUDLayer.prototype.cinemaMode = function( ) {
@@ -176,14 +342,53 @@ HUDLayer.prototype.cinemaMode = function( ) {
 	}
 };
 
+HUDLayer.prototype.numberToWord = function( number ) {
+	var words = ['One','Two','Three','Four', 'Five','Six','Seven','Eight','Nine','Ten','Eleven'];
+	return words[parseInt(number) - 1];
+};
+
 HUDLayer.prototype.update = function( deltaTime ) {
 	var leftKombatant = this.scene.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.scene.layers['Kombat'].components['RightKombatant'];
 
 
-	if( this.scene.state === this.scene.states.starting ) {
-		this.bounce.scale = 0.5 + (this.scene.stateTime - 1) / 2;
-		this.bounce.opacity = Math.max( 1 - (this.scene.stateTime - 1) / 2, 0 );
+	switch( this.scene.state ) {
+		case this.scene.states.starting :
+			if( this.scene.stateTime > 3 ) {
+				var elapsedTime = this.scene.stateTime - 3;
+				this.bounce.scale = 0.5 + elapsedTime / 3;
+				this.bounce.opacity = Math.max( (2 - elapsedTime) / 2, 0 );
+				this.bounceSound.playOnce();
+			}
+			if( this.scene.stateTime > 1 ) {
+				this.currentRound.opacity = 1;
+				this.roundSound.playOnce();
+				if( this.roundSound.played ) {
+					this.roundNumberSounds[this.scene.currentRound - 1].playOnce();
+				}
+			}
+		break;
+
+		case this.scene.states.announcing :
+			if( this.scene.stateTime > 1 ) {
+				this.finishEmSound.playOnce();
+			}
+		break;
+
+		case this.scene.states.ending :
+			this.scene.winner.getNameSound().playOnce();
+			if( this.scene.winner.getNameSound().played ) {
+				this.winsSound.playOnce();
+			}
+
+			if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
+				this.dismantledSound.playOnce();
+			}
+
+			if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
+				this.flawlessSound.playOnce();
+			}
+		break;
 	}
 
 	// Drain health gradually
@@ -197,6 +402,22 @@ HUDLayer.prototype.update = function( deltaTime ) {
 			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x + viewport.width * 0.05 * deltaTime, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.leftHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
+
+		this.components['LeftIconBorder'].color.green = 150 * leftKombatant.life / this.scene.startLife;
+		this.components['LeftIconBorder'].color.blue = 150 * leftKombatant.life / this.scene.startLife;
+
+		if( !app.settings.CENSORSHIP ) {
+			var leftIconBlood = this.components['LeftIconBlood'];
+			if( leftKombatant.life / this.scene.startLife < 0.25 ) {
+				leftIconBlood.image = Resources['Paddle-Icon-Low-Life'];
+			} else if( leftKombatant.life / this.scene.startLife < 0.65 ) {
+				leftIconBlood.image = Resources['Paddle-Icon-Medium-Life'];
+			} else if( leftKombatant.life / this.scene.startLife < 0.85 ) {
+				leftIconBlood.image = Resources['Paddle-Icon-High-Life'];
+			} else {
+				leftIconBlood.image = Resources['Paddle-Icon-Full-Life'];
+			}
+		}
 	}
 	
 	if( rightKombatant )
@@ -208,6 +429,22 @@ HUDLayer.prototype.update = function( deltaTime ) {
 		else if( rightKombatant.life / this.scene.startLife > this.rightHealthBar.size.x / this.healthBarWidth ) {
 			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x + viewport.width * 0.05 * deltaTime, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.rightHealthBar.size.x += viewport.width * 0.05 * deltaTime;
+		}
+
+		this.components['RightIconBorder'].color.green = 150 * rightKombatant.life / this.scene.startLife;
+		this.components['RightIconBorder'].color.blue = 150 * rightKombatant.life / this.scene.startLife;
+
+		if( !app.settings.CENSORSHIP ) {
+			var rightIconBlood = this.components['RightIconBlood'];
+			if( rightKombatant.life / this.scene.startLife < 0.25 ) {
+				rightIconBlood.image = Resources['Paddle-Icon-Low-Life'];
+			} else if( rightKombatant.life / this.scene.startLife < 0.65 ) {
+				rightIconBlood.image = Resources['Paddle-Icon-Medium-Life'];
+			} else if( rightKombatant.life / this.scene.startLife < 0.85 ) {
+				rightIconBlood.image = Resources['Paddle-Icon-High-Life'];
+			} else {
+				rightIconBlood.image = Resources['Paddle-Icon-Full-Life'];
+			}
 		}
 	}
 

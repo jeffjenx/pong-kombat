@@ -23,6 +23,11 @@ function TowerForegroundLayer( scene ) {
 	this.rope4.size.y = viewport.height * 1.25;
 	this.rope4.size.x = this.rope4.size.y;
 	this.addComponent( 'Rope4', this.rope4 );
+
+	this.towerSound = new Sound( 'Tower' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.towerSound.loop();
+	}
 }
 
 TowerForegroundLayer.prototype = new Layer;

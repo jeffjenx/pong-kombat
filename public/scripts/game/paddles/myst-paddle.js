@@ -4,7 +4,7 @@ function MystPaddle( ) {
 	this.name = "Myst";
 	this.bigness = 3.00;
 	this.quickness = 3.00;
-
+	
 	this.projectileSequence = [ Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.DOWN, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	
@@ -12,7 +12,7 @@ function MystPaddle( ) {
 	this.story = "Little is known about the mystical paddle known as, uhhh, Myst. One minute they're here, and the next minute their gone. Seems like they show up when you least expect them to. And, why are they always yelling?";
 	
 	Paddle.call( this, 'Paddle-Myst' );
-
+	this.icon = Resources['Paddle-Icon-Myst'];
 	this.opacity = 0.33;
 	//this.gloss.opacity = 0.33;
 
@@ -31,6 +31,9 @@ function MystPaddle( ) {
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 2;
 	this.effect.attachTo( this );
+
+	this.nameSound = new Sound( 'Myst' );
+	this.spraySound = new Sound( 'Spray' );
 }
 
 MystPaddle.prototype = new Paddle;
@@ -47,9 +50,6 @@ MystPaddle.prototype.dismantle = function( opponent ) {
 
 MystPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
-	if( this.effect ) {
-		this.effect.draw( context );	
-	}
 };
 
 
@@ -69,13 +69,19 @@ MystPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.spraySound.stop();
+		this.spraySound.play();
+	}
+
 };
 
 MystPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 
-	if( this.effect ) {
-		this.effect.update( deltaTime );	
-	}
+	//if( this.effect ) {
+	//	this.effect.update( deltaTime );	
+	//}
 };

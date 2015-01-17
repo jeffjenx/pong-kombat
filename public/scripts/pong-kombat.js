@@ -123,6 +123,7 @@ function ready( ) {
 		'COMBAT'     : (localStorage && localStorage['PongKombat.settings.COMBAT'] === "false") ? false : true,
 		'DIFFICULTY' : (localStorage && localStorage['PongKombat.settings.DIFFICULTY']) ? parseInt( localStorage['PongKombat.settings.DIFFICULTY'] ) : 1,
 		'POWER_UPS'  : (localStorage && localStorage['PongKombat.settings.POWER_UPS'] === "false") ? false : true,
+		'ROUNDS'     : (localStorage && localStorage['PongKombat.settings.ROUNDS']) ? parseInt( localStorage['PongKombat.settings.ROUNDS'] ) : 3,
 		'SOUND_FX'   : (localStorage && localStorage['PongKombat.settings.SOUND_FX']) ? parseInt( localStorage['PongKombat.settings.SOUND_FX'] ) : 10,
 		'TUNES'      : (localStorage && localStorage['PongKombat.settings.TUNES']) ? parseInt( localStorage['PongKombat.settings.TUNES'] ) : 10
 	};
@@ -160,7 +161,7 @@ function ready( ) {
 		// storyScene.setStory( paddle.endStory );
 		// app.startupScene = storyScene;
 		
-		app.startupScene = new PickPaddleScene();
+		app.startupScene = new TitleScene();
 		
 		app.initialize( );
 	};

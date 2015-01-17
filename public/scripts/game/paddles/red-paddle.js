@@ -12,6 +12,7 @@ function RedPaddle( ) {
 	this.story = "Although they have yet to see the fame that comes with it, Red Paddle has a satisfying career as a movie star. They hope to catch the eye of notable director, Trent Quentiño, with an underdog victory in the tournament.";
 	
 	Paddle.call( this, 'Paddle-Red' );
+	this.icon = Resources['Paddle-Icon-Red'];
 	
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-BlackSmoke1'],Resources['Particle-BlackSmoke2']];
@@ -28,6 +29,9 @@ function RedPaddle( ) {
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 5;
 	this.effect.compositeOperation = 'darker';
+
+	this.nameSound = new Sound( 'Red-Paddle' );
+	this.whooshSound = new Sound( 'Whoosh-3' );
 }
 
 RedPaddle.prototype = new Paddle;
@@ -44,12 +48,17 @@ RedPaddle.prototype.dismantle = function( opponent ) {
 
 RedPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
-	this.effect.draw( context );
 };
 
 
 RedPaddle.prototype.shootProjectile = function( ) {
 	Paddle.prototype.shootProjectile.call( this, new ShadowProjectile( this ) );
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.whooshSound.stop();
+		this.whooshSound.play();
+	}
+
 
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
@@ -71,12 +80,14 @@ RedPaddle.prototype.shootProjectile = function( ) {
 
 RedPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 	
+	/*
 	this.effect.position = this.position;
 	this.effect.rotation = this.rotation;
 	this.effect.size.x = this.size.x * this.scale;
 	this.effect.size.y = this.size.y * this.scale;
 	this.effect.scale = this.scale;
 	this.effect.update( deltaTime );
+	*/
 };

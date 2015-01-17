@@ -56,6 +56,7 @@
 	                Pinterest
 	                RetroMags
 	                StackOverflow
+	                TinyPNG
 	                Twitter
 	                Wikipedia
 	Software:       Adobe Illustrator

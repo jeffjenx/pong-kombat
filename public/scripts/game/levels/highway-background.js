@@ -58,6 +58,8 @@ function HighwayBackgroundLayer( scene ) {
 	for( var i = 0; i < 11; i++ ) {
 		this.addVehicle( );
 	}
+
+	this.vehicleSound = new Sound( 'Vehicle' );
 }
 
 HighwayBackgroundLayer.prototype = new Layer;
@@ -113,6 +115,10 @@ HighwayBackgroundLayer.prototype.addVehicle = function( ) {
 	this.vehicles.push( vehicle );
 	this.addComponent( vehicle.id, vehicle );
 	this.vehicleCounter++;
+
+	if( app.settings.SOUND_FX ) {
+		this.vehicleSound.playOnce( );
+	}
 };
 
 HighwayBackgroundLayer.prototype.draw = function( context ) {

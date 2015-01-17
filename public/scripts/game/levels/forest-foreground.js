@@ -18,6 +18,11 @@ function ForestForegroundLayer( scene ) {
 	this.trees3.size.y = viewport.height;
 	this.trees3.opacity = this.trees1.opacity;
 	this.addComponent( 'Trees3', this.trees3 );
+
+	this.birdsSound = new Sound( 'Birds' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.birdsSound.loop();
+	}
 }
 
 ForestForegroundLayer.prototype = new Layer;

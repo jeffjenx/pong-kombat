@@ -1,4 +1,4 @@
-function Sound( resource, unique ) {
+function Sound( resource ) {
 	this.mutedVolume = 1.0; // for resetting audio to correct levels
 	
 	if( Resources[resource] !== undefined )
@@ -7,6 +7,9 @@ function Sound( resource, unique ) {
 		this.name = resource;
 	}
 
+	this.uniqueIdentifier = ++AudioManager.audioCounter;
+
+	this.started = false;
 	this.played = false;
 }
 
@@ -25,7 +28,7 @@ Sound.prototype.loop = function( ) {
 		AudioManager.currentSounds[this.name] = this;
 	}
 	
-	this.played = true;
+	this.started = true;
 };
 
 Sound.prototype.mute = function( ) {
@@ -42,13 +45,23 @@ Sound.prototype.play = function( ) {
 	if( this.audio.paused )
 	{
 		this.audio.play( );
-		AudioManager.currentSounds[this.name] = this;
+		AudioManager.currentSounds[this.name + this.uniqueIdentifier] = this;
+		var that = this;
 		this.audio.addEventListener( 'ended', function( ) {
+			that.played = true;
 			delete AudioManager.currentSounds[this.name];
 		} );
 	}
 
-	this.played = true;
+	this.started = true;
+};
+
+Sound.prototype.playOnce = function() {
+	if( this.started ) {
+		return;
+	}
+
+	this.play();
 };
 
 Sound.prototype.setVolume = function( volume ) {
@@ -69,7 +82,7 @@ Sound.prototype.stop = function( ) {
 	{
 		this.audio.pause( );
 		this.audio.currentTime = 0;
-		delete AudioManager.currentSounds[this.name];
+		delete AudioManager.currentSounds[this.name + this.uniqueIdentifier];
 	}
 };
 

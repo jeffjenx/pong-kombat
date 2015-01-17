@@ -41,6 +41,8 @@ function TowerBackgroundLayer( scene ) {
 	this.bellBall.size.y = viewport.height * 1.5;
 	this.bellBall.size.x = this.bellBall.size.y;
 	this.addComponent( 'Bell-Ball-Shadow', this.bellBall );
+
+	this.bellSound = new Sound( 'Bell' );
 }
 
 TowerBackgroundLayer.prototype = new Layer;
@@ -50,6 +52,10 @@ TowerBackgroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
 
 	var bellFrequency = Math.sin( app.gameTime / 2000 );
+	if( app.settings.SOUND_FX && Math.abs( bellFrequency ) > 0.97 ) {
+		this.bellSound.stop();
+		this.bellSound.play();
+	}
 
 	this.bell.position.y = viewport.height / 2 + bellFrequency * viewport.width * 0.33;
 	this.bellClapper.position.y = viewport.height / 2 + bellFrequency * viewport.width * 0.22;

@@ -30,6 +30,8 @@ function LifePowerup( ) {
 	}
 	
 	this.timeoutTime *= 1000 + app.gameTime;
+
+	this.chompSound = new Sound( 'Chomp' );
 }
 
 LifePowerup.prototype = new Powerup;
@@ -38,6 +40,11 @@ LifePowerup.prototype.constructor = LifePowerup;
 LifePowerup.prototype.collect = function( kombatant ) {
 	Powerup.prototype.collect.call( this, kombatant );
 	kombatant.life = Math.min( kombatant.life + 0.5, SceneManager.currentScene.startLife );
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.chompSound.stop();
+		this.chompSound.play();
+	}
 };
 
 LifePowerup.prototype.draw = function( context ) {

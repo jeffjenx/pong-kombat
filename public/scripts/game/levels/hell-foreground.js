@@ -3,6 +3,11 @@ function HellForegroundLayer( scene ) {
 
 	this.leftStationaryTime = 0;
 	this.rightStationaryTime = 0;
+
+	this.lavaSound = new Sound( 'Lava' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.lavaSound.loop();
+	}
 }
 
 HellForegroundLayer.prototype = new Layer;

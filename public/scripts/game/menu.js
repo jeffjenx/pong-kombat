@@ -37,6 +37,10 @@ function Menu( scene ) {
 	this.overlay = this.addComponent( 'Overlay', overlay );
 	
 	this.captured = false;
+
+	this.clickSound = new Sound( 'Click' );
+	this.confirmSound = new Sound( 'Confirm' );
+	this.denySound = new Sound( 'Deny' );
 }
 
 Menu.prototype = new Layer;
@@ -95,6 +99,11 @@ Menu.prototype.addItem = function( title, action ) {
 
 Menu.prototype.selectCurrentItem = function( ) {
 	this.items[this.currentIndex].action.call( this );
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.confirmSound.stop();
+		this.confirmSound.play();
+	}
 };
 
 Menu.prototype.selectNextItem = function( ) {
@@ -108,6 +117,11 @@ Menu.prototype.selectNextItem = function( ) {
 	}
 	this.items[this.currentIndex].component.fontWeight = 600;
 	this.items[this.currentIndex].component.color = 'yellow';
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.clickSound.stop();
+		this.clickSound.play();
+	}
 };
 
 Menu.prototype.selectPreviousItem = function( ) {
@@ -119,6 +133,11 @@ Menu.prototype.selectPreviousItem = function( ) {
 	}
 	this.items[this.currentIndex].component.fontWeight = 600;
 	this.items[this.currentIndex].component.color = 'yellow';
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.clickSound.stop();
+		this.clickSound.play();
+	}
 };
 
 Menu.prototype.fadeIn = function( fadeTime ) {
@@ -148,6 +167,11 @@ Menu.prototype.closeMenu = function( ) {
 	InputManager.currentState = { };
 	InputManager.previousState = { };
 	InputManager.history = [ ];
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.denySound.stop();
+		this.denySound.play();
+	}
 };
 
 Menu.prototype.update = function( deltaTime ) {

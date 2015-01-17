@@ -28,6 +28,7 @@ function Paddle( texture ) {
 	
 	this.gloss = new Sprite( 'Paddle-Gloss' );
 
+	this.icon = Resources['Paddle-Icon-Unknown'];
 	this.drag = 0.95;
 	this.lifeModifier = 1;
 	
@@ -67,12 +68,35 @@ function Paddle( texture ) {
 	this.glue = null;
 	this.shield = null;
 	//this.projectile = null;
-	this.bloodEffect = null;
+	//this.bloodEffect = null;
 
-	this.maxProjectiles = 5;
+	this.maxProjectiles = 1;
 	this.projectiles = [ ];
 
+	this.maxBloods = 5;
+	this.bloods = [ ];
+
 	this.effect = new ParticleSystem();
+
+	this.gruntSounds = [];
+	this.gruntSounds.push( new Sound( 'Grunt-1' ) );
+	this.gruntSounds.push( new Sound( 'Grunt-2' ) );
+	this.gruntSounds.push( new Sound( 'Grunt-3' ) );
+
+	this.hitSounds = [];
+	this.hitSounds.push( new Sound( 'Kick-1' ) );
+	this.hitSounds.push( new Sound( 'Kick-2' ) );
+	this.hitSounds.push( new Sound( 'Kick-3' ) );
+	this.hitSounds.push( new Sound( 'Punch-1' ) );
+	this.hitSounds.push( new Sound( 'Punch-2' ) );
+	this.hitSounds.push( new Sound( 'Punch-3' ) );
+	this.hitSounds.push( new Sound( 'Punch-4' ) );
+
+	this.explodeSound = new Sound( 'Explode' );
+	this.screamSound = new Sound( 'Scream' );
+	this.absorbSound = new Sound( 'Shield-Absorb' );
+
+	this.dismantleAnimationFrames = null;
 }
 
 Paddle.prototype = new Sprite;
@@ -81,6 +105,37 @@ Paddle.prototype.constructor = Paddle;
 Paddle.prototype.canShootProjectile = function( ) {
 	return app.settings.COMBAT && this.projectiles.length < this.maxProjectiles;
 	//return app.settings.COMBAT && this.projectile === null;
+};
+
+Paddle.prototype.blockProjectile = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.absorbSound.stop();
+		this.absorbSound.play();
+	}
+};
+
+Paddle.prototype.dismantle = function( opponent ) {
+	if( !this.dismantleAnimationFrames ) {
+		return;
+	}
+
+	var sceneTime = opponent.layer.scene.stateTime;
+
+	for( var i = 0; i < this.dismantleAnimationFrames.length; i++ ) {
+		var frame = this.dismantleAnimationFrames[i];
+		if( sceneTime >= frame.start ) {
+			if( frame.start === frame.end ) {
+				// called once
+				frame.action( this, opponent.paddle );
+				this.dismantleAnimationFrames.splice(i, 1);
+				--i;
+			}
+			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
+				frame['action']( this, opponent.paddle, percentComplete );
+			}
+		}
+	}
 };
 
 Paddle.prototype.dismantleBurning = function(percentComplete) {
@@ -106,6 +161,11 @@ Paddle.prototype.dismantleBurning = function(percentComplete) {
 	this.gloss.opacity = 1-percentComplete;
 	
 	this.effect.update( 1/60 );
+
+	if( percentComplete > 0.75 ) {
+		this.screamSound.stop();
+		this.screamSound.play();
+	}
 };
 Paddle.prototype.dismantleCharring = function(percentComplete) {
 	this.gloss = new Sprite( 'Black' );
@@ -146,6 +206,80 @@ Paddle.prototype.dismantleCharred = function() {
 	if( this.scale <= 0 ) {
 		this.effect.count -= 1;
 	}
+};
+
+Paddle.prototype.dismantleFreezing = function() {
+	if( this.effect.particleImages[0] !== Resources['Projectile-Ice-Blast'] ) {
+		//this.effect.particles = [];
+		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
+		this.effect.count = 20;
+		this.effect.minVelocity.x = 0;
+		this.effect.minVelocity.y = 0;
+		this.effect.maxVelocity.x = 0;
+		this.effect.maxVelocity.y = 0;
+		this.effect.minParticleSize = this.size.x * 0.4;
+		this.effect.maxParticleSize = this.size.x * 0.6;
+		this.effect.minLife = 1000;
+		this.effect.maxLife = 1000;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0.05;
+		this.effect.maxOpacity = 10;
+		this.effect.fadeSpeed = 1;
+		this.effect.attachTo( this );
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
+
+		this.effect.restart();
+	}
+	this.opacity = 0;
+	this.effect.update( 1/60 );
+};
+Paddle.prototype.dismantleExploding = function() {
+	if( this.effect.minVelocity.x === 0 ) {
+		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
+		this.effect.count = 50;
+		this.effect.minVelocity.x = -this.size.x * 5;
+		this.effect.minVelocity.y = -this.size.y * 2;
+		this.effect.maxVelocity.x = this.size.x * 5;
+		this.effect.maxVelocity.y = -this.size.y * 4;
+		this.effect.minLife = 5000;
+		this.effect.maxLife = 5000;
+		this.effect.update = function( deltaTime ) {
+			ParticleSystem.prototype.update.call( this, deltaTime );
+
+			var i = this.particles.length;
+			while( i-- )
+			{
+				var p = this.particles[i];
+				p.velocity.y += viewport.height * 0.02;
+				
+				var bottom = viewport.height;
+				if( SceneManager.currentScene.layers['HUD'].components['LetterBox'] ) {
+					bottom = SceneManager.currentScene.layers['HUD'].components['LetterBox'].boundingBox.top;
+				}
+
+				if( p.position.y > viewport.width || p.position.y < 0 ) {
+					p.velocity.x = 0;
+				}
+
+				if( p.position.y > bottom ) {
+					p.velocity.y *= -0.5;
+					p.velocity.x *= 0.5;
+				}
+
+				if( p.remainingLife <= 0 ) {
+					this.particles.splice( this.particles.indexOf(i), 1 );
+				}
+			}
+		};
+		this.effect.restart();
+
+		if( percentComplete > 0.75 ) {
+			this.explodeSound.stop();
+			this.explodeSound.play();
+		}
+	}
+	this.effect.update( 1/60 );
 };
 
 Paddle.prototype.draw = function( context ) {
@@ -262,32 +396,42 @@ Paddle.prototype.draw = function( context ) {
 	//	this.projectile.draw( context );
 	//}
 
-	if( this.bloodEffect ) {
-		this.bloodEffect.draw( context );
+	if( this.effect ) {
+		this.effect.draw( context );
 	}
+
+	if( this.bloods.length > 0 ) {
+		for( var i = 0; i < this.bloods.length; i++ ) {
+			this.bloods[i].draw( context );
+		}
+	}
+	// if( this.bloodEffect ) {
+	// 	this.bloodEffect.draw( context );
+	// }
 };
 
 Paddle.prototype.getHit = function( ) {
-	this.bloodEffect = new ParticleSystem( );
-	this.bloodEffect.particleImages = [Resources['Particle-Blood1'],Resources['Particle-Blood2']];
-	this.bloodEffect.compositeOperation = 'normal';
-	this.bloodEffect.count = 50;
-	this.bloodEffect.minVelocity.x = -this.size.x / 2;
-	this.bloodEffect.minVelocity.y = -this.size.y * 3;
-	this.bloodEffect.maxVelocity.x = this.size.x / 2;
-	this.bloodEffect.maxVelocity.y = -this.size.y;
-	this.bloodEffect.minParticleSize = this.size.x * 0.3;
-	this.bloodEffect.maxParticleSize = this.size.x * 0.5;
-	this.bloodEffect.minLife = 500;
-	this.bloodEffect.maxLife = 500;
-	this.bloodEffect.rotationSpeed = 0;
-	this.bloodEffect.scaleSpeed = 0.01;
-	this.bloodEffect.maxOpacity = 50;
-	this.bloodEffect.fadeSpeed = 0.9;
-	this.bloodEffect.attachTo( this );
-	this.bloodEffect.size.x = 0;
-	this.bloodEffect.size.y = 0;
-	this.bloodEffect.update = function( deltaTime ) {
+	var blood = new ParticleSystem( );
+	blood.particleImages = [Resources['Particle-Blood1'],Resources['Particle-Blood2']];
+	blood.compositeOperation = 'normal';
+	blood.count = 50;
+	blood.minVelocity.x = -this.size.x * 2;
+	blood.minVelocity.y = -this.size.y * 3;
+	blood.maxVelocity.x = this.size.x * 2;
+	blood.maxVelocity.y = -this.size.y;
+	blood.minParticleSize = this.size.x * 0.3;
+	blood.maxParticleSize = this.size.x * 0.5;
+	blood.minLife = 1000;
+	blood.maxLife = 1000;
+	blood.rotationSpeed = 0;
+	blood.scaleSpeed = 0.01;
+	blood.maxOpacity = 50;
+	blood.fadeSpeed = 0.9;
+	blood.attachTo( this );
+	blood.size.x = 0;
+	blood.size.y = 0;
+	blood.dripSound = new Sound( 'Drips-' + Math.ceil(Math.random()*3) );
+	blood.update = function( deltaTime ) {
 		ParticleSystem.prototype.update.call( this, deltaTime );
 
 		var i = this.particles.length;
@@ -296,8 +440,18 @@ Paddle.prototype.getHit = function( ) {
 			var p = this.particles[i];
 			p.velocity.y += viewport.height * 0.02;
 			
-			if( p.position.y > viewport.height ) {
+			var bottom = viewport.height;
+			if( SceneManager.currentScene.layers['HUD'].components['LetterBox'] ) {
+				bottom = SceneManager.currentScene.layers['HUD'].components['LetterBox'].boundingBox.top;
+			}
+
+			if( p.position.y > bottom ) {
 				p.velocity.y = 0;
+				p.velocity.x *= 0.75;
+
+				if( !this.dripSound.played ) {
+					this.dripSound.playOnce();
+				}
 			}
 
 			if( p.remainingLife <= 0 ) {
@@ -305,17 +459,35 @@ Paddle.prototype.getHit = function( ) {
 			}
 		}
 	};
-	this.bloodEffect.start = function( ) {
+	blood.start = function( ) {
 		this.started = true;
 		for( var i = 0; i < this.count; i++ )
 		{
 			this.particles.push( new Particle( this ) );
 		}
 	};
+
+	this.bloods.push( blood );
+	if( this.bloods.length > this.maxBloods ) {
+		this.bloods.shift();
+	}
+
+	if( app.settings.SOUND_FX > 0 && !app.isMobile( ) )
+	{
+		if( app.settings.COMBAT ) {
+			var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
+			randomHitSound.stop();
+			randomHitSound.play();
+
+			var randomGruntSound = this.gruntSounds[ Math.floor(Math.random() * this.gruntSounds.length) ];
+			randomGruntSound.stop();
+			randomGruntSound.play();
+		}
+	}
 };
 
 Paddle.prototype.moveDown = function( ) {
-	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	this.offset = this.position.y / viewport.height * 0.75;
 	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
@@ -328,7 +500,7 @@ Paddle.prototype.moveDown = function( ) {
 };
 
 Paddle.prototype.moveUp = function( ) {
-	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	this.offset = this.position.y / viewport.height * 0.75;
 	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
@@ -341,7 +513,7 @@ Paddle.prototype.moveUp = function( ) {
 };
 
 Paddle.prototype.moveLeft = function( ) {
-	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	//this.offset = this.position.y / viewport.height * 0.75;
 	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
@@ -354,7 +526,7 @@ Paddle.prototype.moveLeft = function( ) {
 };
 
 Paddle.prototype.moveRight = function( ) {
-	var speedMultiplier = ( this.speedPowerup ) ? 1.5 : 1;
+	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	//this.offset = this.position.y / viewport.height * 0.75;	
 	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
@@ -383,6 +555,11 @@ Paddle.prototype.restrictToBounds = function( ) {
 	}
 };
 
+Paddle.prototype.shootHomingProjectile = function( projectile, target ) {
+	var homingProjectile = this.shootProjectile(projectile);
+	homingProjectile.setTarget( target );
+};
+
 Paddle.prototype.shootProjectile = function( projectile ) {
 	if( !projectile ) {
 		projectile = new Projectile( this );
@@ -390,11 +567,12 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 	projectile.position.x = this.position.x;
 	projectile.position.y = this.position.y;
 	
-	projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+	projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+	projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
 	
 	if( this.position.x > viewport.width * 0.50 )
 	{
+		projectile.flipH = true;
 		projectile.velocity.x *= -1;
 	}
 	/*
@@ -405,15 +583,16 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 	}
 	*/
 
-	if( projectile.effect ) {
-		projectile.effect.minVelocity.x += projectile.velocity.x / 2;
-		projectile.effect.maxVelocity.x += projectile.velocity.x / 2;
-		projectile.effect.minVelocity.y += projectile.velocity.y / 2;
-		projectile.effect.maxVelocity.y += projectile.velocity.y / 2;
-	}
+	// if( projectile.effect ) {
+	// 	projectile.effect.minVelocity.x += projectile.velocity.x / 2;
+	// 	projectile.effect.maxVelocity.x += projectile.velocity.x / 2;
+	// 	projectile.effect.minVelocity.y += projectile.velocity.y / 2;
+	// 	projectile.effect.maxVelocity.y += projectile.velocity.y / 2;
+	// }
 
 	this.projectiles.push( projectile );
 	InputManager.history = [ ];
+	return projectile;
 };
 
 Paddle.prototype.update = function( deltaTime ) {
@@ -438,12 +617,22 @@ Paddle.prototype.update = function( deltaTime ) {
 	
 	this.velocity = this.velocity.multiply( this.drag );
 	
-	if( this.bloodEffect ) {
-		this.bloodEffect.update( deltaTime );
-		if( this.bloodEffect.particles.count === 0 ) {
-			this.bloodEffect = null;
+	if( this.bloods.length > 0 ) {
+		for( var i = 0; i < this.bloods.length; i++ ) {
+			if( this.bloods[i].particles[0] && this.bloods[i].particles[0].remainingLife <= 0) {
+				this.bloods.splice(i,1);
+				--i;
+			} else {
+				this.bloods[i].update( deltaTime );
+			}
 		}
 	}
+	// if( this.bloodEffect ) {
+	// 	this.bloodEffect.update( deltaTime );
+	// 	if( this.bloodEffect.particles.count === 0 ) {
+	// 		this.bloodEffect = null;
+	// 	}
+	// }
 
 	if( this.glue )
 	{
@@ -508,5 +697,9 @@ Paddle.prototype.update = function( deltaTime ) {
 
 	if( this.timePowerup && app.gameTime > this.timePowerup ) {
 		this.timePowerup = false;
+	}
+
+	if( this.effect )  {
+		this.effect.update( deltaTime );
 	}
 };

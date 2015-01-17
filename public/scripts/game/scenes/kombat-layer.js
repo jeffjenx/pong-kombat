@@ -23,7 +23,7 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	
 		if( leftKombatant.paddle.position.x > viewport.width * 0.03 ) {
 			leftKombatant.paddle.moveLeft( );
-		} else if( leftKombatant.paddle.position.x < viewport.width * 0.02 ) {
+		} else if( leftKombatant.paddle.position.x < viewport.width * 0.01 ) {
 			leftKombatant.paddle.moveRight( );
 		} else {
 			leftKombatant.paddle.position.x = viewport.width * 0.025;
@@ -40,7 +40,7 @@ KombatLayer.prototype.centerPaddles = function( ) {
 			rightKombatant.paddle.position.y = viewport.height * 0.50;
 		}
 
-		if( rightKombatant.paddle.position.x > viewport.width * 0.98 ) {
+		if( rightKombatant.paddle.position.x > viewport.width * 0.99 ) {
 			rightKombatant.paddle.moveLeft( );
 		} else if( rightKombatant.paddle.position.x < viewport.width * 0.97 ) {
 			rightKombatant.paddle.moveRight( );
@@ -99,10 +99,12 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 	
 	if( this.components['LeftKombatant'] ) {
 		this.addComponent( 'RightKombatant', kombatant );
-		this.scene.layers['HUD'].components['RightName'].text = kombatant.paddle.name;
+		this.scene.layers['HUD'].setRight( kombatant );
+		//this.scene.layers['HUD'].components['RightName'].text = kombatant.paddle.name;
 	} else {
 		this.addComponent( 'LeftKombatant', kombatant );
-		this.scene.layers['HUD'].components['LeftName'].text = kombatant.paddle.name;
+		this.scene.layers['HUD'].setLeft( kombatant );
+		//this.scene.layers['HUD'].components['LeftName'].text = kombatant.paddle.name;
 	}
 };
 
@@ -115,6 +117,11 @@ KombatLayer.prototype.addPowerup = function( ) {
 	}
 	var randomPowerup = Math.floor( Math.random( ) * count );
 	//randomPowerup = Powerups.GLUE;
+
+	if( !app.settings.COMBAT && randomPowerup === Powerups.SHIELD ) {
+		return this.addPowerup();
+	};
+
 	var powerup;
 	switch( randomPowerup ) {
 		case Powerups.GLUE : powerup = new GluePowerup( ); break;
@@ -136,8 +143,29 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	
 	switch( this.scene.state ) {
 		case this.scene.states.starting :
-			leftKombatant.update( deltaTime );
-			rightKombatant.update( deltaTime );
+			this.centerPaddles();
+			
+			if( leftKombatant ) {
+				leftKombatant.update( deltaTime );
+				if( leftKombatant.paddle.projectiles.length > 0 ) {
+					leftKombatant.paddle.projectiles = [ ];
+				}
+			}
+
+			if( rightKombatant ) {
+				rightKombatant.update( deltaTime );
+				if( rightKombatant.paddle.projectiles.length > 0 ) {
+					rightKombatant.paddle.projectiles = [ ];
+				}
+			}
+
+			if( powerup ) {
+				powerup.timedOut( );
+			}
+
+			if( ball ) {
+				ball.set();
+			}
 			return;
 		break;
 		
@@ -229,6 +257,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 									rightKombatant.paddle.getHit( );
 								}
 								rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
+							} else {
+								rightKombatant.paddle.blockProjectile();
 							}
 							leftKombatant.paddle.projectiles.splice( i, 1 );
 							--i;
@@ -260,6 +290,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 									leftKombatant.paddle.getHit( );
 								}
 								leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
+							} else {
+								leftKombatant.paddle.blockProjectile( );
 							}
 							rightKombatant.paddle.projectiles.splice( i, 1 );
 							--i;
@@ -292,6 +324,9 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 			if( rightKombatant && rightKombatant.paddle.projectiles.length > 0 ) {
 				rightKombatant.paddle.projectiles = [ ];
+			}
+			if( ball ) {
+				ball.set();
 			}
 		break;
 	}

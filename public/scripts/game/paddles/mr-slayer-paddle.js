@@ -4,7 +4,7 @@ function MrSlayerPaddle( ) {
 	this.name = "Mr. Slayer";
 	this.bigness = 3.00;
 	this.quickness = 3.00;
-
+	
 	this.projectileSequence = [ Buttons.DOWN, Buttons.UP, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	
@@ -12,8 +12,12 @@ function MrSlayerPaddle( ) {
 	this.story = "The year is 1994 and things are different than the years before; violence is what Mr. Slayer adores. It is their passion and it likely cannot be contained. Uninvited to the game, they cause unexpected chaos, mayhem and anarchy with no regrets.";
 	
 	Paddle.call( this, 'Paddle-MrSlayer' );
-	
+	this.icon = Resources['Paddle-Icon-MrSlayer'];
+
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
+
+	this.nameSound = new Sound( 'Mr-Slayer' );
+	this.geminiSound = new Sound( 'Gemini' );
 }
 
 MrSlayerPaddle.prototype = new Paddle;
@@ -44,9 +48,14 @@ MrSlayerPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+
+	if( app.settings.SOUND_FX > 0 ) {
+		this.geminiSound.stop();
+		this.geminiSound.play();
+	}
 };
 
 MrSlayerPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	this.velocity = this.velocity.multiply( 0.9 );
+	//this.velocity = this.velocity.multiply( 0.9 );
 };

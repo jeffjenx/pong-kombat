@@ -47,6 +47,8 @@ function Projectile( ) {
 	this.effect.fadeSpeed = 0.5;
 	this.effect.attachTo( this );
 	*/
+	this.target = null;
+	this.absorbSound = new Sound( 'Shield-Absorb' );
 }
 
 Projectile.prototype = new Sprite;
@@ -77,12 +79,17 @@ Projectile.prototype.hitPaddle = function( ) {
 	//console.log( 'hit paddle' );
 };
 
+Projectile.prototype.setTarget = function( target ) {
+	this.target = new Vector( [target.position.x, target.position.y] );
+};
+
 Projectile.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
 	if( this.sourcePaddle ) {
 		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 ) {
-			this.sourcePaddle.projectile = null;
+			this.sourcePaddle.projectiles.splice( this.sourcePaddle.projectiles.indexOf( this ), 1 );
+			//this.sourcePaddle.projectile = null;
 		}	
 	}
 
@@ -99,5 +106,14 @@ Projectile.prototype.update = function( deltaTime ) {
 		this.effect.size.y = this.size.y * this.scale;
 		this.effect.scale = this.scale;
 		this.effect.update( deltaTime );
+	}
+
+	if( this.target ) {
+		var angleToTarget = Math.acos( this.velocity.dot( this.target ) / ( this.velocity.normalize() * this.velocity.normalize() ) );
+		if( angleToTarget < -1 ) {
+			this.velocity.rotate( 1 );
+		} else if( angleToTarget > 1 ) {
+			this.velocity.rotate( -1 );
+		}
 	}
 };
