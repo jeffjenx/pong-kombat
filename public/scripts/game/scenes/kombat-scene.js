@@ -6,7 +6,7 @@ function KombatScene( ) {
 	this.addLayer( 'Foreground', new ForegroundLayer( this ) );
 	this.addLayer( 'HUD', new HUDLayer( this ) );
 	
-	this.startLife = 5;
+	this.startLife = 1;
 	this.states = {
 		announcing : 0,
 		starting : 1,
@@ -196,7 +196,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 					++rightKombatant.roundsWon;
 					this.layers['HUD'].components['RightRounds'].text = Array(rightKombatant.roundsWon+1).join('●');
 					this.layers['Kombat'].removeComponent( 'Ball' );
-					if( rightKombatant.roundsWon > app.settings.ROUNDS / 2 + 1 )
+					if( rightKombatant.roundsWon > app.settings.ROUNDS / 2 )
 					{
 						this.winner = rightKombatant;
 						this.layers['HUD'].updateWinner( );

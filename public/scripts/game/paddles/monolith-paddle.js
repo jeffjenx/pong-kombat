@@ -23,6 +23,23 @@ function MonolithPaddle( ) {
 
 	this.nameSound = new Sound( 'Monolith' );
 	this.throwSound = new Sound( 'Throw' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+	{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.0, end : 1.5, action : function(winner) { winner.moveUp(); winner.velocity.y *= 0.5; } },
+		{ start : 1.25, end : 1.25, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.5, end : 1.5, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.5, end : 2.5, action : function(winner) { winner.moveDown(); winner.velocity.y *= 0.5; } },
+		{ start : 1.75, end : 1.75, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.0, end : 2.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.25, end : 2.25, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.5, end : 2.5, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 2.5, end : 3.0, action : function(winner) { winner.moveUp(); winner.velocity.y *= 0.5; } },
+		{ start : 2.75, end : 2.75, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 3.0, end : 3.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 3.0, end : 3.0, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
+	];
 }
 
 MonolithPaddle.prototype = new Paddle;

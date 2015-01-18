@@ -29,14 +29,45 @@ function RedPaddle( ) {
 	this.effect.rotationSpeed = 1;
 	this.effect.scaleSpeed = 5;
 	this.effect.compositeOperation = 'darker';
+	this.effect.attachTo( this );
 
 	this.nameSound = new Sound( 'Red-Paddle' );
 	this.whooshSound = new Sound( 'Whoosh-3' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
+		
+		{ start : 6.0, end : 6.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 6.1, end : 6.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 6.3, end :  7.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		
+		{ start : 8.0, end : 8.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 8.1, end : 8.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 8.3, end : 9.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		
+		{ start : 10.0, end : 10.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 10.1, end : 10.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 10.3, end : 13.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		
+		{ start : 14.0, end : 14.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+		/*
+		{ start : 11.0, end : 12.25, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 11.5, end : 11.5, action : function(winner,loser){loser.getHit();} },
+		{ start : 12.0, end :  13.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 14.5, end : 15.75, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 16.0, end : 16.0, action : function(winner,loser){loser.getHit();} },
+		{ start : 16.5, end : 19.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 20.0, end : 20.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+		*/
+	];
 }
 
 RedPaddle.prototype = new Paddle;
 RedPaddle.prototype.constructor = RedPaddle;
 
+/*
 RedPaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
 	
@@ -45,6 +76,7 @@ RedPaddle.prototype.dismantle = function( opponent ) {
 		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
 	}
 };
+*/
 
 RedPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );

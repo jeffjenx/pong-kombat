@@ -43,6 +43,7 @@ function ParticleSystem( particleCount ) {
 	this.compositeOperation = 'lighter';
 	this.attachedObject = null;
 	this.started = false;
+	this.singleCycle = false;
 }
 
 ParticleSystem.prototype.constructor = ParticleSystem;
@@ -132,7 +133,7 @@ ParticleSystem.prototype.update = function( deltaTime ) {
 		{
 			this.particles.splice(i, 1);
 			--i;
-			if( this.particles.length < this.count ) {
+			if( !this.singleCycle && this.particles.length < this.count ) {
 				this.particles.push( new Particle( this ) );
 			}
 		}

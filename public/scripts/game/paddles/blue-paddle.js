@@ -64,7 +64,7 @@ function BluePaddle( ) {
 		},
 		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleFreezing(percentComplete); } },
 		{ start : 8.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.position.x += viewport.width * 0.06 * percentComplete; } },
-		{ start : 9.25, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
+		{ start : 9.23, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }

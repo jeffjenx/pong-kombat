@@ -22,6 +22,18 @@ function ShifterPaddle( ) {
 
 	this.nameSound = new Sound( 'Shifter' );
 	this.laserSound = new Sound( 'Laser' );
+	
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 6.0, end : 7.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 7.0, end :  10.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 10.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 11.0, end :  12.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 12.5, end : 14.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 14.0, end :  15.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 ShifterPaddle.prototype = new Paddle;

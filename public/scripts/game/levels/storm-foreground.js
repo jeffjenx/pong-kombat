@@ -3,9 +3,9 @@ function StormForegroundLayer( scene ) {
 
 	this.addLightning( );
 
-	this.rainSound = new Sound( 'Rain' );
+	this.stormSound = new Sound( 'Storm' );
 	if( app.settings.SOUND_FX > 0 ) {
-		this.rainSound.loop();
+		this.stormSound.loop();
 	}
 }
 

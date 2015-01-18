@@ -358,35 +358,45 @@ HUDLayer.prototype.update = function( deltaTime ) {
 				var elapsedTime = this.scene.stateTime - 3;
 				this.bounce.scale = 0.5 + elapsedTime / 3;
 				this.bounce.opacity = Math.max( (2 - elapsedTime) / 2, 0 );
-				this.bounceSound.playOnce();
+
+				if( app.settings.SOUND_FX > 0 ) {
+					this.bounceSound.playOnce();
+				}
 			}
 			if( this.scene.stateTime > 1 ) {
 				this.currentRound.opacity = 1;
-				this.roundSound.playOnce();
-				if( this.roundSound.played ) {
-					this.roundNumberSounds[this.scene.currentRound - 1].playOnce();
+
+				if( app.settings.SOUND_FX > 0 ) {
+					this.roundSound.playOnce();
+					if( this.roundSound.played ) {
+						this.roundNumberSounds[this.scene.currentRound - 1].playOnce();
+					}
 				}
 			}
 		break;
 
 		case this.scene.states.announcing :
-			if( this.scene.stateTime > 1 ) {
-				this.finishEmSound.playOnce();
+			if( app.settings.SOUND_FX > 0 ) {
+				if( this.scene.stateTime > 1 ) {
+					this.finishEmSound.playOnce();
+				}
 			}
 		break;
 
 		case this.scene.states.ending :
-			this.scene.winner.getNameSound().playOnce();
-			if( this.scene.winner.getNameSound().played ) {
-				this.winsSound.playOnce();
-			}
+			if( app.settings.SOUND_FX > 0 ) {
+				this.scene.winner.getNameSound().playOnce();
+				if( this.scene.winner.getNameSound().played ) {
+					this.winsSound.playOnce();
+				}
 
-			if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
-				this.dismantledSound.playOnce();
-			}
+				if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
+					this.dismantledSound.playOnce();
+				}
 
-			if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
-				this.flawlessSound.playOnce();
+				if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
+					this.flawlessSound.playOnce();
+				}
 			}
 		break;
 	}

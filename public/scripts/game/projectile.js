@@ -109,7 +109,7 @@ Projectile.prototype.update = function( deltaTime ) {
 	}
 
 	if( this.target ) {
-		var angleToTarget = Math.acos( this.velocity.dot( this.target ) / ( this.velocity.normalize() * this.velocity.normalize() ) );
+		var angleToTarget = Math.acos( this.velocity.dot( this.target ) / ( this.target.normalize() * this.velocity.normalize() ) );
 		if( angleToTarget < -1 ) {
 			this.velocity.rotate( 1 );
 		} else if( angleToTarget > 1 ) {

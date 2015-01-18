@@ -219,7 +219,7 @@ Ball.prototype.set = function( ) {
 	this.position.y = viewport.height * 0.50;
 	
 	var angle;
-	var speed = viewport.width * 0.2; // Always start at the same speed
+	var speed = viewport.width * 0.15; // Always start at the same speed
 	
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg

@@ -18,6 +18,31 @@ function MrSlayerPaddle( ) {
 
 	this.nameSound = new Sound( 'Mr-Slayer' );
 	this.geminiSound = new Sound( 'Gemini' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action : function(winner) {
+			winner.projectile = new Projectile( winner );
+			winner.projectile.sourcePaddle = winner;
+			winner.projectile.position.x = winner.position.x;
+			winner.projectile.position.y = winner.position.y;
+
+			winner.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+			winner.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
+
+			if( winner.position.x > viewport.width * 0.50 )
+			{
+				winner.projectile.velocity.x *= -1;
+			}
+
+			if( app.settings.SOUND_FX > 0 ) {
+				winner.geminiSound.stop();
+				winner.geminiSound.play();
+			}
+		} },
+		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleCutInHalf(percentComplete); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 MrSlayerPaddle.prototype = new Paddle;

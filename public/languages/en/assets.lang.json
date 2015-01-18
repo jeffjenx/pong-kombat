@@ -17,7 +17,7 @@
 		"Squirt"   : "sounds/squirt",
 		"Birds"   : "sounds/birds",
 		"Lava"   : "sounds/lava",
-		"Rain"   : "sounds/rain",
+		"Storm"   : "sounds/storm",
 		"Pit"   : "sounds/pit",
 		"Acid"   : "sounds/acid",
 		"River"   : "sounds/river",
@@ -260,6 +260,8 @@
 		"Paddle-Gloss-MrSlayer" : "images/paddles/mr-slayer-gloss.png",
 		"Paddle-Gloss-Shifter" : "images/paddles/shifter-gloss.png",
 		"Paddle-Glue"         : "images/paddles/paddle-glue.png",
+		"Paddle-Lightning-1"         : "images/paddles/lightning-1.png",
+		"Paddle-Lightning-2"         : "images/paddles/lightning-2.png",
 		
 		"Paddle-Icon-Blue"          : "images/paddles/blue-icon.png",
 		"Paddle-Icon-Green"         : "images/paddles/green-icon.png",

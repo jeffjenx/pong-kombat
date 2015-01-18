@@ -26,6 +26,7 @@ function ShadowProjectile( sourcePaddle ) {
 	this.effect.size.x = this.size.x * this.scale;
 	this.effect.size.y = this.size.y * this.scale;
 	this.effect.compositeOperation = 'multiply';
+	this.effect.attachTo( this );
 
 	for( var i = 0; i < this.effect.maxLife; i++ ) {
 		this.effect.update( 1/60 );
@@ -78,19 +79,7 @@ ShadowProjectile.prototype.draw = function( context ) {
 };
 
 ShadowProjectile.prototype.update = function( deltaTime ) {
-	Sprite.prototype.update.call( this, deltaTime );
-
-	if( this.sourcePaddle ) {
-		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
-			this.sourcePaddle.projectile = null;
-		}	
-	}
-
-	if( this.scale < 1 ) {
-		this.scale += deltaTime * 10; 
-	}
-
-	if( this.effect ) {
-		this.effect.update( deltaTime );
-	}
+	Projectile.prototype.update.call( this, deltaTime );
+	
+	this.rotation = 0;
 }

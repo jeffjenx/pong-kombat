@@ -27,6 +27,14 @@ function PurplePaddle( ) {
 
 	this.nameSound = new Sound( 'Purple-Paddle' );
 	this.boltSound = new Sound( 'Bolt' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action : function(winner, loser, percentComplete) { loser.dismantleStruckByLightning(winner); } },
+		{ start : 1.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleElectricuting(percentComplete); } },
+		{ start : 8.0, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 PurplePaddle.prototype = new Paddle;

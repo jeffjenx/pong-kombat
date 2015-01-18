@@ -162,7 +162,7 @@ Paddle.prototype.dismantleBurning = function(percentComplete) {
 	
 	this.effect.update( 1/60 );
 
-	if( percentComplete > 0.75 ) {
+	if( app.settings.SOUND_FX && percentComplete > 0.75 ) {
 		this.screamSound.stop();
 		this.screamSound.play();
 	}
@@ -208,11 +208,62 @@ Paddle.prototype.dismantleCharred = function() {
 	}
 };
 
+Paddle.prototype.dismantleElectricuting = function(percentComplete) {
+	if( this.effect.particleImages[0] !== Resources['Particle-Fire1'] ) {
+		this.effect = new ParticleSystem();
+		this.effect.particleImages = [Resources['Particle-Lightning1'],Resources['Particle-Lightning2'],Resources['Particle-Lightning3']];
+		this.effect.count = 100;
+		this.effect.minVelocity.x = 0;
+		this.effect.minVelocity.y = 0;
+		this.effect.maxVelocity.x = 0;
+		this.effect.maxVelocity.y = 0;
+		this.effect.minParticleSize = this.size.x * 0.4;
+		this.effect.maxParticleSize = this.size.x * 0.8;
+		this.effect.minLife = 40;
+		this.effect.maxLife = 200;
+		this.effect.maxOpacity = 0.7;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0;
+		this.effect.fadeSpeed = 0.65;
+
+		this.effect.draw = function( context ) {
+			context.save( );
+			context.globalCompositeOperation = this.compositeOperation;
+			
+			for(var i = 0; i < this.particles.length; i++)
+			{
+				var p = this.particles[i];
+				
+				context.save();
+				context.globalAlpha = p.opacity;
+				if( this.attachedObject ) {
+					context.translate( this.attachedObject.position.x + p.position.x - p.startPosition.x, this.attachedObject.position.y + p.position.y - p.startPosition.y );
+				} else {
+					context.translate( this.position.x + p.position.x - p.startPosition.x, this.position.y + p.position.y - p.startPosition.y );
+				}
+				context.rotate( p.rotation );
+				context.drawImage( p.image, -p.radius * p.scale, -p.radius * p.scale, p.radius * 2 * p.scale, p.radius * 2 * p.scale );
+				context.restore();
+			}
+			context.restore( );
+		};
+	}
+
+	this.gloss.opacity = 1-percentComplete;
+	
+	this.effect.update( 1/60 );
+
+	if( percentComplete > 0.75 ) {
+		this.screamSound.stop();
+		this.screamSound.play();
+	}
+};
+
 Paddle.prototype.dismantleFreezing = function() {
 	if( this.effect.particleImages[0] !== Resources['Projectile-Ice-Blast'] ) {
 		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
-		this.effect.count = 20;
+		this.effect.count = 50;
 		this.effect.minVelocity.x = 0;
 		this.effect.minVelocity.y = 0;
 		this.effect.maxVelocity.x = 0;
@@ -225,19 +276,23 @@ Paddle.prototype.dismantleFreezing = function() {
 		this.effect.scaleSpeed = 0.05;
 		this.effect.maxOpacity = 10;
 		this.effect.fadeSpeed = 1;
+		this.effect.compositeOperation = 'normal';
 		this.effect.attachTo( this );
 		this.effect.size.x = this.size.x * this.scale;
 		this.effect.size.y = this.size.y * this.scale;
 
 		this.effect.restart();
 	}
-	this.opacity = 0;
+	this.opacity = 0.5;
 	this.effect.update( 1/60 );
 };
-Paddle.prototype.dismantleExploding = function() {
+Paddle.prototype.dismantleExploding = function( percentComplete ) {
 	if( this.effect.minVelocity.x === 0 ) {
+		this.opacity = 0;
+		this.getHit( );
+
 		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
-		this.effect.count = 50;
+		this.effect.count = 40;
 		this.effect.minVelocity.x = -this.size.x * 5;
 		this.effect.minVelocity.y = -this.size.y * 2;
 		this.effect.maxVelocity.x = this.size.x * 5;
@@ -280,6 +335,110 @@ Paddle.prototype.dismantleExploding = function() {
 		}
 	}
 	this.effect.update( 1/60 );
+};
+
+Paddle.prototype.dismantleMeanderToMiddle = function( percentComplete ) {
+	if( this.position.x > viewport.width * 0.5 ) {
+		this.position.x = viewport.width * 0.98 - viewport.width * 0.5 * 0.98 * percentComplete;
+	} else {
+		this.position.x = viewport.width * 0.02 + viewport.width * 0.5 * 0.98 * percentComplete;
+	}
+};
+
+Paddle.prototype.dismantleStruckByLightning = function( source ) {
+	var lightningBolt = new Sprite( (Math.random() < 0.5) ? 'Paddle-Lightning-1' : 'Paddle-Lightning-2' );
+
+	lightningBolt.flipH = (Math.random() < 0.5);
+	lightningBolt.registration.x = 0;
+
+	if( source ) {
+		lightningBolt.position.x = source.position.x;
+		lightningBolt.position.y = source.position.y;
+		lightningBolt.rotation = Math.acos( this.position.dot( this.source ) / ( this.source.normalize() * this.position.normalize() ) );
+	}
+};
+
+Paddle.prototype.dismantleVanish = function(percentComplete) {
+	if( this.effect.count != 50 ) {
+		//this.effect.particles = [];
+		this.effect.particleImages = [Resources['Particle-Smoke2']];
+		this.effect.count = 50;
+		this.effect.minVelocity.x = -viewport.height * 0.05;
+		this.effect.minVelocity.y = -viewport.height * 0.05;
+		this.effect.maxVelocity.x = viewport.height * 0.05;
+		this.effect.maxVelocity.y = viewport.height * 0.1;
+		this.effect.minParticleSize = this.size.x * 0.7;
+		this.effect.maxParticleSize = this.size.x;
+		this.effect.minLife = 50;
+		this.effect.maxLife = 50;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0.1;
+		this.effect.maxOpacity = 1;
+		this.effect.fadeSpeed = 1;
+		this.effect.compositeOperation = 'normal';
+		this.effect.attachTo( this );
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
+
+		this.effect.singleCycle = true;
+
+		this.effect.restart();
+	}
+	this.opacity = Math.max(1 - percentComplete * 5, 0);
+};
+
+Paddle.prototype.dismantleAppear = function(percentComplete) {
+	if( this.effect.count != 33 ) {
+		this.position.y = viewport.height * 0.45 + Math.random() * viewport.height * 0.1;
+		this.position.x = (Math.random() < 0.5) ? viewport.width * 0.60 : viewport.width * 0.40;
+		this.opacity = 1;
+		this.velocity.x = (this.position.x < viewport.width * 0.5) ? viewport.width * 0.8 : -viewport.width * 0.8;
+
+		this.effect.particleImages = [Resources['Particle-Smoke2']];
+		this.effect.count = 33;
+		this.effect.minVelocity.x = -viewport.height * 0.05;
+		this.effect.minVelocity.y = -viewport.height * 0.05;
+		this.effect.maxVelocity.x = viewport.height * 0.05;
+		this.effect.maxVelocity.y = viewport.height * 0.1;
+		this.effect.minParticleSize = this.size.x * 0.7;
+		this.effect.maxParticleSize = this.size.x;
+		this.effect.minLife = 50;
+		this.effect.maxLife = 50;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0.1;
+		this.effect.maxOpacity = 0.5;
+		this.effect.fadeSpeed = 1;
+		this.effect.compositeOperation = 'normal';
+		this.effect.attachTo( this );
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
+		this.effect.singleCycle = true;
+		this.effect.restart();
+	}
+
+	//if( percentComplete < 0.5 && this.opacity != 0 ) {
+		//this.effect.restart();
+		//this.opacity = 0;
+	//}
+
+	this.velocity.x /= this.drag;
+};
+
+Paddle.prototype.dismantleCutInHalf = function(percentComplete) {
+	if( !this.slicedHalf ) {
+		this.slicedHalf = new Sprite( 'Paddle-Guts' );
+		this.slicedHalf.position.x = this.position.x;
+		this.slicedHalf.position.y = this.position.y;
+		this.slicedHalf.size.x = this.size.x;
+		this.slicedHalf.size.y = this.size.y;
+		this.slicedHalf.scale = this.scale;
+	}
+
+	this.rotation = percentComplete * 90;
+	this.velocity.y += viewport.height * 0.1;
+	if( this.position.y > viewport.height * 0.8 ) {
+		this.position.y = viewport.height * 0.8;
+	}
 };
 
 Paddle.prototype.draw = function( context ) {
@@ -449,7 +608,7 @@ Paddle.prototype.getHit = function( ) {
 				p.velocity.y = 0;
 				p.velocity.x *= 0.75;
 
-				if( !this.dripSound.played ) {
+				if( app.settings.SOUND_FX > 0 && !this.dripSound.played ) {
 					this.dripSound.playOnce();
 				}
 			}
@@ -466,6 +625,7 @@ Paddle.prototype.getHit = function( ) {
 			this.particles.push( new Particle( this ) );
 		}
 	};
+	blood.start();
 
 	this.bloods.push( blood );
 	if( this.bloods.length > this.maxBloods ) {

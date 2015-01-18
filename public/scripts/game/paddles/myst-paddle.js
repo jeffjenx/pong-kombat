@@ -34,6 +34,23 @@ function MystPaddle( ) {
 
 	this.nameSound = new Sound( 'Myst' );
 	this.spraySound = new Sound( 'Spray' );
+
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 7.0, end : 8.0, action : function(winner, loser, percentComplete) {
+			if( !winner.flySwatter ) {
+				winner.flySwatter = new Sprite( 'Fly-Swatter' );
+				winner.flySwatter.size.y = viewport.height * 0.3;
+				winner.flySwatter.size.x = winner.flySwatter.size.y;
+				winner.flySwatter.position.x = Math.random() * viewport.width;
+				winner.flySwatter.position.y = viewport.height + winner.flySwatter.size.y * winner.flySwatter.scale;
+			}
+
+			winner.flySwatter.position.y = viewport.width * 0.5 + viewport.width * 0.5 * percentComplete;
+		} },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 MystPaddle.prototype = new Paddle;

@@ -183,6 +183,10 @@ Difficulty (Default: Medium)
 Power-Ups (Default: On)
     Toggle power-up abilities: Off, On
 
+Rounds (Default: 3)
+    Life is replenished after each round. Best of 1, 3, 5, 7, 9, or 11 rounds 
+    wins the match.
+
 Sound FX (Default: 10)
     Adjust volume of sound effects: Off, 1-11
 
@@ -770,7 +774,7 @@ The playing field is high above a multi-lane highway. At ground level, cars,
 vans, and trucks race across the screen in both directions.
 
 Dismantle
-    Splat - Left, Right, Right, Action
+    Flyswatter II - Left, Right, Right, Action
 
 
 -------------------------------------------------------------------------------
