@@ -13,7 +13,7 @@ function HUDLayer( scene ) {
 	
 	this.pk = new Sprite( 'PK' );
 	this.pk.position.x = viewport.width * 0.50;
-	this.pk.position.y = hud.size.y * 0.40;
+	this.pk.position.y = hud.size.y * 0.42;
 	this.pk.size.x = viewport.height * 0.09;
 	this.pk.size.y = viewport.height * 0.06;
 	this.addComponent( 'PK', this.pk );
@@ -64,7 +64,7 @@ function HUDLayer( scene ) {
 	leftIcon.size.y = hud.size.y * 0.80;
 	leftIcon.size.x = leftIcon.size.y;
 	leftIcon.position.x = viewport.width * 0.024;
-	leftIcon.position.y = hud.size.y * 0.47;
+	leftIcon.position.y = hud.size.y * 0.48;
 	// component added to layer after icon border below
 
 	var leftIconBorder = new Component( );

@@ -64,7 +64,7 @@ Menu.prototype.addItem = function( title, action ) {
 	var lineSpacing = viewport.height * 0.01;
 	var fontSize = viewport.height * 0.05;
 	var item = new Text( title );
-	item.color = 'white';
+	item.color = 'rgb(128,128,128)';
 	item.fontFamily = 'Apple Garamond';
 	item.fontStyle = 200;
 	item.fontSize = fontSize;
@@ -109,14 +109,14 @@ Menu.prototype.selectCurrentItem = function( ) {
 Menu.prototype.selectNextItem = function( ) {
 	if( this.items[this.currentIndex] ) {
 		this.items[this.currentIndex].component.fontWeight = 200;
-		this.items[this.currentIndex].component.color = 'white';
+		this.items[this.currentIndex].component.color = 'rgb(128,128,128)';
 	}
 	this.currentIndex += 1;
 	if( this.currentIndex >= this.items.length ) {
 		this.currentIndex = 0;
 	}
 	this.items[this.currentIndex].component.fontWeight = 600;
-	this.items[this.currentIndex].component.color = 'yellow';
+	this.items[this.currentIndex].component.color = 'rgb(255,255,255)';
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.clickSound.stop();
@@ -126,13 +126,13 @@ Menu.prototype.selectNextItem = function( ) {
 
 Menu.prototype.selectPreviousItem = function( ) {
 	this.items[this.currentIndex].component.fontWeight = 200;
-	this.items[this.currentIndex].component.color = 'white';
+	this.items[this.currentIndex].component.color = 'rgb(128,128,128)';
 	this.currentIndex -= 1;
 	if( this.currentIndex < 0 ) {
 		this.currentIndex = this.items.length - 1;
 	}
 	this.items[this.currentIndex].component.fontWeight = 600;
-	this.items[this.currentIndex].component.color = 'yellow';
+	this.items[this.currentIndex].component.color = 'rgb(255,255,255)';
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.clickSound.stop();
@@ -177,6 +177,10 @@ Menu.prototype.closeMenu = function( ) {
 Menu.prototype.update = function( deltaTime ) {
 	this.fadeIn( 0.33 );
 	this.timeElapsed += deltaTime;
+
+	var selectedItemTiming = Math.sin(app.gameTime/213);
+	this.items[this.currentIndex].component.scale = 1.025 + selectedItemTiming * 0.025;
+	this.items[this.currentIndex].component.color = 'rgb(255,255,255)';
 	
 	if( InputManager.checkButtonPress( Buttons.DOWN ) ) {
 		this.selectNextItem( );

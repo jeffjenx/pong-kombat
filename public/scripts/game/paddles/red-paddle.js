@@ -50,6 +50,8 @@ function RedPaddle( ) {
 		{ start : 10.0, end : 10.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
 		{ start : 10.1, end : 10.1, action : function(winner,loser){ loser.getHit(); } },
 		{ start : 10.3, end : 13.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+
+		{ start : 10.2, end : 15.0, action : function(winner, loser) {loser.dismantleFallToBottom();} },
 		
 		{ start : 14.0, end : 14.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 		/*

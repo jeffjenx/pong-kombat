@@ -46,6 +46,7 @@
                    EVOX Stock Images
 	                Facebook
 	                FreeSFX
+	                FreeSound.org
 	                GameFAQs
 	                GitHub
 	                Google Analytics
@@ -72,6 +73,7 @@
 	                Autodesk 3D Studio Max
 	                Balsamiq Mockups
 	                Blender
+	                FiftyThree Paper
 	                FileZilla
 	                GitHub
 	                Google Chrome
@@ -88,5 +90,6 @@
 	                Apple Mac mini
 	                Apple MacBook Air
 	                eMachines
+	                FiftyThree Pencil
 	                Sony Bravia
 	                Synology DiskStation

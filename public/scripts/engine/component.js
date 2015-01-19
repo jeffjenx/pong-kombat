@@ -29,7 +29,7 @@ function Component( ) {
 	this.scale = 1.0;
 	this.size = new Vector( [ 64, 64 ] );
 	this.tint = false;
-	this.velocity = copy( Vector.Zero );
+	this.velocity = new Vector( [ 0, 0 ] );
 	this.width = 64;
 };
 

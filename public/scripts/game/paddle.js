@@ -337,11 +337,39 @@ Paddle.prototype.dismantleExploding = function( percentComplete ) {
 	this.effect.update( 1/60 );
 };
 
+Paddle.prototype.dismantleFallToBottom = function() {
+	this.velocity.y += viewport.height * 0.04;
+
+	this.rotation += 3;
+
+	var bottom = viewport.height;
+	if( SceneManager.currentScene.layers['HUD'].components['LetterBox'] ) {
+		bottom = SceneManager.currentScene.layers['HUD'].components['LetterBox'].boundingBox.top;
+	}
+
+	if( this.position.y > bottom ) {
+		this.velocity.y = 0;
+		this.position.y = bottom;
+	}
+
+	if( this.rotation >= 90 ) {
+		this.rotation = 90;
+	}
+};
+
 Paddle.prototype.dismantleMeanderToMiddle = function( percentComplete ) {
 	if( this.position.x > viewport.width * 0.5 ) {
 		this.position.x = viewport.width * 0.98 - viewport.width * 0.5 * 0.98 * percentComplete;
 	} else {
 		this.position.x = viewport.width * 0.02 + viewport.width * 0.5 * 0.98 * percentComplete;
+	}
+};
+
+Paddle.prototype.dismantleStickToWall = function( ) {
+	if( this.position.x > viewport.width * 0.5 ) {
+		this.position.x = Math.min( this.position.x + viewport.width * 0.01, viewport.width );
+	} else {
+		this.position.x = Math.min( this.position.x - viewport.width * 0.01, 0 );
 	}
 };
 
@@ -716,8 +744,9 @@ Paddle.prototype.restrictToBounds = function( ) {
 };
 
 Paddle.prototype.shootHomingProjectile = function( projectile, target ) {
-	var homingProjectile = this.shootProjectile(projectile);
-	homingProjectile.setTarget( target );
+	//projectile.setTarget( target );
+	//this.shootProjectile(projectile);
+	//var homingProjectile = this.projectiles[this.projectiles.length-1];
 };
 
 Paddle.prototype.shootProjectile = function( projectile ) {
@@ -729,6 +758,8 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 	
 	projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
 	projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+
+	projectile.rotation = this.rotation;
 	
 	if( this.position.x > viewport.width * 0.50 )
 	{
@@ -752,6 +783,7 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 
 	this.projectiles.push( projectile );
 	InputManager.history = [ ];
+
 	return projectile;
 };
 

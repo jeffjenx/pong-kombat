@@ -18,6 +18,10 @@ GreenArrowProjectile.prototype.draw = function( context ) {
 };
 
 GreenArrowProjectile.prototype.update = function( deltaTime ) {
+	Projectile.prototype.update.call( this, deltaTime );
+
+	this.rotation -= 180 * deltaTime;
+	/*
 	Sprite.prototype.update.call( this, deltaTime );
 
 	if( this.sourcePaddle ) {
@@ -29,4 +33,5 @@ GreenArrowProjectile.prototype.update = function( deltaTime ) {
 	if( this.scale < 1 ) {
 		this.scale += deltaTime * 10; 
 	}
+	*/
 }

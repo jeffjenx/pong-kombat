@@ -2,7 +2,7 @@ function Opponent( ) {
 	this.paddle = null;
 	this.life = 0;
 	this.roundsWon = 0;
-	this.nextProjectileTime = app.gameTime + 2000 + Math.random( ) * 8000;
+	this.nextProjectileTime = app.gameTime + 4000 + Math.random( ) * 8000;
 	this.targetPosition = viewport.height * 0.5;
 }
 

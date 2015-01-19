@@ -20,19 +20,173 @@ function GreenPaddle( ) {
 	this.currentStep = 0;
 	this.dismantleAnimationFrames = [
 		// (end = start) ? call only once, (end < 0) ? call indefinitely
-		{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
-		{ start : 1.0, end : 6.0, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
-		{ start : 6.0, end : 7.0, action : function(winner, loser, percentComplete) { winner.rotation -= 15 * percentComplete; } },
-		{ start : 8.0, end : 12.0, action : function(winner, loser, percentComplete) { winner.rotation += 30 * percentComplete; } },
-		{ start : 8.0, end : 8.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 8.5, end : 8.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 9.0, end : 9.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 9.5, end : 9.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 10.0, end : 10.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 10.5, end : 10.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 11.0, end : 11.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 11.5, end : 11.5, action : function(winner, loser) {winner.shootHomingProjectile(loser); } },
-		{ start : 12.0, end : 12.0, action : function(winner, loser) {winner.shootHomingProjectile(loser); } }
+		{ start : 1.0, end : 1.0, action : function(winner) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.5 );
+		} },
+		{ start : 2.5, end : 3.5, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
+		{ start : 4.5, end : 5.5, action : function(winner, loser, percentComplete) { winner.rotation = -30 * percentComplete; } },
+		{ start : 6.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.rotation = -30 + 60 * percentComplete; } },
+		//{ start : 8.0, end : 8.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 6.0, end : 6.0, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.05 );
+		} },
+		{ start : 6.5, end : 6.5, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.15 );
+		} },
+		{ start : 7.0, end : 7.0, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.35 );
+		} },
+		{ start : 7.5, end : 7.5, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.60 );
+		} },
+
+		{ start : 8.0, end : 8.0, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.25 );
+		} },
+
+		{ start : 8.5, end : 8.5, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.60 );
+		} },
+		{ start : 9.0, end : 9.0, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.35 );
+		} },
+		{ start : 9.5, end : 9.5, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.15 );
+		} },
+		{ start : 10.0, end : 10.0, action : function(winner, loser) {
+			var projectile = winner.shootProjectile();
+			projectile.velocity = projectile.velocity.multiply( 1.05 );
+		} },
+		
+		/*
+		{ start : 8.5, end : 8.5, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.1 );
+		} },
+		{ start : 9.0, end : 9.0, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.3 );
+		} },
+		{ start : 9.5, end : 9.5, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.4 );
+		} },
+		{ start : 10.0, end : 10.0, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 2.5 );
+		} },
+		*/
+
+		/*
+		{ start : 10.5, end : 10.5, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.8 );
+		} },
+		{ start : 11.0, end : 11.0, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.4 );
+		} },
+		{ start : 11.5, end : 11.5, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.3 );
+		} },
+		{ start : 12.0, end : 12.0, action : function(winner, loser) {
+			var projectile = new GreenArrowProjectile( winner );
+			winner.shootProjectile(projectile);
+			projectile = winner.projectiles[winner.projectiles.length-1];
+			projectile.velocity = projectile.velocity.multiply( 1.1 );
+		} },
+		*/
+		/*
+		{ start : 9.0, end : 9.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 9.5, end : 9.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 10.5, end : 10.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 11.5, end : 11.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		*/
+		//{ start : 12.0, end : 12.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 1.0, end : 13.0, action : function(winner,loser) {
+			for( var i = 0; i < winner.projectiles.length; ++i ) {
+				var projectile = winner.projectiles[i];
+
+				if( Collision.RectRect(projectile.boundingBox,loser.boundingBox) ) {
+					continue;
+				}
+
+				if( projectile.position.y > viewport.height * 0.5 ) {
+					projectile.velocity.y -= viewport.height * 0.004;
+				} else {
+					projectile.velocity.y += viewport.height * 0.004;
+				}
+
+				projectile.rotation = Math.atan2(projectile.velocity.y, projectile.velocity.x) * Math.TO_DEGREES;
+
+				//var speed = projectile.velocity.length();
+				//var direction = loser.position.subtract(projectile.position);
+				//projectile.rotation = Math.atan2(direction.y, direction.x) * Math.TO_DEGREES;
+				//console.log(projectile.rotation);
+				/*
+				projectile.velocity.x = speed * (90 - Math.abs(projectile.rotation)) / 90;
+				if( projectile.rotation < 0 )
+					projectile.velocity.y = -speed + Math.abs(projectile.velocity.x);
+				else
+					projectile.velocity.y = speed - Math.abs(projectile.velocity.x);//Going downwards.
+				*/
+				//projectile.velocity = direction.multiply(speed);
+
+				//var angleToTarget = Math.acos( projectile.velocity.dot( loser.position ) / ( loser.position.normalize() * projectile.velocity.normalize() ) );
+				//projectile.rotation = angleToTarget * Math.TO_DEGREES;
+				
+				// var a1 = Math.atan2(projectile.velocity.y, projectile.velocity.x);
+				// var a2 = Math.atan2(loser.position.y, loser.position.x);
+				// if(a1 < -Math.PI / 2 && a2 > Math.PI / 2) a1 += Math.PI * 2;
+				// if(a2 < -Math.PI / 2 && a1 > Math.PI / 2) a2 += Math.PI * 2;
+				// if( a2 - a1 > 0 ) {
+				// 	projectile.velocity = projectile.velocity.rotate( a2 - a1 );
+				// } else {
+				// 	projectile.velocity = projectile.velocity.rotate( -1 * (a2 - a1) );
+				// }
+				
+				//projectile.rotation = a2 - a1;
+				//projectile.velocity = projectile.velocity.rotate( a2 - a1 );
+				// var angleToTarget = Math.acos( projectile.velocity.dot( loser.position ) / ( loser.position.normalize() * projectile.velocity.normalize() ) );
+				// if( angleToTarget < -1 ) {
+				// 	projectile.rotation += 1;
+				// 	projectile.velocity.rotate( 1 );
+				// } else if( angleToTarget > 1 ) {
+				// 	projectile.rotation -= 1;
+				// 	projectile.velocity.rotate( -1 );
+				// }
+			}
+		} },
+		/*
+		*/
+		{ start : 10.0, end : 12.0, action : function(winner, loser, percentComplete) { winner.rotation = 30 * (1-percentComplete); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
 
@@ -140,6 +294,7 @@ GreenPaddle.prototype.draw = function( context ) {
 	// }
 };
 
+/*
 GreenPaddle.prototype.dismantle = function( opponent ) {
 	var sceneTime = opponent.layer.scene.stateTime;
 	
@@ -148,14 +303,17 @@ GreenPaddle.prototype.dismantle = function( opponent ) {
 		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
 	}
 };
+*/
 
 GreenPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this, new GreenArrowProjectile( this ) );
+	var projectile = Paddle.prototype.shootProjectile.call( this, new GreenArrowProjectile( this ) );
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.arrowSound.stop();
 		this.arrowSound.play();
 	}
+
+	return projectile;
 
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;

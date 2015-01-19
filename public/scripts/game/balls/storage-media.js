@@ -9,7 +9,7 @@ function StorageMedia( texture ) {
 		case 'Ball-Vinyl-Record' : this.size.x = viewport.width * 0.05; break;
 		case 'Ball-Floppy-Disk' : this.size.x = viewport.width * 0.035; break;
 		case 'Ball-Cartridge-Zelda' :
-		case 'Ball-Cartridge-Zelda' : this.size.x = viewport.width * 0.045; break;
+		case 'Ball-Cartridge-Zelda' : this.size.x = viewport.width * 0.055; break;
 	}
 	this.size.y = this.size.x;
 

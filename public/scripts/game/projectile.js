@@ -47,7 +47,6 @@ function Projectile( ) {
 	this.effect.fadeSpeed = 0.5;
 	this.effect.attachTo( this );
 	*/
-	this.target = null;
 	this.absorbSound = new Sound( 'Shield-Absorb' );
 }
 
@@ -79,10 +78,6 @@ Projectile.prototype.hitPaddle = function( ) {
 	//console.log( 'hit paddle' );
 };
 
-Projectile.prototype.setTarget = function( target ) {
-	this.target = new Vector( [target.position.x, target.position.y] );
-};
-
 Projectile.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
@@ -106,14 +101,5 @@ Projectile.prototype.update = function( deltaTime ) {
 		this.effect.size.y = this.size.y * this.scale;
 		this.effect.scale = this.scale;
 		this.effect.update( deltaTime );
-	}
-
-	if( this.target ) {
-		var angleToTarget = Math.acos( this.velocity.dot( this.target ) / ( this.target.normalize() * this.velocity.normalize() ) );
-		if( angleToTarget < -1 ) {
-			this.velocity.rotate( 1 );
-		} else if( angleToTarget > 1 ) {
-			this.velocity.rotate( -1 );
-		}
 	}
 };

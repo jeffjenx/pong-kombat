@@ -260,8 +260,16 @@ KombatLayer.prototype.update = function( deltaTime ) {
 							} else {
 								rightKombatant.paddle.blockProjectile();
 							}
-							leftKombatant.paddle.projectiles.splice( i, 1 );
-							--i;
+
+							if( this.scene.state === this.scene.states.dismantling && leftKombatant.paddle.enum === 'GREEN' ) {
+								var speed = projectile.velocity.length();
+								var direction = projectile.velocity.normalize();
+								projectile.velocity = direction.multiply( speed * 0.8 );
+								//projectile.velocity = projectile.velocity.multiply( 0.85 );
+							} else {
+								leftKombatant.paddle.projectiles.splice( i, 1 );
+								--i;
+							}
 						}
 					}
 				}

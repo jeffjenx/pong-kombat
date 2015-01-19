@@ -66,7 +66,7 @@ ShadowProjectile.prototype.draw = function( context ) {
 		context.scale( -1, 1 );
 	}
 	
-	context.drawImage( this.sourcePaddle.image, -this.size.x * this.registration.x * this.scale, -this.size.y * this.registration.y * this.scale, this.size.x * this.scale, this.size.y * this.scale );
+	context.drawImage( this.sourcePaddle.image, -this.size.x * this.registration.x * this.scale, -this.size.y * this.registration.y * this.scale, this.size.y * this.scale, this.size.y * this.scale );
 	
 	context.globalAlpha *= this.opacity * 0.5;
 	context.drawImage( this.image, -this.size.x * this.registration.x * this.scale, -this.size.y * this.registration.y * this.scale, this.size.x * this.scale, this.size.y * this.scale );
