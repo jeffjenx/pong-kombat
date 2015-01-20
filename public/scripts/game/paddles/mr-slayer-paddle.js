@@ -13,6 +13,7 @@ function MrSlayerPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-MrSlayer' );
 	this.icon = Resources['Paddle-Icon-MrSlayer'];
+	this.broken = Resources['Paddle-Broken-MrSlayer'];
 
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
 

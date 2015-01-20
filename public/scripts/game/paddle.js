@@ -29,6 +29,7 @@ function Paddle( texture ) {
 	this.gloss = new Sprite( 'Paddle-Gloss' );
 
 	this.icon = Resources['Paddle-Icon-Unknown'];
+	this.broken = Resources['Paddle-Broken-Shifter'];
 	this.drag = 0.95;
 	this.lifeModifier = 1;
 	
@@ -138,9 +139,14 @@ Paddle.prototype.dismantle = function( opponent ) {
 	}
 };
 
+Paddle.prototype.dismantleBloat = function() {
+	this.targetSize = this.size.x * 1.5;
+	//this.size.x *= 1.5;
+};
+
 Paddle.prototype.dismantleBurning = function(percentComplete) {
-	if( this.effect.particleImages[0] !== Resources['Particle-Fire1'] ) {
-		this.effect = new ParticleSystem();
+	if( this.effect.type !== 'burning' ) {
+		this.effect.type = 'burning';
 		this.effect.particleImages = [Resources['Particle-Fire1'],Resources['Particle-Fire2'],Resources['Particle-Fire3']];
 		this.effect.count = 420;
 		this.effect.minVelocity.x = -this.size.x;
@@ -173,8 +179,8 @@ Paddle.prototype.dismantleCharring = function(percentComplete) {
 	this.effect.count = Math.max( 420 * (1 - percentComplete), 1 );
 };
 Paddle.prototype.dismantleCharred = function() {
-	if( this.effect.particleImages[0] !== Resources['Black'] ) {
-		this.effect = new ParticleSystem();
+	if( this.effect.type !== 'charred' ) {
+		this.effect.type = 'charred';
 		this.effect.particleImages = [Resources['Black']];
 		this.effect.compositeOperation = 'darken';
 		this.effect.count = 500;
@@ -209,8 +215,8 @@ Paddle.prototype.dismantleCharred = function() {
 };
 
 Paddle.prototype.dismantleElectricuting = function(percentComplete) {
-	if( this.effect.particleImages[0] !== Resources['Particle-Fire1'] ) {
-		this.effect = new ParticleSystem();
+	if( this.effect.type !== 'electricuting' ) {
+		this.effect.type = 'electricuting';
 		this.effect.particleImages = [Resources['Particle-Lightning1'],Resources['Particle-Lightning2'],Resources['Particle-Lightning3']];
 		this.effect.count = 100;
 		this.effect.minVelocity.x = 0;
@@ -260,7 +266,8 @@ Paddle.prototype.dismantleElectricuting = function(percentComplete) {
 };
 
 Paddle.prototype.dismantleFreezing = function() {
-	if( this.effect.particleImages[0] !== Resources['Projectile-Ice-Blast'] ) {
+	if( this.effect.type !== 'freezing' ) {
+		this.effect.type = 'freezing';
 		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
 		this.effect.count = 50;
@@ -287,18 +294,36 @@ Paddle.prototype.dismantleFreezing = function() {
 	this.effect.update( 1/60 );
 };
 Paddle.prototype.dismantleExploding = function( percentComplete ) {
-	if( this.effect.minVelocity.x === 0 ) {
+	if( this.effect.type !== 'exploding' ) {
+		switch( this.effect.type ) {
+			case 'freezing' :
+				this.effect.particleImages = [Resources['Projectile-Ice-Blast'], this.broken];
+			break;
+			default :
+				this.effect.particleImages = [this.broken];
+		}
+		this.effect.type = 'exploding';
 		this.opacity = 0;
 		this.getHit( );
 
-		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
+		//this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
 		this.effect.count = 40;
-		this.effect.minVelocity.x = -this.size.x * 5;
-		this.effect.minVelocity.y = -this.size.y * 2;
-		this.effect.maxVelocity.x = this.size.x * 5;
-		this.effect.maxVelocity.y = -this.size.y * 4;
+		this.effect.minVelocity.x = -viewport.width * 0.03 * 5;
+		this.effect.minVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) * 2;
+		this.effect.maxVelocity.x = viewport.width * 0.03 * 5;
+		this.effect.maxVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) * 4;
+		this.effect.minParticleSize = viewport.width * 0.03 * 0.4;
+		this.effect.maxParticleSize = viewport.width * 0.03 * 0.6;
 		this.effect.minLife = 5000;
 		this.effect.maxLife = 5000;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0.05;
+		this.effect.maxOpacity = 10;
+		this.effect.fadeSpeed = 1;
+		this.effect.compositeOperation = 'normal';
+		this.effect.attachTo( this );
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
 		this.effect.update = function( deltaTime ) {
 			ParticleSystem.prototype.update.call( this, deltaTime );
 
@@ -387,7 +412,8 @@ Paddle.prototype.dismantleStruckByLightning = function( source ) {
 };
 
 Paddle.prototype.dismantleVanish = function(percentComplete) {
-	if( this.effect.count != 50 ) {
+	if( this.effect.type !== 'vanishing' ) {
+		this.effect.type = 'vanishing';
 		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Particle-Smoke2']];
 		this.effect.count = 50;
@@ -416,7 +442,8 @@ Paddle.prototype.dismantleVanish = function(percentComplete) {
 };
 
 Paddle.prototype.dismantleAppear = function(percentComplete) {
-	if( this.effect.count != 33 ) {
+	if( this.effect.type !== 'appearing' ) {
+		this.effect.type = 'appearing';
 		this.position.y = viewport.height * 0.45 + Math.random() * viewport.height * 0.1;
 		this.position.x = (Math.random() < 0.5) ? viewport.width * 0.60 : viewport.width * 0.40;
 		this.opacity = 1;
@@ -602,12 +629,12 @@ Paddle.prototype.getHit = function( ) {
 	blood.particleImages = [Resources['Particle-Blood1'],Resources['Particle-Blood2']];
 	blood.compositeOperation = 'normal';
 	blood.count = 50;
-	blood.minVelocity.x = -this.size.x * 2;
-	blood.minVelocity.y = -this.size.y * 3;
-	blood.maxVelocity.x = this.size.x * 2;
-	blood.maxVelocity.y = -this.size.y;
-	blood.minParticleSize = this.size.x * 0.3;
-	blood.maxParticleSize = this.size.x * 0.5;
+	blood.minVelocity.x = -viewport.width * 0.03 * 2;
+	blood.minVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) * 3;
+	blood.maxVelocity.x = viewport.width * 0.03 * 2;
+	blood.maxVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 );
+	blood.minParticleSize = viewport.width * 0.03 * 0.3;
+	blood.maxParticleSize = viewport.width * 0.03 * 0.5;
 	blood.minLife = 1000;
 	blood.maxLife = 1000;
 	blood.rotationSpeed = 0;

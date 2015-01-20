@@ -13,6 +13,7 @@ function MonolithPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Monolith' );
 	this.icon = Resources['Paddle-Icon-Monolith'];
+	this.broken = Resources['Paddle-Broken-Monolith'];
 
 	this.lifeModifier = 0.5;
 	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );

@@ -13,6 +13,7 @@ function ShifterPaddle( ) {
 
 	Paddle.call( this, 'Background-Title' );
 	this.icon = Resources['Paddle-Icon-Shifter'];
+	this.broken = Resources['Paddle-Broken-Shifter'];
 	this.gloss = new Sprite( 'Paddle-Gloss-Shifter' );
 	this.opacity = 0.6;
 	this.gloss.opacity = 0.6;

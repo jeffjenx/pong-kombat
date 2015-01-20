@@ -14,6 +14,7 @@ function PurplePaddle( ) {
 	Paddle.call( this, 'Paddle-Purple' );
 
 	this.icon = Resources['Paddle-Icon-Purple'];
+	this.broken = Resources['Paddle-Broken-Purple'];
 	this.addEffect( );
 	
 	this.boltCanvas = document.createElement( 'canvas' );
@@ -30,10 +31,83 @@ function PurplePaddle( ) {
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-		{ start : 1.0, end : 1.0, action : function(winner, loser, percentComplete) { loser.dismantleStruckByLightning(winner); } },
+		{ start : 1.0, end : 1.0, action : function(winner) { winner.velocity.x = (winner.position.x < viewport.width * 0.5) ? viewport.width * 0.4 : -viewport.width * 0.4; } },
+		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) {
+			if( winner.velocity.x > 0 && winner.position.x > viewport.width * 0.94 ) {
+				winner.velocity.x = 0;
+				winner.position.x = viewport.width * 0.94;
+			} else if( winner.velocity.x < 0 && winner.position.x < viewport.width * 0.06 ) {
+				winner.velocity.x = 0;
+				winner.position.x = viewport.width * 0.06;
+			}
+
+			winner.velocity.x /= winner.drag;
+		} },
+		{ start : 3.75, end : 3.75, action : function(winner) {
+			var airPump = new SpriteSheet( 'Paddle-Air-Pump' );
+			airPump.position.x = winner.position.x;
+			airPump.position.y = winner.position.y;
+			airPump.size.x = winner.size.x * winner.scale;
+			airPump.size.y = airPump.size.x;
+
+			airPump.animations = {
+				'up' : { frames : [0], step : 1000 },
+				'down' : {frames : [1], step : 1000 }
+			};
+			airPump.currentAnimation = 'up';
+			airPump.frame = { x : 0, y : 0, width : 256, height : 256 };
+			SceneManager.currentScene.layers['Kombat'].addComponent( 'AirPump', airPump );
+		} },
+		{
+			start : 4.0, end : 4.0, action : function(winner) {
+				winner.velocity.x = (winner.position.x > viewport.width * 0.5) ? -viewport.width * 0.4 : viewport.width * 0.4;
+			}
+		},
+		{
+			start : 4.0, end : 7.0, action : function(winner) {
+				SceneManager.currentScene.layers['Kombat'].components['AirPump'].position.x = winner.position.x;
+
+				if( winner.velocity.x < 0 && winner.position.x < viewport.width * 0.02 ) {
+					winner.velocity.x = 0;
+					winner.position.x = viewport.width * 0.02;
+				} else if( winner.velocity.x > 0 && winner.position.x > viewport.width * 0.98 ) {
+					winner.velocity.x = 0;
+					winner.position.x = viewport.width * 0.98;
+				}
+
+				winner.velocity.x /= winner.drag;
+			}
+		},
+		{ start : 7.0, end : 8.0, action : function(winner) {
+			var airPump = SceneManager.currentScene.layers['Kombat'].components['AirPump'];
+			airPump.velocity.y += viewport.height * 0.02;
+
+			if( airPump.velocity.y > 0 && airPump.position.y > winner.boundingBox.bottom ) {
+				airPump.velocity.y *= -0.5;
+			}
+		} },
+		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
+		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; } },
+		{ start : 11.0, end : 15.0, action : function(winner, loser, percentComplete) { loser.dismantleExploding(percentComplete); } },
+		{ start : 8.0, end : 12.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.x /= winner.drag;
+			winner.velocity.y += viewport.height * 0.02;
+
+			if( winner.velocity.y > 0 && winner.position.y > viewport.height * 0.51 ) {
+				winner.velocity.y = 0;
+			}
+
+			if( loser.size.x < loser.targetSize ) {
+				loser.size.x += loser.size.y / 50;
+			}
+		} }
+		/*
 		{ start : 1.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleElectricuting(percentComplete); } },
 		{ start : 8.0, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+		*/
 	];
 }
 
@@ -78,15 +152,6 @@ PurplePaddle.prototype.addEffect = function( ) {
 		}
 		context.restore( );
 	};
-};
-
-PurplePaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
 };
 
 PurplePaddle.prototype.draw = function( context ) {

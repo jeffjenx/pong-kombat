@@ -13,6 +13,7 @@ function YellowPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Yellow' );
 	this.icon = Resources['Paddle-Icon-Yellow'];
+	this.broken = Resources['Paddle-Broken-Yellow'];
 
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Fire1'],Resources['Particle-Fire2'],Resources['Particle-Fire3']];

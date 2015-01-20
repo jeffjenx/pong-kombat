@@ -13,6 +13,7 @@ function WhitePaddle( ) {
 	
 	Paddle.call( this, 'White' );
 	this.icon = Resources['Paddle-Icon-White'];
+	this.broken = Resources['Paddle-Broken-White'];
 
 	this.lifeModifier = 0.75;
 

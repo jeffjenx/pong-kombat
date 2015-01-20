@@ -65,6 +65,9 @@ LightningSaiProjectile.prototype.draw = function( context ) {
 };
 
 LightningSaiProjectile.prototype.update = function( deltaTime ) {
+	Projectile.prototype.update.call( this, deltaTime );
+	this.rotation -= 180 * deltaTime;
+	/*
 	Sprite.prototype.update.call( this, deltaTime );
 
 	if( this.sourcePaddle ) {
@@ -80,4 +83,5 @@ LightningSaiProjectile.prototype.update = function( deltaTime ) {
 	if( this.effect ) {
 		this.effect.update( deltaTime );
 	}
+	*/
 }

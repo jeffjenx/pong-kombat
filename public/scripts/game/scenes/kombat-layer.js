@@ -206,6 +206,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					if( leftKombatant.paddle.timePowerup && ball.velocity.x < 0 && ball.position.x < viewport.width / 2 && !ball.bulletTimed ) {
 						ball.bulletTimed = true;
 					}
+
+					leftKombatant.paddle.restrictToBounds( );
 				}
 
 				if( rightKombatant )
@@ -229,6 +231,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					if( rightKombatant.paddle.timePowerup && ball.velocity.x > 0 && ball.position.x > viewport.width / 2 && !ball.bulletTimed ) {
 						ball.bulletTimed = true;
 					}
+
+					rightKombatant.paddle.restrictToBounds( );
 				}
 			}
 

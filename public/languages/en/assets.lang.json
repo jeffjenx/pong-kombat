@@ -262,6 +262,18 @@
 		"Paddle-Glue"         : "images/paddles/paddle-glue.png",
 		"Paddle-Lightning-1"         : "images/paddles/lightning-1.png",
 		"Paddle-Lightning-2"         : "images/paddles/lightning-2.png",
+		"Paddle-Air-Pump"         : "images/paddles/air-pump.png",
+		
+		"Paddle-Broken-Blue"          : "images/paddles/blue-broken.png",
+		"Paddle-Broken-Green"         : "images/paddles/green-broken.png",
+		"Paddle-Broken-Monolith"      : "images/paddles/monolith-broken.png",
+		"Paddle-Broken-MrSlayer"      : "images/paddles/mr-slayer-broken.png",
+		"Paddle-Broken-Myst"          : "images/paddles/myst-broken.png",
+		"Paddle-Broken-Purple"        : "images/paddles/purple-broken.png",
+		"Paddle-Broken-Red"           : "images/paddles/red-broken.png",
+		"Paddle-Broken-Shifter"       : "images/paddles/shifter-broken.png",
+		"Paddle-Broken-Yellow"        : "images/paddles/yellow-broken.png",
+		"Paddle-Broken-White"        : "images/paddles/white-broken.png",
 		
 		"Paddle-Icon-Blue"          : "images/paddles/blue-icon.png",
 		"Paddle-Icon-Green"         : "images/paddles/green-icon.png",
@@ -279,6 +291,8 @@
 		"Paddle-Icon-High-Life"        : "images/paddles/paddle-icon-high-life.png",
 		"Paddle-Icon-Full-Life"        : "images/paddles/paddle-icon-full-life.png",
 		
+		"Particle-Binary-1" : "images/effects/particle-binary-1.png",
+		"Particle-Binary-0" : "images/effects/particle-binary-0.png",
 		"Particle-BlackSmoke1" : "images/effects/particle-black-smoke-1.png",
 		"Particle-BlackSmoke2" : "images/effects/particle-black-smoke-2.png",
 		"Particle-Blood1"      : "images/effects/particle-blood-1.png",

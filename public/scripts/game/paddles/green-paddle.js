@@ -13,6 +13,7 @@ function GreenPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Green' );
 	this.icon = Resources['Paddle-Icon-Green'];
+	this.broken = Resources['Paddle-Broken-Green'];
 
 	this.nameSound = new Sound( 'Green-Paddle' );
 	this.arrowSound = new Sound( 'Arrow-Fired' );

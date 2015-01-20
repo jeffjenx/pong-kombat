@@ -13,6 +13,7 @@ function MystPaddle( ) {
 	
 	Paddle.call( this, 'Paddle-Myst' );
 	this.icon = Resources['Paddle-Icon-Myst'];
+	this.broken = Resources['Paddle-Broken-Myst'];
 	this.opacity = 0.33;
 	//this.gloss.opacity = 0.33;
 
