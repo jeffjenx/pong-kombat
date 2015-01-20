@@ -43,7 +43,7 @@ function PurplePaddle( ) {
 
 			winner.velocity.x /= winner.drag;
 		} },
-		{ start : 3.75, end : 3.75, action : function(winner) {
+		{ start : 3.75, end : 3.75, action : function(winner, loser) {
 			var airPump = new SpriteSheet( 'Paddle-Air-Pump' );
 			airPump.position.x = winner.position.x;
 			airPump.position.y = winner.position.y;
@@ -56,6 +56,25 @@ function PurplePaddle( ) {
 			};
 			airPump.currentAnimation = 'up';
 			airPump.frame = { x : 0, y : 0, width : 256, height : 256 };
+			// added after rope for z-indexing
+			//SceneManager.currentScene.layers['Kombat'].addComponent( 'AirPump', airPump );
+
+			var rope = new Component();
+			rope.draw = function(context) {
+				//var airPump = SceneManager.currentScene.layers['Kombat'].components['AirPump'];
+				context.save();
+				context.lineWidth = viewport.height * 0.01;
+				context.strokeStyle = 'blue';
+				context.lineCap = 'round';
+				context.beginPath();
+				context.moveTo(airPump.position.x, airPump.position.y);
+				context.quadraticCurveTo(airPump.position.x + (loser.position.x - airPump.position.x), viewport.width * 0.51, loser.position.x, loser.position.y);
+				//context.lineTo(loser.position.x, loser.position.y);
+				context.stroke();
+				context.restore();
+			};
+			rope.update = function(deltaTime) {};
+			SceneManager.currentScene.layers['Kombat'].addComponent( 'Rope', rope );
 			SceneManager.currentScene.layers['Kombat'].addComponent( 'AirPump', airPump );
 		} },
 		{
@@ -86,17 +105,26 @@ function PurplePaddle( ) {
 				airPump.velocity.y *= -0.5;
 			}
 		} },
-		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
-		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
-		{ start : 10.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; loser.dismantleBloat(); } },
-		{ start : 11.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; } },
-		{ start : 11.0, end : 15.0, action : function(winner, loser, percentComplete) { loser.dismantleExploding(percentComplete); } },
+		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 8.5, end : 8.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
+		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 9.5, end : 9.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 10.5, end : 10.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 11.5, end : 15.0, action : function(winner, loser, percentComplete) { loser.dismantleExploding(percentComplete); } },
 		{ start : 8.0, end : 12.0, action : function(winner, loser, percentComplete) {
 			winner.velocity.x /= winner.drag;
 			winner.velocity.y += viewport.height * 0.02;
 
-			if( winner.velocity.y > 0 && winner.position.y > viewport.height * 0.51 ) {
-				winner.velocity.y = 0;
+			if( winner.velocity.y > 0 ) {
+				if( winner.position.y > viewport.height * 0.50 ) {
+					SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'down';
+				}
+
+				if( winner.position.y > viewport.height * 0.51 ) {
+					winner.velocity.y = 0;
+				}
 			}
 
 			if( loser.size.x < loser.targetSize ) {

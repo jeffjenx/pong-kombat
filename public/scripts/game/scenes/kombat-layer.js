@@ -265,7 +265,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 								rightKombatant.paddle.blockProjectile();
 							}
 
-							if( this.scene.state === this.scene.states.dismantling && leftKombatant.paddle.enum === 'GREEN' ) {
+							if( this.scene.state === this.scene.states.dismantling && (leftKombatant.paddle.enum === 'GREEN') ) {
 								var speed = projectile.velocity.length();
 								var direction = projectile.velocity.normalize();
 								projectile.velocity = direction.multiply( speed * 0.8 );

@@ -19,45 +19,48 @@ function MonolithPaddle( ) {
 	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );
 
 	// Monolith throws 3 rocks at a time
-	this.projectile2 = null;
-	this.projectile3 = null;
+	//this.projectile2 = null;
+	//this.projectile3 = null;
+	this.maxProjectiles = 3;
 
 	this.nameSound = new Sound( 'Monolith' );
 	this.throwSound = new Sound( 'Throw' );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-	{ start : 1.0, end : 1.0, action : function(winner) { winner.shootProjectile(); } },
+		{ start : 1.0, end : 1.0, action : function(winner, loser) { winner.shootProjectile(); loser.maxBloods = 15; } },
 		{ start : 1.0, end : 1.5, action : function(winner) { winner.moveUp(); winner.velocity.y *= 0.5; } },
 		{ start : 1.25, end : 1.25, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 1.5, end : 1.5, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 1.5, end : 2.5, action : function(winner) { winner.moveDown(); winner.velocity.y *= 0.5; } },
 		{ start : 1.75, end : 1.75, action : function(winner) { winner.shootProjectile(); } },
-		{ start : 2.0, end : 2.0, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 2.25, end : 2.25, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 2.5, end : 2.5, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 2.5, end : 3.0, action : function(winner) { winner.moveUp(); winner.velocity.y *= 0.5; } },
 		{ start : 2.75, end : 2.75, action : function(winner) { winner.shootProjectile(); } },
 		{ start : 3.0, end : 3.0, action : function(winner) { winner.shootProjectile(); } },
-		{ start : 3.0, end : 3.0, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
+		{ start : 3.0, end : 3.0, action : function(winner, loser) { winner.shootProjectile(); } },
+		{ start : 4.0, end : 4.0, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
+		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) {
+			for( var i in winner.projectiles) {
+				if( winner.projectiles[i].velocity.x === 0) {
+					winner.projectiles[i].rotation = 0;
+				}
+			}
+			loser.dismantleRocked(percentComplete);
+		} },
+		{ start : 9.0, end : -1, action : function(winner,loser,percentComplete) { loser.dismantleRockFalling(); } },
+		{ start : 9.5, end : -1, action : function(winner,loser){ loser.dismantleFallToBottom(); } }
 	];
 }
 
 MonolithPaddle.prototype = new Paddle;
 MonolithPaddle.prototype.constructor = MonolithPaddle;
 
-MonolithPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-
 MonolithPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
 
+	/*
 	if( this.projectile2 ) {
 		this.projectile2.draw( context );
 	}
@@ -65,12 +68,30 @@ MonolithPaddle.prototype.draw = function( context ) {
 	if( this.projectile3 ) {
 		this.projectile3.draw( context );
 	}
+	*/
 };
 
 MonolithPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
+	var projectile = new RockProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
+
+	var direction = (this.position.x > viewport.width * 0.5 ) ? -180 : 0;
+	var projectile2 = new RockProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile2 );
+	projectile2.position.y = projectile.position.y - this.size.y * 0.11;
+	projectile2.velocity.x = Math.cos( (direction-1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
+	projectile2.velocity.y = Math.sin( (direction-1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
+
+	var projectile3 = new RockProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile3 );
+	projectile3.position.y = projectile.position.y + this.size.y * 0.11;
+	projectile3.velocity.x = Math.cos( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
+	projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
+
+	/*
 	this.projectile = new RockProjectile( this );
 	this.projectile.sourcePaddle = this;
 	this.projectile.position.x = this.position.x;
@@ -96,6 +117,7 @@ MonolithPaddle.prototype.shootProjectile = function( ) {
 	this.projectile3.position.y = this.projectile.position.y + this.size.y * 0.11;
 	this.projectile3.velocity.x = Math.cos( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
 	this.projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
+	*/
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.throwSound.stop();
@@ -109,6 +131,7 @@ MonolithPaddle.prototype.shootProjectile = function( ) {
 	//}
 };
 
+/*
 MonolithPaddle.prototype.updateRocksBoundingBox = function( ) {
 	this.projectile.boundingBox.top = this.projectile2.boundingBox.top;
 	this.projectile.boundingBox.bottom = this.projectile3.boundingBox.bottom;
@@ -116,11 +139,13 @@ MonolithPaddle.prototype.updateRocksBoundingBox = function( ) {
 	//this.projectile.boundingBox.width = Math.abs(this.projectile.boundingBox.right - this.projectile.boundingBox.left);
 	this.projectile.boundingBox.height = Math.abs(this.projectile.boundingBox.top - this.projectile.boundingBox.bottom);
 };
+*/
 
 MonolithPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
 	//this.velocity = this.velocity.multiply( 0.9 );
 
+	/*
 	if( this.projectile === null ) {
 		this.projectile2 = null;
 		this.projectile3 = null;
@@ -137,4 +162,5 @@ MonolithPaddle.prototype.update = function( deltaTime ) {
 	if( this.projectile && this.projectile2 && this.projectile3 ) {
 		this.updateRocksBoundingBox( );
 	}
+	*/
 };

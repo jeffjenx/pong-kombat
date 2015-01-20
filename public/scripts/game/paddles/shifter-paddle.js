@@ -26,33 +26,37 @@ function ShifterPaddle( ) {
 	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 6.0, end : 7.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
-		{ start : 7.0, end :  10.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 10.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
-		{ start : 11.0, end :  12.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 12.5, end : 14.0, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
-		{ start : 14.0, end :  15.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
+		
+		{ start : 6.0, end : 6.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 6.1, end : 6.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 6.3, end :  7.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		
+		{ start : 8.0, end : 8.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 8.1, end : 8.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 8.3, end : 9.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		
+		{ start : 10.0, end : 10.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
+		{ start : 10.1, end : 10.1, action : function(winner,loser){ loser.getHit(); } },
+		{ start : 10.3, end : 13.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+
+		{ start : 10.2, end : 15.0, action : function(winner, loser) {loser.dismantleFallToBottom();} },
+		
+		{ start : 14.0, end : 14.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
 
 ShifterPaddle.prototype = new Paddle;
 ShifterPaddle.prototype.constructor = ShifterPaddle;
 
-ShifterPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-
 ShifterPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
+	Paddle.prototype.shootProjectile.call( this, new LaserProjectile( this ) );
+
+	/*
 	this.projectile = new LaserProjectile( this );
 	this.projectile.sourcePaddle = this;
 	this.projectile.position.x = this.position.x;
@@ -65,6 +69,7 @@ ShifterPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+	*/
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.laserSound.stop();
