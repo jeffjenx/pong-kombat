@@ -89,6 +89,7 @@ load( 'scripts/game/', [
 	'projectiles/lightning-sai-projectile',
 	'projectiles/bloodball-projectile',
 	'projectiles/rock-projectile',
+	'projectiles/saw-blade-projectile',
 	'projectiles/shadow-projectile',
 
 	'scenes/splash-scene',

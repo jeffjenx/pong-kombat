@@ -18,30 +18,50 @@ function MrSlayerPaddle( ) {
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
 
 	this.nameSound = new Sound( 'Mr-Slayer' );
-	this.geminiSound = new Sound( 'Gemini' );
+	//this.geminiSound = new Sound( 'Gemini' );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 1.0, action : function(winner) {
-			winner.projectile = new Projectile( winner );
-			winner.projectile.sourcePaddle = winner;
-			winner.projectile.position.x = winner.position.x;
-			winner.projectile.position.y = winner.position.y;
+			var projectile = new SawBladeProjectile(winner);
+			projectile.zOrder = 1;
+			projectile.position.x = winner.position.x;
+			projectile.position.y = winner.position.y;
+			
+			projectile.velocity.x = Math.cos( winner.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
+			projectile.velocity.y = Math.sin( winner.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
 
-			winner.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-			winner.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-
+			projectile.rotation = winner.rotation;
+			
 			if( winner.position.x > viewport.width * 0.50 )
 			{
-				winner.projectile.velocity.x *= -1;
+				projectile.flipH = true;
+				projectile.velocity.x *= -1;
 			}
-
-			if( app.settings.SOUND_FX > 0 ) {
-				winner.geminiSound.stop();
-				winner.geminiSound.play();
+			//Paddle.prototype.shootProjectile.call( winner, new SawBladeProjectile(winner) );
+			SceneManager.currentScene.layers['Kombat'].addComponent( 'Saw-Blade-Projectile', projectile );
+		} },
+		{ start : 1.0, end : 5.0, action : function(winner,loser){
+			var projectile = SceneManager.currentScene.layers['Kombat'].components['Saw-Blade-Projectile'];
+			if( Math.abs(projectile.velocity.x) !== viewport.width * 0.2 && Collision.RectRect(projectile.boundingBox, loser.boundingBox ) ) {
+				projectile.velocity.x /= 2;
+				loser.getHit();
 			}
 		} },
-		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleCutInHalf(percentComplete); } },
+		{ start : 6.5, end : -1, action : function(winner,loser){
+			var projectile = SceneManager.currentScene.layers['Kombat'].components['Saw-Blade-Projectile'];
+			projectile.velocity.x = (projectile.velocity.x > 0) ? viewport.width * 0.4 : -viewport.width * 0.4;
+		} },
+		{ start : 7.0, end : 7.0, action : function(winner, loser) {
+			var paddleHalf = new Sprite( 'Paddle-Halved' );
+			paddleHalf.zOrder = 1;
+			paddleHalf.position.x = loser.position.x;
+			paddleHalf.position.y = loser.position.y;
+			paddleHalf.size.x = loser.size.x * loser.scale;
+			paddleHalf.size.y = loser.size.y * loser.scale;
+			SceneManager.currentScene.layers['Kombat'].addComponent('Paddle-Half', paddleHalf );
+		} },
+		{ start : 7.0, end : -1, action : function(winner, loser, percentComplete) { loser.dismantleFallToBottom(); } },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
@@ -49,19 +69,13 @@ function MrSlayerPaddle( ) {
 MrSlayerPaddle.prototype = new Paddle;
 MrSlayerPaddle.prototype.constructor = MrSlayerPaddle;
 
-MrSlayerPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-
 MrSlayerPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
+	Paddle.prototype.shootProjectile.call( this, new BloodballProjectile(this) );
+
+	/*
 	this.projectile = new BloodballProjectile( this );
 	this.projectile.sourcePaddle = this;
 	this.projectile.position.x = this.position.x;
@@ -74,10 +88,11 @@ MrSlayerPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+	*/
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.geminiSound.stop();
-		this.geminiSound.play();
+		//this.geminiSound.stop();
+		//this.geminiSound.play();
 	}
 };
 

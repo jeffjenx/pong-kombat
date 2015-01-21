@@ -16,7 +16,16 @@ Layer.prototype.addComponent = function( id, object ) {
 Layer.prototype.draw = function( context ) {
 	for( var i in this.components )
 	{
-		this.components[i].draw( context );
+		if( this.components[i].zOrder ) {
+			this.components[i].draw( context );
+		}
+	}
+
+	for( var i in this.components )
+	{
+		if( !this.components[i].zOrder ) {
+			this.components[i].draw( context );
+		}
 	}
 };
 

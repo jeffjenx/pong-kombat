@@ -39,16 +39,51 @@ function MystPaddle( ) {
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 7.0, end : 8.0, action : function(winner, loser, percentComplete) {
-			if( !winner.flySwatter ) {
-				winner.flySwatter = new Sprite( 'Fly-Swatter' );
-				winner.flySwatter.size.y = viewport.height * 0.3;
-				winner.flySwatter.size.x = winner.flySwatter.size.y;
-				winner.flySwatter.position.x = Math.random() * viewport.width;
-				winner.flySwatter.position.y = viewport.height + winner.flySwatter.size.y * winner.flySwatter.scale;
+		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
+		{ start : 4.0, end : 4.0, action : function(winner) {
+			var flySwatter = new SpriteSheet( 'Fly-Swatter' );
+			flySwatter.size.y = viewport.height * 0.15;
+			flySwatter.size.x = flySwatter.size.y;
+			flySwatter.animations = {
+				'moving' : { 'frames' : [ 0 ], 'step' : 1000 },
+				'swatting' : { 'frames' : [ 0, 1, 2 ], 'step' : 250 / 3 }
 			}
+			flySwatter.frame = { x : 0, y : 0, width : 128, height : 128 };
+			flySwatter.currentAnimation = 'moving';
+			flySwatter.position.x = viewport.width * 0.5;
+			flySwatter.position.y = viewport.height;
 
-			winner.flySwatter.position.y = viewport.width * 0.5 + viewport.width * 0.5 * percentComplete;
+			SceneManager.currentScene.layers['Kombat'].addComponent( 'FlySwatter', flySwatter );
+		} },
+		{ start : 5.0, end : 9.0, action : function(winner, loser, percentComplete) {
+			var flySwatter = SceneManager.currentScene.layers['Kombat'].components['FlySwatter'];
+
+			flySwatter.position.y = viewport.height * 0.51 + viewport.height * 0.49 * (1-percentComplete);
+		} },
+		{ start : 9.0, end : 9.5, action : function(winner, loser, percentComplete){ SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].position.y = viewport.height * 0.51 - loser.size.y * loser.scale * 0.5 * percentComplete; } },
+
+		{ start : 9.0, end : 9.25, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 9.25, end : 9.25, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 9.25, end : 9.5, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 9.5, end : 9.5, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 9.5, end : 10.0, action : function(winner, loser, percentComplete){ SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].position.y = viewport.height * 0.51 - loser.size.y * loser.scale * 0.5 * (1-percentComplete); } },
+		{ start : 9.5, end : 10.0, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser) { loser.getHit(); } },
+
+		{ start : 10.0, end : 10.5, action : function(winner, loser, percentComplete){ SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].position.y = viewport.height * 0.51 + loser.size.y * loser.scale * 0.5 * percentComplete; } },
+		{ start : 10.0, end : 10.25, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 10.25, end : 10.25, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 10.25, end : 10.5, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 10.5, end : 10.5, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 10.5, end : 11.0, action : function(winner, loser, percentComplete){ SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].position.y = viewport.height * 0.51 + loser.size.y * loser.scale * 0.5 * (1-percentComplete); } },
+		{ start : 10.5, end : 11.0, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 12.0, end : 15.0, action : function(winner, loser, percentComplete) {
+			var flySwatter = SceneManager.currentScene.layers['Kombat'].components['FlySwatter'];
+			if( flySwatter.currentAnimation !== 'moving' ) {
+				flySwatter.currentAnimation = 'moving';
+			}
+			flySwatter.position.y = viewport.height * 0.51 + viewport.height * 0.49 * (percentComplete);
 		} },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
@@ -56,15 +91,6 @@ function MystPaddle( ) {
 
 MystPaddle.prototype = new Paddle;
 MystPaddle.prototype.constructor = MystPaddle;
-
-MystPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
 
 MystPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
@@ -75,6 +101,9 @@ MystPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
+	Paddle.prototype.shootProjectile.call( this, new FingerProjectile( this ) );
+
+	/*
 	this.projectile = new FingerProjectile( this );
 	this.projectile.sourcePaddle = this;
 	this.projectile.position.x = this.position.x;
@@ -87,6 +116,7 @@ MystPaddle.prototype.shootProjectile = function( ) {
 	{
 		this.projectile.velocity.x *= -1;
 	}
+	*/
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.spraySound.stop();
