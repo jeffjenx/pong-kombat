@@ -8,6 +8,17 @@ function HellForegroundLayer( scene ) {
 	if( app.settings.SOUND_FX > 0 ) {
 		this.lavaSound.loop();
 	}
+
+	this.dismantleSequence = [ Buttons.RIGHT, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
+	this.dismantleAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 2.0, action : function(winner, loser, percentComplete) { winner.position.x = (winner.position.x < viewport.width * 0.5) ? viewport.width * 0.02 - viewport.width * percentComplete : viewport.width * 0.98 + viewport.width * percentComplete; } },
+		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
+		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleBurning(percentComplete); } },
+		{ start : 6.0, end : 9.0, action : function(winner, loser, percentComplete) { loser.dismantleCharring(percentComplete); } },
+		{ start : 10.0, end :  -1, action : function(winner, loser) { loser.dismantleCharred(); } },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 HellForegroundLayer.prototype = new Layer;

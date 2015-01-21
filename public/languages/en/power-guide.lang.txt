@@ -763,7 +763,7 @@ Dynamics
     Sitting in one area too long will slowly deplete their health.
 
 Dismantle
-    Burnt Toast - Right, Left, Left, Action
+    Burnt Toast - Right, Down, Up, Action
 
 
 -------------------------------------------------------------------------------

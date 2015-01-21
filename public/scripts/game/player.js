@@ -17,7 +17,16 @@ Player.prototype.getNameSound = function() {
 Player.prototype.handleInput = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.finishing :
-			if( this.paddle.dismantleSequence && InputManager.checkSequence( this.paddle.dismantleSequence ) ) {
+			var foreground = SceneManager.currentScene.layers['Foreground'];
+			if( InputManager.checkSequence( [Buttons.ACTION, Buttons.ACTION, Buttons.ACTION, Buttons.UP ] ) ) {
+				this.layer.scene.finishType = this.layer.scene.finishTypes.spamality;
+				this.layer.scene.changeState( this.layer.scene.states.dismantling );
+			}
+			else if( foreground.dismantleSequence && InputManager.checkSequence( SceneManager.currentScene.layers['Foreground'].dismantleSequence ) ) {
+				this.layer.scene.finishType = this.layer.scene.finishTypes.level;
+				this.layer.scene.changeState( this.layer.scene.states.dismantling );
+			}
+			else if( this.paddle.dismantleSequence && InputManager.checkSequence( this.paddle.dismantleSequence ) ) {
 				this.layer.scene.finishType = this.layer.scene.finishTypes.dismantled;
 				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}

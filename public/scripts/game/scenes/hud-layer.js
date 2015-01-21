@@ -204,6 +204,11 @@ function HUDLayer( scene ) {
 	this.dismantled.position.y = viewport.height * 0.45;
 	this.dismantled.rotation = -5;
 
+	this.spamality = new Sprite( 'Spamality' );
+	this.spamality.size.y = viewport.height * 0.13;
+	this.spamality.size.x = this.dismantled.size.y * 6;
+	this.spamality.position.y = viewport.height * 0.45;
+	
 	this.finishem = new Sprite( 'Finish-Em' );
 	this.finishem.size.y = viewport.height * 0.2;
 	this.finishem.size.x = this.finishem.size.y * 4;
@@ -215,6 +220,7 @@ function HUDLayer( scene ) {
 	this.currentRound.position.y = this.flawless.position.y;
 	this.currentRound.opacity = 0;
 
+	this.spamalitySound = new Sound( 'Spamality!' );
 	this.dismantledSound = new Sound( 'Dismantled!' );
 	this.flawlessSound = new Sound( 'Mint-Condition' );
 	this.finishEmSound = new Sound( 'Finish-Em!' );
@@ -258,8 +264,12 @@ HUDLayer.prototype.draw = function( context ) {
 		case this.scene.states.ending :
 			this.winner.draw( context );
 
-			if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
+			if( (this.scene.finishType === this.scene.finishTypes.dismantled || this.scene.finishType === this.scene.finishTypes.level) && this.scene.stateTime > 3 ) {
 				this.dismantled.draw( context );
+			}
+
+			if( this.scene.finishType === this.scene.finishTypes.spamality && this.scene.stateTime > 3 ) {
+				this.spamality.draw( context );
 			}
 
 			if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
@@ -390,8 +400,12 @@ HUDLayer.prototype.update = function( deltaTime ) {
 					this.winsSound.playOnce();
 				}
 
-				if( this.scene.finishType === this.scene.finishTypes.dismantled && this.scene.stateTime > 3 ) {
+				if( (this.scene.finishType === this.scene.finishTypes.dismantled || this.scene.finishType === this.scene.finishTypes.level) && this.scene.stateTime > 3 ) {
 					this.dismantledSound.playOnce();
+				}
+
+				if( this.scene.finishType === this.scene.finishTypes.spamality && this.scene.stateTime > 3 ) {
+					this.spamalitySound.playOnce();
 				}
 
 				if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {

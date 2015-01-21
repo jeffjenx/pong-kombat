@@ -162,6 +162,8 @@ Paddle.prototype.dismantleBurning = function(percentComplete) {
 		this.effect.maxOpacity = 0.9;
 		this.effect.fadeSpeed = 0.666;
 		this.effect.attachTo( this );
+
+		this.effect.restart();
 	}
 
 	this.gloss.opacity = 1-percentComplete;
@@ -178,11 +180,12 @@ Paddle.prototype.dismantleCharring = function(percentComplete) {
 	this.gloss.opacity = percentComplete;
 	this.effect.count = Math.max( 420 * (1 - percentComplete), 1 );
 };
+
 Paddle.prototype.dismantleCharred = function() {
 	if( this.effect.type !== 'charred' ) {
 		this.effect.type = 'charred';
 		this.effect.particleImages = [Resources['Black']];
-		this.effect.compositeOperation = 'darken';
+		this.effect.compositeOperation = 'normal';
 		this.effect.count = 500;
 		this.effect.minVelocity.x = -this.size.x;
 		this.effect.minVelocity.y = viewport.height * 0.25;
@@ -190,7 +193,7 @@ Paddle.prototype.dismantleCharred = function() {
 		this.effect.maxVelocity.y = viewport.height * 0.25;
 		this.effect.minParticleSize = this.size.x * 0.05;
 		this.effect.maxParticleSize = this.size.x * 0.1;
-		this.effect.minLife = 500;
+		this.effect.minLife = 1;
 		this.effect.maxLife = 1000;
 		this.effect.rotationSpeed = 1;
 		this.effect.scaleSpeed = 0;
@@ -200,6 +203,7 @@ Paddle.prototype.dismantleCharred = function() {
 		this.effect.size.x = this.size.x * this.scale;
 		this.effect.size.y = this.size.y * this.scale;
 
+		this.effect.restart();
 		for( var i = 0; i < this.effect.maxLife; i++ ) {
 			this.effect.update( 1/60 );	
 		}

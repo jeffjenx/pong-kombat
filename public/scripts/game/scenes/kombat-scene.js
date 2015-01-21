@@ -25,7 +25,8 @@ function KombatScene( ) {
 
 	this.finishTypes = {
 		dismantled : 0,
-		spamality : 1
+		level : 1,
+		spamality : 2
 	}
 	this.finishType = null;
 	this.winner = null;
@@ -33,6 +34,42 @@ function KombatScene( ) {
 
 	this.screamSound = new Sound( 'Scream' );
 	this.setLevel( Levels.RANDOM );
+
+	var spamify = function() {
+		var randomSpam = Math.ceil( Math.random() * 9 );
+		var spam = new Sprite( 'Spam-' + randomSpam );
+		spam.position.x = Math.random() * viewport.width;
+		spam.position.y = Math.random() * viewport.height;
+		SceneManager.currentScene.layers['Foreground'].addComponent( 'Spam-' + Date.now(), spam );
+	};
+	this.spamalityAnimationFrames = [
+		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action : spamify },
+		{ start : 2.0, end : 2.0, action : spamify },
+		{ start : 3.0, end : 3.0, action : spamify },
+		{ start : 4.0, end : 4.0, action : spamify },
+		{ start : 5.0, end : 5.0, action : spamify },
+		{ start : 6.0, end : 6.0, action : spamify },
+		{ start : 7.0, end : 7.0, action : spamify },
+		{ start : 8.0, end : 8.0, action : spamify },
+		{ start : 9.0, end : 9.0, action : spamify },
+		{ start : 10.0, end : 10.0, action : spamify },
+		{ start : 11.0, end : 11.0, action : spamify },
+		{ start : 1.5, end : 1.5, action : spamify },
+		{ start : 2.5, end : 2.5, action : spamify },
+		{ start : 3.5, end : 3.5, action : spamify },
+		{ start : 4.5, end : 4.5, action : spamify },
+		{ start : 5.5, end : 5.5, action : spamify },
+		{ start : 6.5, end : 6.5, action : spamify },
+		{ start : 7.5, end : 7.5, action : spamify },
+		{ start : 8.5, end : 8.5, action : spamify },
+		{ start : 9.5, end : 9.5, action : spamify },
+		{ start : 10.5, end : 10.5, action : spamify },
+		{ start : 12.5, end : 12.5, action : function() {
+			SceneManager.currentScene.layers['Foreground'].addComponent( 'Spam-' + Date.now(), new Sprite( 'Spam-0' ) );
+		} },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+	];
 }
 
 KombatScene.prototype = new Scene;
@@ -48,6 +85,52 @@ KombatScene.prototype.changeState = function( state ) {
 	this.stateTime = 0;
 
 	this.layers['HUD'].resetSounds();
+};
+
+KombatScene.prototype.levelDismantle = function( winner, loser ) {
+	var level = this.layers['Foreground'];
+
+	if( !level.dismantleAnimationFrames ) {
+		return;
+	}
+
+	var sceneTime = loser.layer.scene.stateTime;
+
+	for( var i = 0; i < level.dismantleAnimationFrames.length; i++ ) {
+		var frame = level.dismantleAnimationFrames[i];
+		if( sceneTime >= frame.start ) {
+			if( frame.start === frame.end ) {
+				// called once
+				frame.action( winner.paddle, loser.paddle );
+				level.dismantleAnimationFrames.splice(i, 1);
+				--i;
+			}
+			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
+				frame['action']( winner.paddle, loser.paddle, percentComplete );
+			}
+		}
+	}
+};
+
+KombatScene.prototype.spamality = function( winner, loser ) {
+	var sceneTime = loser.layer.scene.stateTime;
+
+	for( var i = 0; i < this.spamalityAnimationFrames.length; i++ ) {
+		var frame = this.spamalityAnimationFrames[i];
+		if( sceneTime >= frame.start ) {
+			if( frame.start === frame.end ) {
+				// called once
+				frame.action( winner.paddle, loser.paddle );
+				this.spamalityAnimationFrames.splice(i, 1);
+				--i;
+			}
+			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
+				frame['action']( winner.paddle, loser.paddle, percentComplete );
+			}
+		}
+	}
 };
 
 KombatScene.prototype.setBall = function( ball ) {
@@ -260,7 +343,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 		
 		case this.states.dismantling :
 			//this.layers['HUD'].cinemaMode( );
-			this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
+			if( this.finishType === this.finishTypes.spamality ) {
+				this.spamality( this.winner, this.winner === leftKombatant ? rightKombatant : leftKombatant );
+			}
+			else if( this.finishType === this.finishTypes.level ) {
+				this.levelDismantle( this.winner, this.winner === leftKombatant ? rightKombatant : leftKombatant );
+			} else {
+				this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
+			}
 			
 			/*
 			if( this.stateTime > 2.5 && !this.screamSound.played && app.settings['SoundFX'] === true && !app.isMobile( ) )

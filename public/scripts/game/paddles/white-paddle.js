@@ -77,19 +77,22 @@ WhitePaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 
-	this.projectile = new DefaultBall( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
+	var projectile = new DefaultBall( this );
+	projectile.sourcePaddle = this;
+	projectile.position.x = this.position.x;
+	projectile.position.y = this.position.y;
 	
 	var direction = Math.random( ) * 90 - 45;
-	this.projectile.velocity.x = Math.cos( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
+	projectile.velocity.x = Math.cos( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
+	projectile.velocity.y = Math.sin( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
 	
 	if( this.position.x > viewport.width * 0.50 )
 	{
-		this.projectile.velocity.x *= -1;
+		projectile.velocity.x *= -1;
 	}
+
+	this.projectiles.push( projectile );
+	InputManager.history = [ ];
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.whooshSound.stop();
