@@ -310,7 +310,8 @@ Spamality!
     Perform the secret Spamality dismantle
 
 White Paddle
-    Defeat White Paddle in the Pong Lao Tournament
+    Defeat White Paddle, while playing as White Paddle, in the Pong Lao 
+    Tournament
 
 Yellow Paddle
     Win the Pong Lao Tournament with Yellow Paddle
@@ -540,7 +541,7 @@ Attributes
 
 Abilites
     Lightning Sai (Projectile) - Up, Right, Down, Action
-    1.21 Gigawatts (Dismantle) - Right, Down, Left, Action
+    Pump...You Up! (Dismantle) - Right, Down, Left, Action
 
 
   5.1.4                          Red Paddle                                   
@@ -774,7 +775,7 @@ The playing field is high above a multi-lane highway. At ground level, cars,
 vans, and trucks race across the screen in both directions.
 
 Dismantle
-    Flyswatter II - Left, Right, Right, Action
+    Flyswatter II - Left, Left, Left, Action
 
 
 -------------------------------------------------------------------------------
@@ -785,7 +786,7 @@ The takes place above a flowing river that contains large chunks of glacier and
 ice. It sure looks cold down there.
 
 Dismantle
-    Let It Go - Left, Left, Right, Action
+    Let It Go - Up, Right, Left, Action
 
 
 -------------------------------------------------------------------------------
@@ -796,7 +797,7 @@ The infamous Pit arena sets the combatants against one another high above a bed
 of spikes.
 
 Dismantle
-    Vlad - Left, Down, Right, Action
+    Vlad - Right, Up, Left, Action
 
 
 -------------------------------------------------------------------------------
@@ -811,7 +812,7 @@ Dynamics
     gravitational pull, altering it's trajectory.
 
 Dismantle
-    This Sucks - Right, Down, Left, Action
+    This Sucks - Right, Left, Down, Action
 
 
 -------------------------------------------------------------------------------
@@ -826,7 +827,7 @@ Dynamics
     light that block large portions of the playing field.
 
 Dismantle
-    Shock To The System - Right, Right, Left, Action
+    Shock To The System - Right, Right, Right, Action
 
 
 -------------------------------------------------------------------------------
@@ -841,7 +842,7 @@ Dynamics
     serves as a distraction while tolls.
 
 Dismantle
-    Going Down - Down, Right, Up, Action
+    Going Down - Down, Left, Up, Action
 
 
 -------------------------------------------------------------------------------
@@ -852,7 +853,7 @@ The Toxic Pool is a place for punishment and sacrifice. Captives would be bound
 with chains, and then lowered into the acid below.
 
 Dismantle
-    Acid 'n' Chains - Up, Right, Down, Action
+    Acid 'n' Chains - Up, Down, Left, Action
 
 
 -------------------------------------------------------------------------------
@@ -1042,6 +1043,8 @@ Most websites offer a standard 404 error screen for non-existent pages. On
 PongKombat.com, if you visit a non-existent page or encounter some other server
 error, you will be presented with an infamous Blue Screen Of Death. You can
 even change the death color by pressing the Spacebar or tapping the screen.
+
+Examples: http://www.pongkombat.com/404, http://www.pongkombat.com/xyzzy
 
 
 -------------------------------------------------------------------------------

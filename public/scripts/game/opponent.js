@@ -224,6 +224,8 @@ Opponent.prototype.setPaddle = function( paddle ) {
 		case Paddles.WHITE : this.paddle = new WhitePaddle( ); break;
 		case Paddles.SHIFTER : this.paddle = new ShifterPaddle( ); break;
 		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
+		case Paddles.MRSLAYER : this.paddle = new MrSlayerPaddle( ); break;
+		case Paddles.MYST : this.paddle = new MystPaddle( ); break;
 	}
 
 	this.paddle.kombatant = this;

@@ -265,6 +265,8 @@
 		"Paddle-Lightning-2"         : "images/paddles/lightning-2.png",
 		"Paddle-Air-Pump"         : "images/paddles/air-pump.png",
 		
+		"Paddle-Frozen"          : "images/paddles/paddle-frozen.png",
+		"Paddle-Melted"          : "images/paddles/paddle-melted.png",
 		"Paddle-Broken-Blue"          : "images/paddles/blue-broken.png",
 		"Paddle-Broken-Green"         : "images/paddles/green-broken.png",
 		"Paddle-Broken-Monolith"      : "images/paddles/monolith-broken.png",
@@ -391,6 +393,7 @@
 		"HUD"                  : "images/hud.png",
 		"Logo"                 : "images/pong-kombat-logo.png",
 		"Overpass"             : "images/levels/overpass.png",
+		"Blood-Pool"                   : "images/effects/blood-pool.png",
 		"PK"                   : "images/pk.png",
 		"Quantastical-Painted" : "images/quantastical-logo.png",
 		"Quantastical-Domain"  : "images/quantastical-domain.png",

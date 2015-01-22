@@ -256,6 +256,11 @@ HUDLayer.prototype.draw = function( context ) {
 	Layer.prototype.draw.call( this, context );
 
 	switch( this.scene.state ) {
+		case this.scene.states.secretMessage :
+			this.secretPaddle.draw( context );
+			this.secretMessage.draw( context );
+		break;
+
 		case this.scene.states.starting :
 			this.currentRound.draw( context );
 			this.bounce.draw( context );
@@ -294,6 +299,19 @@ HUDLayer.prototype.addAnnouncement = function( announcement ) {
 	announcement.position.x = viewport.width * 0.50;
 	announcement.position.y = viewport.height * 0.50;
 	this.addComponent( 'Announcement', announcement );
+};
+
+HUDLayer.prototype.addSecretMessage = function( ) {
+	this.secretPaddle = new MrSlayerPaddle();
+	this.secretPaddle.scale = 1.25;
+	this.secretPaddle.opacity = 0;
+
+	this.secretMessage = new Text( 'TIP EHT NO DOOLB NIAR' );
+	this.secretMessage.color = this.flawless.color;
+	this.secretMessage.fontFamily = this.flawless.fontFamily;
+	this.secretMessage.fontSize = this.flawless.fontSize;
+	this.secretMessage.position.y = this.flawless.position.y;
+	this.secretMessage.opacity = 0;
 };
 
 HUDLayer.prototype.updateWinner = function( ) {
@@ -363,6 +381,17 @@ HUDLayer.prototype.update = function( deltaTime ) {
 
 
 	switch( this.scene.state ) {
+		case this.scene.states.secretMessage :
+			if( this.scene.stateTime > 5 ) {
+				this.secretMessage.opacity = Math.max( 1 - (this.scene.stateTime - 5), 0 );
+				this.secretPaddle.opacity = Math.max( 1 - (this.scene.stateTime - 5), 0 );
+			}
+			else if( this.scene.stateTime > 1 ) {
+				this.secretMessage.opacity = Math.min( this.scene.stateTime - 1, 1 );
+				this.secretPaddle.opacity = Math.min( this.scene.stateTime - 1, 1 );
+			}
+		break;
+
 		case this.scene.states.starting :
 			if( this.scene.stateTime > 3 ) {
 				var elapsedTime = this.scene.stateTime - 3;

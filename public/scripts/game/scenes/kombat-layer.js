@@ -142,6 +142,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	var hud = this.scene.layers['HUD'].components['HUD'];
 	
 	switch( this.scene.state ) {
+		case this.scene.states.secretMessage :
 		case this.scene.states.starting :
 			this.centerPaddles();
 			

@@ -27,6 +27,7 @@ function Paddle( texture ) {
 	}
 	
 	this.gloss = new Sprite( 'Paddle-Gloss' );
+	this.gloss.noClip = false; // prevent clipping to paddle shape (for Dismantles)
 
 	this.icon = Resources['Paddle-Icon-Unknown'];
 	this.broken = Resources['Paddle-Broken-Shifter'];
@@ -166,7 +167,7 @@ Paddle.prototype.dismantleBurning = function(percentComplete) {
 		this.effect.restart();
 	}
 
-	this.gloss.opacity = 1-percentComplete;
+	this.gloss.opacity = 1 - percentComplete;
 	
 	this.effect.update( 1/60 );
 
@@ -295,6 +296,37 @@ Paddle.prototype.dismantleFreezing = function() {
 		this.effect.restart();
 	}
 	this.opacity = 0.5;
+	this.effect.update( 1/60 );
+};
+
+
+Paddle.prototype.dismantleSplashing = function(resource) {
+	if( this.effect.type !== 'splashing' ) {
+		this.effect.type = 'splashing';
+		//this.effect.particles = [];
+		resource = resource || 'Projectile-Ice-Blast';
+		this.effect.particleImages = [Resources[resource]];
+		this.effect.count = 50;
+		this.effect.minVelocity.x = -this.size.x * this.scale;
+		this.effect.minVelocity.y = -this.size.x * this.scale;
+		this.effect.maxVelocity.x = this.size.x * this.scale;
+		this.effect.maxVelocity.y = this.size.x * this.scale;
+		this.effect.minParticleSize = this.size.x * 0.4;
+		this.effect.maxParticleSize = this.size.x * 0.6;
+		this.effect.minLife = 50;
+		this.effect.maxLife = 250;
+		this.effect.rotationSpeed = 0;
+		this.effect.scaleSpeed = 0.05;
+		this.effect.maxOpacity = 10;
+		this.effect.fadeSpeed = 1;
+		this.effect.compositeOperation = 'normal';
+		this.effect.attachTo( this );
+		this.effect.size.x = this.size.x * this.scale;
+		this.effect.size.y = this.size.y * this.scale;
+		this.effect.singleCycle = true;
+		this.effect.restart();
+	}
+	//this.opacity = 0.5;
 	this.effect.update( 1/60 );
 };
 
@@ -630,7 +662,16 @@ Paddle.prototype.draw = function( context ) {
 		width,
 		height
 	);
-	context.globalAlpha *= this.gloss.opacity;
+	
+	if( this.gloss.noClip ) {
+		context.restore();
+
+		context.save();
+		context.globalAlpha *= this.opacity * this.gloss.opacity;
+		context.translate( this.position.x, this.position.y );
+		context.rotate( this.rotation * Math.TO_RADIANS );
+	}
+	//context.globalAlpha = this.gloss.opacity;
 	context.drawImage(
 		this.gloss.image,
 		-width * this.registration.x * 6.5,

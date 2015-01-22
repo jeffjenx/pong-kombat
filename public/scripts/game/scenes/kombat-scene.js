@@ -9,12 +9,13 @@ function KombatScene( ) {
 	this.startLife = 1;
 	this.states = {
 		announcing : 0,
-		starting : 1,
-		fighting : 2,
-		finishing : 3,
-		dismantling : 4,
-		ending : 5,
-		paused : 6
+		secretMessage : 1,
+		starting : 2,
+		fighting : 3,
+		finishing : 4,
+		dismantling : 5,
+		ending : 6,
+		paused : 7
 	};
 
 	this.state = null;
@@ -207,12 +208,17 @@ KombatScene.prototype.setLevel = function( level ) {
 };
 
 KombatScene.prototype.startMatch = function( ) {
-	this.changeState( this.states.starting );
-	this.winner = null;
-
 	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
+	this.winner = null;
 
+	if( Math.random() < 0.10 && leftKombatant.paddle.enum !== 'MRSLAYER' && rightKombatant.paddle.enum !== 'MRSLAYER' ) {
+		this.changeState( this.states.secretMessage );
+		this.layers['HUD'].addSecretMessage();
+	} else {
+		this.changeState( this.states.starting );
+	}
+	
 	if( leftKombatant )
 	{
 		leftKombatant.life = this.startLife;
@@ -260,6 +266,14 @@ KombatScene.prototype.update = function( deltaTime ) {
 				this.changeState( this.states.finishing );
 			}
 			this.layers['Kombat'].centerPaddles();
+		break;
+
+		case this.states.secretMessage :
+			if( this.stateTime >= 6 ) {
+				this.layers['HUD'].secretMessage = null;
+				this.layers['HUD'].secretPaddle = null;
+				this.changeState( this.states.starting );
+			}
 		break;
 
 		case this.states.starting :
@@ -373,9 +387,21 @@ KombatScene.prototype.update = function( deltaTime ) {
 		
 		case this.states.ending :
 			if( this.stateTime >= 3 && InputManager.checkButtonPress( Buttons.ACTION ) ) {
+				if(this.finishType === this.finishTypes.dismantled && this.winner.life === this.startLife && this.layers['Background'].components['Background'].resource === 'Background-Pit') {
+					var computer = new Opponent( );
+					computer.setPaddle( Paddles.MRSLAYER );
+					
+					var kombatScene = new KombatScene( );
+					kombatScene.addKombatant( this.winner );
+					kombatScene.addKombatant( computer );
+					kombatScene.setLevel( Levels.HELL );
+					SceneManager.changeScene( kombatScene, Transitions.NONE );
+					return;
+				}
 				if( app.tournament ) {
 					if( app.tournament.player === this.winner ) {
 						app.tournament.increaseRank( );
+
 						if( app.tournament.currentIndex >= app.tournament.opponents.length ) {
 							var storyScene = new StoryScene( );
 							storyScene.setPaddle( Paddles[app.tournament.player.paddle.enum] );

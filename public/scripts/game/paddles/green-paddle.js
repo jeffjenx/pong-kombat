@@ -258,6 +258,8 @@ GreenPaddle.prototype.draw = function( context ) {
 		height
 	);
 	context.restore();
+
+	context.globalAlpha *= this.gloss.opacity;
 	context.drawImage(
 		this.gloss.image,
 		-width * this.registration.x * 6.5,

@@ -12,11 +12,29 @@ function HellForegroundLayer( scene ) {
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.DOWN, Buttons.UP, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-		{ start : 1.0, end : 2.0, action : function(winner, loser, percentComplete) { winner.position.x = (winner.position.x < viewport.width * 0.5) ? viewport.width * 0.02 - viewport.width * percentComplete : viewport.width * 0.98 + viewport.width * percentComplete; } },
-		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
-		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleBurning(percentComplete); } },
-		{ start : 6.0, end : 9.0, action : function(winner, loser, percentComplete) { loser.dismantleCharring(percentComplete); } },
-		{ start : 10.0, end :  -1, action : function(winner, loser) { loser.dismantleCharred(); } },
+		{ start : 1.0, end : 1.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.x = (winner.position.x < viewport.width * 0.5) ? viewport.width * 0.5 : -viewport.width * 0.5;
+		} },
+		{ start : 1.0, end : 3.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.x /= winner.drag;
+			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
+		} },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
+			loser.rotation = -360 * 3 * percentComplete;
+			loser.scale = 1 + percentComplete;
+			loser.dismantleMeanderToMiddle(percentComplete);
+		} },
+
+		{ start : 5.0, end : 7.25, action : function(winner, loser, percentComplete) {
+			if( !loser.endRotation ) {
+				loser.endRotation = 2 + Math.random();
+			}
+			loser.rotation = -360 * loser.endRotation * percentComplete;
+			loser.scale = 2 - percentComplete * 1.25;
+		} },
+		{ start : 7.25, end : 11.0, action : function(winner, loser, percentComplete) { loser.dismantleBurning(percentComplete); } },
+		{ start : 11.0, end : 15.0, action : function(winner, loser, percentComplete) { loser.dismantleCharring(percentComplete); loser.opacity = 1 - percentComplete; } },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
