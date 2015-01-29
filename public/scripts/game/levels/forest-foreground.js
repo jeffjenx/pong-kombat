@@ -19,17 +19,25 @@ function ForestForegroundLayer( scene ) {
 	this.trees3.opacity = this.trees1.opacity;
 	this.addComponent( 'Trees3', this.trees3 );
 
-	this.birdsSound = new Sound( 'Birds' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.birdsSound.loop();
-	}
+	this.ambientSound = new Sound( 'Birds' );
+	this.ambientSound.setMaxVolume( 1 );
 }
 
 ForestForegroundLayer.prototype = new Layer;
 ForestForegroundLayer.prototype.constructor = ForestForegroundLayer;
 
+ForestForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+	}
+};
+
 ForestForegroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
 
 	this.trees1.scale = 1.1 + 0.01 * (0.5 + Math.sin( app.gameTime / 5000 ) * 0.5);
 	this.trees1.rotation = 1 + Math.cos( app.gameTime / 1500 ) * 0.5;

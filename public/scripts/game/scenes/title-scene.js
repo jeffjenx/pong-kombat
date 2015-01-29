@@ -55,6 +55,12 @@ function TitleScene( ) {
 	this.message.position.y = viewport.height * 0.25;
 	this.message.opacity = 0;
 	titleLayer.addComponent( 'Message', this.message );
+
+	if( app.settings.TUNES > 0 ) {
+		this.music = new Sound( 'Music-Intro' );
+		this.music.setMaxVolume( 0.5 );
+		this.music.loop( );
+	}
 }
 
 TitleScene.prototype = new Scene;
@@ -67,11 +73,26 @@ TitleScene.prototype.updateOut = function( transitionPercent ) {
 	this.yellow.offset = transitionPercent / 2;
 	this.yellow.position.x = this.yellow.startPosition.x + (this.yellow.endPosition.x - this.yellow.startPosition.x) * (1 - transitionPercent);
 	this.yellow.position.y = this.yellow.startPosition.y + (this.yellow.endPosition.y - this.yellow.startPosition.y) * (1 - transitionPercent);
+
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( 1 - transitionPercent );
+	}
+};
+
+TitleScene.prototype.updateIn = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( transitionPercent );
+	}
+};
+
+TitleScene.prototype.unload = function( ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.stop( );
+	}
 };
 
 TitleScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
-
 	if( this.timeElapsed > 2.5 && this.timeElapsed < 4 ) {
 		this.logo.opacity = ( this.timeElapsed - 2.5 ) / 1.5;
 	}
@@ -88,6 +109,9 @@ TitleScene.prototype.update = function( deltaTime ) {
 			app.godMode = 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r';
 			this.message.text = 'GOD MODE';
 			this.message.opacity = 1;
+			var excellentSound = new Sound( 'Excellent' );
+			excellentSound.setMaxVolume( 0.75 );
+			excellentSound.play( );
 		}
 		else {
 			this.addLayer( 'Menu', new TitleMenu( this ) );

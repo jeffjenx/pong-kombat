@@ -11,7 +11,14 @@ function HighwayForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			var strike = new Vector( [viewport.width * 0.6, viewport.height * 0.5 ] );
 			loser.rotation = -360 * 3 * percentComplete;
@@ -25,6 +32,13 @@ function HighwayForegroundLayer( scene ) {
 			}
 			loser.rotation = -360 * loser.endRotation * percentComplete;
 			loser.scale = 2 - percentComplete * 1.25;
+		} },
+		{ start : 7.25, end : 7.25, action : function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var thudSound = new Sound( 'Thud' );
+				thudSound.setMaxVolume( 0.5 );
+				thudSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
 			loser.dismantleSplashing('Particle-Blood1');

@@ -18,7 +18,6 @@ function WhitePaddle( ) {
 	this.lifeModifier = 0.75;
 
 	this.nameSound = new Sound( 'White-Paddle' );
-	this.whooshSound = new Sound( 'Whoosh-3' );
 }
 
 WhitePaddle.prototype = new Paddle;
@@ -94,9 +93,11 @@ WhitePaddle.prototype.shootProjectile = function( ) {
 	this.projectiles.push( projectile );
 	InputManager.history = [ ];
 
+	
 	if( app.settings.SOUND_FX > 0 ) {
-		this.whooshSound.stop();
-		this.whooshSound.play();
+		projectile.sound = new Sound( 'Whoosh-3' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 };
 
@@ -117,16 +118,25 @@ WhitePaddle.prototype.update = function( deltaTime ) {
 		this.size.y += viewport.height * 0.03 * deltaTime;
 	}
 
-	if( this.projectile && SceneManager.currentScene && SceneManager.currentScene.layers['HUD'] ) {
+	if( this.projectiles.length && SceneManager.currentScene && SceneManager.currentScene.layers['HUD'] ) {
 		var layer = SceneManager.currentScene.layers['HUD'];
 		var hud = ( layer ) ? layer.components['HUD'] : null;
 		var top = ( hud ) ? hud.size.y : 0;
-		if( this.projectile.velocity.y < 0 && this.projectile.boundingBox.top <= top ) {
-			this.projectile.velocity.y *= -1;
-		}
+		
+		for( var i in this.projectiles ) {
+			var projectile = this.projectiles[i];
 
-		if( this.projectile.velocity.y > 0 && this.projectile.boundingBox.bottom >= viewport.height ) {
-			this.projectile.velocity.y *= -1;
+			if( projectile.velocity.y < 0 && projectile.boundingBox.top <= top ) {
+				projectile.velocity.y *= -1;
+			}
+
+			if( projectile.velocity.y > 0 && projectile.boundingBox.bottom >= viewport.height ) {
+				projectile.velocity.y *= -1;
+			}
+
+			if( projectile.boundingBox.left > viewport.width || projectile.boundingBox.right < 0 ) {
+				this.projectiles.splice( this.projectiles.indexOf( projectile ), 1 );	
+			}
 		}
 	}
 };

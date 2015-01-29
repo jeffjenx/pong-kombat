@@ -1,60 +1,80 @@
 function Sound( resource ) {
-	this.mutedVolume = 1.0; // for resetting audio to correct levels
-	
 	if( Resources[resource] !== undefined )
 	{
-		this.audio = Resources[resource];
+		this.audio = Resources[resource].cloneNode();
 		this.name = resource;
+		this.id = this.name + Date.now();
 	}
 
-	this.uniqueIdentifier = ++AudioManager.audioCounter;
-
 	this.started = false;
-	this.played = false;
+	this.ended = false;
+	this.maxVolume = 1;
 }
 
 Sound.prototype.constructor = Sound;
+
 Sound.prototype.loop = function( ) {
-	if( app.muted || app.pauseMuted )
-	{
-		return;
-	}
-	
-	this.audio.loop = true;
-	
-	if( this.audio.paused )
-	{
-		this.audio.play( );
-		AudioManager.currentSounds[this.name] = this;
-	}
-	
 	this.started = true;
+	this.audio.loop = true;
+	this.audio.play( );
+
+	AudioManager.instances.push( this );
 };
+
+Sound.prototype.play = function( ) {
+	this.started = true;
+	this.audio.play( );
+	
+	AudioManager.instances.push( this );
+
+	var sound = this;
+	this.audio.addEventListener( 'ended', function( ) {
+		sound.ended = true;
+		AudioManager.remove( sound );
+	} );
+};
+
+Sound.prototype.setMaxVolume = function( volume ) {
+	if( volume > 1 )
+		volume = 1;
+	else if (volume < 0 )
+		volume = 0;
+
+	this.maxVolume = volume;
+	this.audio.volume = this.maxVolume;
+};
+
+Sound.prototype.setPan = function( pan ) {
+	// pan should be left = -1, right = +1, center = 0
+	// TODO
+};
+
+Sound.prototype.setVolume = function( volume ) {
+	if( volume > 1 )
+	{
+		volume = 1;
+	}
+	else if( volume < 0 )
+	{
+		volume = 0;
+	}
+	
+	this.audio.volume = volume * this.maxVolume;
+};
+
+Sound.prototype.stop = function( ) {
+	this.started = false;
+	this.ended = false;
+	this.audio.pause( );
+	AudioManager.remove( this );
+};
+/*
 
 Sound.prototype.mute = function( ) {
 	this.mutedVolume = this.audio.volume;
 	this.audio.volume = 0.00;
 };
 
-Sound.prototype.play = function( ) {
-	if( app.muted || app.pauseMuted )
-	{
-		return;
-	}
-	
-	if( this.audio.paused )
-	{
-		this.audio.play( );
-		AudioManager.currentSounds[this.name + this.uniqueIdentifier] = this;
-		var that = this;
-		this.audio.addEventListener( 'ended', function( ) {
-			that.played = true;
-			delete AudioManager.currentSounds[this.name];
-		} );
-	}
-
-	this.started = true;
-};
 
 Sound.prototype.playOnce = function() {
 	if( this.started ) {
@@ -62,19 +82,6 @@ Sound.prototype.playOnce = function() {
 	}
 
 	this.play();
-};
-
-Sound.prototype.setVolume = function( volume ) {
-	if( volume > 1 )
-	{
-		volume = volume / 100;
-	}
-	else if( volume < 0 )
-	{
-		volume = 0;
-	}
-	
-	this.audio.volume = volume;
 };
 
 Sound.prototype.stop = function( ) {
@@ -89,3 +96,4 @@ Sound.prototype.stop = function( ) {
 Sound.prototype.unmute = function( ) {
 	this.audio.volume = this.mutedVolume;
 };
+*/

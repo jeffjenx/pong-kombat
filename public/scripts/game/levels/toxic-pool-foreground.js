@@ -6,12 +6,11 @@ function ToxicPoolForegroundLayer( scene ) {
 	this.sirens.size.y = viewport.height * 1.25;
 	this.addComponent( 'Sirens', this.sirens );
 
-	this.acidSound = new Sound( 'Acid' );
+	this.ambientSound = new Sound( 'Acid' );
+	this.ambientSound.setMaxVolume( 0.5 );
 	this.sirenSound = new Sound( 'Siren' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.acidSound.loop();
-	}
-
+	this.sirenSound.setMaxVolume( 0.11 );
+	
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -22,7 +21,14 @@ function ToxicPoolForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			loser.rotation = -360 * 3 * percentComplete;
 			loser.scale = 1 + percentComplete;
@@ -42,6 +48,12 @@ function ToxicPoolForegroundLayer( scene ) {
 			loser.gloss.noClip = true;
 			loser.opacity = 0;
 			//loser.size.y *= 0.5;
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var splashSound = new Sound( 'Splash' );
+				splashSound.setMaxVolume( 0.6 );
+				splashSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
 			loser.dismantleSplashing('Paddle-Broken-Green');
@@ -64,8 +76,19 @@ function ToxicPoolForegroundLayer( scene ) {
 ToxicPoolForegroundLayer.prototype = new Layer;
 ToxicPoolForegroundLayer.prototype.constructor = ToxicPoolForegroundLayer;
 
+ToxicPoolForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+		this.sirenSound.stop();
+	}
+};
+
 ToxicPoolForegroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
 
 	this.sirens.opacity = 0.25 + Math.sin( app.gameTime / 250 ) / 4;
 	this.sirens.rotation += 180 * deltaTime;

@@ -164,16 +164,50 @@ function PickPaddleScene( )
 		}
 	}
 
-	this.clickSound = new Sound( 'Click' );
-	this.confirmSound = new Sound( 'Confirm' );
-	this.denySound = new Sound( 'Deny' );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.clickSound = new Sound( 'Click' );
+		this.confirmSound = new Sound( 'Confirm' );
+		this.denySound = new Sound( 'Deny' );
+	}
 
+	if( app.settings.TUNES > 0 ) {
+		this.music = new Sound( 'Music-Pick-Paddle' );
+		this.music.setMaxVolume( 0.33 );
+		this.music.loop( );
+	}
+	
 	// must be after sounds
 	this.selectNextPaddle( 'Right' );
 }
 
 PickPaddleScene.prototype = new Scene;
 PickPaddleScene.prototype.constructor = PickPaddleScene;
+
+PickPaddleScene.prototype.updateOut = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( 1 - transitionPercent );
+	}
+};
+
+PickPaddleScene.prototype.updateIn = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( transitionPercent );
+	}
+
+	if( app.settings.SOUND_FX > 0 && !this.gonged ) {
+		this.gonged = true;
+
+		var gong = new Sound( 'Music-Gong' );
+		gong.setMaxVolume( 0.25 );
+		gong.play( );
+	}
+};
+
+PickPaddleScene.prototype.unload = function( ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.stop( );
+	}
+};
 
 PickPaddleScene.prototype.draw = function( context )
 {
@@ -241,7 +275,6 @@ PickPaddleScene.prototype.selectNextPaddle = function( direction )
 	}
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.clickSound.stop();
 		this.clickSound.play();
 	}
 };
@@ -272,9 +305,8 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	{
 		var player = new Player( );
 		player.setPaddle( Paddles[paddles[this.currentIndex].enum] );
-
+		
 		if( app.settings.SOUND_FX > 0 ) {
-			this.confirmSound.stop();
 			this.confirmSound.play();
 		}
 		

@@ -3,11 +3,9 @@ function StormForegroundLayer( scene ) {
 
 	this.addLightning( );
 
-	this.stormSound = new Sound( 'Storm' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.stormSound.loop();
-	}
-
+	this.ambientSound = new Sound( 'Storm' );
+	this.ambientSound.setMaxVolume( 0.5 );
+	
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -18,7 +16,14 @@ function StormForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			var strike = new Vector( [viewport.width * 0.62, viewport.height * 0.53 ] );
 			loser.rotation = -360 * 3 * percentComplete;
@@ -62,9 +67,15 @@ function StormForegroundLayer( scene ) {
 				context.restore();
 			};
 			SceneManager.currentScene.layers['Foreground'].addComponent( 'Lightning', lightning );
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var thunderSound = new Sound( 'Thunder-Loud' );
+				thunderSound.setMaxVolume( 0.6 );
+				thunderSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
-			loser.dismantleExploding('Paddle-Broken-Green');
+			loser.dismantleExploding(loser.broken.resource);
 		} },
 		{ start : 12.0, end : 12.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
@@ -72,6 +83,12 @@ function StormForegroundLayer( scene ) {
 
 StormForegroundLayer.prototype = new Layer;
 StormForegroundLayer.prototype.constructor = StormForegroundLayer;
+
+StormForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+	}
+};
 
 StormForegroundLayer.prototype.addLightning = function( ) {
 	if( Math.random( ) > 0.33 ) {
@@ -88,6 +105,17 @@ StormForegroundLayer.prototype.addLightning = function( ) {
 			context.restore();
 		};
 		this.addComponent( 'Strike', strike );
+		if( app.settings.SOUND_FX > 0 ) {
+			var thunderSound = new Sound( 'Thunder-Medium' );
+			thunderSound.setMaxVolume( 0.5 );
+			thunderSound.play( );
+		}
+	} else {
+		if( app.settings.SOUND_FX > 0 ) {
+			var thunderSound = new Sound( 'Thunder-Quiet' );
+			thunderSound.setMaxVolume( 0.5 );
+			thunderSound.play( );
+		}
 	}
 	
 	var lightning = new Sprite( 'White' );
@@ -107,6 +135,10 @@ StormForegroundLayer.prototype.addLightning = function( ) {
 
 StormForegroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
 
 	var lightning = this.components['Lightning'];
 	if( lightning ) {

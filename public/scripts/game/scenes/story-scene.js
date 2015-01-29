@@ -55,10 +55,34 @@ function StoryScene( ) {
 	this.paddleName.textBaseline = 'top';
 	//this.paddleName.opacity = 0.11;
 	storyLayer.addComponent( 'PlayerName', this.paddleName );
+
+	if( app.settings.TUNES > 0 ) {
+		this.music = new Sound( 'Music-Story' );
+		this.music.setMaxVolume( 0.25 );
+		this.music.loop( );
+	}
 }
 
 StoryScene.prototype = new Scene;
 StoryScene.prototype.constructor = StoryScene;
+
+StoryScene.prototype.updateOut = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( 1 - transitionPercent );
+	}
+};
+
+StoryScene.prototype.updateIn = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( transitionPercent );
+	}
+};
+
+StoryScene.prototype.unload = function( ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.stop( );
+	}
+};
 
 StoryScene.prototype.draw = function( context ) {
 	Scene.prototype.draw.call( this, context );
@@ -127,6 +151,12 @@ StoryScene.prototype.updateIn = function( transitionPercent ) {
 
 StoryScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.announcedName && this.timeElapsed > 2 ) {
+		this.paddle.nameSound.setMaxVolume( 0.25 );
+		this.paddle.nameSound.play( );
+		this.announcedName = true;
+	}
 
 	if( this.paddle ) {
 		this.paddle.update( deltaTime );

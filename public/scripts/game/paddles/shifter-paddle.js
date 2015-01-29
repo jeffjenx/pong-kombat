@@ -22,11 +22,10 @@ function ShifterPaddle( ) {
 	this.patternCanvas.height = viewport.height;
 
 	this.nameSound = new Sound( 'Shifter' );
-	this.laserSound = new Sound( 'Laser' );
 	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-	{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
 		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
 		
 		{ start : 6.0, end : 6.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
@@ -53,27 +52,14 @@ ShifterPaddle.prototype.constructor = ShifterPaddle;
 ShifterPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
+	var projectile = new LaserProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
 
-	Paddle.prototype.shootProjectile.call( this, new LaserProjectile( this ) );
-
-	/*
-	this.projectile = new LaserProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-	}
-	*/
-
 	if( app.settings.SOUND_FX > 0 ) {
-		this.laserSound.stop();
-		this.laserSound.play();
+		projectile.sound = new Sound( 'Laser' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 };
 

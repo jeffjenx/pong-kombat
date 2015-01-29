@@ -43,17 +43,23 @@ function TowerBackgroundLayer( scene ) {
 	this.addComponent( 'Bell-Ball-Shadow', this.bellBall );
 
 	this.bellSound = new Sound( 'Bell' );
+	this.bellSound.setMaxVolume( 0.11 );
 }
 
 TowerBackgroundLayer.prototype = new Layer;
 TowerBackgroundLayer.prototype.constructor = TowerBackgroundLayer;
+
+TowerBackgroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.bellSound.stop();
+	}
+};
 
 TowerBackgroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
 
 	var bellFrequency = Math.sin( app.gameTime / 2000 );
 	if( app.settings.SOUND_FX && Math.abs( bellFrequency ) > 0.97 ) {
-		this.bellSound.stop();
 		this.bellSound.play();
 	}
 

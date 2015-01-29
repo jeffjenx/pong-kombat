@@ -18,8 +18,7 @@ function MrSlayerPaddle( ) {
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
 
 	this.nameSound = new Sound( 'Mr-Slayer' );
-	//this.geminiSound = new Sound( 'Gemini' );
-
+	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 1.0, action : function(winner) {
@@ -40,6 +39,12 @@ function MrSlayerPaddle( ) {
 			}
 			//Paddle.prototype.shootProjectile.call( winner, new SawBladeProjectile(winner) );
 			SceneManager.currentScene.layers['Kombat'].addComponent( 'Saw-Blade-Projectile', projectile );
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var sawSound = new Sound( 'Saw-Blade' );
+				sawSound.setMaxVolume( 0.75 );
+				sawSound.play();
+			}
 		} },
 		{ start : 1.0, end : 5.0, action : function(winner,loser){
 			var projectile = SceneManager.currentScene.layers['Kombat'].components['Saw-Blade-Projectile'];
@@ -48,11 +53,18 @@ function MrSlayerPaddle( ) {
 				loser.getHit();
 			}
 		} },
-		{ start : 6.5, end : -1, action : function(winner,loser){
+		{ start : 3.5, end : 3.5, action : function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamSound = new Sound( 'Scream' );
+				screamSound.setMaxVolume( 0.75 );
+				screamSound.play();
+			}
+		}},
+		{ start : 6.0, end : -1, action : function(winner,loser){
 			var projectile = SceneManager.currentScene.layers['Kombat'].components['Saw-Blade-Projectile'];
 			projectile.velocity.x = (projectile.velocity.x > 0) ? viewport.width * 0.4 : -viewport.width * 0.4;
 		} },
-		{ start : 7.0, end : 7.0, action : function(winner, loser) {
+		{ start : 6.0, end : 6.0, action : function(winner, loser) {
 			var paddleHalf = new Sprite( 'Paddle-Halved' );
 			paddleHalf.zOrder = 1;
 			paddleHalf.position.x = loser.position.x;
@@ -61,8 +73,8 @@ function MrSlayerPaddle( ) {
 			paddleHalf.size.y = loser.size.y * loser.scale;
 			SceneManager.currentScene.layers['Kombat'].addComponent('Paddle-Half', paddleHalf );
 		} },
-		{ start : 7.0, end : -1, action : function(winner, loser, percentComplete) { loser.dismantleFallToBottom(); } },
-		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
+		{ start : 6.5, end : -1, action : function(winner, loser, percentComplete) { loser.dismantleFallToBottom(); } },
+		{ start : 12.0, end : 12.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
 
@@ -70,29 +82,14 @@ MrSlayerPaddle.prototype = new Paddle;
 MrSlayerPaddle.prototype.constructor = MrSlayerPaddle;
 
 MrSlayerPaddle.prototype.shootProjectile = function( ) {
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
+	var projectile = new SkullProjectile(this);
 
-	Paddle.prototype.shootProjectile.call( this, new BloodballProjectile(this) );
-
-	/*
-	this.projectile = new BloodballProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
-	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-	}
-	*/
+	Paddle.prototype.shootProjectile.call( this, projectile );
 
 	if( app.settings.SOUND_FX > 0 ) {
-		//this.geminiSound.stop();
-		//this.geminiSound.play();
+		projectile.sound = new Sound( 'Whoosh-3' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 };
 

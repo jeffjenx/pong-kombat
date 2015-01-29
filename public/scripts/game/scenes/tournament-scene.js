@@ -97,10 +97,37 @@ function TournamentScene( ) {
 	this.textLayer.addComponent( 'TimeIcon', this.timeIcon );
 	
 	this.ladderLayer = this.addLayer( 'Ladder', new Layer( ) );
+
+	if( app.settings.TUNES > 0 ) {
+		this.music = new Sound( 'Music-Tournament' );
+		this.music.setMaxVolume( 0.5 );
+		this.music.loop( );
+	}
 }
 
 TournamentScene.prototype = new Scene;
 TournamentScene.prototype.constructor = TournamentScene;
+
+TournamentScene.prototype.updateOut = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( 1 - transitionPercent );
+	}
+};
+
+TournamentScene.prototype.updateIn = function( transitionPercent ) {
+	if( app.settings.TUNES > 0 ) {
+		if( !this.music.started ) {
+			this.music.loop();
+		}
+		this.music.setVolume( transitionPercent );
+	}
+};
+
+TournamentScene.prototype.unload = function( ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.stop( );
+	}
+};
 
 TournamentScene.prototype.changePlayer = function( player ) {
 	this.player = player;

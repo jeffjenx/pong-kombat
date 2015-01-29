@@ -24,10 +24,8 @@ function TowerForegroundLayer( scene ) {
 	this.rope4.size.x = this.rope4.size.y;
 	this.addComponent( 'Rope4', this.rope4 );
 
-	this.towerSound = new Sound( 'Tower' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.towerSound.loop();
-	}
+	this.ambientSound = new Sound( 'Tower' );
+	this.ambientSound.setMaxVolume( 0.75 );
 
 	this.dismantleSequence = [ Buttons.DOWN, Buttons.LEFT, Buttons.UP, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -39,7 +37,14 @@ function TowerForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			loser.rotation = -360 * 3 * percentComplete;
 			loser.scale = 1 + percentComplete;
@@ -52,6 +57,13 @@ function TowerForegroundLayer( scene ) {
 			}
 			loser.rotation = -360 * loser.endRotation * percentComplete;
 			loser.scale = 2 - percentComplete * 1.25;
+		} },
+		{ start : 7.25, end : 7.25, action : function(winner, loser) {
+			if( app.settings.SOUND_FX > 0 ) {
+				var thudSound = new Sound( 'Thud' );
+				thudSound.setMaxVolume( 0.5 );
+				thudSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
 			loser.dismantleSplashing('Particle-Blood1');
@@ -92,8 +104,19 @@ function TowerForegroundLayer( scene ) {
 TowerForegroundLayer.prototype = new Layer;
 TowerForegroundLayer.prototype.constructor = TowerForegroundLayer;
 
+TowerForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+	}
+};
+
+
 TowerForegroundLayer.prototype.update = function( deltaTime ) {
 	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
 
 	var ropeFrequency = Math.cos( app.gameTime / 2000 );
 

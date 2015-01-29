@@ -35,7 +35,6 @@ function YellowPaddle( ) {
 	this.effect.size.y = this.size.y * this.scale;
 	//this.effect.start( );
 
-	this.whooshSound = new Sound( 'Whoosh-1' );
 	this.nameSound = new Sound( 'Yellow-Paddle' );
 
 	this.dismantleAnimationFrames = [
@@ -87,8 +86,9 @@ YellowPaddle.prototype.shootProjectile = function( ) {
 	projectile.effect.maxVelocity.y += projectile.velocity.y * 0.3;
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.whooshSound.stop();
-		this.whooshSound.play();
+		projectile.sound = new Sound( 'Whoosh-1' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 
 	//Paddle.prototype.shootProjectile.call( this );

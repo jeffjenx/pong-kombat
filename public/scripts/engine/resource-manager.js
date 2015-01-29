@@ -25,7 +25,7 @@ ResourceManager = {
 		*/
 		format = ".m4a";
 		
-		snd.src = app.resources + source + format;
+		snd.src = app.resources + source + format + "?" + app.version;
 		snd.load( );
 		snd.addEventListener( 'canplaythrough', function( ) {
 			snd.removeEventListener( 'canplaythrough', arguments.callee, false );
@@ -39,7 +39,7 @@ ResourceManager = {
 		ResourceManager.totalCount++;
 		
 		var img = new Image( );
-		img.src = app.resources + source + "?" + new Date( ).getTime( );
+		img.src = app.resources + source + "?" + app.version;
 		img.onload = function( ) {
 			ResourceManager.checkLoading( id );
 		};
@@ -51,7 +51,7 @@ ResourceManager = {
 		ResourceManager.totalCount++;
 		
 		var ajax = new XMLHttpRequest( );
-		ajax.open( 'GET', app.resources + source + "?" + new Date( ).getTime( ), true );
+		ajax.open( 'GET', app.resources + source + "?" + app.version, true );
 		ajax.onreadystatechange = function( ) {
 			if( ajax.readyState == 4 )
 			{

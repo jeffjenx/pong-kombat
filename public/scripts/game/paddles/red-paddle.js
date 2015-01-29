@@ -33,25 +33,76 @@ function RedPaddle( ) {
 	this.effect.attachTo( this );
 
 	this.nameSound = new Sound( 'Red-Paddle' );
-	this.whooshSound = new Sound( 'Whoosh-3' );
+	//this.whooshSound = new Sound( 'Whoosh-3' );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
 		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
 		
+		{ start : 6.0, end : 6.0, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		{ start : 6.0, end : 6.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
 		{ start : 6.1, end : 6.1, action : function(winner,loser){ loser.getHit(); } },
 		{ start : 6.3, end :  7.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 6.3, end : 6.3, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		
+		{ start : 8.0, end : 8.0, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		{ start : 8.0, end : 8.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
 		{ start : 8.1, end : 8.1, action : function(winner,loser){ loser.getHit(); } },
 		{ start : 8.3, end : 9.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 8.3, end : 8.3, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		
+		{ start : 10.0, end : 10.0, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		{ start : 10.0, end : 10.2, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
 		{ start : 10.1, end : 10.1, action : function(winner,loser){ loser.getHit(); } },
 		{ start : 10.3, end : 13.3, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
+		{ start : 10.3, end : 10.3, action: function(winner,loser) {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
 
+				loser.screamSound.play();
+			}
+		} },
+		
 		{ start : 10.2, end : 15.0, action : function(winner, loser) {loser.dismantleFallToBottom();} },
 		
 		{ start : 14.0, end : 14.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
@@ -87,11 +138,13 @@ RedPaddle.prototype.draw = function( context ) {
 
 
 RedPaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this, new ShadowProjectile( this ) );
-
+	var projectile = new ShadowProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
+	
 	if( app.settings.SOUND_FX > 0 ) {
-		this.whooshSound.stop();
-		this.whooshSound.play();
+		projectile.sound = new Sound( 'Whoosh-3' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 
 

@@ -16,8 +16,7 @@ function GreenPaddle( ) {
 	this.broken = Resources['Paddle-Broken-Green'];
 
 	this.nameSound = new Sound( 'Green-Paddle' );
-	this.arrowSound = new Sound( 'Arrow-Fired' );
-
+	
 	this.currentStep = 0;
 	this.dismantleAnimationFrames = [
 		// (end = start) ? call only once, (end < 0) ? call indefinitely
@@ -297,43 +296,17 @@ GreenPaddle.prototype.draw = function( context ) {
 	// }
 };
 
-/*
-GreenPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-*/
-
 GreenPaddle.prototype.shootProjectile = function( ) {
-	var projectile = Paddle.prototype.shootProjectile.call( this, new GreenArrowProjectile( this ) );
-
+	var projectile = new GreenArrowProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
+	
 	if( app.settings.SOUND_FX > 0 ) {
-		this.arrowSound.stop();
-		this.arrowSound.play();
+		projectile.sound = new Sound( 'Arrow-Fired' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 
 	return projectile;
-
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
-	
-	// this.projectile = new GreenArrowProjectile( this );
-	// this.projectile.sourcePaddle = this;
-	// this.projectile.position.x = this.position.x;
-	// this.projectile.position.y = this.position.y;
-	
-	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
-	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
-	
-	// if( this.position.x > viewport.width * 0.50 )
-	// {
-	// 	this.projectile.velocity.x *= -1;
-	// 	this.projectile.flipH = true;
-	// }
 };
 
 GreenPaddle.prototype.update = function( deltaTime ) {

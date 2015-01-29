@@ -1,11 +1,9 @@
 function PitForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
-	this.pitSound = new Sound( 'Pit' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.pitSound.loop();
-	}
-
+	this.ambientSound = new Sound( 'Pit' );
+	this.ambientSound.setMaxVolume( 1 );
+	
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.UP, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -16,7 +14,14 @@ function PitForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			loser.rotation = -360 * 3 * percentComplete;
 			loser.scale = 1 + percentComplete;
@@ -29,6 +34,17 @@ function PitForegroundLayer( scene ) {
 			}
 			loser.rotation = -360 * loser.endRotation * percentComplete;
 			loser.scale = 2 - percentComplete * 1.25;
+		} },
+		{ start : 7.25, end : 7.25, action : function(winner, loser) {
+			if( app.settings.SOUND_FX > 0 ) {
+				var thudSound = new Sound( 'Thud' );
+				thudSound.setMaxVolume( 0.5 );
+				thudSound.play( );
+
+				var screamSound = new Sound( 'Scream' );
+				screamSound.setMaxVolume( 0.5 );
+				screamSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
 			loser.dismantleSplashing('Particle-Blood1');
@@ -67,3 +83,17 @@ function PitForegroundLayer( scene ) {
 
 PitForegroundLayer.prototype = new Layer;
 PitForegroundLayer.prototype.constructor = PitForegroundLayer;
+
+PitForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+	}
+};
+
+PitForegroundLayer.prototype.update = function( deltaTime ) {
+	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
+};

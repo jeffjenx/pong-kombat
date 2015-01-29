@@ -35,7 +35,6 @@ function BluePaddle( ) {
 	//	this.effect.update( 1 / 60 );
 	//}
 
-	this.whooshSound = new Sound( 'Whoosh-2' );
 	this.nameSound = new Sound( 'Blue-Paddle' );
 
 	this.dismantleAnimationFrames = [
@@ -65,6 +64,13 @@ function BluePaddle( ) {
 		},
 		{ start : 5.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleFreezing(percentComplete); } },
 		{ start : 8.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.position.x += viewport.width * 0.06 * percentComplete; } },
+		{ start : 9.23, end : 9.23, action : function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var explodeSound = new Sound( 'Explode' );
+				explodeSound.setMaxVolume( 1 );
+				explodeSound.play();
+			}
+		} },
 		{ start : 9.23, end :  -1, action : function(winner, loser, percentComplete) { loser.dismantleExploding(percentComplete); } },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
@@ -87,10 +93,10 @@ BluePaddle.prototype.shootProjectile = function( ) {
 	projectile.effect.maxVelocity.y += projectile.velocity.y * 0.7;
 	
 	if( app.settings.SOUND_FX > 0 ) {
-		this.whooshSound.stop();
-		this.whooshSound.play();
+		projectile.sound = new Sound( 'Whoosh-2' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
-
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
 

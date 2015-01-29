@@ -8,6 +8,8 @@ function Projectile( ) {
 	//this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
 
+	this.hitSomething = false;
+
 	/*
 	if( sourcePaddle.effect ) {
 		this.effect = new ParticleSystem();
@@ -101,5 +103,9 @@ Projectile.prototype.update = function( deltaTime ) {
 		this.effect.size.y = this.size.y * this.scale;
 		this.effect.scale = this.scale;
 		this.effect.update( deltaTime );
+	}
+
+	if( this.sound ) {
+		this.sound.setPan( this.position.x / viewport.width * 2 - 1 );
 	}
 };

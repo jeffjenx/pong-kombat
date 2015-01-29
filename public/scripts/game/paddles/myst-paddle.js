@@ -34,10 +34,16 @@ function MystPaddle( ) {
 	this.effect.attachTo( this );
 
 	this.nameSound = new Sound( 'Myst' );
-	this.spraySound = new Sound( 'Spray' );
-
+	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
+		{ start : 1.0, end : 1.0, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var poofSound = new Sound( 'Poof' );
+				poofSound.setMaxVolume( 1 );
+				poofSound.play( );
+			}
+		} },
 		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
 		{ start : 2.0, end : 4.5, action: function(winner, loser, percentComplete) { loser.dismantleMeanderToMiddle(percentComplete); } },
 		{ start : 4.0, end : 4.0, action : function(winner) {
@@ -79,6 +85,8 @@ function MystPaddle( ) {
 		{ start : 10.5, end : 11.0, action : function(winner, loser) { SceneManager.currentScene.layers['Kombat'].components['FlySwatter'].currentAnimation = 'swatting'; } },
 		{ start : 11.0, end : 11.0, action : function(winner, loser) { loser.getHit(); } },
 		{ start : 12.0, end : 15.0, action : function(winner, loser, percentComplete) {
+			loser.dismantleFallToBottom();
+
 			var flySwatter = SceneManager.currentScene.layers['Kombat'].components['FlySwatter'];
 			if( flySwatter.currentAnimation !== 'moving' ) {
 				flySwatter.currentAnimation = 'moving';
@@ -100,29 +108,14 @@ MystPaddle.prototype.draw = function( context ) {
 MystPaddle.prototype.shootProjectile = function( ) {
 	//Paddle.prototype.shootProjectile.call( this );
 	//this.projectile.tint = this.color;
-
-	Paddle.prototype.shootProjectile.call( this, new FingerProjectile( this ) );
-
-	/*
-	this.projectile = new FingerProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
+	var projectile = new FingerProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
 	
-	this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		this.projectile.velocity.x *= -1;
-	}
-	*/
-
 	if( app.settings.SOUND_FX > 0 ) {
-		this.spraySound.stop();
-		this.spraySound.play();
+		projectile.sound = new Sound( 'Spray' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
-
 };
 
 MystPaddle.prototype.update = function( deltaTime ) {

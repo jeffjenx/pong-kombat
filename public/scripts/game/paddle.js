@@ -94,7 +94,6 @@ function Paddle( texture ) {
 	this.hitSounds.push( new Sound( 'Punch-3' ) );
 	this.hitSounds.push( new Sound( 'Punch-4' ) );
 
-	this.explodeSound = new Sound( 'Explode' );
 	this.screamSound = new Sound( 'Scream' );
 	this.absorbSound = new Sound( 'Shield-Absorb' );
 
@@ -111,7 +110,6 @@ Paddle.prototype.canShootProjectile = function( ) {
 
 Paddle.prototype.blockProjectile = function() {
 	if( app.settings.SOUND_FX > 0 ) {
-		this.absorbSound.stop();
 		this.absorbSound.play();
 	}
 };
@@ -171,8 +169,7 @@ Paddle.prototype.dismantleBurning = function(percentComplete) {
 	
 	this.effect.update( 1/60 );
 
-	if( app.settings.SOUND_FX && percentComplete > 0.75 ) {
-		this.screamSound.stop();
+	if( app.settings.SOUND_FX > 0 && !this.screamSound.started && percentComplete > 0.75 ) {
 		this.screamSound.play();
 	}
 };
@@ -264,8 +261,7 @@ Paddle.prototype.dismantleElectricuting = function(percentComplete) {
 	
 	this.effect.update( 1/60 );
 
-	if( percentComplete > 0.75 ) {
-		this.screamSound.stop();
+	if( percentComplete > 0.75 && !this.screamSound.started ) {
 		this.screamSound.play();
 	}
 };
@@ -325,6 +321,12 @@ Paddle.prototype.dismantleSplashing = function(resource) {
 		this.effect.size.y = this.size.y * this.scale;
 		this.effect.singleCycle = true;
 		this.effect.restart();
+
+		if( app.settings.SOUND_FX > 0 ) {
+			var splashSound = new Sound( 'Drips-1' );
+			splashSound.setMaxVolume( 0.25 );
+			splashSound.play( );
+		}
 	}
 	//this.opacity = 0.5;
 	this.effect.update( 1/60 );
@@ -335,7 +337,7 @@ Paddle.prototype.dismantleRocked = function() {
 		this.effect.type = 'rocked';
 		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Paddle-Broken-Monolith']];
-		this.effect.count = 50;
+		this.effect.count = 5;
 		this.effect.minVelocity.x = 0;
 		this.effect.minVelocity.y = 0;
 		this.effect.maxVelocity.x = 0;
@@ -355,6 +357,12 @@ Paddle.prototype.dismantleRocked = function() {
 
 		this.effect.restart();
 	}
+
+	if( this.effect.count < 50 ) {
+		this.effect.count += 5;
+		this.effect.restart();
+	}
+
 	this.opacity = 0.5;
 	this.effect.update( 1/60 );
 };
@@ -419,11 +427,6 @@ Paddle.prototype.dismantleExploding = function( percentComplete ) {
 			}
 		};
 		this.effect.restart();
-
-		if( percentComplete > 0.75 ) {
-			this.explodeSound.stop();
-			this.explodeSound.play();
-		}
 	}
 	this.effect.update( 1/60 );
 };
@@ -435,7 +438,14 @@ Paddle.prototype.dismantleFallToBottom = function() {
 	}
 
 	if( this.position.y >= bottom ) {
-		this.velocity.y = 0;
+		if( this.velocity.y !== 0 ) {
+			this.velocity.y = 0;
+			if( app.settings.SOUND_FX > 0 ) {
+				var thudSound = new Sound( 'Thud' );
+				thudSound.setVolume( 0.75 );
+				thudSound.play();
+			}
+		}
 		this.position.y = bottom;
 	} else {
 		this.velocity.y += viewport.height * 0.04;
@@ -756,7 +766,18 @@ Paddle.prototype.draw = function( context ) {
 	// }
 };
 
-Paddle.prototype.getHit = function( ) {
+Paddle.prototype.getHit = function( projectile ) {
+	if( projectile ) {
+		if( projectile.hitSomething )
+		{
+			return;
+		}
+		else
+		{
+			projectile.hitSomething = true;
+		}
+	}
+
 	var blood = new ParticleSystem( );
 	blood.particleImages = [Resources['Particle-Blood1'],Resources['Particle-Blood2']];
 	blood.compositeOperation = 'normal';
@@ -765,8 +786,8 @@ Paddle.prototype.getHit = function( ) {
 	blood.minVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) * 3;
 	blood.maxVelocity.x = viewport.width * 0.03 * 2;
 	blood.maxVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 );
-	blood.minParticleSize = viewport.width * 0.03 * 0.3;
-	blood.maxParticleSize = viewport.width * 0.03 * 0.5;
+	blood.minParticleSize = viewport.width * 0.03 * 0.2;
+	blood.maxParticleSize = viewport.width * 0.03 * 0.4;
 	blood.minLife = 1000;
 	blood.maxLife = 1000;
 	blood.rotationSpeed = 0;
@@ -795,8 +816,8 @@ Paddle.prototype.getHit = function( ) {
 				p.velocity.y = 0;
 				p.velocity.x *= 0.75;
 
-				if( app.settings.SOUND_FX > 0 && !this.dripSound.played ) {
-					this.dripSound.playOnce();
+				if( app.settings.SOUND_FX > 0 && !this.dripSound.started ) {
+					this.dripSound.play();
 				}
 			}
 
@@ -819,17 +840,13 @@ Paddle.prototype.getHit = function( ) {
 		this.bloods.shift();
 	}
 
-	if( app.settings.SOUND_FX > 0 && !app.isMobile( ) )
+	if( app.settings.SOUND_FX > 0 )
 	{
-		if( app.settings.COMBAT ) {
-			var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
-			randomHitSound.stop();
-			randomHitSound.play();
+		var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
+		randomHitSound.play();
 
-			var randomGruntSound = this.gruntSounds[ Math.floor(Math.random() * this.gruntSounds.length) ];
-			randomGruntSound.stop();
-			randomGruntSound.play();
-		}
+		var randomGruntSound = this.gruntSounds[ Math.floor(Math.random() * this.gruntSounds.length) ];
+		randomGruntSound.play();
 	}
 };
 

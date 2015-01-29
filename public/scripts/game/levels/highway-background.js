@@ -58,8 +58,6 @@ function HighwayBackgroundLayer( scene ) {
 	for( var i = 0; i < 11; i++ ) {
 		this.addVehicle( );
 	}
-
-	this.vehicleSound = new Sound( 'Vehicle' );
 }
 
 HighwayBackgroundLayer.prototype = new Layer;
@@ -116,8 +114,17 @@ HighwayBackgroundLayer.prototype.addVehicle = function( ) {
 	this.addComponent( vehicle.id, vehicle );
 	this.vehicleCounter++;
 
-	if( app.settings.SOUND_FX ) {
-		this.vehicleSound.playOnce( );
+	if( app.settings.SOUND_FX > 0 ) {
+		vehicle.sound = new Sound( 'Vehicle' );
+		vehicle.sound.setMaxVolume( 0.11 );
+	}
+};
+
+HighwayBackgroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		for( var i in this.vehicles ) {
+			this.vehicles[i].sound.stop();
+		}
 	}
 };
 
@@ -167,6 +174,10 @@ HighwayBackgroundLayer.prototype.update = function( deltaTime ) {
 			this.vehicles.splice( i, 1 );
 			this.removeComponent( vehicle.id );
 			this.addVehicle( );
+		}
+
+		if( !vehicle.sound.started && Collision.RectRect( vehicle.boundingBox, {top:0,bottom:viewport.height,left:0,right:viewport.width} ) ) {
+			vehicle.sound.play( );
 		}
 	}
 };

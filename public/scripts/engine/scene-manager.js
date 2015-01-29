@@ -76,6 +76,9 @@ var SceneManager =
 	
 	transitionEnded : function( )
 	{
+		if( this.currentScene && this.currentScene.unload ) {
+			this.currentScene.unload( );
+		}
 		this.currentScene = this.nextScene;
 		this.nextScene = null;
 		this.transitioning = false;

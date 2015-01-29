@@ -27,7 +27,6 @@ function PurplePaddle( ) {
 	this.bolt.life = 0;
 
 	this.nameSound = new Sound( 'Purple-Paddle' );
-	this.boltSound = new Sound( 'Bolt' );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -42,6 +41,13 @@ function PurplePaddle( ) {
 			}
 
 			winner.velocity.x /= winner.drag;
+		} },
+		{ start : 3, end : 3, action: function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var chainsSound = new Sound( 'Chains' );
+				chainsSound.setMaxVolume(1);
+				chainsSound.play();
+			}
 		} },
 		{ start : 3.75, end : 3.75, action : function(winner, loser) {
 			var airPump = new SpriteSheet( 'Paddle-Air-Pump' );
@@ -78,12 +84,12 @@ function PurplePaddle( ) {
 			SceneManager.currentScene.layers['Kombat'].addComponent( 'AirPump', airPump );
 		} },
 		{
-			start : 4.0, end : 4.0, action : function(winner) {
+			start : 4.25, end : 4.25, action : function(winner) {
 				winner.velocity.x = (winner.position.x > viewport.width * 0.5) ? -viewport.width * 0.4 : viewport.width * 0.4;
 			}
 		},
 		{
-			start : 4.0, end : 7.0, action : function(winner) {
+			start : 4.25, end : 7.25, action : function(winner) {
 				SceneManager.currentScene.layers['Kombat'].components['AirPump'].position.x = winner.position.x;
 
 				if( winner.velocity.x < 0 && winner.position.x < viewport.width * 0.02 ) {
@@ -97,6 +103,15 @@ function PurplePaddle( ) {
 				winner.velocity.x /= winner.drag;
 			}
 		},
+		{
+			start : 7.0, end : 7.0, action : function() {
+				if( app.settings.SOUND_FX > 0 ) {
+					var pumpSound = new Sound( 'Drop-Cup' );
+					pumpSound.setMaxVolume( 1 );
+					pumpSound.play();
+				}
+			}
+		},
 		{ start : 7.0, end : 8.0, action : function(winner) {
 			var airPump = SceneManager.currentScene.layers['Kombat'].components['AirPump'];
 			airPump.velocity.y += viewport.height * 0.02;
@@ -105,13 +120,46 @@ function PurplePaddle( ) {
 				airPump.velocity.y *= -0.5;
 			}
 		} },
-		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up';
+		} },
 		{ start : 8.5, end : 8.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
-		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up';
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var pumpSound = new Sound( 'Spray' );
+				pumpSound.setMaxVolume( 1 );
+				pumpSound.play();
+			}
+		} },
 		{ start : 9.5, end : 9.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
-		{ start : 10.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 10.0, end : 10.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up';
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var pumpSound = new Sound( 'Spray' );
+				pumpSound.setMaxVolume( 1 );
+				pumpSound.play();
+			}
+		} },
 		{ start : 10.5, end : 10.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
-		{ start : 11.0, end : 11.0, action : function(winner, loser, percentComplete) { winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up'; } },
+		{ start : 11.0, end : 11.0, action : function(winner, loser, percentComplete) {
+			winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up';
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var pumpSound = new Sound( 'Spray' );
+				pumpSound.setMaxVolume( 1 );
+				pumpSound.play();
+			}
+		} },
+		{ start : 11.5, end : 11.5, action : function() {
+			if( app.settings.SOUND_FX > 0 ) {
+				var explodeSound = new Sound( 'Explode' );
+				explodeSound.setMaxVolume( 1 );
+				explodeSound.play();
+			}
+		} },
 		{ start : 11.5, end : 15.0, action : function(winner, loser, percentComplete) { loser.dismantleExploding(percentComplete); } },
 		{ start : 8.0, end : 12.0, action : function(winner, loser, percentComplete) {
 			winner.velocity.x /= winner.drag;
@@ -130,11 +178,11 @@ function PurplePaddle( ) {
 			if( loser.size.x < loser.targetSize ) {
 				loser.size.x += loser.size.y / 50;
 			}
-		} }
+		} },
+		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 		/*
 		{ start : 1.0, end : 8.0, action : function(winner, loser, percentComplete) { loser.dismantleElectricuting(percentComplete); } },
 		{ start : 8.0, end :  -1, action : function(winner, loser) { loser.dismantleExploding(); } },
-		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 		*/
 	];
 }
@@ -257,35 +305,18 @@ PurplePaddle.prototype.draw = function( context ) {
 };
 
 PurplePaddle.prototype.shootProjectile = function( ) {
-	Paddle.prototype.shootProjectile.call( this, new LightningSaiProjectile( this ) );
+	var projectile = new LightningSaiProjectile( this );
+	Paddle.prototype.shootProjectile.call( this, projectile );
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.boltSound.stop();
-		this.boltSound.play();
+		projectile.sound = new Sound( 'Bolt' );
+		projectile.sound.setMaxVolume( 0.11 );
+		projectile.sound.play();
 	}
-
-
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
-	
-	// this.projectile = new LightningSaiProjectile( this );
-	// this.projectile.sourcePaddle = this;
-	// this.projectile.position.x = this.position.x;
-	// this.projectile.position.y = this.position.y;
-	
-	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
-	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.35;
-	
-	// if( this.position.x > viewport.width * 0.50 )
-	// {
-	// 	this.projectile.velocity.x *= -1;
-	// 	this.projectile.flipH = true;
-	// }
 };
 
 PurplePaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
 	
 	this.bolt.life -= 1;
 

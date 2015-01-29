@@ -24,8 +24,7 @@ function MonolithPaddle( ) {
 	this.maxProjectiles = 3;
 
 	this.nameSound = new Sound( 'Monolith' );
-	this.throwSound = new Sound( 'Throw' );
-
+	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 1.0, action : function(winner, loser) { winner.shootProjectile(); loser.maxBloods = 15; } },
@@ -50,7 +49,13 @@ function MonolithPaddle( ) {
 			loser.dismantleRocked(percentComplete);
 		} },
 		{ start : 9.0, end : -1, action : function(winner,loser,percentComplete) { loser.dismantleRockFalling(); } },
-		{ start : 9.5, end : -1, action : function(winner,loser){ loser.dismantleFallToBottom(); } }
+		{ start : 9.5, end : -1, action : function(winner,loser){ loser.dismantleFallToBottom(); } },
+		{ start : 10.0, end : 10.0, action : function() {
+			var dropSound = new Sound( 'Drop-Cup' );
+			dropSound.setMaxVolume( 1 );
+			dropSound.play();
+		} },
+		{ start : 13.0, end : 13.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
 
@@ -119,9 +124,11 @@ MonolithPaddle.prototype.shootProjectile = function( ) {
 	this.projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
 	*/
 
+	
 	if( app.settings.SOUND_FX > 0 ) {
-		this.throwSound.stop();
-		this.throwSound.play();
+		projectile.sound = new Sound( 'Throw' );
+		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.play();
 	}
 
 	

@@ -220,16 +220,18 @@ function HUDLayer( scene ) {
 	this.currentRound.position.y = this.flawless.position.y;
 	this.currentRound.opacity = 0;
 
-	this.spamalitySound = new Sound( 'Spamality!' );
-	this.dismantledSound = new Sound( 'Dismantled!' );
-	this.flawlessSound = new Sound( 'Mint-Condition' );
-	this.finishEmSound = new Sound( 'Finish-Em!' );
-	this.winsSound = new Sound( 'Wins' );
-	this.bounceSound = new Sound( 'Bounce!' );
-	this.roundSound = new Sound( 'Round' );
-	this.roundNumberSounds = [];
-	for( var i = 1; i <= 11; i++ ) {
-		this.roundNumberSounds.push( new Sound( this.numberToWord(i) ) );
+	if( app.settings.SOUND_FX > 0 ) {
+		this.spamalitySound = new Sound( 'Spamality!' );
+		this.dismantledSound = new Sound( 'Dismantled!' );
+		this.flawlessSound = new Sound( 'Mint-Condition' );
+		this.finishEmSound = new Sound( 'Finish-Em!' );
+		this.winsSound = new Sound( 'Wins' );
+		this.bounceSound = new Sound( 'Bounce!' );
+		this.roundSound = new Sound( 'Round' );
+		this.roundNumberSounds = [];
+		for( var i = 1; i <= 11; i++ ) {
+			this.roundNumberSounds.push( new Sound( this.numberToWord(i) ) );
+		}
 	}
 }
 
@@ -237,19 +239,21 @@ HUDLayer.prototype = new Layer;
 HUDLayer.prototype.constructor = HUDLayer;
 
 HUDLayer.prototype.resetSounds = function() {
-	this.dismantledSound.started = false;
-	this.flawlessSound.started = false;
-	this.finishEmSound.started = false;
-	this.bounceSound.started = false;
-	this.roundSound.started = false;
-	this.winsSound.started = false;
+	if( app.settings.SOUND_FX > 0 ) {
+		this.dismantledSound.started = false;
+		this.flawlessSound.started = false;
+		this.finishEmSound.started = false;
+		this.bounceSound.started = false;
+		this.roundSound.started = false;
+		this.winsSound.started = false;
 
-	this.dismantledSound.played = false;
-	this.flawlessSound.played = false;
-	this.finishEmSound.played = false;
-	this.bounceSound.played = false;
-	this.roundSound.played = false;
-	this.winsSound.played = false;
+		this.dismantledSound.ended = false;
+		this.flawlessSound.ended = false;
+		this.finishEmSound.ended = false;
+		this.bounceSound.ended = false;
+		this.roundSound.ended = false;
+		this.winsSound.ended = false;
+	}
 };
 
 HUDLayer.prototype.draw = function( context ) {
@@ -398,47 +402,50 @@ HUDLayer.prototype.update = function( deltaTime ) {
 				this.bounce.scale = 0.5 + elapsedTime / 3;
 				this.bounce.opacity = Math.max( (2 - elapsedTime) / 2, 0 );
 
-				if( app.settings.SOUND_FX > 0 ) {
-					this.bounceSound.playOnce();
+				if( app.settings.SOUND_FX > 0 && !this.bounceSound.started ) {
+					this.bounceSound.play();
 				}
 			}
 			if( this.scene.stateTime > 1 ) {
 				this.currentRound.opacity = 1;
 
 				if( app.settings.SOUND_FX > 0 ) {
-					this.roundSound.playOnce();
-					if( this.roundSound.played ) {
-						this.roundNumberSounds[this.scene.currentRound - 1].playOnce();
+					if( !this.roundSound.started ) {
+						this.roundSound.play();
+					}
+					if( this.roundSound.ended && !this.roundNumberSounds[this.scene.currentRound - 1].started ) {
+						this.roundNumberSounds[this.scene.currentRound - 1].play();
 					}
 				}
 			}
 		break;
 
 		case this.scene.states.announcing :
-			if( app.settings.SOUND_FX > 0 ) {
-				if( this.scene.stateTime > 1 ) {
-					this.finishEmSound.playOnce();
-				}
+			if( app.settings.SOUND_FX > 0 && this.scene.stateTime > 1 && !this.finishEmSound.started ) {
+				this.finishEmSound.play();
 			}
 		break;
 
 		case this.scene.states.ending :
 			if( app.settings.SOUND_FX > 0 ) {
-				this.scene.winner.getNameSound().playOnce();
-				if( this.scene.winner.getNameSound().played ) {
-					this.winsSound.playOnce();
+				if( !this.scene.winner.getNameSound().started ) {
+					this.scene.winner.getNameSound().play();
 				}
 
-				if( (this.scene.finishType === this.scene.finishTypes.dismantled || this.scene.finishType === this.scene.finishTypes.level) && this.scene.stateTime > 3 ) {
-					this.dismantledSound.playOnce();
+				if( this.scene.winner.getNameSound().ended && !this.winsSound.started ) {
+					this.winsSound.play();
 				}
 
-				if( this.scene.finishType === this.scene.finishTypes.spamality && this.scene.stateTime > 3 ) {
-					this.spamalitySound.playOnce();
+				if( !this.dismantledSound.started && (this.scene.finishType === this.scene.finishTypes.dismantled || this.scene.finishType === this.scene.finishTypes.level) && this.scene.stateTime > 3 ) {
+					this.dismantledSound.play();
 				}
 
-				if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
-					this.flawlessSound.playOnce();
+				if( !this.spamalitySound.started && this.scene.finishType === this.scene.finishTypes.spamality && this.scene.stateTime > 3 ) {
+					this.spamalitySound.play();
+				}
+
+				if( !this.flawlessSound.started && this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
+					this.flawlessSound.play();
 				}
 			}
 		break;

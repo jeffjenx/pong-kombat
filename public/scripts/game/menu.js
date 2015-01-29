@@ -39,8 +39,8 @@ function Menu( scene ) {
 	this.captured = false;
 
 	this.clickSound = new Sound( 'Click' );
-	this.confirmSound = new Sound( 'Confirm' );
 	this.denySound = new Sound( 'Deny' );
+	this.confirmSound = new Sound( 'Confirm' );
 }
 
 Menu.prototype = new Layer;
@@ -101,8 +101,8 @@ Menu.prototype.selectCurrentItem = function( ) {
 	this.items[this.currentIndex].action.call( this );
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.confirmSound.stop();
-		this.confirmSound.play();
+		this.confirmSound.play( );
+		//AudioManager.play( this.confirmSound );
 	}
 };
 
@@ -111,17 +111,18 @@ Menu.prototype.selectNextItem = function( ) {
 		this.items[this.currentIndex].component.fontWeight = 200;
 		this.items[this.currentIndex].component.color = 'rgb(128,128,128)';
 	}
+	
+	if( app.settings.SOUND_FX > 0 ) {
+		var sound = (this.currentIndex === -1) ? this.confirmSound : this.clickSound;
+		sound.play(  );
+	}
+
 	this.currentIndex += 1;
 	if( this.currentIndex >= this.items.length ) {
 		this.currentIndex = 0;
 	}
 	this.items[this.currentIndex].component.fontWeight = 600;
 	this.items[this.currentIndex].component.color = 'rgb(255,255,255)';
-
-	if( app.settings.SOUND_FX > 0 ) {
-		this.clickSound.stop();
-		this.clickSound.play();
-	}
 };
 
 Menu.prototype.selectPreviousItem = function( ) {
@@ -135,7 +136,6 @@ Menu.prototype.selectPreviousItem = function( ) {
 	this.items[this.currentIndex].component.color = 'rgb(255,255,255)';
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.clickSound.stop();
 		this.clickSound.play();
 	}
 };
@@ -169,7 +169,6 @@ Menu.prototype.closeMenu = function( ) {
 	InputManager.history = [ ];
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.denySound.stop();
 		this.denySound.play();
 	}
 };

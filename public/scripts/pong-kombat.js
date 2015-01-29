@@ -1,12 +1,12 @@
 load( 'scripts/game/', [
 	'ball',
 	'level',
-	'menu',
 	'opponent',
 	'paddle',
 	'player',
 	'powerup',
 	'projectile',
+	'menu',
 	
 	'balls/baseball',
 	'balls/basketball',
@@ -87,7 +87,7 @@ load( 'scripts/game/', [
 	'projectiles/green-arrow-projectile',
 	'projectiles/laser-projectile',
 	'projectiles/lightning-sai-projectile',
-	'projectiles/bloodball-projectile',
+	'projectiles/skull-projectile',
 	'projectiles/rock-projectile',
 	'projectiles/saw-blade-projectile',
 	'projectiles/shadow-projectile',
@@ -115,6 +115,7 @@ function ready( ) {
 	}
 	
 	app = new App( );
+	app.version = '0.9.6';
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = '/';
 	app.language = 'en';
@@ -130,9 +131,6 @@ function ready( ) {
 	};
 	app.resize( );
 
-	// TODO: REMOVE
-	app.settings.SOUND_FX = 0;
-	
 	var loadingInterval;
 	var loadingPercentage;
 	var loadingTick = function( ) {
@@ -159,14 +157,7 @@ function ready( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
 		
-		// var paddle = new WhitePaddle();
-		// var storyScene = new StoryScene( );
-		// storyScene.setPaddle( paddle );
-		// storyScene.setStory( paddle.endStory );
-		// app.startupScene = storyScene;
-		
-		app.startupScene = new PickPaddleScene();
-		
+		app.startupScene = new SplashScene();
 		app.initialize( );
 	};
 };

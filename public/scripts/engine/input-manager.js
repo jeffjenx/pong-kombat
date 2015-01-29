@@ -28,6 +28,10 @@ var Mouse = {
 	1 : Buttons.ACTION     // <left_button>
 };
 
+var Gamepad = {
+
+};
+
 var InputManager = {
 	currentState : { },
 	previousState : { },
@@ -39,6 +43,7 @@ var InputManager = {
 	
 	lastXY : { },
 	pointerEvent : { },
+	gamepads : [ ],
 	
 	checkButtonPress : function( button ) {
 		if( button == undefined )
@@ -65,6 +70,52 @@ var InputManager = {
 		}
 		
 		return true;
+	},
+
+	handleGamepads : function( event ) {
+		for( var i in this.gamepads )
+		{
+			var gamepad = this.gamepads[i];
+			
+			for( var j = 0; j < gamepad.buttons.length; j++ )
+			{
+				var button = gamepads.buttons[j];
+				var pressed = (button == 1.0) ? true : false;
+			
+				if( typeof(button) == 'object' )
+				{
+					pressed = button.pressed;
+					button = button.value;
+				}
+
+				if( pressed ) {
+					this.context = Gamepad;
+					if( !this.currentState[ Gamepad[ j ] ] )
+					{
+						this.currentState[ Gamepad[ j ] ] = Date.now( );
+					}
+					clearTimeout( this.keySequenceTimer );
+				} else {
+					delete InputManager.currentState[ Gamepad[ j ] ];
+					if( InputManager.history.length > 10 ) {
+						InputManager.history.splice( 0, InputManager.history.length - 10 );
+					}
+					InputManager.history.push( Gamepad[ j ] );
+					this.keySequenceTimer = setTimeout( function( ) {
+						if( InputManager.history.length > 10 ) {
+							InputManager.history.splice( 0, InputManager.history.length - 10 );
+						}
+						InputManager.history.push( '-' );
+					}, 500 );
+				}
+			}
+
+			for(var j = 0; j < gamepad.axes.length; j++)
+			{
+				var axis = gamepad.axes[i];
+
+			}
+		}
 	},
 	
 	handlePointers : function( event ) {

@@ -45,6 +45,7 @@
 	                DreamHost
                    EVOX Stock Images
 	                Facebook
+	                FlashKit
 	                FreeSFX
 	                FreeSound.org
 	                GameFAQs
@@ -54,6 +55,7 @@
 	                Google Images
 	                Google Search
 	                nodejitsu
+	                OpenGame Art
 	                Pinterest
 	                RetroMags
 	                StackOverflow

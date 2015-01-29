@@ -775,7 +775,7 @@ The playing field is high above a multi-lane highway. At ground level, cars,
 vans, and trucks race across the screen in both directions.
 
 Dismantle
-    Flyswatter II - Left, Left, Left, Action
+    Splat - Left, Left, Left, Action
 
 
 -------------------------------------------------------------------------------
@@ -1102,8 +1102,8 @@ Here is a list of directories that can be navigated using the interface:
 -------------------------------------------------------------------------------
 
 Spamalities are special finishing moves that can be performed by any character
-and result in a comedic transformation of the opponent into everyone's favorite
-processed meat-type food.
+and result in a comedic representation of life with spam, and it's not just 
+about the processed meat-type food.
 
 To perform a Spamality on your opponent, you must defeat them without taking
 any damage and, then, enter in the following button sequence:

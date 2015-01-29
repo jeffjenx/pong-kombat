@@ -1,10 +1,8 @@
 function IceRiverForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
-	this.riverSound = new Sound( 'River' );
-	if( app.settings.SOUND_FX > 0 ) {
-		this.riverSound.loop();
-	}
+	this.ambientSound = new Sound( 'River' );
+	this.ambientSound.setMaxVolume( 0.2 );
 
 	this.dismantleSequence = [ Buttons.UP, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -16,7 +14,14 @@ function IceRiverForegroundLayer( scene ) {
 			winner.velocity.x /= winner.drag;
 			winner.position.y = viewport.height * 0.51 + winner.size.y * winner.scale * 0.5 * percentComplete;
 		} },
-		{ start : 2.75, end : 2.75, action : function(winner, loser) { loser.getHit(); } },
+		{ start : 2.75, end : 2.75, action : function(winner, loser) {
+			loser.getHit();
+			if( app.settings.SOUND_FX > 0 ) {
+				var screamingSound = new Sound( 'Long-Scream' );
+				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.play( );
+			}
+		} },
 		{ start : 2.75, end : 5.0, action : function(winner, loser, percentComplete) {
 			loser.rotation = -360 * 3 * percentComplete;
 			loser.scale = 1 + percentComplete;
@@ -36,9 +41,15 @@ function IceRiverForegroundLayer( scene ) {
 			loser.gloss.noClip = true;
 			loser.opacity = 0;
 			//loser.size.y *= 0.5;
+
+			if( app.settings.SOUND_FX > 0 ) {
+				var splashSound = new Sound( 'Splash' );
+				splashSound.setMaxVolume( 0.6 );
+				splashSound.play( );
+			}
 		} },
 		{ start : 7.25, end : 10.25, action : function(winner, loser, percentComplete) {
-			loser.dismantleSplashing(percentComplete);
+			loser.dismantleSplashing('Projectile-Ice-Blast');
 		} },
 		{ start : 9.5, end : 10.0, action : function( winner, loser, percentComplete ) {
 			loser.scale = percentComplete;
@@ -58,3 +69,17 @@ function IceRiverForegroundLayer( scene ) {
 
 IceRiverForegroundLayer.prototype = new Layer;
 IceRiverForegroundLayer.prototype.constructor = IceRiverForegroundLayer;
+
+IceRiverForegroundLayer.prototype.unload = function() {
+	if( app.settings.SOUND_FX > 0 ) {
+		this.ambientSound.stop();
+	}
+};
+
+IceRiverForegroundLayer.prototype.update = function( deltaTime ) {
+	Layer.prototype.update.call( this, deltaTime );
+
+	if( app.settings.SOUND_FX > 0 && !this.ambientSound.started ) {
+		this.ambientSound.loop();
+	}
+};

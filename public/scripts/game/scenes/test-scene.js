@@ -7,11 +7,11 @@ function TestScene( ) {
 	this.background = new Background( 'Black' );
 	this.layer.addComponent( 'Background', this.background );
 
-	this.tester = new Rupee( 'Ball-Rupee-Green' );
-	this.tester.scale = 5;
-	this.layer.addComponent( 'Tester', this.tester );
+	//this.tester = new Rupee( 'Ball-Rupee-Green' );
+	//this.tester.scale = 5;
+	//this.layer.addComponent( 'Tester', this.tester );
 
-	this.resetBall( );
+	//this.resetBall( );
 }
 
 TestScene.prototype = new Scene;
@@ -26,6 +26,7 @@ TestScene.prototype.resetBall = function( ) {
 TestScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
+	/*
 	if( this.tester.boundingBox.right > viewport.width || this.tester.boundingBox.left < 0 ) {
 		this.tester.velocity.x *= -1;
 		this.tester.changedRotation();
@@ -39,4 +40,5 @@ TestScene.prototype.update = function( deltaTime ) {
 	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
 		this.resetBall( );
 	}
+	*/
 };

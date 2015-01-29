@@ -134,6 +134,9 @@ App.prototype.initialize = function( ) {
 			InputManager.history.push( '-' );
 		}, 500 );
 	};
+
+	window.addEventListener( 'gamepadconnected', InputManager.handleGamepads );
+	window.addEventListener( 'gamepaddisconnected', InputManager.handleGamepads );
 	
 	if( window.navigator.msPointerEnabled )
 	{
@@ -229,6 +232,8 @@ App.prototype.render = function( ) {
 	var now = new Date( ).getTime( );
 	var delta = now - then;
 	then = now;
+
+	InputManager.handleGamepads( );
 	
 	// Clear canvas
 	viewportContext.clearRect( 0, 0, viewport.width, viewport.height );
@@ -399,6 +404,7 @@ App.prototype.toggleMute = function( ) {
 App.prototype.togglePause = function( ) {
 	app.paused = !app.paused;
 	
+	/*
 	if( app.paused && !app.muted )
 	{
 		AudioManager.mute( );
@@ -409,6 +415,7 @@ App.prototype.togglePause = function( ) {
 		app.pauseMuted = false;
 		AudioManager.unmute( );
 	}
+	*/
 };
 
 copy = function( source ) {

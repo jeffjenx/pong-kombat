@@ -93,6 +93,7 @@
 		<item id="collect-a-balls-2" href="content/xhtml/collect-a-balls-2.xhtml" media-type="application/xhtml+xml" />
 		<item id="poster-1" href="content/xhtml/poster-1.xhtml" media-type="application/xhtml+xml" />
 		<item id="poster-2" href="content/xhtml/poster-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="power-ups" href="content/xhtml/power-ups.xhtml" media-type="application/xhtml+xml" />
 
 		<!-- CSS, JavaScript, Audio, ... -->
 		<item id="advert-icade-style" href="content/styles/advert-icade.css" media-type="text/css" />
@@ -105,28 +106,38 @@
 		<item id="introduction-style" href="content/styles/introduction.css" media-type="text/css" />
 		<item id="nav-style" href="content/styles/nav.css" media-type="text/css" />
 		<item id="poster-style" href="content/styles/poster.css" media-type="text/css" />
+		<item id="power-ups-style" href="content/styles/power-ups.css" media-type="text/css" />
 	</manifest>
 
 	<spine>
 		<itemref idref="cover" linear="no" properties="rendition:page-spread-center" />
-		
+
 		<itemref idref="advert-icade" />
 		<itemref idref="contents" />
+
 		<itemref idref="introduction-1" />
 		<itemref idref="introduction-2" />
+
 		<itemref idref="battle-zones-1" />
 		<itemref idref="battle-zones-2" />
+
 		<itemref idref="battle-zones-3" />
 		<itemref idref="battle-zones-4" />
+
 		<itemref idref="battle-zones-5" />
 		<itemref idref="battle-zones-6" />
+
 		<itemref idref="collect-a-balls-1" />
 		<itemref idref="collect-a-balls-2" />
+
 		<itemref idref="poster-1" />
 		<itemref idref="poster-2" />
+
+		<itemref idref="advert-mkx" />
+		<itemref idref="power-ups" />
+
 		<itemref idref="classified-information-1" />
 		<itemref idref="classified-information-2" />
-		<!--<itemref idref="advert-mkx" />-->
 		
 		<itemref idref="developer" />
 	</spine>

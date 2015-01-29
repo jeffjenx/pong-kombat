@@ -118,6 +118,12 @@ function SettingsScene( )
 	this.settingsLayer.addComponent( 'Purple', this.purple );
 	
 	this.selectSetting( 'CENSORSHIP' );
+
+	if( app.settings.TUNES > 0 ) {
+		this.music = new Sound( 'Music-Settings' );
+		this.music.setMaxVolume( 0.5 );
+		this.music.loop( );
+	}
 }
 
 SettingsScene.prototype = new Scene;
@@ -306,16 +312,30 @@ SettingsScene.prototype.selectPreviousSetting = function( )
 	this.selectSetting( keys[i] );
 };
 
+SettingsScene.prototype.unload = function( ) {
+	if( app.settings.TUNES > 0 ) {
+		this.music.stop( );
+	}
+};
+
 SettingsScene.prototype.updateIn = function( transitionPercent ) {
 	for( var i in this.settingsLayer.components )
 	{
 		this.settingsLayer.components[i].opacity = Math.min( transitionPercent, 1 );
+	}
+
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( transitionPercent );
 	}
 };
 
 SettingsScene.prototype.updateOut = function( transitionPercent ) {
 	this.green.position.y = this.green.startPosition.y + (this.green.endPosition.y - this.green.startPosition.y) * (1 - transitionPercent);
 	this.purple.position.y = this.purple.startPosition.y + (this.purple.endPosition.y - this.purple.startPosition.y) * (1 - transitionPercent);
+
+	if( app.settings.TUNES > 0 ) {
+		this.music.setVolume( 1 - transitionPercent );
+	}
 };
 
 SettingsScene.prototype.update = function( deltaTime )
