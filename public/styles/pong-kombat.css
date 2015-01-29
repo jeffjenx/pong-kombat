@@ -915,7 +915,7 @@
   }
   #teaser header {
     background-attachment: fixed;
-    background-image: url("../images/backgrounds/teaser-landscape.jpg");
+    background-image: url("../images/teaser-landscape.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -931,7 +931,7 @@
 }
 @media screen and (orientation: portrait) {
   #teaser header {
-    background-image: url("../images/backgrounds/teaser-portrait.jpg");
+    background-image: url("../images/teaser-portrait.jpg");
   }
 }
 @media screen {

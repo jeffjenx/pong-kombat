@@ -1,6 +1,6 @@
 {
   "name": "pong-kombat",
-  "version": "0.9.6",
+  "version": "0.9.9",
   "description": "So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced by Stefan Gagne in 1994, finally returns.",
   "keywords": "Pong Kombat, Pong, Mortal Kombat, video games",
   "dependencies": {

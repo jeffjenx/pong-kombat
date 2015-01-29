@@ -31,9 +31,9 @@ angular.module('play').controller('PlayController', ['$scope', 'Authentication',
 		    }
 		};
 
-		var engine = $scope.loadScript('/scripts/engine/start.js', 'text/javascript', 'utf-8');
+		var engine = $scope.loadScript('http://pongkombat.quantastical.com/scripts/engine/start.js', 'text/javascript', 'utf-8');
 		engine.onload = function() {
-			$scope.loadScript('/scripts/pong-kombat.js', 'text/javascript', 'utf-8');
+			$scope.loadScript('http://pongkombat.quantastical.com/scripts/pong-kombat.js', 'text/javascript', 'utf-8');
 		};
 		
 		$analytics.pageTrack('/play');
