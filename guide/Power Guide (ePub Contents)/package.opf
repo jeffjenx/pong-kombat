@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<package prefix="rendition: http://www.idpf.org/vocab/rendition/#" unique-identifier="unique-identifier" version="3.0" xmlns="http://www.idpf.org/2007/opf">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<!-- File Information -->
+		<dc:format id="format">application/epub+zip</dc:format>
+		<dc:identifier id="unique-identifier">www.pongkombat.com/documents/Strategy%20Guide.epub</dc:identifier>
+		<meta property="dcterms:modified">2014-12-15T06:33:00Z</meta>
+
+		<!-- Publication Information -->
+		<dc:title id="main-title">Pong Kombat Power Guide</dc:title>
+		<meta refines="#main-title" property="file-as">Pong Kombat (2014) Power Guide</meta>
+		<meta refines="#main-title" property="title-type">main</meta>
+
+		<dc:title id="extended-title">Pong Kombat (2014): Official Strategy Guide</dc:title>
+		<meta refines="#extended-title" property="title-type">extended</meta>
+
+		<dc:description id="description">
+			Pong Kombat returns twenty years after the parody franchise originally debuted.
+			Need some extra power?
+			This strategy guide features all the special abilities, dismantles, and uncovers all the secrets...delivered directly from the developer.
+		</dc:description>
+		<dc:subject id="subject">Pong Kombat freeware video game franchise</dc:subject>
+
+		<!-- Author Information -->
+		<dc:creator id="creator">Jeff Jenkins, Quantastical.com</dc:creator>
+
+		<!-- Publisher Information -->
+		<dc:publisher id="publisher">Quantastical.com</dc:publisher>
+		<meta refines="#publisher" property="role" scheme="marc:relators">pbl</meta>
+
+		<!-- Copyright Information -->
+		<dc:rights>GNU General Public License</dc:rights>
+
+		<!-- ePub Properties -->
+		<meta property="rendition:layout">pre-paginated</meta>
+		<meta property="rendition:orientation">auto</meta>
+		<meta property="rendition:spread">auto</meta>
+	</metadata>
+
+	<manifest>
+		<!-- Navigation Document (Table of Contents) -->
+		<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav" />
+
+		<!-- Images -->
+		<item id="advert-atari-greatest-hits-image" href="content/images/advert-atari-greatest-hits.png" media-type="image/png" />
+		<item id="advert-frogger-decades-image" href="content/images/advert-frogger-decades.png" media-type="image/png" />
+		<item id="advert-icade-image" href="content/images/advert-icade.jpg" media-type="image/jpeg" />
+		<item id="advert-midway-arcade-image" href="content/images/advert-midway-arcade.png" media-type="image/png" />
+		<item id="advert-mkx-dragon-image" href="content/images/advert-mkx-dragon.png" media-type="image/png" />
+		<item id="advert-mkx-scorpion-image" href="content/images/advert-mkx-scorpion.jpg" media-type="image/jpeg" />
+		<item id="advert-netherrealm-studios-image" href="content/images/advert-netherrealm-studios.png" media-type="image/png" />
+		<item id="advert-ps4-image" href="content/images/advert-ps4.png" media-type="image/png" />
+		<item id="advert-wb-games-image" href="content/images/advert-wb-games.png" media-type="image/png" />
+		<item id="advert-windows-image" href="content/images/advert-windows.png" media-type="image/png" />
+		<item id="advert-xbox-one-image" href="content/images/advert-xbox-one.png" media-type="image/png" />
+		<item id="app-store-badge-image" href="content/images/app-store-badge.png" media-type="image/png" />
+		<item id="battle-zone-default-image" href="content/images/battle-zone-default.png" media-type="image/png" />
+		<item id="battle-zone-forest-image" href="content/images/battle-zone-forest.png" media-type="image/png" />
+		<item id="battle-zone-hell-image" href="content/images/battle-zone-hell.png" media-type="image/png" />
+		<item id="battle-zone-highway-image" href="content/images/battle-zone-highway.png" media-type="image/png" />
+		<item id="battle-zone-ice-river-image" href="content/images/battle-zone-ice-river.png" media-type="image/png" />
+		<item id="battle-zone-introduction-image" href="content/images/battle-zone-introduction.png" media-type="image/png" />
+		<item id="battle-zone-pit-image" href="content/images/battle-zone-pit.png" media-type="image/png" />
+		<item id="battle-zone-portal-image" href="content/images/battle-zone-portal.png" media-type="image/png" />
+		<item id="battle-zone-storm-image" href="content/images/battle-zone-storm.png" media-type="image/png" />
+		<item id="battle-zone-tower-image" href="content/images/battle-zone-tower.png" media-type="image/png" />
+		<item id="battle-zone-toxic-pool-image" href="content/images/battle-zone-toxic-pool.png" media-type="image/png" />
+		<item id="battle-zone-watercolor-image" href="content/images/battle-zone-watercolor.png" media-type="image/png" />
+		<item id="classified-folder-image" href="content/images/classified-folder.jpg" media-type="image/jpeg" />
+		<item id="classified-header-small-image" href="content/images/classified-header-small.png" media-type="image/png" />
+		<item id="classified-header-image" href="content/images/classified-header.png" media-type="image/png" />
+		<item id="cover-image" href="content/images/cover.jpg" media-type="image/jpeg" properties="cover-image" />
+		<item id="poster-image" href="content/images/poster.jpg" media-type="image/jpeg" />
+		<item id="title-sketch-image" href="content/images/title-sketch.jpg" media-type="image/jpeg" />
+		
+		<!-- XHTML -->
+		<item id="advert-icade" href="content/xhtml/advert-icade.xhtml" media-type="application/xhtml+xml" />
+		<item id="advert-mkx" href="content/xhtml/advert-mkx.xhtml" media-type="application/xhtml+xml" />
+		<item id="classified-information-1" href="content/xhtml/classified-information-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="classified-information-2" href="content/xhtml/classified-information-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="contents" href="nav.xhtml" media-type="application/xhtml+xml" />
+		<item id="cover" href="content/xhtml/cover.xhtml" media-type="application/xhtml+xml" />
+		<item id="developer" href="content/xhtml/developer.xhtml" media-type="application/xhtml+xml" />
+		<item id="introduction-1" href="content/xhtml/introduction-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="introduction-2" href="content/xhtml/introduction-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-1" href="content/xhtml/battle-zones-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-2" href="content/xhtml/battle-zones-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-3" href="content/xhtml/battle-zones-3.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-4" href="content/xhtml/battle-zones-4.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-5" href="content/xhtml/battle-zones-5.xhtml" media-type="application/xhtml+xml" />
+		<item id="battle-zones-6" href="content/xhtml/battle-zones-6.xhtml" media-type="application/xhtml+xml" />
+		<item id="collect-a-balls-1" href="content/xhtml/collect-a-balls-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="collect-a-balls-2" href="content/xhtml/collect-a-balls-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="poster-1" href="content/xhtml/poster-1.xhtml" media-type="application/xhtml+xml" />
+		<item id="poster-2" href="content/xhtml/poster-2.xhtml" media-type="application/xhtml+xml" />
+		<item id="power-ups" href="content/xhtml/power-ups.xhtml" media-type="application/xhtml+xml" />
+
+		<!-- CSS, JavaScript, Audio, ... -->
+		<item id="advert-icade-style" href="content/styles/advert-icade.css" media-type="text/css" />
+		<item id="advert-mkx-style" href="content/styles/advert-mkx.css" media-type="text/css" />
+		<item id="battle-zones-style" href="content/styles/battle-zones.css" media-type="text/css" />
+		<item id="classified-information-style" href="content/styles/classified-information.css" media-type="text/css" />
+		<item id="collect-a-balls-style" href="content/styles/collect-a-balls.css" media-type="text/css" />
+		<item id="developer-style" href="content/styles/developer.css" media-type="text/css" />
+		<item id="fonts-style" href="content/styles/fonts.css" media-type="text/css" />
+		<item id="introduction-style" href="content/styles/introduction.css" media-type="text/css" />
+		<item id="nav-style" href="content/styles/nav.css" media-type="text/css" />
+		<item id="poster-style" href="content/styles/poster.css" media-type="text/css" />
+		<item id="power-ups-style" href="content/styles/power-ups.css" media-type="text/css" />
+	</manifest>
+
+	<spine>
+		<itemref idref="cover" linear="no" properties="rendition:page-spread-center" />
+
+		<itemref idref="advert-icade" />
+		<itemref idref="contents" />
+
+		<itemref idref="introduction-1" />
+		<itemref idref="introduction-2" />
+
+		<itemref idref="battle-zones-1" />
+		<itemref idref="battle-zones-2" />
+
+		<itemref idref="battle-zones-3" />
+		<itemref idref="battle-zones-4" />
+
+		<itemref idref="battle-zones-5" />
+		<itemref idref="battle-zones-6" />
+
+		<itemref idref="collect-a-balls-1" />
+		<itemref idref="collect-a-balls-2" />
+
+		<itemref idref="poster-1" />
+		<itemref idref="poster-2" />
+
+		<itemref idref="advert-mkx" />
+		<itemref idref="power-ups" />
+
+		<itemref idref="classified-information-1" />
+		<itemref idref="classified-information-2" />
+		
+		<itemref idref="developer" />
+	</spine>
+</package>

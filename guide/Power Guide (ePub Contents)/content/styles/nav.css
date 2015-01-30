@@ -1,0 +1,453 @@
+@import url( 'fonts.css' );
+
+body
+{
+	font-family: 'Roboto';
+	font-size: 24pt;
+	font-weight: 400;
+	margin: 0;
+}
+
+header
+{
+	border-style: solid;
+	border-width: 0 0.5em;
+	border-color: crimson;
+	box-sizing: border-box;
+	margin: 0 1em;
+	position: relative;
+}
+
+header > h1
+{
+	background: -webkit-linear-gradient( yellow, orange, crimson );
+	-webkit-background-clip: text;
+	bottom: 0;
+	color: yellow;
+	font-family: 'Apple Garamond';
+	font-weight: 400;
+	margin: 0;
+	position: absolute;
+	right: 0.5em;
+	-webkit-text-fill-color: transparent;
+	text-transform: uppercase;
+}
+
+header > h2
+{
+	border-right: solid calc( 0.5em / 1.5 ) crimson;
+	display: inline-block;
+	font-family: 'Roboto';
+	font-size: 1.5em;
+	font-weight: 700;
+	margin: 0;
+	padding: 1.25em 1em 0 0.5em;
+	text-transform: uppercase;
+}
+
+nav a
+{
+	text-decoration: none;
+}
+
+nav ol
+{
+	list-style: none;
+}
+
+nav > ol
+{
+	font-family: 'Roboto';
+	font-size: 1.75em;
+	font-weight: 700;
+	margin: 0;
+	padding: 0.25em;
+	text-transform: uppercase;
+}
+
+#cover,
+#contents
+{
+	display: none;
+}
+
+#introduction
+{
+	width: 50%;
+}
+
+#introduction:before
+{
+	background: black;
+	color: yellow;
+	content: 'Features';
+	display: block;
+	font-family: 'Roboto';
+	font-size: 0.5em;
+	font-weight: 300;
+	padding: 0.1em 0.25em;
+}
+
+#introduction:after
+{
+	background-image: url('../images/choose-your-paddle.jpg' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: '';
+	display: block;
+	height: 4.25em;
+	position: absolute;
+	right: 1.5em;
+	top: 2.25em;
+	width: 6.5em;
+}
+
+#introduction a
+{
+	color: royalblue;
+}
+
+#introduction a:after
+{
+	color: black;
+	content: 'Need to get caught up on what this is all about?';
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#story
+{
+	width: 45%;
+}
+
+#story a
+{
+	color: hotpink;
+	margin-top: 0.25em;
+}
+
+#story a:after
+{
+	color: black;
+	content: 'White Paddle challenges you to Pong Kombat';
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-bottom: 0.5em;
+	margin-top: -0.25em;
+	text-transform: none;
+}
+
+#gameplay
+{
+	margin-top: 0.5em;
+	width: 50%;
+	/*
+	position: absolute;
+	right: 0.25em;
+	top: 6.5em;
+	width: calc( 55% - 0.5em);
+	*/
+}
+
+#gameplay:before
+{
+	background-image: url('../images/gameplay-forest.jpg' );
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: '';
+	display: block;
+	height: 5em;
+	position: absolute;
+	width: 8em;
+	right: 0.75em;
+	bottom: 31%;
+}
+
+#gameplay a
+{
+	background: black;
+	color: lawngreen;
+	display: block;
+	padding: 0;
+	text-indent: 0.25em;
+}
+
+#gameplay ol
+{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#gameplay ol li a
+{
+	background: white;
+	color: black;
+	font-family: 'Alegreya Sans';
+	font-size: 0.75em;
+	line-height: 1em;
+}
+
+#gameplay #training a    { font-size: 1.1em; font-weight: 900; letter-spacing: 0.12em; }
+#gameplay #multiplayer a { font-size: 1em; font-weight: 300; letter-spacing: 0.06em; }
+#gameplay #tournament a  { font-size: 0.9em; letter-spacing: -0.03em; }
+#gameplay #settings a    { font-size: 1.1em; font-weight: 900; letter-spacing: 0.11em; }
+#gameplay #analytics a   { font-size: 0.9em; font-weight: 600; letter-spacing: 0.5em; }
+
+#controls
+{
+	clear: left;
+	float: left;
+	text-align: center;
+	width: 50%;
+}
+
+#controls a
+{
+	background: white;
+	color: black;
+	font-family: 'Alegreya Sans';
+	font-size: 1.25em;
+	font-weight: 700;
+	letter-spacing: 0.25em;
+	line-height: 1em;
+}
+
+#controls ol
+{
+	display: none;
+}
+
+/*
+
+#controls a
+{
+	background: black;
+	color: yellow;
+	display: block;
+	font-family: 'Roboto';
+	font-size: 0.5em;
+	font-weight: 300;
+	padding: 0.1em 0.25em;
+}
+
+#controls ol
+{
+	margin: 0.1em 0 0.25em;
+	padding-left: 0.5em;
+}
+
+#controls ol li a
+{
+	background: white;
+	color: mediumorchid;
+	font-family: 'Roboto';
+	font-size: 0.5em;
+	font-weight: 700;
+	line-height: 1em;
+}
+*/
+
+#characters
+{
+	float: left;
+	margin-left: 0.5em;
+	margin-top: -8em;
+	width: calc( 45% - 0.25em );
+}
+
+#characters a
+{
+	background: black;
+	color: yellow;
+	display: block;
+	font-family: 'Roboto';
+	font-size: 0.5em;
+	font-weight: 300;
+	padding: 0.1em 0.25em;
+}
+
+#characters ol
+{
+	margin: 0.1em 0 0.25em;
+	padding-left: 0;
+	position: absolute;
+	text-align: center;
+}
+
+#characters ol li a
+{
+	background: white;
+	color: yellow;
+	font-family: 'Roboto';
+	font-weight: 700;
+	font-size: 0.8em;
+	letter-spacing: -0.02em;
+	line-height: 1em;
+}
+
+#characters #paddles a { color: crimson; }
+#characters #bosses a  { color: turquoise; }
+#characters #others a  { color: orchid; }
+#characters #create a  { color: royalblue; }
+
+#characters #paddles a:after,
+#characters #bosses a:after,
+#characters #others a:after,
+#characters #create a:after
+{
+	color: black;
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#characters #paddles a:after { content: 'Special abilities, dismantles, and stats'; }
+#characters #bosses a:after  { content: 'Strategies to beat the bosses'; }
+#characters #others a:after  { content: 'How to unlock hidden paddles'; }
+#characters #create a:after  { content: 'Feeling creative? Make your own paddle!'; }
+
+#zones
+{
+	clear: both;
+	float: left;
+	padding-top: 0.25em;
+}
+
+#zones a
+{
+	color: crimson;
+}
+
+#zones a:after
+{
+	color: black;
+	content: 'Tips & tricks for every stage';
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#balls
+{
+	clear: both;
+	padding-top: 0.25em;
+	width: 60%;
+}
+
+#balls a
+{
+	color: limegreen;
+}
+
+#balls a:after
+{
+	content: 'Unlock every ball for maximum replay and mega fun!';
+	color: black;
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#powerups
+{
+	padding-top: 0.25em;
+}
+
+#powerups a
+{
+	color: royalblue;
+}
+
+#powerups a:after
+{
+	content: 'Super strategies to give you an advantage against your competitor';
+	color: black;
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: bold;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+	width: 60%;
+}
+
+#secrets
+{
+	margin-top: 0.5em;
+}
+
+#secrets a,
+#acknowledgements a
+{
+	color: hotpink;
+	font-family: 'Alegreya Sans';
+	font-size: 0.95em;
+	letter-spacing: -2pt;
+}
+
+#secrets a:after
+{
+	content: 'Ultra top secret techniques reported by our agents';
+	color: black;
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#acknowledgements a:after
+{
+	content: 'Special thank-yous and credits to everyone involved';
+	color: black;
+	display: block;
+	font-family: 'Droid Serif';
+	font-size: 0.5em;
+	font-weight: 700;
+	letter-spacing: -1pt;
+	margin-top: -0.5em;
+	text-transform: none;
+}
+
+#legal
+{
+	bottom: 0.25em;
+	font-size: 0.65em;
+	position: absolute;
+	right: 1.5em;
+	text-align: justify;
+	width: 26%;
+}
+
+#legal strong
+{
+	display: block;
+	font-size: 1.25em;
+	font-style: italic;
+	margin-bottom: 0.5em;
+	text-transform: uppercase;
+}
