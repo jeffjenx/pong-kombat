@@ -340,10 +340,10 @@ Yellow Paddle
        | Right        | Increase item value     | Move paddle          |
        |              | (where applicable)      | toward the right     |
        +--------------+-------------------------+----------------------+
-       | Back         | Return to previous menu | Pause gameplay       |
+       | B            | Return to previous menu | Pause gameplay       |
        |              | or close menu           |                      |
        +--------------+-------------------------+----------------------+
-       | Action       | Select highlighted item | Used in special move |
+       | A            | Select highlighted item | Used in special move |
        |              | or increase item value  | sequences            |
        +--------------+-------------------------+----------------------+
        | Start        | Select highlighted item | Pause gameplay       |
@@ -353,10 +353,6 @@ Yellow Paddle
 -------------------------------------------------------------------------------
   4.2                         Advanced Controls
 -------------------------------------------------------------------------------
-
-Ball Speed
-    When returning a volley, press the Action button as the ball approaches 
-    your paddle, to increase the ball speed.
 
 English
     To alter the trajectory of the ball, use the Up or Down buttons as the
@@ -396,10 +392,10 @@ them off by *Dismantling* them (using the same criteria).
                     | Right        | Right Arrow or       |
                     |              | `D` Key              |
                     +--------------+----------------------+
-                    | Back         | Backspace/Delete Key |
+                    | B            | Backspace/Delete Key |
                     |              | or Escape Key        |
                     +--------------+----------------------+
-                    | Action       | Spacebar or          |
+                    | A            | Spacebar or          |
                     |              | Shift Key            |
                     +--------------+----------------------+
                     | Start        | Enter/Return Key     |
@@ -421,9 +417,9 @@ them off by *Dismantling* them (using the same criteria).
                        +--------------+---------------+
                        | Right        | Swipe Right   |
                        +--------------+---------------+
-                       | Back         | Pinch         |
+                       | B            | Pinch         |
                        +--------------+---------------+
-                       | Action       | Tap           |
+                       | A            | Tap           |
                        +--------------+---------------+
                        | Start        | Tap & Hold    |
                        +--------------+---------------+
@@ -451,10 +447,10 @@ them off by *Dismantling* them (using the same criteria).
             | Right        | D-Pad Right or    | D-Pad Right or    |
             |              | Left Analog Right | Left Analog Right |
             +--------------+-------------------+-------------------+
-            | Back         | Select, Cross or  | Back/White, A,    |
+            | B            | Select, Cross or  | Back/White, A,    |
             |              | Triangle Button   | or Y Button       |
             +--------------+-------------------+-------------------+
-            | Action       | Square or Circle  | X or B Button     |
+            | A            | Square or Circle  | X or B Button     |
             |              | Button            |                   |
             +--------------+-------------------+-------------------+
             | Start        | Start             | Start/Black       |
@@ -475,10 +471,10 @@ them off by *Dismantling* them (using the same criteria).
                +--------------+-------------+----------------+
                | Right        | D-Pad Right | D-Pad Right    |
                +--------------+-------------+----------------+
-               | Back         | Select or   | Select, B,     |
+               | B            | Select or   | Select, B,     |
                |              | B Button    | or X Button    |
                +--------------+-------------+----------------+
-               | Action       | A Button    | A or Y Button  |
+               | A            | A Button    | A or Y Button  |
                +--------------+-------------+----------------+
                | Start        | Start       | Start          |
                +--------------+-------------+----------------+
