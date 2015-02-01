@@ -115,16 +115,16 @@ function ready( ) {
 	}
 	
 	app = new App( );
-	app.version = '1.0';
+	app.version = '1.1';
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = '/';
 	app.language = 'en';
 	app.settings = {
-		'CENSORSHIP' : (localStorage && localStorage['PongKombat.settings.CENSORSHIP'] === "false") ? false : true,
+		'CENSORSHIP' : (localStorage && localStorage['PongKombat.settings.CENSORSHIP'] === "false") ? "false" : "true",
 		'COINAGE'    : (localStorage && localStorage['PongKombat.settings.COINAGE']) ? parseInt( localStorage['PongKombat.settings.COINAGE'] ) : 0,
-		'COMBAT'     : (localStorage && localStorage['PongKombat.settings.COMBAT'] === "false") ? false : true,
+		'COMBAT'     : (localStorage && localStorage['PongKombat.settings.COMBAT'] === "false") ? "false" : "true",
 		'DIFFICULTY' : (localStorage && localStorage['PongKombat.settings.DIFFICULTY']) ? parseInt( localStorage['PongKombat.settings.DIFFICULTY'] ) : 1,
-		'POWER_UPS'  : (localStorage && localStorage['PongKombat.settings.POWER_UPS'] === "false") ? false : true,
+		'POWER_UPS'  : (localStorage && localStorage['PongKombat.settings.POWER_UPS'] === "false") ? "false" : "true",
 		'ROUNDS'     : (localStorage && localStorage['PongKombat.settings.ROUNDS']) ? parseInt( localStorage['PongKombat.settings.ROUNDS'] ) : 3,
 		'SOUND_FX'   : (localStorage && localStorage['PongKombat.settings.SOUND_FX']) ? parseInt( localStorage['PongKombat.settings.SOUND_FX'] ) : 10,
 		'TUNES'      : (localStorage && localStorage['PongKombat.settings.TUNES']) ? parseInt( localStorage['PongKombat.settings.TUNES'] ) : 10

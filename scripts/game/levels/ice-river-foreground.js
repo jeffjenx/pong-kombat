@@ -2,7 +2,7 @@ function IceRiverForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
 	this.ambientSound = new Sound( 'River' );
-	this.ambientSound.setMaxVolume( 0.2 );
+	this.ambientSound.setMaxVolume( 0.2 * app.settings.SOUND_FX / 11 );
 
 	this.dismantleSequence = [ Buttons.UP, Buttons.RIGHT, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -18,7 +18,7 @@ function IceRiverForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -44,7 +44,7 @@ function IceRiverForegroundLayer( scene ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var splashSound = new Sound( 'Splash' );
-				splashSound.setMaxVolume( 0.6 );
+				splashSound.setMaxVolume( 0.6 * app.settings.SOUND_FX / 11 );
 				splashSound.play( );
 			}
 		} },

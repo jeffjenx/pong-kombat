@@ -7,9 +7,9 @@ function ToxicPoolForegroundLayer( scene ) {
 	this.addComponent( 'Sirens', this.sirens );
 
 	this.ambientSound = new Sound( 'Acid' );
-	this.ambientSound.setMaxVolume( 0.5 );
+	this.ambientSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 	this.sirenSound = new Sound( 'Siren' );
-	this.sirenSound.setMaxVolume( 0.11 );
+	this.sirenSound.setMaxVolume( 0.11 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleSequence = [ Buttons.UP, Buttons.DOWN, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -25,7 +25,7 @@ function ToxicPoolForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -51,7 +51,7 @@ function ToxicPoolForegroundLayer( scene ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var splashSound = new Sound( 'Splash' );
-				splashSound.setMaxVolume( 0.6 );
+				splashSound.setMaxVolume( 0.6 * app.settings.SOUND_FX / 11 );
 				splashSound.play( );
 			}
 		} },

@@ -32,6 +32,7 @@ function GluePowerup( ) {
 	this.timeoutTime *= 1000 + app.gameTime;
 
 	this.squirtSound = new Sound( 'Squirt' );
+	this.squirtSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 GluePowerup.prototype = new Powerup;
@@ -48,7 +49,6 @@ GluePowerup.prototype.collect = function( kombatant ) {
 	kombatant.paddle.gluePowerup = app.gameTime + 10 * 1000;
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.squirtSound.stop();
 		this.squirtSound.play();
 	}
 };

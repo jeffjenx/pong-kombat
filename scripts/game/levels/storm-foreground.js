@@ -4,7 +4,7 @@ function StormForegroundLayer( scene ) {
 	this.addLightning( );
 
 	this.ambientSound = new Sound( 'Storm' );
-	this.ambientSound.setMaxVolume( 0.5 );
+	this.ambientSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.RIGHT, Buttons.RIGHT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -20,7 +20,7 @@ function StormForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -70,7 +70,7 @@ function StormForegroundLayer( scene ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var thunderSound = new Sound( 'Thunder-Loud' );
-				thunderSound.setMaxVolume( 0.6 );
+				thunderSound.setMaxVolume( 0.6 * app.settings.SOUND_FX / 11 );
 				thunderSound.play( );
 			}
 		} },
@@ -107,13 +107,13 @@ StormForegroundLayer.prototype.addLightning = function( ) {
 		this.addComponent( 'Strike', strike );
 		if( app.settings.SOUND_FX > 0 ) {
 			var thunderSound = new Sound( 'Thunder-Medium' );
-			thunderSound.setMaxVolume( 0.5 );
+			thunderSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 			thunderSound.play( );
 		}
 	} else {
 		if( app.settings.SOUND_FX > 0 ) {
 			var thunderSound = new Sound( 'Thunder-Quiet' );
-			thunderSound.setMaxVolume( 0.5 );
+			thunderSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 			thunderSound.play( );
 		}
 	}

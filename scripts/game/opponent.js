@@ -13,7 +13,13 @@ Opponent.prototype.draw = function( context ) {
 };
 
 Opponent.prototype.getNameSound = function() {
-	return( this.paddle.nameSound ) ? this.paddle.nameSound : new Sound( 'Their Paddle' );
+	if( this.paddle.nameSound ) {
+		return this.paddle.nameSound;
+	} else {
+		var nameSound = new Sound( 'Their Paddle' );
+		nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
+		return nameSound;
+	}
 };
 
 Opponent.prototype.applyAI = function( ) {

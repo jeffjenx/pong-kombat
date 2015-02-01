@@ -15,7 +15,7 @@ function Powerup( texture ) {
 	this.size.x = viewport.height * 0.05;
 	this.size.y = viewport.height * 0.05;
 	*/
-	this.timeoutTime = 8; // 8 seconds
+	this.timeoutTime; // set from kombat layer
 }
 
 Powerup.prototype = new Sprite;
@@ -27,6 +27,7 @@ Powerup.prototype.collect = function( kombatant ) {
 };
 
 Powerup.prototype.timedOut = function( ) {
+	console.log('timedout');
 	this.layer.removeComponent( this.id );
 	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 10;
 }
@@ -42,7 +43,7 @@ Powerup.prototype.update = function( deltaTime ) {
 		this.scale = 1;
 	}
 
-	if( app.gameTime >= this.timeoutTime ) {
+	if( this.layer.scene.timeElapsed >= this.timeoutTime ) {
 		this.timedOut();
 	}
 }

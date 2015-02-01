@@ -18,20 +18,36 @@ TitleMenu.prototype = new Menu;
 TitleMenu.prototype.constructor = TitleMenu;
 
 TitleMenu.prototype.selectFreePlay = function( ) {
+	if( typeof track === 'function' ) {
+		track( 'free-play' );
+	}
+
 	app.gameMode = GameModes.FREEPLAY;
 	SceneManager.changeScene( new PickPaddleScene( ), Transitions.FADE, 0.5 );
 };
 
 TitleMenu.prototype.selectSettings = function( ) {
+	if( typeof track === 'function' ) {
+		track( 'dip-switches' );
+	}
+
 	this.closeMenu( );
 	SceneManager.changeScene( new SettingsScene( ), Transitions.FADE );
 };
 
 TitleMenu.prototype.selectTournament = function( ) {
+	if( typeof track === 'function' ) {
+		track( 'tournament' );
+	}
+
 	app.gameMode = GameModes.TOURNAMENT;
 	SceneManager.changeScene( new PickPaddleScene( ), Transitions.FADE, 0.5 );
 };
 
 TitleMenu.prototype.selectQuit = function( ) {
-	window.location = '/terminal';
+	if( typeof track === 'function' ) {
+		track( 'quit' );
+	}
+
+	window.location = '/';
 };

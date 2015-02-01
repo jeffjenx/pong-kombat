@@ -34,13 +34,14 @@ function MystPaddle( ) {
 	this.effect.attachTo( this );
 
 	this.nameSound = new Sound( 'Myst' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 1.0, action: function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var poofSound = new Sound( 'Poof' );
-				poofSound.setMaxVolume( 1 );
+				poofSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				poofSound.play( );
 			}
 		} },
@@ -113,7 +114,7 @@ MystPaddle.prototype.shootProjectile = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Spray' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 };

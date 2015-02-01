@@ -181,11 +181,11 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 	{
 		if( app.settings.COMBAT ) {
 			var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
-			randomHitSound.stop();
+			randomHitSound.setMaxVolume(0.8 * app.settings.SOUND_FX / 11);
 			randomHitSound.play();
 		} else {
-			this.beepSound.stop( );
 			this.beepSound.play( );
+			this.beepSound.setMaxVolume(0.8 * app.settings.SOUND_FX / 11);
 		}
 	}
 };

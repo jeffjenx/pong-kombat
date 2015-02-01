@@ -58,7 +58,7 @@ function StoryScene( ) {
 
 	if( app.settings.TUNES > 0 ) {
 		this.music = new Sound( 'Music-Story' );
-		this.music.setMaxVolume( 0.25 );
+		this.music.setMaxVolume( 0.25 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
 }

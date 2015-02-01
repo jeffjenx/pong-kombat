@@ -100,7 +100,7 @@ function TournamentScene( ) {
 
 	if( app.settings.TUNES > 0 ) {
 		this.music = new Sound( 'Music-Tournament' );
-		this.music.setMaxVolume( 0.5 );
+		this.music.setMaxVolume( 0.5 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
 }

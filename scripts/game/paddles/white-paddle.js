@@ -18,6 +18,7 @@ function WhitePaddle( ) {
 	this.lifeModifier = 0.75;
 
 	this.nameSound = new Sound( 'White-Paddle' );
+	this.nameSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 WhitePaddle.prototype = new Paddle;
@@ -96,7 +97,7 @@ WhitePaddle.prototype.shootProjectile = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Whoosh-3' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 };

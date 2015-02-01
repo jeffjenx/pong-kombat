@@ -101,6 +101,7 @@ Menu.prototype.selectCurrentItem = function( ) {
 	this.items[this.currentIndex].action.call( this );
 
 	if( app.settings.SOUND_FX > 0 ) {
+		this.confirmSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.confirmSound.play( );
 		//AudioManager.play( this.confirmSound );
 	}
@@ -114,7 +115,8 @@ Menu.prototype.selectNextItem = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		var sound = (this.currentIndex === -1) ? this.confirmSound : this.clickSound;
-		sound.play(  );
+		sound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
+		sound.play( );
 	}
 
 	this.currentIndex += 1;

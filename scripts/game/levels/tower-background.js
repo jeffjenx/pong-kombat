@@ -43,7 +43,7 @@ function TowerBackgroundLayer( scene ) {
 	this.addComponent( 'Bell-Ball-Shadow', this.bellBall );
 
 	this.bellSound = new Sound( 'Bell' );
-	this.bellSound.setMaxVolume( 0.11 );
+	this.bellSound.setMaxVolume( 0.11 * app.settings.SOUND_FX / 11 );
 }
 
 TowerBackgroundLayer.prototype = new Layer;

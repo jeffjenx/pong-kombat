@@ -22,6 +22,7 @@ function ShifterPaddle( ) {
 	this.patternCanvas.height = viewport.height;
 
 	this.nameSound = new Sound( 'Shifter' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -58,7 +59,7 @@ ShifterPaddle.prototype.shootProjectile = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Laser' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 };

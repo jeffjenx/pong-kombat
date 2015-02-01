@@ -11,7 +11,13 @@ Player.prototype.draw = function( context ) {
 };
 
 Player.prototype.getNameSound = function() {
-	return( this.paddle.nameSound ) ? this.paddle.nameSound : new Sound( 'Your Paddle' );
+	if( this.paddle.nameSound ) {
+		return this.paddle.nameSound;
+	} else {
+		var nameSound = new Sound( 'Your Paddle' );
+		nameSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
+		return nameSound;
+	}
 };
 
 Player.prototype.handleInput = function( ) {

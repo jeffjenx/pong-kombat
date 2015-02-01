@@ -71,12 +71,14 @@ function KombatScene( ) {
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 
-	if( app.settings.TUNES > 0 ) {
+	if( app.settings.SOUND_FX > 0 ) {
 		this.dismantleSound = new Sound( 'Dun-Dun-Dun' );
-		this.dismantleSound.setMaxVolume( 0.5 );
+		this.dismantleSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
+	}
 
+	if( app.settings.TUNES > 0 ) {
 		this.music = new Sound( 'Music-Retro-Crime-Movie' );
-		this.music.setMaxVolume( 0.11 );
+		this.music.setMaxVolume( 0.11 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
 }
@@ -279,7 +281,7 @@ KombatScene.prototype.startMatch = function( ) {
 	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
 	this.winner = null;
 
-	if( Math.random() < 0.10 && leftKombatant.paddle.enum !== 'MRSLAYER' && rightKombatant.paddle.enum !== 'MRSLAYER' ) {
+	if( Math.random() < 0.05 && leftKombatant.paddle.enum !== 'MRSLAYER' && rightKombatant.paddle.enum !== 'MRSLAYER' ) {
 		this.changeState( this.states.secretMessage );
 		this.layers['HUD'].addSecretMessage();
 	} else {
@@ -470,6 +472,10 @@ KombatScene.prototype.update = function( deltaTime ) {
 						app.tournament.increaseRank( );
 
 						if( app.tournament.currentIndex >= app.tournament.opponents.length ) {
+							if( typeof track === 'function' ) {
+								track( 'completed-tournament' );
+							}
+
 							var storyScene = new StoryScene( );
 							storyScene.setPaddle( Paddles[app.tournament.player.paddle.enum] );
 							storyScene.setStory( app.tournament.player.paddle.endStory );

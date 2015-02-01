@@ -15,7 +15,7 @@ function HighwayForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -36,7 +36,7 @@ function HighwayForegroundLayer( scene ) {
 		{ start : 7.25, end : 7.25, action : function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var thudSound = new Sound( 'Thud' );
-				thudSound.setMaxVolume( 0.5 );
+				thudSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				thudSound.play( );
 			}
 		} },

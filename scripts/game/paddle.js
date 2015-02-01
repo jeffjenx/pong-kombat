@@ -84,7 +84,7 @@ function Paddle( texture ) {
 	this.gruntSounds.push( new Sound( 'Grunt-1' ) );
 	this.gruntSounds.push( new Sound( 'Grunt-2' ) );
 	this.gruntSounds.push( new Sound( 'Grunt-3' ) );
-
+	
 	this.hitSounds = [];
 	this.hitSounds.push( new Sound( 'Kick-1' ) );
 	this.hitSounds.push( new Sound( 'Kick-2' ) );
@@ -93,10 +93,10 @@ function Paddle( texture ) {
 	this.hitSounds.push( new Sound( 'Punch-2' ) );
 	this.hitSounds.push( new Sound( 'Punch-3' ) );
 	this.hitSounds.push( new Sound( 'Punch-4' ) );
-
+	
 	this.screamSound = new Sound( 'Scream' );
 	this.absorbSound = new Sound( 'Shield-Absorb' );
-
+	
 	this.dismantleAnimationFrames = null;
 }
 
@@ -110,6 +110,7 @@ Paddle.prototype.canShootProjectile = function( ) {
 
 Paddle.prototype.blockProjectile = function() {
 	if( app.settings.SOUND_FX > 0 ) {
+		this.absorbSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.absorbSound.play();
 	}
 };
@@ -261,7 +262,8 @@ Paddle.prototype.dismantleElectricuting = function(percentComplete) {
 	
 	this.effect.update( 1/60 );
 
-	if( percentComplete > 0.75 && !this.screamSound.started ) {
+	if( app.settings.SOUND_FX > 0 && percentComplete > 0.75 && !this.screamSound.started ) {
+		this.screamSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.screamSound.play();
 	}
 };
@@ -324,7 +326,7 @@ Paddle.prototype.dismantleSplashing = function(resource) {
 
 		if( app.settings.SOUND_FX > 0 ) {
 			var splashSound = new Sound( 'Drips-1' );
-			splashSound.setMaxVolume( 0.25 );
+			splashSound.setMaxVolume( 0.25 * app.settings.SOUND_FX / 11 );
 			splashSound.play( );
 		}
 	}
@@ -442,7 +444,7 @@ Paddle.prototype.dismantleFallToBottom = function() {
 			this.velocity.y = 0;
 			if( app.settings.SOUND_FX > 0 ) {
 				var thudSound = new Sound( 'Thud' );
-				thudSound.setVolume( 0.75 );
+				thudSound.setVolume( 0.75 * app.settings.SOUND_FX / 11 );
 				thudSound.play();
 			}
 		}
@@ -798,6 +800,7 @@ Paddle.prototype.getHit = function( projectile ) {
 	blood.size.x = 0;
 	blood.size.y = 0;
 	blood.dripSound = new Sound( 'Drips-' + Math.ceil(Math.random()*3) );
+	blood.dripSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	blood.update = function( deltaTime ) {
 		ParticleSystem.prototype.update.call( this, deltaTime );
 
@@ -843,9 +846,11 @@ Paddle.prototype.getHit = function( projectile ) {
 	if( app.settings.SOUND_FX > 0 )
 	{
 		var randomHitSound = this.hitSounds[ Math.floor(Math.random() * this.hitSounds.length) ];
+		randomHitSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		randomHitSound.play();
 
 		var randomGruntSound = this.gruntSounds[ Math.floor(Math.random() * this.gruntSounds.length) ];
+		randomGruntSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		randomGruntSound.play();
 	}
 };

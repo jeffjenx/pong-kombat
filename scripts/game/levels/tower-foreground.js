@@ -25,7 +25,7 @@ function TowerForegroundLayer( scene ) {
 	this.addComponent( 'Rope4', this.rope4 );
 
 	this.ambientSound = new Sound( 'Tower' );
-	this.ambientSound.setMaxVolume( 0.75 );
+	this.ambientSound.setMaxVolume( 0.75 * app.settings.SOUND_FX / 11 );
 
 	this.dismantleSequence = [ Buttons.DOWN, Buttons.LEFT, Buttons.UP, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -41,7 +41,7 @@ function TowerForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -61,7 +61,7 @@ function TowerForegroundLayer( scene ) {
 		{ start : 7.25, end : 7.25, action : function(winner, loser) {
 			if( app.settings.SOUND_FX > 0 ) {
 				var thudSound = new Sound( 'Thud' );
-				thudSound.setMaxVolume( 0.5 );
+				thudSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				thudSound.play( );
 			}
 		} },

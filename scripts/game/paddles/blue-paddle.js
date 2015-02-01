@@ -36,6 +36,7 @@ function BluePaddle( ) {
 	//}
 
 	this.nameSound = new Sound( 'Blue-Paddle' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -67,7 +68,7 @@ function BluePaddle( ) {
 		{ start : 9.23, end : 9.23, action : function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var explodeSound = new Sound( 'Explode' );
-				explodeSound.setMaxVolume( 1 );
+				explodeSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				explodeSound.play();
 			}
 		} },
@@ -94,7 +95,7 @@ BluePaddle.prototype.shootProjectile = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Whoosh-2' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 	//Paddle.prototype.shootProjectile.call( this );

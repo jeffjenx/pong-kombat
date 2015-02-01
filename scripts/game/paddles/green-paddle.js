@@ -16,6 +16,7 @@ function GreenPaddle( ) {
 	this.broken = Resources['Paddle-Broken-Green'];
 
 	this.nameSound = new Sound( 'Green-Paddle' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.currentStep = 0;
 	this.dismantleAnimationFrames = [
@@ -302,7 +303,7 @@ GreenPaddle.prototype.shootProjectile = function( ) {
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Arrow-Fired' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 

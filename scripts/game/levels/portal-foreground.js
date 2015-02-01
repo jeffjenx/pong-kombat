@@ -2,7 +2,7 @@ function PortalForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
 	this.ambientSound = new Sound( 'Space' );
-	this.ambientSound.setMaxVolume( 1 );
+	this.ambientSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.LEFT, Buttons.DOWN, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -18,7 +18,7 @@ function PortalForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -31,14 +31,14 @@ function PortalForegroundLayer( scene ) {
 		{ start : 6.00, end : 6.00, action : function(winner, loser) {
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.1 );
+				screamingSound.setMaxVolume( 0.1 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
 		{ start : 9.00, end : 9.00, action : function(winner, loser) {
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.05 );
+				screamingSound.setMaxVolume( 0.05 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },

@@ -166,13 +166,16 @@ function PickPaddleScene( )
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.clickSound = new Sound( 'Click' );
+		this.clickSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.confirmSound = new Sound( 'Confirm' );
+		this.confirmSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.denySound = new Sound( 'Deny' );
+		this.denySound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 	}
 
 	if( app.settings.TUNES > 0 ) {
 		this.music = new Sound( 'Music-Pick-Paddle' );
-		this.music.setMaxVolume( 0.33 );
+		this.music.setMaxVolume( 0.33 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
 	
@@ -198,7 +201,7 @@ PickPaddleScene.prototype.updateIn = function( transitionPercent ) {
 		this.gonged = true;
 
 		var gong = new Sound( 'Music-Gong' );
-		gong.setMaxVolume( 0.25 );
+		gong.setMaxVolume( 0.25 * app.settings.SOUND_FX / 11 );
 		gong.play( );
 	}
 };
@@ -305,6 +308,10 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	{
 		var player = new Player( );
 		player.setPaddle( Paddles[paddles[this.currentIndex].enum] );
+
+		if( typeof track === 'function' ) {
+			track( paddles[this.currentIndex].enum.toLowerCase() );
+		}
 		
 		if( app.settings.SOUND_FX > 0 ) {
 			this.confirmSound.play();
@@ -350,10 +357,13 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	 || InputManager.checkSequence([Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT])
 	 || InputManager.checkSequence([Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT])
 	) {
-		this.addLayer( 'Menu', new LevelMenu( this ) );	
+		this.addLayer( 'Menu', new LevelMenu( this ) );
+		if( typeof track === 'function' ) {
+			track( 'zone-select' );
+		}
 	}
 
-	// Secret Level Select Menu (Hold direction for # seconds)
+	// Secret Paddle Select Menu (Hold direction for # seconds)
 	var now = Date.now( );
 	var buttons = [ Buttons.DOWN, Buttons.UP, Buttons.LEFT, Buttons.RIGHT ];
 	for( var i in buttons )
@@ -363,7 +373,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			if( now - InputManager.currentState[ buttons[i] ] > 3 * 1000 )
 			{
 				this.currentPage = ( this.currentPage === this.primaryLayer ) ? this.secondaryLayer : this.primaryLayer;
-				InputManager.currentState[ buttons[i] ]  = now;
+				InputManager.currentState[ buttons[i] ] = now;
 			}
 		}
 	}

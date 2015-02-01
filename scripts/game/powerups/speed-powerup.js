@@ -31,6 +31,7 @@ function SpeedPowerup( ) {
 
 	this.timeoutTime *= 1000 + app.gameTime;
 	this.canOpenSound = new Sound( 'Can-Open' );
+	this.canOpenSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 SpeedPowerup.prototype = new Powerup;
@@ -41,7 +42,6 @@ SpeedPowerup.prototype.collect = function( kombatant ) {
 	kombatant.paddle.speedPowerup = app.gameTime + 10 * 1000;
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.canOpenSound.stop();
 		this.canOpenSound.play();
 	}
 };

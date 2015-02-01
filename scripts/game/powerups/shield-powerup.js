@@ -31,6 +31,7 @@ function ShieldPowerup( ) {
 
 	this.timeoutTime *= 1000 + app.gameTime;
 	this.activateSound = new Sound( 'Shield-Activate' );
+	this.activateSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 ShieldPowerup.prototype = new Powerup;
@@ -44,7 +45,6 @@ ShieldPowerup.prototype.collect = function( kombatant ) {
 	kombatant.paddle.shieldPowerup = app.gameTime + 10 * 1000;
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.activateSound.stop();
 		this.activateSound.play();
 	}
 };

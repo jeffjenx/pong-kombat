@@ -197,6 +197,12 @@ function HUDLayer( scene ) {
 	this.flawless.fontFamily = this.winner.fontFamily;
 	this.flawless.fontSize = viewport.height * 0.04;
 	this.flawless.position.y = viewport.height * 0.7;
+	this.flawless.textShadow = {
+		color : 'black',
+		blur : 1,
+		x : 1,
+		y : 1
+	};
 
 	this.dismantled = new Sprite( 'Dismantled' );
 	this.dismantled.size.y = viewport.height * 0.13;
@@ -219,18 +225,33 @@ function HUDLayer( scene ) {
 	this.currentRound.fontSize = this.flawless.fontSize;
 	this.currentRound.position.y = this.flawless.position.y;
 	this.currentRound.opacity = 0;
+	this.currentRound.textShadow = {
+		color : 'black',
+		blur : 1,
+		x : 1,
+		y : 1
+	};
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.spamalitySound = new Sound( 'Spamality!' );
+		this.spamalitySound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.dismantledSound = new Sound( 'Dismantled!' );
+		this.dismantledSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.flawlessSound = new Sound( 'Mint-Condition' );
+		this.flawlessSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.finishEmSound = new Sound( 'Finish-Em!' );
+		this.finishEmSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.winsSound = new Sound( 'Wins' );
+		this.winsSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.bounceSound = new Sound( 'Bounce!' );
+		this.bounceSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.roundSound = new Sound( 'Round' );
+		this.roundSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		this.roundNumberSounds = [];
 		for( var i = 1; i <= 11; i++ ) {
-			this.roundNumberSounds.push( new Sound( this.numberToWord(i) ) );
+			var roundNumberSound = new Sound( this.numberToWord(i) );
+			roundNumberSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
+			this.roundNumberSounds.push( roundNumberSound );
 		}
 	}
 }
@@ -316,6 +337,12 @@ HUDLayer.prototype.addSecretMessage = function( ) {
 	this.secretMessage.fontSize = this.flawless.fontSize;
 	this.secretMessage.position.y = this.flawless.position.y;
 	this.secretMessage.opacity = 0;
+	this.secretMessage.textShadow = {
+		color : 'black',
+		blur : 1,
+		x : 1,
+		y : 1
+	};
 };
 
 HUDLayer.prototype.updateWinner = function( ) {

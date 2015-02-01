@@ -178,6 +178,7 @@ KombatLayer.prototype.addPowerup = function( ) {
 		case Powerups.TIME : powerup = new TimePowerup( ); break;
 		default : powerup = new SpeedPowerup( ); break;
 	}
+	powerup.timeoutTime = this.scene.timeElapsed + 8.8;
 	this.addComponent( 'Powerup', powerup );
 };
 

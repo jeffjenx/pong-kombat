@@ -18,6 +18,7 @@ function MrSlayerPaddle( ) {
 	this.gloss = new Sprite( 'Paddle-Gloss-MrSlayer' );
 
 	this.nameSound = new Sound( 'Mr-Slayer' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -42,7 +43,7 @@ function MrSlayerPaddle( ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var sawSound = new Sound( 'Saw-Blade' );
-				sawSound.setMaxVolume( 0.75 );
+				sawSound.setMaxVolume( 0.75 * app.settings.SOUND_FX / 11 );
 				sawSound.play();
 			}
 		} },
@@ -56,7 +57,7 @@ function MrSlayerPaddle( ) {
 		{ start : 3.5, end : 3.5, action : function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamSound = new Sound( 'Scream' );
-				screamSound.setMaxVolume( 0.75 );
+				screamSound.setMaxVolume( 0.75 * app.settings.SOUND_FX / 11 );
 				screamSound.play();
 			}
 		}},
@@ -88,7 +89,7 @@ MrSlayerPaddle.prototype.shootProjectile = function( ) {
 
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Whoosh-3' );
-		projectile.sound.setMaxVolume( 0.5 );
+		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 };

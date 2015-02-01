@@ -116,7 +116,7 @@ HighwayBackgroundLayer.prototype.addVehicle = function( ) {
 
 	if( app.settings.SOUND_FX > 0 ) {
 		vehicle.sound = new Sound( 'Vehicle' );
-		vehicle.sound.setMaxVolume( 0.11 );
+		vehicle.sound.setMaxVolume( 0.11 * app.settings.SOUND_FX / 11 );
 	}
 };
 

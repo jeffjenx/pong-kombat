@@ -27,6 +27,7 @@ function PurplePaddle( ) {
 	this.bolt.life = 0;
 
 	this.nameSound = new Sound( 'Purple-Paddle' );
+	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
@@ -45,7 +46,7 @@ function PurplePaddle( ) {
 		{ start : 3, end : 3, action: function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var chainsSound = new Sound( 'Chains' );
-				chainsSound.setMaxVolume(1);
+				chainsSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 				chainsSound.play();
 			}
 		} },
@@ -107,7 +108,7 @@ function PurplePaddle( ) {
 			start : 7.0, end : 7.0, action : function() {
 				if( app.settings.SOUND_FX > 0 ) {
 					var pumpSound = new Sound( 'Drop-Cup' );
-					pumpSound.setMaxVolume( 1 );
+					pumpSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 					pumpSound.play();
 				}
 			}
@@ -129,7 +130,7 @@ function PurplePaddle( ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var pumpSound = new Sound( 'Spray' );
-				pumpSound.setMaxVolume( 1 );
+				pumpSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				pumpSound.play();
 			}
 		} },
@@ -139,7 +140,7 @@ function PurplePaddle( ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var pumpSound = new Sound( 'Spray' );
-				pumpSound.setMaxVolume( 1 );
+				pumpSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				pumpSound.play();
 			}
 		} },
@@ -149,14 +150,14 @@ function PurplePaddle( ) {
 
 			if( app.settings.SOUND_FX > 0 ) {
 				var pumpSound = new Sound( 'Spray' );
-				pumpSound.setMaxVolume( 1 );
+				pumpSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				pumpSound.play();
 			}
 		} },
 		{ start : 11.5, end : 11.5, action : function() {
 			if( app.settings.SOUND_FX > 0 ) {
 				var explodeSound = new Sound( 'Explode' );
-				explodeSound.setMaxVolume( 1 );
+				explodeSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 				explodeSound.play();
 			}
 		} },
@@ -310,7 +311,7 @@ PurplePaddle.prototype.shootProjectile = function( ) {
 
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Bolt' );
-		projectile.sound.setMaxVolume( 0.11 );
+		projectile.sound.setMaxVolume( 0.11 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
 };

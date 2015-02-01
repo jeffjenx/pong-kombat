@@ -119,11 +119,16 @@ function SettingsScene( )
 	
 	this.selectSetting( 'CENSORSHIP' );
 
-	if( app.settings.TUNES > 0 ) {
-		this.music = new Sound( 'Music-Settings' );
-		this.music.setMaxVolume( 0.5 );
-		this.music.loop( );
-	}
+	this.music = new Sound( 'Music-Settings' );
+	this.music.setMaxVolume( 0.5 * app.settings.TUNES / 11 );
+	//if( app.settings.TUNES > 0 ) {
+	this.music.loop( );
+	//}
+
+	this.beepSound = new Sound('Beep');
+	this.beepSound.setMaxVolume(0.5 * app.settings.SOUND_FX / 11);
+	this.boopSound = new Sound('Boop');
+	this.boopSound.setMaxVolume(0.5 * app.settings.SOUND_FX / 11);
 }
 
 SettingsScene.prototype = new Scene;
@@ -165,6 +170,9 @@ SettingsScene.prototype.decreaseSetting = function( )
 		break;
 
 		case 'SOUND_FX' :
+			this.beepSound.setMaxVolume(0.5 * app.settings.SOUND_FX / 11);
+			this.beepSound.play();
+			// no break;
 		case 'TUNES' :
 			var volume = app.settings[ this.currentSetting ];
 
@@ -176,6 +184,8 @@ SettingsScene.prototype.decreaseSetting = function( )
 
 			app.settings[ this.currentSetting ] = volume;
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources.Strings.SETTINGS.OFF;
+
+			this.music.setMaxVolume(0.5 * app.settings.TUNES / 11);
 		break;
 		
 		case 'CENSORSHIP' :
@@ -233,6 +243,9 @@ SettingsScene.prototype.increaseSetting = function( )
 		break;
 
 		case 'SOUND_FX' :
+			this.beepSound.setMaxVolume(0.5 * app.settings.SOUND_FX / 11);
+			this.beepSound.play();
+			// no break;
 		case 'TUNES' :
 			var volume = app.settings[ this.currentSetting ];
 
@@ -244,6 +257,8 @@ SettingsScene.prototype.increaseSetting = function( )
 
 			app.settings[ this.currentSetting ] = volume;
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = ( volume > 0 ) ? volume : Resources.Strings.SETTINGS.OFF;
+
+			this.music.setMaxVolume(0.5 * app.settings.TUNES / 11);
 		break;
 		
 		case 'CENSORSHIP' :
@@ -313,9 +328,7 @@ SettingsScene.prototype.selectPreviousSetting = function( )
 };
 
 SettingsScene.prototype.unload = function( ) {
-	if( app.settings.TUNES > 0 ) {
-		this.music.stop( );
-	}
+	this.music.stop( );
 };
 
 SettingsScene.prototype.updateIn = function( transitionPercent ) {

@@ -20,7 +20,7 @@ function ForestForegroundLayer( scene ) {
 	this.addComponent( 'Trees3', this.trees3 );
 
 	this.ambientSound = new Sound( 'Birds' );
-	this.ambientSound.setMaxVolume( 1 );
+	this.ambientSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 }
 
 ForestForegroundLayer.prototype = new Layer;

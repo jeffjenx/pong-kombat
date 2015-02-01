@@ -32,6 +32,7 @@ function TimePowerup( ) {
 	this.timeoutTime *= 1000 + app.gameTime;
 
 	this.clockSound = new Sound( 'Clock' );
+	this.clockSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 TimePowerup.prototype = new Powerup;
@@ -42,7 +43,6 @@ TimePowerup.prototype.collect = function( kombatant ) {
 	kombatant.paddle.timePowerup = app.gameTime + 10 * 1000;
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.clockSound.stop();
 		this.clockSound.play();
 	}
 };

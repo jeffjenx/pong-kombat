@@ -2,7 +2,7 @@ function PitForegroundLayer( scene ) {
 	Layer.call( this, scene );
 
 	this.ambientSound = new Sound( 'Pit' );
-	this.ambientSound.setMaxVolume( 1 );
+	this.ambientSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
 	
 	this.dismantleSequence = [ Buttons.RIGHT, Buttons.UP, Buttons.LEFT, Buttons.ACTION ];
 	this.dismantleAnimationFrames = [
@@ -18,7 +18,7 @@ function PitForegroundLayer( scene ) {
 			loser.getHit();
 			if( app.settings.SOUND_FX > 0 ) {
 				var screamingSound = new Sound( 'Long-Scream' );
-				screamingSound.setMaxVolume( 0.5 );
+				screamingSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamingSound.play( );
 			}
 		} },
@@ -38,11 +38,11 @@ function PitForegroundLayer( scene ) {
 		{ start : 7.25, end : 7.25, action : function(winner, loser) {
 			if( app.settings.SOUND_FX > 0 ) {
 				var thudSound = new Sound( 'Thud' );
-				thudSound.setMaxVolume( 0.5 );
+				thudSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				thudSound.play( );
 
 				var screamSound = new Sound( 'Scream' );
-				screamSound.setMaxVolume( 0.5 );
+				screamSound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 				screamSound.play( );
 			}
 		} },

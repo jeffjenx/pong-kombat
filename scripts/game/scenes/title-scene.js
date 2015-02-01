@@ -58,7 +58,7 @@ function TitleScene( ) {
 
 	if( app.settings.TUNES > 0 ) {
 		this.music = new Sound( 'Music-Intro' );
-		this.music.setMaxVolume( 0.5 );
+		this.music.setMaxVolume( 0.5 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
 }
@@ -109,9 +109,15 @@ TitleScene.prototype.update = function( deltaTime ) {
 			app.godMode = 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r';
 			this.message.text = 'GOD MODE';
 			this.message.opacity = 1;
-			var excellentSound = new Sound( 'Excellent' );
-			excellentSound.setMaxVolume( 0.75 );
-			excellentSound.play( );
+			if( app.settings.SOUND_FX > 0 ) {
+				var excellentSound = new Sound( 'Excellent' );
+				excellentSound.setMaxVolume( 0.75 * app.settings.SOUND_FX / 11 );
+				excellentSound.play( );
+			}
+			
+			if( typeof track === 'function' ) {
+				track( 'god-mode' );
+			}
 		}
 		else {
 			this.addLayer( 'Menu', new TitleMenu( this ) );
@@ -132,6 +138,10 @@ TitleScene.prototype.update = function( deltaTime ) {
 	}
 
 	if( !this.layers['Menu'] && this.timeElapsed > 15 ) {
+		if( typeof track === 'function' ) {
+			track( 'story' );
+		}
+
 		var storyScene = new StoryScene( );
 		storyScene.setPaddle( Paddles.RANDOM );
 		storyScene.setStory( storyScene.paddle.story );

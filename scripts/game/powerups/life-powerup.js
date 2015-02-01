@@ -32,6 +32,7 @@ function LifePowerup( ) {
 	this.timeoutTime *= 1000 + app.gameTime;
 
 	this.chompSound = new Sound( 'Chomp' );
+	this.chompSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 }
 
 LifePowerup.prototype = new Powerup;
@@ -42,7 +43,6 @@ LifePowerup.prototype.collect = function( kombatant ) {
 	kombatant.life = Math.min( kombatant.life + 0.5, SceneManager.currentScene.startLife );
 
 	if( app.settings.SOUND_FX > 0 ) {
-		this.chompSound.stop();
 		this.chompSound.play();
 	}
 };
