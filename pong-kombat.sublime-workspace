@@ -1,0 +1,630 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Fo",
+				"ForestForegroundLayer"
+			],
+			[
+				"vehi",
+				"vehicleSound"
+			],
+			[
+				"dism",
+				"dismantledSound"
+			],
+			[
+				"finis",
+				"finishEmSound"
+			],
+			[
+				"stat",
+				"stateTime"
+			],
+			[
+				"sound",
+				"SOUND_FX"
+			],
+			[
+				"Title",
+				"TitleScene"
+			],
+			[
+				"handle",
+				"handleGamepads"
+			],
+			[
+				"cy",
+				"cymbalMusic"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"p",
+				"percentComplete"
+			],
+			[
+				"m",
+				"dismantleMeanderToMiddle"
+			],
+			[
+				"se",
+				"secretMessage"
+			],
+			[
+				"flaw",
+				"flawless"
+			],
+			[
+				"finish",
+				"finishType"
+			],
+			[
+				"fini",
+				"finishTypes"
+			],
+			[
+				"a",
+				"appearing"
+			],
+			[
+				"dismantl",
+				"dismantleExploding"
+			],
+			[
+				"righ",
+				"rightKombatant"
+			],
+			[
+				"select",
+				"selectedItemTiming"
+			],
+			[
+				"flawless",
+				"flawlessSound"
+			],
+			[
+				"ve",
+				"velocity"
+			],
+			[
+				"start",
+				"startLife"
+			],
+			[
+				"left",
+				"leftIcon"
+			],
+			[
+				"proje",
+				"projectiles"
+			],
+			[
+				"proj",
+				"projectiles"
+			],
+			[
+				"Gree",
+				"GreenArrowProjectile"
+			],
+			[
+				"dis",
+				"dismantleAnimationFrames"
+			],
+			[
+				"back",
+				"backgroundLogo"
+			],
+			[
+				"time",
+				"timePowerup"
+			],
+			[
+				"speed",
+				"speedPowerup"
+			],
+			[
+				"Ba",
+				"Ball-Food-Plain-Bagel"
+			],
+			[
+				"Bal",
+				"Ball-Food-Donut"
+			],
+			[
+				"Ball",
+				"Ball-Food-Cookie"
+			],
+			[
+				"Ball-Super-Mario",
+				"Ball-Super-Mario-Coin"
+			],
+			[
+				"global",
+				"globalCompositeOperation"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"intro",
+				"introduction-2"
+			],
+			[
+				"introduc",
+				"introduction-1"
+			],
+			[
+				"k",
+				"Kinetic"
+			],
+			[
+				"lo",
+				"localstorage"
+			],
+			[
+				"local",
+				"localStorage"
+			],
+			[
+				"angular-translate",
+				"angular-translate-loader-static-files"
+			],
+			[
+				"regi",
+				"registerModule"
+			],
+			[
+				"reg",
+				"registerModule"
+			],
+			[
+				"Applic",
+				"ApplicationConfiguration"
+			],
+			[
+				"locatio",
+				"locationProvider"
+			],
+			[
+				"array_key",
+				"array_key_exists"
+			],
+			[
+				"utf8_",
+				"utf8_encode"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Quantastical/Projects/GitHub/pong-kombat"
+	],
+	"file_history":
+	[
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/languages/en/assets.lang.json",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/scripts/engine/start.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/index.html",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/scripts/pong-kombat.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/modules/play/controllers/play.client.controller.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/pong-kombat.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/modules/teaser/styles/teaser.client.style.scss",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/languages/en/power-guide.lang.txt",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/modules/core/config/core.client.routes.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/package.json",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/bower.json",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/tower-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/portal-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/hell-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/ice-river-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/pit-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/toxic-pool-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/languages/en/assets.lang.json",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/player.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/ball.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/assets.json",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/tournament-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/test-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/temp-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/story-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/main-story-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/kombat-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/kombat-layer.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/hud-layer.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/skull-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/shadow-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/lightning-sai-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/laser-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/ice-blast-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/green-arrow-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerups/time-powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerups/speed-powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerups/shield-powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerups/life-powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/powerups/glue-powerup.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/yellow-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/white-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/shifter-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/red-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/purple-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/myst-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/mr-slayer-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/monolith-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/green-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/paddles/blue-paddle.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/menus/test-menu.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/toxic-pool-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/storm-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/storm-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/portal-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/ice-river-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/highway-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/highway-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/hell-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/forest-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/effects/particle-system.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/super-mario.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/storage-media.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/solar-system.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/rupee.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/pac-man.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/logo.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/football.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/food.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/eye-ball.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/dice.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/coin.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/sound.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/component.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/audio-manager.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/app.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/humans.txt",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/resource-manager.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/sprite.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/title-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/settings-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/tower-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/forest-foreground.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/menu.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/input-manager.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/scene-manager.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/scenes/pick-paddle-scene.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/package.opf",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/styles/power-ups.css",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/power-ups.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/nav.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/styles/classified-information.css",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/classified-information-1.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/classified-information-2.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/battle-zones-6.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/battle-zones-5.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/battle-zones-4.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/battle-zones-3.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/battle-zones-2.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/levels/pit-background.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/opponent.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/saw-blade-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/layer.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/saw-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/config/env/development.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/collect-a-balls-1.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/xhtml/collect-a-balls-2.xhtml",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/documents/Power Guide/content/styles/collect-a-balls.css",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/app/routes/users.server.routes.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/app/views/directory.server.view.html",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/app/views/404.server.view.html",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/app/views/layout.server.view.html",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/projectiles/fireball-projectile.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/engine/text.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/styles/pong-kombat.css",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/modules/play/views/play.client.view.html",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/styles/pong-kombat.scss",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/styles/fonts/anton.scss",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/tennis-ball.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/marble.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/foil-ball.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/croquet-ball.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/emoticon.js",
+		"/Users/Quantastical/Projects/GitHub/pong-kombat/public/scripts/game/balls/billiards-ball.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/Quantastical/Projects/GitHub/pong-kombat"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"main",
+			"shootHomingProjectile",
+			"app",
+			"projectile",
+			"rocked",
+			"throw",
+			"blood",
+			"skull",
+			"explode",
+			"this.explode",
+			"finishing",
+			"changestate",
+			"exploding",
+			"move",
+			"center",
+			"moveto",
+			"scream",
+			"gethit",
+			"sound",
+			"green",
+			"blood",
+			"green",
+			"gethit",
+			"stop",
+			"gethit",
+			"sound",
+			"lightning",
+			"ambient",
+			"river",
+			"splash",
+			"denySound",
+			"roundsound",
+			"changestate",
+			"sound",
+			"scream",
+			"yellow-paddle",
+			"sound",
+			"confirm",
+			"select",
+			"sound",
+			"6.0 ",
+			"dismantle",
+			"blood",
+			"gloss",
+			"6.0 ",
+			"draw",
+			"gloss",
+			"vehicle",
+			"start",
+			"9.4 ",
+			"level",
+			"opponent",
+			"6.3",
+			"5.3.1",
+			"gemini",
+			"gethit",
+			"projectiles",
+			"shootproje",
+			"Red",
+			"gethit",
+			"mong",
+			"rotation",
+			"shootp",
+			"stic",
+			"rounds",
+			"restrict",
+			"vanish",
+			"smoke",
+			"sound",
+			"this.rain",
+			"screamsound",
+			"sound",
+			"blood",
+			"sound",
+			"menu",
+			"startSpeed",
+			"hit",
+			"blood",
+			"scream",
+			"wins",
+			"finishem",
+			"unique",
+			"move",
+			"hitsounds",
+			"punches",
+			"gethit",
+			"effect.up",
+			"effect",
+			"restrict",
+			"restrictToBounds",
+			"update",
+			"dismantle",
+			"dismangle",
+			"position.x",
+			"ball",
+			"announcing",
+			"draw",
+			"shootp",
+			"flip",
+			"fliph",
+			"blood",
+			"shootproj",
+			"move",
+			"projectile",
+			"blood",
+			"bloodEffect",
+			"blood",
+			"announcing",
+			"isWithinViewport",
+			"projectile",
+			"balls.default",
+			"starting",
+			"ball",
+			"setball",
+			"starting",
+			"black",
+			"bounce",
+			"count",
+			"particleimages",
+			"center",
+			"move",
+			"canshoot",
+			"dismantle",
+			"shoot",
+			"shootProjectile",
+			"projectile",
+			"dismantle",
+			"shield"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"outerHole",
+			"content/xhtml/cover",
+			"100%",
+			"128",
+			"115",
+			"REQUEST"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "pong-kombat.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 224.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

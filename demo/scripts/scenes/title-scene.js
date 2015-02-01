@@ -1,10 +1,12 @@
 function TitleScene( ) {
 	Scene.call( this );
 	
+	/*
 	if( Resources['Localization'].UseRTL == "true" )
 	{
 		document.body.style.direction = "rtl";
 	}
+	*/
 	
 	var titleLayer = this.addLayer( 'Title', new Layer( ) );
 	

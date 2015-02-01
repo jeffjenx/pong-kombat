@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"name": "Pong Kombat",
+			"path": "/Users/Quantastical/Projects/GitHub/pong-kombat"
+		}
+	],
+	"settings":
+	{
+		"word_wrap": false,
+		"translate_tabs_to_spaces": false
+	}
+}

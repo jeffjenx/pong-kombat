@@ -1,0 +1,429 @@
+@import 'fonts/abnormal';
+@import 'fonts/mortal-kombat';
+@import '../vendors/animate.scss/_properties';
+@import '../vendors/animate.scss/_attention/_flash';
+@import '../vendors/animate.scss/_fading-entrances/_fadeIn';
+@import '../vendors/animate.scss/_fading-entrances/_fadeInDown';
+@import '../vendors/animate.scss/_fading-exits/_fadeOutDown';
+@import '../vendors/animate.scss/_flippers/_flipInY';
+@import '../vendors/animate.scss/_flippers/_flipOutY';
+@import '../vendors/animate.scss/_zooming-entrances/_zoomIn';
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+@mixin filter($filter) { 
+  -webkit-filter: $filter;
+  -moz-filter: $filter;
+  -ms-filter: $filter;
+  -o-filter: $filter;
+  filter: $filter;
+}
+
+@mixin animation($animation) { 
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -ms-animation: $animation;
+  -o-animation: $animation;
+  animation: $animation;
+}
+
+body
+{
+	margin: 0;
+}
+
+@media screen
+{
+	#teaser
+	{
+		background: black;
+		cursor: default;
+		height: 100%;
+		position: absolute;
+		width: 100%;
+	   
+		header
+		{
+			background-attachment: fixed;
+			background-image: url( '../images/backgrounds/teaser-landscape.jpg' );
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			cursor: default;
+			display: block;
+			height: 100%;
+			@include transition( filter 1s );
+			width: 100%;
+
+			@media screen and ( orientation: portrait )
+			{
+				background-image: url( '../images/backgrounds/teaser-portrait.jpg' );
+			}
+			
+			h1
+			{
+				@include fadeIn( $duration: 3s ); /* animation */
+				bottom: 50%;
+				margin: 0;
+				position: fixed;
+				text-align: center;
+				width: 100%;
+
+				img
+				{
+					height: auto;
+					max-width: 800px;
+					width: 90%;
+				}
+			}
+
+			h2
+			{
+				@include flash( $count: infinite, $duration: 3.3s ); /* animation */
+				color: white;
+				font-family: 'Mortal Kombat 3';
+				font-size: 2.13em;
+				height: 100%;
+				opacity: 0;
+				text-align: center;
+				position: fixed;
+				top: 60%;
+				width: 100%;
+
+				@media screen and ( max-width: 400px )
+				{
+					font-size: 1.5em;
+				}
+			}
+
+			&.blur
+			{
+				@include filter( blur( 25px ) );
+				
+				h2
+				{
+					@include animation( none );
+				}
+			}
+		}
+		
+		button
+		{
+			@include flipInY( $delay: 1s, $duration: 1.1s ); /* animation */
+			background: url( '/icons/pong-kombat-icon-512.png' );
+			background-size: 100%;
+			border: none;
+			border-radius: 9pt;
+			bottom: 11pt;
+			color: transparent;
+			cursor: pointer;
+			height: 40pt;
+			outline: none;
+			position: absolute;
+			right: 11pt;
+			width: 40pt;
+			z-index: 3;
+
+			&:after
+			{
+				@include zoomIn( $delay: 3s, $duration: 1.1s ); /* animation */
+				content: '!';
+				background: red;
+				border-radius: 8pt;
+				color: white;
+				font-family: 'MK Deadly Alliance';
+				font-size: 13pt;
+				font-weight: 600;
+				height: 15pt;
+				line-height: 18pt;
+				position: absolute;
+				right: -5pt;
+				text-align: center;
+				top: -5pt;
+				width: 15pt;
+			}
+		}
+
+		#notifications
+		{
+			background-color: rgba( 0, 0, 0, 0.666 );
+			left: 0;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			transition: background-color 0.33s;
+			width: 100%;
+			z-index: 2;
+
+			h3
+			{
+				@include flipInY( $duration: 1.1s ); /* animation */
+				background: white;
+				border-radius: 60% 40% 60% 40%;
+				color: black;
+				font-family: 'Abnormal';
+				font-size: 33px;
+				left: calc( 50% - 3.75em );
+				margin: 0;
+				padding: 0.5em 0.25em;
+				position: absolute;
+				text-align: center;
+				top: 10%;
+				width: 7em;
+
+				@media screen and (orientation: portrait) and (max-width: 500px), (orientation: landscape) and (max-height: 500px)
+				{
+					display: none;
+				}
+			}
+
+			ul
+			{
+				display: block;
+				font-size: 0;
+				left: 0;
+				list-style: none;
+				height: 326px;
+				margin: -163px 0 0;
+				padding: 0;
+				position: absolute;
+				text-align: center;
+				top: 50%;
+				width: 100%;
+
+				li
+				{
+					display: inline;
+
+					&:nth-child( 1 ):after,
+					&:nth-child( 3 ):after
+					{
+						content: '	';
+						display: block;
+					}
+
+					@for $i from 1 through 6
+					{
+						&:nth-child( #{$i} ) a
+						{
+							@include fadeInDown( $delay: #{(6 - $i) / 10}s, $duration: 0.33s ); /* animation */
+							display: inline-block;
+							@if $i > 1 and $i <= 3 { top: -30px; }
+							@if $i > 3 { top: -60px; }
+							transition-delay: #{(6 - $i) / 10}s;
+							transition-property: display 0s;
+						}
+					}
+
+					a
+					{
+						display: inline-block;
+						outline: none;
+						position: relative;
+
+						&:after
+						{
+							background-image: url( '/images/queue.svg' );
+							background-size: 100%;
+							content: ' ';
+							display: none;
+							left: calc( 50% - 128px / 2 );
+							height: 128px;
+							position: absolute;
+							top: -75px;
+							width: 128px;
+						}
+
+						&:focus:after,
+						&:hover:after
+						{
+							@include fadeInDown( $duration: 0.11s ); /* animation */
+							display: block;
+						}
+					}
+
+					a, img
+					{
+						height: 128px;
+						width: 115px;
+					}
+				}
+			}
+
+			&.hide
+			{
+				background-color: rgba( 0, 0, 0, 0 );
+
+				h3
+				{
+					@include flipOutY( $duration: 1.1s ); /* animation */
+				}
+
+				ul
+				{
+					@for $i from 1 through 6
+					{
+						li:nth-child( #{$i} ) a
+						{
+							@include fadeOutDown( $delay: #{(6 - $i) / 30}s, $duration: 0.11s ); /* animation */
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media print
+{
+	#teaser
+	{
+		&:before
+		{
+			color: black;
+			content: 'PongKombat.com';
+			display: block;
+			font-family: 'Mortal Kombat';
+			font-size: 1.75em;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		header
+		{
+			text-align: center;
+
+			&:before
+			{
+				-webkit-print-color-adjust: exact;
+				background-image: url("/images/qr-codes/pong-kombat.png");
+				background-size: 100%;
+				content: '';
+				display: block;
+				height: 13em;
+				margin: 0 auto 6em;
+				width: 13em;
+
+				@media print and (orientation: landscape)
+				{
+					margin-bottom: 3em;
+				}
+			}
+		}
+
+		h1
+		{
+			&:before
+			{
+				content: attr(data-print);
+				font-size: 6.66em;
+				text-transform: uppercase;
+			}
+
+			img
+			{
+				display: none;
+			}
+		}
+
+		h2
+		{
+			font-family: 'Mortal Kombat 1';
+			font-size: 3.3em;
+			letter-spacing: -1px;
+		}
+
+		h3
+		{
+			font-family: 'Mortal Kombat 2';
+			font-size: 2em;
+			letter-spacing: -1px;
+			margin: 0;
+		}
+
+		button
+		{
+			display: none;
+		}
+
+		#notifications
+		{
+			display: block !important;
+			font-size: 1.5em;
+			margin-top: 6em;;
+			text-align: center;
+
+			ul
+			{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+
+				li
+				{
+					display: inline-block;
+					margin: 1em 3em 3em;
+
+					@media print and (orientation: landscape)
+					{
+						margin: 1em 2em 2em;
+					}
+
+					&:nth-child( n + 4 )
+					{
+						margin-top: 2em;
+					}
+				}
+
+				a
+				{
+					color: black;
+					font-family: 'Mortal Kombat';
+					text-decoration: none;
+				}
+
+				a:after
+				{
+					-webkit-print-color-adjust: exact;
+					background-size: 100%;
+					content: '';
+					display: block;
+					height: 8em;
+					width: 8em;
+				}
+
+				a#email:after     { background-image: url( '/images/qr-codes/mailing-list.png' ); }
+				a#github:after    { background-image: url( '/images/qr-codes/github.png' ); }
+				a#pinterest:after { background-image: url( '/images/qr-codes/pinterest.png' ); }
+				a#facebook:after  { background-image: url( '/images/qr-codes/facebook.png' ); }
+				a#twitter:after   { background-image: url( '/images/qr-codes/twitter.png' ); }
+				a#wordpress:after { background-image: url( '/images/qr-codes/wordpress.png' ); }
+				
+				a:before
+				{
+					display: block;
+					text-transform: uppercase;
+				}
+
+				a#email:before     { content: 'Mailing List'; }
+				a#github:before    { content: 'GitHub'; }
+				a#pinterest:before { content: 'Pinterest'; }
+				a#facebook:before  { content: 'Facebook'; }
+				a#twitter:before   { content: 'Twitter'; }
+				a#wordpress:before { content: 'Dev Blog'; }
+				
+				svg
+				{
+					display: none;
+				}
+			}
+		}
+	}
+}

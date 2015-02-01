@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<base href="/" />
+		<title>Pong Kombat | Demo</title>
+
+		<!-- General -->
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-mobile-web-app-title" content="Pong Kombat" />
+		<link rel="author" href="humans.txt" />
+
+		<!-- Semantics -->
+		<meta name="keywords" content="Pong, Mortal Kombat, Pong Kombat, Video Games" />
+		<meta name="description" content="So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced 1994." />
+
+		<!-- Facebook -->
+		<meta property="fb:app_id" content="238975976145670" />
+		<meta property="og:site_name" content="Pong Kombat" />
+		<meta property="og:title" content="Pong Kombat" />
+		<meta property="og:description" content="So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced 1994." />
+		<meta property="og:url" content="http://www.pongkombat.com/" />
+		<meta property="og:image" content="/screenshots/title-screen.jpg" />
+		<meta property="og:type" content="website" />
+
+		<!-- Twitter -->
+		<meta name="twitter:title" content="Pong Kombat" />
+		<meta name="twitter:description" content="So real...it hurts! A mash-up of Pong and Mortal Kombat, first introduced 1994." />
+		<meta name="twitter:url" content="http://www.pongkombat.com/" />
+		<meta name="twitter:image:src" content="/screenshots/title-screen.jpg" />
+
+		<!-- Icons -->
+		<link rel="icon" type="image/x-icon" href="/icons/pong-kombat-icon.ico" />
+		<link rel="apple-touch-icon" href="/icons/pong-kombat-icon-180.png" />
+
+		<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="styles/demo.css" />
+	</head>
+
+	<body>
+		<section id="demo">
+			<style>
+			body {background: black;}
+			</style>
+
+			<div id="console">
+				<p>PONG KOMBAT DEMO</p>
+				<p>
+					The demo you are about to play was built in JavaScript from scratch.
+					In this early build, only Keyboard controls are enabled and it has only been tested in Google Chrome.
+				</p>
+				<p>
+					A lot of improvements will be made before the final version is complete.
+					Check out the <a href="languages/README.en.txt" target="_blank">README</a> to learn more.
+				</p>
+				<p>
+					To proceed, type "play demo" and press Enter/Return:
+				</p>
+				&gt;
+				<input autofocus id="input" onkeyup="handleConsole(event)" />
+				<output id="output" />
+			</div>
+
+			<button id="social_toggle" onclick="toggleNotifications()"></button>
+
+			<div id="notifications" class="hide">
+				<h3>Stay Notified</h3>
+
+				<ul>
+					<li>
+						<a id="email" href="mailto:jeff@pongkombat.com?subject=Subscribe%20Notifications&body=I%20would%20like%20to%20be%20notified%20via%20email%20whenever%20there%20is%20news%20about%20Pong%20Kombat." onclick="track('email')">
+							<svg viewBox="0 0 115 128">
+								<title>E-mail</title>
+								<use xlink:href="/icons/queue-icons.svg#email"></use>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a id="github" href="http://github.com/Quantastical/pong-kombat" onclick="track('github')">
+							<svg viewBox="0 0 115 128">
+								<title>GitHub</title>
+								<use xlink:href="/icons/queue-icons.svg#github"></use>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a id="pinterest" href="http://pinterest.com/PongKombat" onclick="track('pinterest')">
+							<svg viewBox="0 0 115 128">
+								<title>Pinterest</title>
+								<use xlink:href="/icons/queue-icons.svg#pinterest"></use>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a id="facebook" href="http://facebook.com/PongKombat" onclick="track('facebook')">
+							<svg viewBox="0 0 115 128">
+								<title>Facebook</title>
+								<use xlink:href="/icons/queue-icons.svg#facebook"></use>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a id="twitter" href="http://twitter.com/pongkombat" onclick="track('twitter')">
+							<svg viewBox="0 0 115 128">
+								<title>Twitter</title>
+								<use xlink:href="/icons/queue-icons.svg#twitter"></use>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a id="wordpress" href="http://wordpress.quantastical.com/category/projects/pong-kombat/" onclick="track('wordpress')">
+							<svg viewBox="0 0 115 128">
+								<title>Developer Blog</title>
+								<use xlink:href="/icons/queue-icons.svg#wordpress"></use>
+							</svg>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="font1">&nbsp;</div>
+			<div id="font2">&nbsp;</div>
+		</section>
+
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script defer src="/scripts/demo.js"></script>
+		<script src="/scripts/analytics.js"></script>
+	</body>
+</html>

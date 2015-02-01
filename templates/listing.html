@@ -1,0 +1,108 @@
+
+<!DOCTYPE html public "-//IETF//DTD HTML 2.0//EN">
+<html lang="en">
+
+	<head>
+		<base href="/" />
+		<title>Index of <?= REQUEST; ?></title>
+
+		<!-- General -->
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=420, maximum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-mobile-web-app-title" content="Directory Index" />
+		<link rel="author" href="humans.txt" />
+
+		<!-- Semantics -->
+		<meta name="keywords" content="Pong, Mortal Kombat, Pong Kombat, Video Games" />
+		<meta name="description" content="Directory index of <?= REQUEST; ?>" />
+
+		<!-- Facebook -->
+		<meta property="fb:app_id" content="238975976145670" />
+		<meta property="og:site_name" content="Pong Kombat" />
+		<meta property="og:title" content="Pong Kombat | Index of <?= REQUEST; ?>" />
+		<meta property="og:description" content="Directory index of <?= REQUEST; ?>" />
+		<meta property="og:url" content="<?= REQUEST; ?>" />
+		<meta property="og:image" content="/icons/sys1-icon-1024.png" />
+		<meta property="og:type" content="website" />
+
+		<!-- Twitter -->
+		<meta name="twitter:title" content="Pong Kombat | Index of <?= REQUEST; ?>" />
+		<meta name="twitter:description" content="Directory index of <?= REQUEST; ?>" />
+		<meta name="twitter:url" content="<?= REQUEST; ?>" />
+		<meta name="twitter:image:src" content="/icons/sys1-icon-1024.png" />
+
+		<!-- Icons -->
+		<link rel="icon" type="image/x-icon" href="/icons/sys1-icon.ico" />
+		<link rel="apple-touch-icon" href="/icons/sys1-icon-180.png" />
+
+		<!-- Styles -->
+		<link rel="stylesheet" href="/vendors/jquery-ui/themes/base/all.css" />
+	</head>
+
+	<body>
+		<h1 data-directory="<?= REQUEST; ?>">Index of <?= REQUEST; ?></h1>
+
+		<code>
+			<table cellpadding="0" width="100%">
+				<thead>
+					<tr>
+						<td>
+							<a href="<?= REQUEST; ?>?C=N&0={{sort.name}}">Name</a>
+						</td>
+						<td data-type="extension">
+							<a href="<?= REQUEST; ?>?C=D&0={{sort.type}}">Type</a>
+						</td>
+						<td data-type="bytes">
+							<a href="<?= REQUEST; ?>?C=S&0={{sort.size}}">Size</a>
+						</td>
+						<td data-type="timestamp">
+							<a href="<?= REQUEST; ?>?C=M&0={{sort.time}}">Last Changed</a>
+						</td>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<hr />
+						</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr>
+						<td colspan="4">
+							<hr />
+						</td>
+					</tr>
+				</tbody>
+				<tbody>
+<?php foreach( $files as $file ) : ?>
+					<tr>
+						<td>
+							<a href="<?= REQUEST . $file['NAME']; ?>"><?= $file['NAME']; ?></a>
+						</td>
+						<td data-sort="<?= $file['EXTENSION']; ?>" data-type="extension"><?= $file['EXTENSION']; ?></td>
+						<td data-sort="<?= $file['BYTES']; ?>" data-type="bytes"><?= $file['SIZE']; ?></td>
+						<td data-sort="<?= $file['TIMESTAMP']; ?>" data-type="timestamp"><?= $file['DATE']; ?></td>
+					</tr>
+<?php endforeach; ?>
+				</tbody>
+			</table>
+		</code>
+
+		<script src="/vendors/jquery/dist/jquery.js"></script>
+		<script src="/vendors/jquery-ui/jquery-ui.js"></script>
+		<script src="/vendors/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+		<script src="/vendors/datatables/media/js/jquery.dataTables.js"></script>
+		<script src="/vendors/pagedown/Markdown.Converter.js"></script>
+		<script src="/vendors/moment/moment.js"></script>
+		<script src="/vendors/hammerjs/hammer.js"></script>
+		<script src="/vendors/modernizr/modernizr.js"></script>
+		<script src="/scripts/listing.js"></script>
+		<script src="/scripts/analytics.js"></script>
+	</body>
+
+</html>
