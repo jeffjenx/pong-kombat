@@ -87,11 +87,11 @@
 					<dt>Related Links</dt>
 					<dd>
 						<ul id="related">
-							<li><a href="http://github.com/Quantastical/pong-kombat" target="_self">GitHub</a></li>
-							<li><a href="http://facebook.com/pongkombat" target="_self">Facebook</a></li>
-							<li><a href="http://twitter.com/pongkombat" target="_self">Twitter</a></li>
-							<li><a href="http://pinterest.com/PongKombat" target="_self">Pinterest</a></li>
-							<li><a href="http://wordpress.quantastical.com/category/projects/pong-kombat/" target="_self">Developer Blog</a></li>
+							<li><a href="http://github.com/Quantastical/pong-kombat" target="_self" onclick="track('github');">GitHub</a></li>
+							<li><a href="http://facebook.com/pongkombat" target="_self" onclick="track('facebook');">Facebook</a></li>
+							<li><a href="http://twitter.com/pongkombat" target="_self" onclick="track('twitter');">Twitter</a></li>
+							<li><a href="http://pinterest.com/PongKombat" target="_self" onclick="track('pinterest');">Pinterest</a></li>
+							<li><a href="http://wordpress.quantastical.com/category/projects/pong-kombat/" target="_self" onclick="track('wordpress');">Developer Blog</a></li>
 						</ul>
 					</dd>
 				</dl>
@@ -264,14 +264,6 @@
 
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="/scripts/press.js"></script>
-
-		<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-54926068-5', { 'cookieDomain': 'none' });
-		ga('require', 'displayfeatures');
-		</script> 
+		<script src="/scripts/analytics.js"></script>
 	</body>
 </html>
