@@ -32,5 +32,5 @@ TitleMenu.prototype.selectTournament = function( ) {
 };
 
 TitleMenu.prototype.selectQuit = function( ) {
-	window.location = 'http://www.pongkombat.com/teaser';
+	window.location = 'http://www.pongkombat.com/demo/index.html';
 };

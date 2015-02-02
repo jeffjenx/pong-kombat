@@ -39,8 +39,15 @@ SplashScene.prototype.update = function( deltaTime )
 	// for some reason timeElapsed after the first update is significant (> 2s)
 	// causing the fade in to not look good.
 	if( !this.firstUpdate ) {
-		this.timeElapsed = 0;
 		this.firstUpdate = true;
+		this.timeElapsed = 0;
+		this.logo.position.x = viewport.width * 0.50;
+		this.logo.position.y = viewport.height * 0.40;
+		this.logo.scale = viewport.height / 1080;
+		
+		this.domain.position.x = viewport.width * 0.50;
+		this.domain.position.y = viewport.height * 0.75;
+		this.domain.scale = viewport.height / 1080;
 	}
 	
 	if( this.timeElapsed > 2 && this.timeElapsed < 4 )

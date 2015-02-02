@@ -4,6 +4,11 @@
 @import '../vendors/animate.scss/_properties';
 @import '../vendors/animate.scss/_attention/_flash';
 
+body
+{
+	margin: 0;
+}
+
 @media screen
 {
 	#press

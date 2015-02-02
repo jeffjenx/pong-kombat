@@ -296,10 +296,26 @@ App.prototype.resize = function( ) {
 		viewport.width = this.maxWidth;
 		viewport.height = this.maxWidth / this.aspectRatio.x * this.aspectRatio.y;
 	}
-	
-	viewport.center = { x : viewport.width / 2, y : viewport.height / 2 };
-	viewport.style.marginTop = -( viewport.height / 2 ) + "px";
-	viewport.style.marginLeft = -( viewport.width / 2 ) + "px";
+
+	/*
+	if( browser.width > 1000 || browser.height > 500 ) {
+		// Use CSS scaling for large monitors to help optimize processing
+		// TODO: only do this if framerate drops? use a in-game "detail" setting
+		viewport.style.marginTop = -( viewport.height / 2 ) + "px";
+		viewport.style.marginLeft = -( viewport.width / 2 ) + "px";
+		viewport.style.width = viewport.width + 'px';
+		viewport.style.height = viewport.height + 'px';
+		viewport.width /= 2;
+		viewport.height /= 2;
+		viewport.center = { x : viewport.width / 2, y : viewport.height / 2 };
+	} else {
+	*/
+		viewport.center = { x : viewport.width / 2, y : viewport.height / 2 };
+		viewport.style.marginTop = -( viewport.height / 2 ) + "px";
+		viewport.style.marginLeft = -( viewport.width / 2 ) + "px";
+	/*
+	}
+	*/
 	
 	backBuffer.width = viewport.width;
 	backBuffer.height = viewport.height;

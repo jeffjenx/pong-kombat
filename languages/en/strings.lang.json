@@ -49,6 +49,12 @@
 			"HALF_COIN" : "1 Coin/2 Credits"
 		},
 		"COMBAT" : "Combat",
+		"DETAIL" : "Detail",
+		"DETAILS" : {
+			"LOW" : "Low",
+			"MEDIUM" : "Medium",
+			"HIGH" : "High"
+		},
 		"DIFFICULTIES" : 
 		{
 			"EASY" : "Easy",

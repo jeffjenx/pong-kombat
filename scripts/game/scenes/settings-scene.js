@@ -17,12 +17,20 @@ function SettingsScene( )
 		'CENSORSHIP' : Resources.Strings.SETTINGS.CENSORSHIP,
 		'COINAGE'    : Resources.Strings.SETTINGS.COINAGE,
 		'COMBAT'     : Resources.Strings.SETTINGS.COMBAT,
+		'DETAIL'     : Resources.Strings.SETTINGS.DETAIL,
 		'DIFFICULTY' : Resources.Strings.SETTINGS.DIFFICULTY,
 		'POWER_UPS'  : Resources.Strings.SETTINGS.POWER_UPS,
 		'ROUNDS'     : 'Rounds',
 		'SOUND_FX'   : Resources.Strings.SETTINGS.SOUND_FX,
 		'TUNES'      : Resources.Strings.SETTINGS.TUNES
 	};
+
+	this.details = 
+	[
+		Resources.Strings.SETTINGS.DETAILS.LOW,
+		Resources.Strings.SETTINGS.DETAILS.MEDIUM,
+		Resources.Strings.SETTINGS.DETAILS.HIGH
+	];
 	
 	this.difficulties =
 	[
@@ -60,6 +68,10 @@ function SettingsScene( )
 			{
 				case 'COINAGE' :
 					value.text = this.coinages[ app.settings[i] ];
+				break;
+
+				case 'DETAIL' :
+					value.text = this.details[ app.settings[i] ];
 				break;
 
 				case 'DIFFICULTY' :
@@ -134,6 +146,61 @@ function SettingsScene( )
 SettingsScene.prototype = new Scene;
 SettingsScene.prototype.constructor = SettingsScene;
 
+SettingsScene.prototype.changeDetail = function() {
+	// Resize/Reposition all elements after detail setting changed
+	var background = this.settingsLayer.components['Background'];
+	background.size.x = viewport.width;
+	background.size.y = viewport.height;
+	
+	this.titleText.fontSize = viewport.height * 0.08;
+	this.titleText.position.x = viewport.width / 2;
+	this.titleText.position.y = viewport.height * 0.11;
+	
+	// Settings Menu Items
+	var y = viewport.height * 0.25;
+	for( var i in app.settings )
+	{
+		if( app.settings.hasOwnProperty( i ) )
+		{
+			var label = this.settingsLayer.components[i + 'Label'];
+			label.fontSize = viewport.height * 0.05;
+			label.position.x = viewport.width * 0.33;
+			label.position.y = y;
+			
+			var value = this.settingsLayer.components[i + 'Value'];
+			value.fontSize = label.fontSize;
+			value.position.x = viewport.width * 0.67;
+			value.position.y = y;
+			
+			y += label.fontSize * 1.5;
+		}
+	}
+	
+	// Main Menu Item
+	var returnLabel = this.settingsLayer.components['ReturnLabel'];
+	returnLabel.fontSize = viewport.height * 0.05;
+	returnLabel.position.x = viewport.width / 2;
+	returnLabel.position.y = y + returnLabel.fontSize * 1.5;
+	
+	this.green.startPosition = {x: viewport.width * 0.85, y: -this.green.size.y * this.green.scale};
+	this.green.endPosition = {x: viewport.width * 0.85, y: viewport.height * 0.50};
+	//this.green.position.x = this.green.startPosition.x;
+	//this.green.position.y = this.green.startPosition.y;
+	this.green.size.x = viewport.width * 0.03;
+	this.green.size.y = viewport.height * ( 0.01 * Math.pow( this.green.bigness, 2 ) + 0.09 );
+	
+	
+	this.purple.startPosition = {x: viewport.width * 0.15, y: viewport.height + this.purple.size.y * this.purple.scale};
+	this.purple.endPosition = {x: viewport.width * 0.15, y: viewport.height * 0.50};
+	//this.purple.position.x = this.purple.startPosition.x;
+	//this.purple.position.y = this.purple.startPosition.y;
+	this.purple.size.x = viewport.width * 0.03;
+	this.purple.size.y = viewport.height * ( 0.01 * Math.pow( this.purple.bigness, 2 ) + 0.09 );
+
+	this.easePosition( 0, 2, this.green );
+	this.easePosition( 0.5, 2, this.purple );
+};
+
 SettingsScene.prototype.decreaseSetting = function( )
 {
 	switch( this.currentSetting )
@@ -146,6 +213,18 @@ SettingsScene.prototype.decreaseSetting = function( )
 			}
 			app.settings[this.currentSetting] = index;
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.coinages[ index ];
+		break;
+
+		case 'DETAIL' :
+			var index = app.settings[ this.currentSetting ];
+			index -= 1;
+			if( index < 0 ) {
+				index = this.details.length - 1;
+			}
+			app.settings[this.currentSetting] = index;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.details[ index ];
+			app.resize( index );
+			this.changeDetail();
 		break;
 
 		case 'DIFFICULTY' :
@@ -214,6 +293,21 @@ SettingsScene.prototype.increaseSetting = function( )
 
 			app.settings[ this.currentSetting ] = index;
 			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.coinages[ index ];
+		break;
+
+		case 'DETAIL' :
+			var index = app.settings[ this.currentSetting ];
+			
+			index += 1;
+			if( index >= this.details.length )
+			{
+				index = this.details.length - 1;
+			}
+
+			app.settings[ this.currentSetting ] = index;
+			this.settingsLayer.components[ this.currentSetting + 'Value' ].text = this.details[ index ];
+			app.resize( index );
+			this.changeDetail();
 		break;
 
 		case 'DIFFICULTY' :
@@ -407,7 +501,7 @@ SettingsScene.prototype.easePosition = function( startTime, endTime, component )
 		component.position.x = component.endPosition.x - (component.endPosition.x - component.startPosition.x) * time * time;
 		component.position.y = component.endPosition.y - (component.endPosition.y - component.startPosition.y) * time * time;
 	}
-	else if( this.timeElapsed > endTime && component.opacity != 1 )
+	else if( this.timeElapsed > endTime )
 	{
 		component.opacity = 1;
 		component.position.x = component.endPosition.x;
