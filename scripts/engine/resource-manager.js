@@ -10,7 +10,6 @@ ResourceManager = {
 		var snd = new Audio( );
 		var format;
 		
-		/*
 		if( snd.canPlayType )
 		{
 			if( "" != snd.canPlayType( 'audio/mpeg' ) )
@@ -21,9 +20,11 @@ ResourceManager = {
 			{
 				format = ".ogg";
 			}
+			else
+			{
+				format = ".m4a";
+			}
 		}
-		*/
-		format = ".m4a";
 		
 		snd.src = app.resources + source + format + "?" + app.version;
 		snd.load( );

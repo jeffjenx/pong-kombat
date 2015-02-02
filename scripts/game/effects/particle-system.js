@@ -85,12 +85,15 @@ ParticleSystem.prototype.draw = function( context ) {
 	for(var i = 0; i < this.particles.length; i++)
 	{
 		var p = this.particles[i];
+		var width = Math.max(1, Math.floor(p.radius * 2 * p.scale));
+		var height = Math.max(1, Math.floor(p.radius * 2 * p.scale));
+		//console.log(width, height);
 		
 		context.save();
 		context.globalAlpha = p.opacity;
 		context.translate( p.position.x, p.position.y );
 		context.rotate( p.rotation );
-		context.drawImage( p.image, -p.radius * p.scale, -p.radius * p.scale, p.radius * 2 * p.scale, p.radius * 2 * p.scale );
+		context.drawImage( p.image, -p.radius * p.scale, -p.radius * p.scale, width, height );
 		context.restore();
 	}
 	context.restore( );

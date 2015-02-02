@@ -92,7 +92,7 @@ nav
 		background: red;
 		border-radius: 8pt;
 		color: white;
-		font-family: 'MK Deadly Alliance';
+		font-family: 'Times';
 		font-size: 13pt;
 		font-weight: 600;
 		height: 15pt;
@@ -126,8 +126,9 @@ a[href="/play"]
 	color: #d8cece;
 	cursor: pointer;
 	display: block;
-	font-family: 'Mortal Kombat 3';
+	font-family: 'Georgia';
 	font-size: 2.25em;
+	font-weight: 600;
 	height: 60px;
 	left: 50%;
 	line-height: 10em;
@@ -135,7 +136,7 @@ a[href="/play"]
 	position: absolute;
 	text-decoration: none;
 	top: 50%;
-	text-indent: -2.25em;
+	text-indent: -2.9em;
 	transition: all 0.2s ease-out;
 	white-space: nowrap;
 	width: 130px;
@@ -262,6 +263,7 @@ a[href="/play"]
 		max-width: 40em;
 		padding: 1em 2em;
 		text-align: left;
+		vertical-align: top;
 		width: calc(100% - 2em);
 	}
 
@@ -297,6 +299,7 @@ a[href="/play"]
 		display: inline-block;
 		max-width: 40em;
 		padding: 1em 2em;
+		vertical-align: top;
 		width: calc(100% - 2em);
 	}
 

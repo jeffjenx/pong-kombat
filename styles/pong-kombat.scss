@@ -1,27 +1,17 @@
-@import 'compass';
-@import 'compass/css3/animation';
-@import 'compass/css3/filter';
-@import 'compass/css3/transition';
 @import 'fonts/abnormal';
 @import 'fonts/anton';
 @import 'fonts/dos';
 @import 'fonts/mortal-kombat';
 @import 'fonts/open-sans';
-@import '../vendors/animate.css-scss/_properties';
-@import '../vendors/animate.css-scss/_attention/_flash';
-@import '../vendors/animate.css-scss/_fading-entrances/_fadeIn';
-@import '../vendors/animate.css-scss/_fading-entrances/_fadeInDown';
-@import '../vendors/animate.css-scss/_fading-exits/_fadeOutDown';
-@import '../vendors/animate.css-scss/_fading-exits/_fadeOutUp';
-@import '../vendors/animate.css-scss/_flippers/_flipInY';
-@import '../vendors/animate.css-scss/_flippers/_flipOutY';
-@import '../vendors/animate.css-scss/_zooming-entrances/_zoomIn';
-
-@import '../modules/play/styles/play.client.style.scss';
-@import '../modules/press/styles/press.client.style.scss';
-@import '../modules/teaser/styles/teaser.client.style.scss';
-@import '../modules/demo/styles/demo.client.style.scss';
-@import '../modules/terminal/styles/terminal.client.style.scss';
+@import '../vendors/animate.scss/_properties';
+@import '../vendors/animate.scss/_attention/_flash';
+@import '../vendors/animate.scss/_fading-entrances/_fadeIn';
+@import '../vendors/animate.scss/_fading-entrances/_fadeInDown';
+@import '../vendors/animate.scss/_fading-exits/_fadeOutDown';
+@import '../vendors/animate.scss/_fading-exits/_fadeOutUp';
+@import '../vendors/animate.scss/_flippers/_flipInY';
+@import '../vendors/animate.scss/_flippers/_flipOutY';
+@import '../vendors/animate.scss/_zooming-entrances/_zoomIn';
 
 $transitionable-prefixed-values : filter;
 
@@ -44,5 +34,39 @@ $transitionable-prefixed-values : filter;
 		{
 			font-size: 6pt;
 		}
+	}
+}
+
+#play
+{
+	background: black;
+	box-sizing: border-box;
+	left: 0;
+	height: 100%;
+	overflow: auto;
+	padding: 1em;
+	position: absolute;
+	top: 0;
+	width: 100%;
+
+	canvas
+	{
+		background-color: black;
+		box-sizing: border-box;
+		display: block;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+	}
+	
+	#loading
+	{
+		color: white;
+		font-family: 'DOS';
+		left: 0;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		width: 100%;
 	}
 }

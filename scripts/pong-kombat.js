@@ -120,7 +120,7 @@ function ready( ) {
 	app.resources = '/';
 	app.language = 'en';
 	app.settings = {
-		'CENSORSHIP' : (localStorage && localStorage['PongKombat.settings.CENSORSHIP'] === "false") ? "false" : "true",
+		'CENSORSHIP' : (localStorage && localStorage['PongKombat.settings.CENSORSHIP'] === "true") ? "true" : "false",
 		'COINAGE'    : (localStorage && localStorage['PongKombat.settings.COINAGE']) ? parseInt( localStorage['PongKombat.settings.COINAGE'] ) : 0,
 		'COMBAT'     : (localStorage && localStorage['PongKombat.settings.COMBAT'] === "false") ? "false" : "true",
 		'DIFFICULTY' : (localStorage && localStorage['PongKombat.settings.DIFFICULTY']) ? parseInt( localStorage['PongKombat.settings.DIFFICULTY'] ) : 1,

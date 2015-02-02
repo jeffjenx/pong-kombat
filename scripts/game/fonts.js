@@ -1,5 +1,5 @@
 window.addEventListener( 'load', function() {
-	var fonts = ['Apple Garamond', 'MK Mythologies'];
+	var fonts = ['Apple Garamond', 'MK Mythologies', 'Open Sans'];
 	
 	for( var i = 0; i < fonts.length; i++ ) {
 		var preload = document.createElement( 'div' );

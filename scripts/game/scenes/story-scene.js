@@ -22,7 +22,7 @@ function StoryScene( ) {
 	this.storyText = new Text( '' );
 	this.storyText.opacity = 0;
 	this.storyText.color = "#FFE8B8";
-	this.storyText.fontFamily = "Helvetica";
+	this.storyText.fontFamily = "Open Sans";
 	this.storyText.fontSize = viewport.height * 0.045;
 	this.storyText.fontStyle = "200";
 	this.storyText.position.x = viewport.width * 0.5;
