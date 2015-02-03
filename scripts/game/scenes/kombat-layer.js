@@ -14,40 +14,17 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	if( leftKombatant )
 	{
 		if( leftKombatant.paddle.position.y > viewport.height * 0.51 ) {
-			if( leftKombatant.paddle.velocity.y > 0 ) {
-				leftKombatant.paddle.velocity.y = 0;
-				leftKombatant.paddle.position.y = viewport.height * 0.5;
-			} else {
-				leftKombatant.paddle.moveUp( );
-			}
+			leftKombatant.paddle.moveUp( );
 		} else if( leftKombatant.paddle.position.y < viewport.height * 0.49 ) {
-			if( leftKombatant.paddle.velocity.y < 0 ) {
-				leftKombatant.paddle.velocity.y = 0;
-				leftKombatant.paddle.position.y = viewport.height * 0.5;
-			} else {
-				leftKombatant.paddle.moveDown( );
-			}
-			//leftKombatant.paddle.moveDown( );
+			leftKombatant.paddle.moveDown( );
 		} else {
 			leftKombatant.paddle.position.y = viewport.height * 0.50;
 		}
 	
 		if( leftKombatant.paddle.position.x > viewport.width * 0.03 ) {
-			if( leftKombatant.paddle.velocity.x > 0 ) {
-				leftKombatant.paddle.velocity.x = 0;
-				leftKombatant.paddle.position.x = viewport.height * 0.025;
-			} else {
-				leftKombatant.paddle.moveLeft( );
-			}
-			//leftKombatant.paddle.moveLeft( );
+			leftKombatant.paddle.moveLeft( );
 		} else if( leftKombatant.paddle.position.x < viewport.width * 0.01 ) {
-			if( leftKombatant.paddle.velocity.x < 0 ) {
-				leftKombatant.paddle.velocity.x = 0;
-				leftKombatant.paddle.position.x = viewport.height * 0.025;
-			} else {
-				leftKombatant.paddle.moveRight( );
-			}
-			//leftKombatant.paddle.moveRight( );
+			leftKombatant.paddle.moveRight( );
 		} else {
 			leftKombatant.paddle.position.x = viewport.width * 0.025;
 		}
@@ -56,41 +33,17 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	if( rightKombatant )
 	{
 		if( rightKombatant.paddle.position.y > viewport.height * 0.51 ) {
-			if( rightKombatant.paddle.velocity.y > 0 ) {
-				rightKombatant.paddle.velocity.y = 0;
-				rightKombatant.paddle.position.y = viewport.height * 0.5;
-			} else {
-				rightKombatant.paddle.moveUp( );
-			}
-			//rightKombatant.paddle.moveUp( );
+			rightKombatant.paddle.moveUp( );
 		} else if( rightKombatant.paddle.position.y < viewport.height * 0.49 ) {
-			if( rightKombatant.paddle.velocity.y < 0 ) {
-				rightKombatant.paddle.velocity.y = 0;
-				rightKombatant.paddle.position.y = viewport.height * 0.5;
-			} else {
-				rightKombatant.paddle.moveDown( );
-			}
-			//rightKombatant.paddle.moveDown( );
+			rightKombatant.paddle.moveDown( );
 		} else {
 			rightKombatant.paddle.position.y = viewport.height * 0.50;
 		}
 
 		if( rightKombatant.paddle.position.x > viewport.width * 0.99 ) {
-			if( rightKombatant.paddle.velocity.x > 0 ) {
-				rightKombatant.paddle.velocity.x = 0;
-				rightKombatant.paddle.position.x = viewport.height * 0.975;
-			} else {
-				rightKombatant.paddle.moveLeft( );
-			}
-			//rightKombatant.paddle.moveLeft( );
+			rightKombatant.paddle.moveLeft( );
 		} else if( rightKombatant.paddle.position.x < viewport.width * 0.97 ) {
-			if( rightKombatant.paddle.velocity.x < 0 ) {
-				rightKombatant.paddle.velocity.x = 0;
-				rightKombatant.paddle.position.x = viewport.height * 0.975;
-			} else {
-				rightKombatant.paddle.moveRight( );
-			}
-			//rightKombatant.paddle.moveRight( );
+			rightKombatant.paddle.moveRight( );
 		} else {
 			rightKombatant.paddle.position.x = viewport.width * 0.975;
 		}
@@ -195,14 +148,14 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			//this.centerPaddles();
 			
 			if( leftKombatant ) {
-				leftKombatant.update( deltaTime );
+				//leftKombatant.update( deltaTime );
 				if( leftKombatant.paddle.projectiles.length > 0 ) {
 					leftKombatant.paddle.projectiles = [ ];
 				}
 			}
 
 			if( rightKombatant ) {
-				rightKombatant.update( deltaTime );
+				//rightKombatant.update( deltaTime );
 				if( rightKombatant.paddle.projectiles.length > 0 ) {
 					rightKombatant.paddle.projectiles = [ ];
 				}

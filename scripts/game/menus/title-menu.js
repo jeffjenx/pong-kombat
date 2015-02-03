@@ -23,6 +23,7 @@ TitleMenu.prototype.selectFreePlay = function( ) {
 	}
 
 	app.gameMode = GameModes.FREEPLAY;
+	app.tournament = null;
 	SceneManager.changeScene( new PickPaddleScene( ), Transitions.FADE, 0.5 );
 };
 
@@ -41,6 +42,7 @@ TitleMenu.prototype.selectTournament = function( ) {
 	}
 
 	app.gameMode = GameModes.TOURNAMENT;
+	app.tournament = null;
 	SceneManager.changeScene( new PickPaddleScene( ), Transitions.FADE, 0.5 );
 };
 

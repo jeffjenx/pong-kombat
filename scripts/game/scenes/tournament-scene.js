@@ -1,6 +1,7 @@
 function TournamentScene( ) {
 	Scene.call( this );
 	
+	this.tournamentTimer = 0;
 	this.player;
 	this.opponents = new Array( );
 	this.currentIndex = -1;
@@ -87,6 +88,13 @@ function TournamentScene( ) {
 	this.tournamentTime.position.x = viewport.width * 0.52;
 	this.tournamentTime.position.y = viewport.height * 0.90;
 	this.tournamentTime.textAlign = 'left';
+	this.tournamentTime.update = function(deltaTime) {
+		Text.prototype.update.call(this, deltaTime);
+
+		var minutes = parseInt( app.tournament.tournamentTimer / 60 ) % 60;
+		var seconds = parseInt( app.tournament.tournamentTimer ) % 60;
+		this.text = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
+	};
 	this.textLayer.addComponent( 'TournamentTime', this.tournamentTime );
 
 	this.timeIcon = new Sprite( 'Icon-Hourglass' );

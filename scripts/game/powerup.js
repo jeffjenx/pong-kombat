@@ -27,7 +27,6 @@ Powerup.prototype.collect = function( kombatant ) {
 };
 
 Powerup.prototype.timedOut = function( ) {
-	console.log('timedout');
 	this.layer.removeComponent( this.id );
 	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 10;
 }

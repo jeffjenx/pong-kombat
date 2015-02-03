@@ -385,6 +385,10 @@ KombatScene.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.states.fighting :
+			if( app.gameMode === GameModes.TOURNAMENT ) {
+				app.tournament.tournamentTimer += deltaTime;
+			}
+
 			if( leftKombatant )
 			{
 				if( leftKombatant.life <= 0 ) {
