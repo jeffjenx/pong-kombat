@@ -208,6 +208,8 @@ TournamentScene.prototype.update = function( deltaTime ) {
 	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed > 11 ) {
 		var computer = new Opponent( );
 		computer.setPaddle( Paddles[this.opponents[this.currentIndex].enum] );
+
+		this.player.setPaddle( Paddles[this.player.paddle.enum] );
 		
 		var kombatScene = new KombatScene( );
 		kombatScene.addKombatant( this.player );

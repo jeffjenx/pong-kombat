@@ -8,7 +8,7 @@ function TitleMenu( scene ) {
 	Menu.call( this, scene );
 	
 	this.addItem( 'Free Play', this.selectFreePlay );
-	this.addItem( 'Tournament', this.selectTournament );
+	this.addItem( 'Tournament Edition', this.selectTournament );
 	//this.addItem( 'Super PK', null );
 	this.addItem( 'Dip Switches', this.selectSettings );
 	this.addItem( 'Get Outta Here!', this.selectQuit );

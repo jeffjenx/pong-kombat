@@ -120,7 +120,7 @@ Paddle.prototype.dismantle = function( opponent ) {
 		return;
 	}
 
-	var sceneTime = opponent.layer.scene.stateTime;
+	var sceneTime = SceneManager.currentScene.stateTime;
 
 	for( var i = 0; i < this.dismantleAnimationFrames.length; i++ ) {
 		var frame = this.dismantleAnimationFrames[i];

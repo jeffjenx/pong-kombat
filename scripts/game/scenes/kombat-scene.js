@@ -290,6 +290,7 @@ KombatScene.prototype.startMatch = function( ) {
 	
 	if( leftKombatant )
 	{
+		leftKombatant.roundsWon = 0;
 		leftKombatant.life = this.startLife;
 		leftKombatant.paddle.opacity = 1;
 		leftKombatant.paddle.scale = 1;
@@ -299,11 +300,33 @@ KombatScene.prototype.startMatch = function( ) {
 
 	if( rightKombatant )
 	{
+		rightKombatant.roundsWon = 0;
 		rightKombatant.life = this.startLife;
 		rightKombatant.paddle.opacity = 1;
 		rightKombatant.paddle.scale = 1;
 		//rightKombatant.paddle.position.x = viewport.width * 0.98;
 		//rightKombatant.paddle.position.y = viewport.height * 0.50;
+	}
+};
+
+KombatScene.prototype.nextRound = function() {
+	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
+	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
+	
+	this.changeState( this.states.starting );
+	
+	if( leftKombatant )
+	{
+		leftKombatant.life = this.startLife;
+		leftKombatant.paddle.opacity = 1;
+		leftKombatant.paddle.scale = 1;
+	}
+
+	if( rightKombatant )
+	{
+		rightKombatant.life = this.startLife;
+		rightKombatant.paddle.opacity = 1;
+		rightKombatant.paddle.scale = 1;
 	}
 };
 
@@ -379,7 +402,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 					{
 						++this.currentRound;
 						this.layers['HUD'].currentRound.text = 'Round ' + this.currentRound;
-						this.startMatch( );
+						this.nextRound( );
 					}
 				}
 			}
@@ -407,7 +430,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 					{
 						++this.currentRound;
 						this.layers['HUD'].currentRound.text = 'Round ' + this.currentRound;
-						this.startMatch( );
+						this.nextRound( );
 					}
 				}
 			}
