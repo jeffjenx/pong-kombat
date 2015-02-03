@@ -192,7 +192,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	switch( this.scene.state ) {
 		case this.scene.states.secretMessage :
 		case this.scene.states.starting :
-			this.centerPaddles();
+			//this.centerPaddles();
 			
 			if( leftKombatant ) {
 				leftKombatant.update( deltaTime );
@@ -215,7 +215,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			if( ball ) {
 				ball.set();
 			}
-			return;
+			//return;
 		break;
 		
 		case this.scene.states.fighting :

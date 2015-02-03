@@ -133,27 +133,33 @@ KombatScene.prototype.changeState = function( state ) {
 	this.stateTime = 0;
 	this.layers['HUD'].resetSounds();
 
-	if( app.settings.TUNES > 0 ) {
-		switch( state ) {
-			case this.states.announcing :
+	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
+	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
+
+	switch( state ) {
+		case this.states.announcing :
+			if( app.settings.TUNES > 0 ) {
 				this.music.stop();
-			break;
+			}
+		break;
 
-			case this.states.finishing :
-				if( this.layers['Kombat'].components['LeftKombatant'] ) {
-					this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.x = 0;
-					this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.y = 0;
-				}
-				if( this.layers['Kombat'].components['RightKombatant'] ) {
-					this.layers['Kombat'].components['RightKombatant'].paddle.velocity.x = 0;
-					this.layers['Kombat'].components['RightKombatant'].paddle.velocity.y = 0;
-				}
-			break;
+		case this.states.starting :
+		case this.states.finishing :
+			if( this.layers['Kombat'].components['LeftKombatant'] ) {
+				this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.x = 0;
+				this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.y = 0;
+			}
+			if( this.layers['Kombat'].components['RightKombatant'] ) {
+				this.layers['Kombat'].components['RightKombatant'].paddle.velocity.x = 0;
+				this.layers['Kombat'].components['RightKombatant'].paddle.velocity.y = 0;
+			}
+		break;
 
-			case this.states.dismantling :
-				this.dismantleSound.play();
-			break;
-		}
+		case this.states.dismantling :
+			if( app.settings.SOUND_FX > 0 ) {
+				this.dismantleSound.play();	
+			}
+		break;
 	}
 };
 

@@ -141,7 +141,7 @@ a[href="/play"]
 	white-space: nowrap;
 	width: 130px;
 
-	&:active
+	&:active, &.active
 	{
 		background: #b7bfc2; /* Old browsers */
 		background: -moz-linear-gradient(left, #b7bfc2 0%, #e1e9ec 26%, #fff9f4 32%, #d4dcdf 38%, #ccd4d7 66%, #d8e0e3 71%, #ced8da 100%); /* FF3.6+ */
@@ -195,7 +195,7 @@ a[href="/play"]
 		z-index: -1;
 	}
 
-	&:active:after
+	&:active:after, &.active:after
 	{
 		background: #b1ffff;
 		box-shadow: 
@@ -233,6 +233,12 @@ a[href="/play"]
 	p
 	{
 		display: inline;
+	}
+
+	a
+	{
+		color: inherit;
+		text-decoration: none;
 	}
 }
 
