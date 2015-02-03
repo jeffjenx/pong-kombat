@@ -31,14 +31,6 @@ function MrSlayerPaddle( ) {
 			projectile.velocity.x = Math.cos( winner.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
 			projectile.velocity.y = Math.sin( winner.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
 
-			projectile.rotation = winner.rotation;
-			
-			if( winner.position.x > viewport.width * 0.50 )
-			{
-				projectile.flipH = true;
-				projectile.velocity.x *= -1;
-			}
-			//Paddle.prototype.shootProjectile.call( winner, new SawBladeProjectile(winner) );
 			SceneManager.currentScene.layers['Kombat'].addComponent( 'Saw-Blade-Projectile', projectile );
 
 			if( app.settings.SOUND_FX > 0 ) {
@@ -92,9 +84,4 @@ MrSlayerPaddle.prototype.shootProjectile = function( ) {
 		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
-};
-
-MrSlayerPaddle.prototype.update = function( deltaTime ) {
-	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
 };

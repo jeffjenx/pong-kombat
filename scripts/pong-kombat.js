@@ -115,7 +115,7 @@ function ready( ) {
 	}
 	
 	app = new App( );
-	app.version = '1.2';
+	app.version = '1.3';
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = '/';
 	app.language = 'en';

@@ -34,8 +34,7 @@ function RedPaddle( ) {
 
 	this.nameSound = new Sound( 'Red-Paddle' );
 	this.nameSound.setMaxVolume( 1 * app.settings.SOUND_FX / 11 );
-	//this.whooshSound = new Sound( 'Whoosh-3' );
-
+	
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
 		{ start : 1.0, end : 1.0, action: function() {
@@ -107,31 +106,11 @@ function RedPaddle( ) {
 		{ start : 10.2, end : 15.0, action : function(winner, loser) {loser.dismantleFallToBottom();} },
 		
 		{ start : 14.0, end : 14.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
-		/*
-		{ start : 11.0, end : 12.25, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
-		{ start : 11.5, end : 11.5, action : function(winner,loser){loser.getHit();} },
-		{ start : 12.0, end :  13.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 14.5, end : 15.75, action : function(winner, loser, percentComplete) { winner.dismantleAppear(); } },
-		{ start : 16.0, end : 16.0, action : function(winner,loser){loser.getHit();} },
-		{ start : 16.5, end : 19.5, action : function(winner, loser, percentComplete) { winner.dismantleVanish(percentComplete); } },
-		{ start : 20.0, end : 20.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
-		*/
 	];
 }
 
 RedPaddle.prototype = new Paddle;
 RedPaddle.prototype.constructor = RedPaddle;
-
-/*
-RedPaddle.prototype.dismantle = function( opponent ) {
-	var sceneTime = opponent.layer.scene.stateTime;
-	
-	if( sceneTime < 2 ) {
-	} else if( sceneTime < 5 ) {
-		this.velocity.x = viewport.width * ( sceneTime - 2 / 100 );
-	}
-};
-*/
 
 RedPaddle.prototype.draw = function( context ) {
 	Paddle.prototype.draw.call( this, context );
@@ -147,36 +126,4 @@ RedPaddle.prototype.shootProjectile = function( ) {
 		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
-
-
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
-	
-	// this.projectile = new ShadowProjectile( this );
-	// this.projectile.sourcePaddle = this;
-	// this.projectile.position.x = this.position.x;
-	// this.projectile.position.y = this.position.y;
-	
-	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
-	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.4;
-	
-	// if( this.position.x > viewport.width * 0.50 )
-	// {
-	// 	this.projectile.velocity.x *= -1;
-	// 	this.projectile.flipH = true;
-	// }
-};
-
-RedPaddle.prototype.update = function( deltaTime ) {
-	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
-	
-	/*
-	this.effect.position = this.position;
-	this.effect.rotation = this.rotation;
-	this.effect.size.x = this.size.x * this.scale;
-	this.effect.size.y = this.size.y * this.scale;
-	this.effect.scale = this.scale;
-	this.effect.update( deltaTime );
-	*/
 };

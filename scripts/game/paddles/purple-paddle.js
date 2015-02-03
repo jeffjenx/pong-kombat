@@ -31,7 +31,9 @@ function PurplePaddle( ) {
 
 	this.dismantleAnimationFrames = [
 		// end = start?? call only once, end < 0?? call indefinitely
-		{ start : 1.0, end : 1.0, action : function(winner) { winner.velocity.x = (winner.position.x < viewport.width * 0.5) ? viewport.width * 0.4 : -viewport.width * 0.4; } },
+		{ start : 1.0, end : 1.0, action : function(winner, loser) {
+			winner.velocity.x = (loser.position.x < viewport.width * 0.5) ?-viewport.width * 0.4 :  viewport.width * 0.4;
+		} },
 		{ start : 1.0, end : 4.0, action : function(winner, loser, percentComplete) {
 			if( winner.velocity.x > 0 && winner.position.x > viewport.width * 0.94 ) {
 				winner.velocity.x = 0;
@@ -85,8 +87,8 @@ function PurplePaddle( ) {
 			SceneManager.currentScene.layers['Kombat'].addComponent( 'AirPump', airPump );
 		} },
 		{
-			start : 4.25, end : 4.25, action : function(winner) {
-				winner.velocity.x = (winner.position.x > viewport.width * 0.5) ? -viewport.width * 0.4 : viewport.width * 0.4;
+			start : 4.25, end : 4.25, action : function(winner, loser) {
+				winner.velocity.x = (loser.position.x < viewport.width * 0.5) ? viewport.width * 0.4 : -viewport.width * 0.4;
 			}
 		},
 		{
@@ -123,6 +125,7 @@ function PurplePaddle( ) {
 		} },
 		{ start : 8.0, end : 8.0, action : function(winner, loser, percentComplete) {
 			winner.velocity.y = -viewport.height * 0.5; SceneManager.currentScene.layers['Kombat'].components['AirPump'].currentAnimation = 'up';
+			SceneManager.currentScene.layers['Kombat'].components['AirPump'].velocity.y = 0;
 		} },
 		{ start : 8.5, end : 8.5, action : function(winner, loser, percentComplete) { loser.dismantleBloat(); } },
 		{ start : 9.0, end : 9.0, action : function(winner, loser, percentComplete) {

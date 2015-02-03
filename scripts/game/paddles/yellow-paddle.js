@@ -33,8 +33,7 @@ function YellowPaddle( ) {
 	this.effect.attachTo( this );
 	this.effect.size.x = this.size.x * this.scale;
 	this.effect.size.y = this.size.y * this.scale;
-	//this.effect.start( );
-
+	
 	this.nameSound = new Sound( 'Yellow-Paddle' );
 	this.nameSound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 
@@ -91,33 +90,4 @@ YellowPaddle.prototype.shootProjectile = function( ) {
 		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
-
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
-
-	// this.projectile = new FireballProjectile( this );
-	// this.projectile.sourcePaddle = this;
-	// this.projectile.position.x = this.position.x;
-	// this.projectile.position.y = this.position.y;
-	
-	// this.projectile.velocity.x = Math.cos( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	// this.projectile.velocity.y = Math.sin( this.rotation * Math.TO_RADIANS ) * viewport.width * 0.33;
-	
-	// if( this.position.x > viewport.width * 0.50 )
-	// {
-	// 	this.projectile.velocity.x *= -1;
-	// }
-	
-	// if( this.projectile.effect ) {
-	// 	this.projectile.effect.minVelocity.x += this.projectile.velocity.x / 2;
-	// 	this.projectile.effect.maxVelocity.x += this.projectile.velocity.x / 2;
-	// 	this.projectile.effect.minVelocity.y += this.projectile.velocity.y / 2;
-	// 	this.projectile.effect.maxVelocity.y += this.projectile.velocity.y / 2;
-	// }
-};
-
-YellowPaddle.prototype.update = function( deltaTime ) {
-	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
-	//this.effect.update( deltaTime );
 };

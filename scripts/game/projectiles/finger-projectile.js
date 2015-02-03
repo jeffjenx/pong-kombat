@@ -8,13 +8,8 @@ function FingerProjectile( sourcePaddle ) {
 	this.position.y = sourcePaddle.position.y;
 	this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
+	this.rotate = false;
 }
 
 FingerProjectile.prototype = new Projectile;
 FingerProjectile.prototype.constructor = FingerProjectile;
-
-FingerProjectile.prototype.update = function( deltaTime ) {
-	Projectile.prototype.update.call( this, deltaTime );
-
-	this.rotation = 0;
-}

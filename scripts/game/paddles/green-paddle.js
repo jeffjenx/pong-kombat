@@ -26,9 +26,20 @@ function GreenPaddle( ) {
 			projectile.velocity = projectile.velocity.multiply( 1.5 );
 		} },
 		{ start : 2.5, end : 3.5, action : function(winner, loser) { loser.dismantleStickToWall(winner); } },
-		{ start : 4.5, end : 5.5, action : function(winner, loser, percentComplete) { winner.rotation = -30 * percentComplete; } },
-		{ start : 6.0, end : 10.0, action : function(winner, loser, percentComplete) { winner.rotation = -30 + 60 * percentComplete; } },
-		//{ start : 8.0, end : 8.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
+		{ start : 4.5, end : 5.5, action : function(winner, loser, percentComplete) {
+			if(loser.position.x > viewport.width / 2){
+				winner.rotation = -30 * percentComplete;
+			} else{
+				winner.rotation = 180 + 30 * percentComplete;
+			}
+		} },
+		{ start : 6.0, end : 10.0, action : function(winner, loser, percentComplete) {
+			if(loser.position.x > viewport.width / 2){
+				winner.rotation = -30 + 60 * percentComplete;
+			} else {
+				winner.rotation = 180 + 30 - 60 * percentComplete;
+			}
+		} },
 		{ start : 6.0, end : 6.0, action : function(winner, loser) {
 			var projectile = winner.shootProjectile();
 			projectile.velocity = projectile.velocity.multiply( 1.05 );
@@ -67,69 +78,6 @@ function GreenPaddle( ) {
 			var projectile = winner.shootProjectile();
 			projectile.velocity = projectile.velocity.multiply( 1.05 );
 		} },
-		
-		/*
-		{ start : 8.5, end : 8.5, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.1 );
-		} },
-		{ start : 9.0, end : 9.0, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.3 );
-		} },
-		{ start : 9.5, end : 9.5, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.4 );
-		} },
-		{ start : 10.0, end : 10.0, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 2.5 );
-		} },
-		*/
-
-		/*
-		{ start : 10.5, end : 10.5, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.8 );
-		} },
-		{ start : 11.0, end : 11.0, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.4 );
-		} },
-		{ start : 11.5, end : 11.5, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.3 );
-		} },
-		{ start : 12.0, end : 12.0, action : function(winner, loser) {
-			var projectile = new GreenArrowProjectile( winner );
-			winner.shootProjectile(projectile);
-			projectile = winner.projectiles[winner.projectiles.length-1];
-			projectile.velocity = projectile.velocity.multiply( 1.1 );
-		} },
-		*/
-		/*
-		{ start : 9.0, end : 9.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		{ start : 9.5, end : 9.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		{ start : 10.0, end : 10.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		{ start : 10.5, end : 10.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		{ start : 11.0, end : 11.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		{ start : 11.5, end : 11.5, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
-		*/
-		//{ start : 12.0, end : 12.0, action : function(winner, loser) {winner.shootProjectile(new GreenArrowProjectile( winner ) ); } },
 		{ start : 1.0, end : 13.0, action : function(winner,loser) {
 			for( var i = 0; i < winner.projectiles.length; ++i ) {
 				var projectile = winner.projectiles[i];
@@ -145,48 +93,15 @@ function GreenPaddle( ) {
 				}
 
 				projectile.rotation = Math.atan2(projectile.velocity.y, projectile.velocity.x) * Math.TO_DEGREES;
-
-				//var speed = projectile.velocity.length();
-				//var direction = loser.position.subtract(projectile.position);
-				//projectile.rotation = Math.atan2(direction.y, direction.x) * Math.TO_DEGREES;
-				//console.log(projectile.rotation);
-				/*
-				projectile.velocity.x = speed * (90 - Math.abs(projectile.rotation)) / 90;
-				if( projectile.rotation < 0 )
-					projectile.velocity.y = -speed + Math.abs(projectile.velocity.x);
-				else
-					projectile.velocity.y = speed - Math.abs(projectile.velocity.x);//Going downwards.
-				*/
-				//projectile.velocity = direction.multiply(speed);
-
-				//var angleToTarget = Math.acos( projectile.velocity.dot( loser.position ) / ( loser.position.normalize() * projectile.velocity.normalize() ) );
-				//projectile.rotation = angleToTarget * Math.TO_DEGREES;
-				
-				// var a1 = Math.atan2(projectile.velocity.y, projectile.velocity.x);
-				// var a2 = Math.atan2(loser.position.y, loser.position.x);
-				// if(a1 < -Math.PI / 2 && a2 > Math.PI / 2) a1 += Math.PI * 2;
-				// if(a2 < -Math.PI / 2 && a1 > Math.PI / 2) a2 += Math.PI * 2;
-				// if( a2 - a1 > 0 ) {
-				// 	projectile.velocity = projectile.velocity.rotate( a2 - a1 );
-				// } else {
-				// 	projectile.velocity = projectile.velocity.rotate( -1 * (a2 - a1) );
-				// }
-				
-				//projectile.rotation = a2 - a1;
-				//projectile.velocity = projectile.velocity.rotate( a2 - a1 );
-				// var angleToTarget = Math.acos( projectile.velocity.dot( loser.position ) / ( loser.position.normalize() * projectile.velocity.normalize() ) );
-				// if( angleToTarget < -1 ) {
-				// 	projectile.rotation += 1;
-				// 	projectile.velocity.rotate( 1 );
-				// } else if( angleToTarget > 1 ) {
-				// 	projectile.rotation -= 1;
-				// 	projectile.velocity.rotate( -1 );
-				// }
 			}
 		} },
-		/*
-		*/
-		{ start : 10.0, end : 12.0, action : function(winner, loser, percentComplete) { winner.rotation = 30 * (1-percentComplete); } },
+		{ start : 10.0, end : 12.0, action : function(winner, loser, percentComplete) {
+			if(loser.position.x > viewport.width / 2){
+				winner.rotation = 30 * (1-percentComplete);
+			} else {
+				winner.rotation = -30 * (1-percentComplete);
+			}
+		} },
 		{ start : 15.0, end : 15.0, action : function() { SceneManager.currentScene.changeState( SceneManager.currentScene.states.ending ); } }
 	];
 }
@@ -292,9 +207,6 @@ GreenPaddle.prototype.draw = function( context ) {
 			this.bloods[i].draw( context );
 		}
 	}
-	// if( this.bloodEffect ) {
-	// 	this.bloodEffect.draw( context );
-	// }
 };
 
 GreenPaddle.prototype.shootProjectile = function( ) {
@@ -312,7 +224,6 @@ GreenPaddle.prototype.shootProjectile = function( ) {
 
 GreenPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
 
 	this.offset += 0.11 * deltaTime;
 	if( this.offset > 1 ) {

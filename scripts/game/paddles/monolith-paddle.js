@@ -19,8 +19,6 @@ function MonolithPaddle( ) {
 	this.gloss = new Sprite( 'Paddle-Gloss-Monolith' );
 
 	// Monolith throws 3 rocks at a time
-	//this.projectile2 = null;
-	//this.projectile3 = null;
 	this.maxProjectiles = 3;
 
 	this.nameSound = new Sound( 'Monolith' );
@@ -63,24 +61,7 @@ function MonolithPaddle( ) {
 MonolithPaddle.prototype = new Paddle;
 MonolithPaddle.prototype.constructor = MonolithPaddle;
 
-MonolithPaddle.prototype.draw = function( context ) {
-	Paddle.prototype.draw.call( this, context );
-
-	/*
-	if( this.projectile2 ) {
-		this.projectile2.draw( context );
-	}
-
-	if( this.projectile3 ) {
-		this.projectile3.draw( context );
-	}
-	*/
-};
-
 MonolithPaddle.prototype.shootProjectile = function( ) {
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
-
 	var projectile = new RockProjectile( this );
 	Paddle.prototype.shootProjectile.call( this, projectile );
 
@@ -96,79 +77,10 @@ MonolithPaddle.prototype.shootProjectile = function( ) {
 	projectile3.position.y = projectile.position.y + this.size.y * 0.11;
 	projectile3.velocity.x = Math.cos( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
 	projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * (0.33 + Math.random() * 0.07);
-
-	/*
-	this.projectile = new RockProjectile( this );
-	this.projectile.sourcePaddle = this;
-	this.projectile.position.x = this.position.x;
-	this.projectile.position.y = this.position.y;
-	
-	var direction = 0;
-	if( this.position.x > viewport.width * 2 ) {
-		direction -= 180;
-	}
-	this.projectile.velocity.x = Math.cos( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile.velocity.y = Math.sin( direction * Math.TO_RADIANS ) * viewport.width * 0.33;
-
-	this.projectile2 = new RockProjectile( this );
-	this.projectile2.sourcePaddle = this;
-	this.projectile2.position.x = this.projectile.position.x;
-	this.projectile2.position.y = this.projectile.position.y - this.size.y * 0.11;
-	this.projectile2.velocity.x = Math.cos( (direction-1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile2.velocity.y = Math.sin( (direction-1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
-
-	this.projectile3 = new RockProjectile( this );
-	this.projectile3.sourcePaddle = this;
-	this.projectile3.position.x = this.projectile.position.x;
-	this.projectile3.position.y = this.projectile.position.y + this.size.y * 0.11;
-	this.projectile3.velocity.x = Math.cos( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
-	this.projectile3.velocity.y = Math.sin( (direction+1.5) * Math.TO_RADIANS ) * viewport.width * 0.33;
-	*/
-
 	
 	if( app.settings.SOUND_FX > 0 ) {
 		projectile.sound = new Sound( 'Throw' );
 		projectile.sound.setMaxVolume( 0.5 * app.settings.SOUND_FX / 11 );
 		projectile.sound.play();
 	}
-
-	
-	//if( this.position.x > viewport.width * 0.50 )
-	//{
-	//	this.projectile.velocity.x *= -1;
-	//}
-};
-
-/*
-MonolithPaddle.prototype.updateRocksBoundingBox = function( ) {
-	this.projectile.boundingBox.top = this.projectile2.boundingBox.top;
-	this.projectile.boundingBox.bottom = this.projectile3.boundingBox.bottom;
-
-	//this.projectile.boundingBox.width = Math.abs(this.projectile.boundingBox.right - this.projectile.boundingBox.left);
-	this.projectile.boundingBox.height = Math.abs(this.projectile.boundingBox.top - this.projectile.boundingBox.bottom);
-};
-*/
-
-MonolithPaddle.prototype.update = function( deltaTime ) {
-	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
-
-	/*
-	if( this.projectile === null ) {
-		this.projectile2 = null;
-		this.projectile3 = null;
-	}
-
-	if( this.projectile2 ) {
-		this.projectile2.update( deltaTime );
-	}
-
-	if( this.projectile3 ) {
-		this.projectile3.update( deltaTime );
-	}
-
-	if( this.projectile && this.projectile2 && this.projectile3 ) {
-		this.updateRocksBoundingBox( );
-	}
-	*/
 };

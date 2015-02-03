@@ -69,8 +69,6 @@ function Paddle( texture ) {
 
 	this.glue = null;
 	this.shield = null;
-	//this.projectile = null;
-	//this.bloodEffect = null;
 
 	this.maxProjectiles = 1;
 	this.projectiles = [ ];
@@ -141,7 +139,6 @@ Paddle.prototype.dismantle = function( opponent ) {
 
 Paddle.prototype.dismantleBloat = function() {
 	this.targetSize = this.size.x * 1.5;
-	//this.size.x *= 1.5;
 };
 
 Paddle.prototype.dismantleBurning = function(percentComplete) {
@@ -208,7 +205,6 @@ Paddle.prototype.dismantleCharred = function() {
 		}
 	}
 
-	//this.opacity = Math.max( this.opacity - 0.005, 0 );
 	this.size.y *= 0.99;
 	this.scale = Math.max( this.scale - 0.005, 0 );
 
@@ -271,7 +267,6 @@ Paddle.prototype.dismantleElectricuting = function(percentComplete) {
 Paddle.prototype.dismantleFreezing = function() {
 	if( this.effect.type !== 'freezing' ) {
 		this.effect.type = 'freezing';
-		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
 		this.effect.count = 50;
 		this.effect.minVelocity.x = 0;
@@ -301,7 +296,6 @@ Paddle.prototype.dismantleFreezing = function() {
 Paddle.prototype.dismantleSplashing = function(resource) {
 	if( this.effect.type !== 'splashing' ) {
 		this.effect.type = 'splashing';
-		//this.effect.particles = [];
 		resource = resource || 'Projectile-Ice-Blast';
 		this.effect.particleImages = [Resources[resource]];
 		this.effect.count = 50;
@@ -330,14 +324,12 @@ Paddle.prototype.dismantleSplashing = function(resource) {
 			splashSound.play( );
 		}
 	}
-	//this.opacity = 0.5;
 	this.effect.update( 1/60 );
 };
 
 Paddle.prototype.dismantleRocked = function() {
 	if( this.effect.type !== 'rocked' ) {
 		this.effect.type = 'rocked';
-		//this.effect.particles = [];
 		this.effect.particleImages = [Resources['Paddle-Broken-Monolith']];
 		this.effect.count = 5;
 		this.effect.minVelocity.x = 0;
@@ -382,7 +374,6 @@ Paddle.prototype.dismantleExploding = function( percentComplete ) {
 		this.opacity = 0;
 		this.getHit( );
 
-		//this.effect.particleImages = [Resources['Projectile-Ice-Blast']];
 		this.effect.count = 40;
 		this.effect.minVelocity.x = -viewport.width * 0.03 * 5;
 		this.effect.minVelocity.y = -viewport.height * ( 0.01 * Math.pow( this.bigness, 2 ) + 0.09 ) * 2;
@@ -471,7 +462,7 @@ Paddle.prototype.dismantleStickToWall = function( ) {
 	if( this.position.x > viewport.width * 0.5 ) {
 		this.position.x = Math.min( this.position.x + viewport.width * 0.01, viewport.width );
 	} else {
-		this.position.x = Math.min( this.position.x - viewport.width * 0.01, 0 );
+		this.position.x = Math.max( this.position.x - viewport.width * 0.01, 0 );
 	}
 };
 
@@ -551,11 +542,6 @@ Paddle.prototype.dismantleAppear = function(percentComplete) {
 		}
 	}
 
-	//if( percentComplete < 0.5 && this.opacity != 0 ) {
-		//this.effect.restart();
-		//this.opacity = 0;
-	//}
-
 	this.velocity.x /= this.drag;
 };
 
@@ -609,7 +595,6 @@ Paddle.prototype.dismantleRockFalling = function( percentComplete ) {
 				}
 			}
 		};
-		//this.effect.restart();
 	}
 	this.effect.update( 1/60 );
 };
@@ -693,50 +678,6 @@ Paddle.prototype.draw = function( context ) {
 	);
 	context.restore();
 	
-	/*
-	context.save();
-	context.beginPath();
-	context.moveTo(x + radius, y);
-	context.lineTo(x + width - radius, y);
-	context.quadraticCurveTo(x + width, y, x + width, y + radius);
-	context.lineTo(x + width, y + height - radius);
-	context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-	context.lineTo(x + radius, y + height);
-	context.quadraticCurveTo(x, y + height, x, y + height - radius);
-	context.lineTo(x, y + radius);
-	context.quadraticCurveTo(x, y, x + radius, y);
-	context.closePath();
-	context.clip();
-	//context.restore();
-	//context.save( );
-	context.globalAlpha *= this.opacity;
-	context.translate( this.position.x, this.position.y );
-	context.rotate( this.rotation * Math.TO_RADIANS );
-	if( this.flipH )
-	{
-		context.scale( -1, 1 );
-	}
-	context.drawImage(
-		this.patternCanvas,
-		0,
-		0,
-		this.patternCanvas.width * (this.size.x / this.size.y) * 0.75,
-		this.patternCanvas.height * 0.75,
-		-width * this.registration.x,
-		-height * this.registration.y,
-		width,
-		height
-	);
-	context.drawImage(
-		this.gloss.image,
-		-width * this.registration.x * 7,
-		-height * this.registration.y * 1.15,
-		width * 7,
-		height * 1.15
-	);
-	context.restore( );
-	*/
-
 	if( this.glue ) {
 		this.glue.draw( context );
 	}
@@ -750,9 +691,6 @@ Paddle.prototype.draw = function( context ) {
 			this.projectiles[i].draw( context );
 		}
 	}
-	//if( this.projectile ) {
-	//	this.projectile.draw( context );
-	//}
 
 	if( this.effect ) {
 		this.effect.draw( context );
@@ -763,9 +701,6 @@ Paddle.prototype.draw = function( context ) {
 			this.bloods[i].draw( context );
 		}
 	}
-	// if( this.bloodEffect ) {
-	// 	this.bloodEffect.draw( context );
-	// }
 };
 
 Paddle.prototype.getHit = function( projectile ) {
@@ -859,11 +794,7 @@ Paddle.prototype.moveDown = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	this.offset = this.position.y / viewport.height * 0.75;
-	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
-	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) );
-	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
-
 	this.velocity.y = viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
@@ -872,11 +803,7 @@ Paddle.prototype.moveUp = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
 	this.offset = this.position.y / viewport.height * 0.75;
-	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
 	
-	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
-	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
-
 	this.velocity.y = -viewport.height * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.2 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
@@ -884,24 +811,12 @@ Paddle.prototype.moveUp = function( ) {
 Paddle.prototype.moveLeft = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
 
-	//this.offset = this.position.y / viewport.height * 0.75;
-	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
-	
-	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
-	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
-
 	this.velocity.x = -viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
 };
 
 Paddle.prototype.moveRight = function( ) {
 	var speedMultiplier = ( this.speedPowerup ) ? 2 : 1.5;
-
-	//this.offset = this.position.y / viewport.height * 0.75;	
-	//this.offset = (Math.abs(this.position.x - viewport.width / 2) + this.position.y) / (viewport.width / 2 + viewport.height);
-	
-	//this.offset = Math.sqrt( Math.pow( this.position.y, 2 ) + Math.pow( this.position.x, 2 ) ); 
-	//this.offset /= Math.sqrt( Math.pow( viewport.height, 2 ) + Math.pow( viewport.width / 2, 2 ) );
 
 	this.velocity.x = viewport.width * ( 0.01 * Math.pow( this.quickness, 2 ) + 0.1 ) * speedMultiplier;
 	this.restrictToBounds( );
@@ -924,12 +839,6 @@ Paddle.prototype.restrictToBounds = function( ) {
 	}
 };
 
-Paddle.prototype.shootHomingProjectile = function( projectile, target ) {
-	//projectile.setTarget( target );
-	//this.shootProjectile(projectile);
-	//var homingProjectile = this.projectiles[this.projectiles.length-1];
-};
-
 Paddle.prototype.shootProjectile = function( projectile ) {
 	if( !projectile ) {
 		projectile = new Projectile( this );
@@ -942,26 +851,6 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 
 	projectile.rotation = this.rotation;
 	
-	if( this.position.x > viewport.width * 0.50 )
-	{
-		projectile.flipH = true;
-		projectile.velocity.x *= -1;
-	}
-	/*
-	if( this.position.x < viewport.width * 0.50 ) {
-		projectile.velocity.x = viewport.width * 0.25;
-	} else {
-		projectile.velocity.x = -viewport.width * 0.25;
-	}
-	*/
-
-	// if( projectile.effect ) {
-	// 	projectile.effect.minVelocity.x += projectile.velocity.x / 2;
-	// 	projectile.effect.maxVelocity.x += projectile.velocity.x / 2;
-	// 	projectile.effect.minVelocity.y += projectile.velocity.y / 2;
-	// 	projectile.effect.maxVelocity.y += projectile.velocity.y / 2;
-	// }
-
 	this.projectiles.push( projectile );
 	InputManager.history = [ ];
 
@@ -971,8 +860,6 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 Paddle.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
 	
-	//this.offset = this.position.y / viewport.height * 0.75;
-	
 	if( this.projectiles.length > 0 ) {
 		for( var i = 0; i < this.projectiles.length; i++ ) {
 			var projectile = this.projectiles[i];
@@ -980,13 +867,6 @@ Paddle.prototype.update = function( deltaTime ) {
 			projectile.update( deltaTime );	
 		}
 	}
-	// if( this.projectile ) {
-	// 	if( this.projectile.boundingBox.right < 0 || this.projectile.boundingBox.left > viewport.width ) {
-	// 		this.projectile = null;
-	// 	} else {
-	// 		this.projectile.update( deltaTime );
-	// 	}
-	// }
 	
 	this.velocity = this.velocity.multiply( this.drag );
 	
@@ -1000,18 +880,12 @@ Paddle.prototype.update = function( deltaTime ) {
 			}
 		}
 	}
-	// if( this.bloodEffect ) {
-	// 	this.bloodEffect.update( deltaTime );
-	// 	if( this.bloodEffect.particles.count === 0 ) {
-	// 		this.bloodEffect = null;
-	// 	}
-	// }
-
+	
 	if( this.glue )
 	{
 		this.glue.position.x = this.position.x;
 		this.glue.position.y = this.position.y;
-		//this.glue.size.y = this.size.y * this.scale * 1.2;
+		this.glue.rotation = this.rotation;
 		this.glue.size.x = this.size.x * this.scale * 6;
 		
 		if( this.glue.size.y < this.size.y * this.scale * 1.2 ) {

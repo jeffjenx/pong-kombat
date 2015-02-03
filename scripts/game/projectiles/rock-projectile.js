@@ -8,6 +8,7 @@ function RockProjectile( sourcePaddle ) {
 	this.position.y = sourcePaddle.position.y;
 	this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
+	this.lifeModifier = 0.5;
 }
 
 RockProjectile.prototype = new Projectile;

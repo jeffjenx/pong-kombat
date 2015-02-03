@@ -1,20 +1,14 @@
 var Powerups = {
 	GLUE : 0,
 	LIFE : 1,
-	SHIELD : 3,
-	SPEED : 4,
-	TIME : 5
+	SHIELD : 2,
+	SPEED : 3,
+	TIME : 4
 };
 
 function Powerup( texture ) {
 	Sprite.call( this, texture );
 	
-	/*
-	this.position.x = viewport.width * 0.50;
-	this.position.y = viewport.height * 0.50;
-	this.size.x = viewport.height * 0.05;
-	this.size.y = viewport.height * 0.05;
-	*/
 	this.timeoutTime; // set from kombat layer
 }
 
@@ -29,7 +23,7 @@ Powerup.prototype.collect = function( kombatant ) {
 Powerup.prototype.timedOut = function( ) {
 	this.layer.removeComponent( this.id );
 	this.layer.nextPowerup = this.layer.scene.timeElapsed + 5 + Math.random( ) * 10;
-}
+};
 
 Powerup.prototype.update = function( deltaTime ) {
 	Sprite.prototype.update.call( this, deltaTime );
@@ -45,4 +39,4 @@ Powerup.prototype.update = function( deltaTime ) {
 	if( this.layer.scene.timeElapsed >= this.timeoutTime ) {
 		this.timedOut();
 	}
-}
+};

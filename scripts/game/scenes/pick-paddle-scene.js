@@ -341,12 +341,11 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		{
 			var computer = new Opponent( );
 			computer.setPaddle( Paddles.RANDOM );
-			
+
 			var kombatScene = new KombatScene( );
 			kombatScene.addKombatant( player );
 			kombatScene.addKombatant( computer );
 			kombatScene.setLevel( this.level );
-			//kombatScene.setBall( Balls.DEFAULT );
 			SceneManager.changeScene( kombatScene, Transitions.NONE );
 		}
 	}

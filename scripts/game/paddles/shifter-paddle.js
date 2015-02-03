@@ -51,8 +51,6 @@ ShifterPaddle.prototype = new Paddle;
 ShifterPaddle.prototype.constructor = ShifterPaddle;
 
 ShifterPaddle.prototype.shootProjectile = function( ) {
-	//Paddle.prototype.shootProjectile.call( this );
-	//this.projectile.tint = this.color;
 	var projectile = new LaserProjectile( this );
 	Paddle.prototype.shootProjectile.call( this, projectile );
 
@@ -66,7 +64,6 @@ ShifterPaddle.prototype.shootProjectile = function( ) {
 
 ShifterPaddle.prototype.update = function( deltaTime ) {
 	Paddle.prototype.update.call( this, deltaTime );
-	//this.velocity = this.velocity.multiply( 0.9 );
 	
 	this.offset *= -1;
 

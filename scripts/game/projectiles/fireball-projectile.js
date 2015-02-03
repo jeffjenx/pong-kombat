@@ -36,14 +36,6 @@ function FireballProjectile( sourcePaddle ) {
 FireballProjectile.prototype = new Projectile;
 FireballProjectile.prototype.constructor = FireballProjectile;
 
-FireballProjectile.prototype.draw = function( context ) {
-	Sprite.prototype.draw.call( this, context );
-	
-	if( this.effect ) {
-		this.effect.draw( context );
-	}
-};
-
 FireballProjectile.prototype.update = function( deltaTime ) {
 	Projectile.prototype.update.call( this, deltaTime );
 

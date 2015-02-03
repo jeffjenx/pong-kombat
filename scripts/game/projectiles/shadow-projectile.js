@@ -7,6 +7,7 @@ function ShadowProjectile( sourcePaddle ) {
 	this.position.x = sourcePaddle.position.x;
 	this.position.y = sourcePaddle.position.y;
 	this.scale = 0;
+	this.rotate = false;
 
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-BlackSmoke1'],Resources['Particle-BlackSmoke2']];
@@ -77,9 +78,3 @@ ShadowProjectile.prototype.draw = function( context ) {
 		this.effect.draw( context );
 	}
 };
-
-ShadowProjectile.prototype.update = function( deltaTime ) {
-	Projectile.prototype.update.call( this, deltaTime );
-	
-	this.rotation = 0;
-}

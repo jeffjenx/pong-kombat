@@ -36,14 +36,6 @@ function IceBlastProjectile( sourcePaddle ) {
 IceBlastProjectile.prototype = new Projectile;
 IceBlastProjectile.prototype.constructor = IceBlastProjectile;
 
-IceBlastProjectile.prototype.draw = function( context ) {
-	Sprite.prototype.draw.call( this, context );
-	
-	if( this.effect ) {
-		this.effect.draw( context );
-	}
-}
-
 IceBlastProjectile.prototype.update = function( deltaTime ) {
 	Projectile.prototype.update.call( this, deltaTime );
 

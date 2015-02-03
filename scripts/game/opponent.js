@@ -142,7 +142,7 @@ Opponent.prototype.applyAI = function( ) {
 					}
 				}
 
-				if( enemy.paddle.position.x > viewport.width * 0.25 )
+				if( this.paddle.position.x < ball.position.x || enemy.paddle.position.x > viewport.width * 0.25 )
 				{
 					this.paddle.moveRight( );
 				}
@@ -211,7 +211,7 @@ Opponent.prototype.applyAI = function( ) {
 				if( this.randomizer < 0.11 ) {
 					this.layer.scene.finishType = this.layer.scene.finishTypes.dismantled;
 					this.layer.scene.changeState( this.layer.scene.states.dismantling );
-				} else if( this.paddle.canShootProjectile( ) ) {
+				} else if( this.randomizer < 0.5 && this.paddle.canShootProjectile( ) ) {
 					this.paddle.shootProjectile( );
 				}
 			}
@@ -234,6 +234,7 @@ Opponent.prototype.setPaddle = function( paddle ) {
 		case Paddles.MYST : this.paddle = new MystPaddle( ); break;
 	}
 
+	this.paddle.rotation = 180;
 	this.paddle.kombatant = this;
 
 	this.paddle.restrictToBounds = function( ) {
@@ -271,5 +272,4 @@ Opponent.prototype.update = function( deltaTime ) {
 		break;
 	}
 	this.paddle.update( deltaTime );
-	this.paddle.restrictToBounds( );
 };

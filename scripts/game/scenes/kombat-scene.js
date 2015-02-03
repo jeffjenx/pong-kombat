@@ -20,10 +20,6 @@ function KombatScene( ) {
 
 	this.state = null;
 	
-	//this.startMatch( );
-	//this.changeState( this.states.fighting );
-	//this.layers['Kombat'].setBall( Balls.DEFAULT );
-
 	this.finishTypes = {
 		dismantled : 0,
 		level : 1,
@@ -300,8 +296,6 @@ KombatScene.prototype.startMatch = function( ) {
 		leftKombatant.life = this.startLife;
 		leftKombatant.paddle.opacity = 1;
 		leftKombatant.paddle.scale = 1;
-		//leftKombatant.paddle.position.x = viewport.width * 0.02;
-		//leftKombatant.paddle.position.y = viewport.height * 0.50;
 	}
 
 	if( rightKombatant )
@@ -310,8 +304,6 @@ KombatScene.prototype.startMatch = function( ) {
 		rightKombatant.life = this.startLife;
 		rightKombatant.paddle.opacity = 1;
 		rightKombatant.paddle.scale = 1;
-		//rightKombatant.paddle.position.x = viewport.width * 0.98;
-		//rightKombatant.paddle.position.y = viewport.height * 0.50;
 	}
 };
 
@@ -372,11 +364,11 @@ KombatScene.prototype.update = function( deltaTime ) {
 				this.layers['HUD'].secretPaddle = null;
 				this.changeState( this.states.starting );
 			}
+			this.layers['Kombat'].centerPaddles();
 		break;
 
 		case this.states.starting :
 			if( this.stateTime >= 5 ) {
-				//this.layers['HUD'].removeComponent( 'Announcement' );
 				this.changeState( this.states.fighting );
 				this.layers['Kombat'].setBall( );
 			} else {
@@ -401,11 +393,9 @@ KombatScene.prototype.update = function( deltaTime ) {
 						this.layers['HUD'].updateWinner( );
 
 						if( app.settings.COMBAT ) {
-							//this.layers['HUD'].addAnnouncement( "Finish'em!" );
 							this.changeState( this.states.announcing );
 						} else {
 							this.changeState( this.states.ending );
-							//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 						}
 					}
 					else
@@ -429,11 +419,9 @@ KombatScene.prototype.update = function( deltaTime ) {
 						this.layers['HUD'].updateWinner( );
 
 						if( app.settings.COMBAT ) {
-							//this.layers['HUD'].addAnnouncement( "Finish'em!" );
 							this.changeState( this.states.announcing );
 						} else {
 							this.changeState( this.states.ending );
-							//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 						}
 					}
 					else
@@ -453,12 +441,10 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.finishing :
 			if( this.stateTime >= 5 ) {
 				this.changeState( this.states.ending );
-				//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
 			}
 		break;
 		
 		case this.states.dismantling :
-			//this.layers['HUD'].cinemaMode( );
 			if( this.finishType === this.finishTypes.spamality ) {
 				this.spamality( this.winner, this.winner === leftKombatant ? rightKombatant : leftKombatant );
 			}
@@ -466,24 +452,6 @@ KombatScene.prototype.update = function( deltaTime ) {
 				this.levelDismantle( this.winner, this.winner === leftKombatant ? rightKombatant : leftKombatant );
 			} else {
 				this.winner.paddle.dismantle( this.winner === leftKombatant ? rightKombatant : leftKombatant );
-			}
-			
-			/*
-			if( this.stateTime > 2.5 && !this.screamSound.played && app.settings['SoundFX'] === true && !app.isMobile( ) )
-			{
-				this.screamSound.play( );
-			}
-			*/
-
-			if( this.stateTime >= 7 ) {
-				//this.changeState( this.states.ending );
-
-
-				//this.layers['HUD'].addComponent( 'Winner', new Text( this.winner.paddle.name + ' Wins' ) );
-				//
-				//var dismantled = new Text( 'Dismantled!' );
-				//dismantled.position.y = viewport.height * 0.60;
-				//this.layers['HUD'].addComponent( 'Dismantled', dismantled );
 			}
 		break;
 		

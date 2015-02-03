@@ -8,6 +8,7 @@ function LightningSaiProjectile( sourcePaddle ) {
 	this.position.y = sourcePaddle.position.y;
 	this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
+	this.rotate = false;
 
 	this.effect = new ParticleSystem( );
 	this.effect.particleImages = [Resources['Particle-Lightning1'],Resources['Particle-Lightning2'],Resources['Particle-Lightning3']];
@@ -63,25 +64,3 @@ LightningSaiProjectile.prototype.draw = function( context ) {
 		this.effect.draw( context );	
 	}
 };
-
-LightningSaiProjectile.prototype.update = function( deltaTime ) {
-	Projectile.prototype.update.call( this, deltaTime );
-	this.rotation -= 180 * deltaTime;
-	/*
-	Sprite.prototype.update.call( this, deltaTime );
-
-	if( this.sourcePaddle ) {
-		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
-			this.sourcePaddle.projectile = null;
-		}	
-	}
-
-	if( this.scale < 1 ) {
-		this.scale += deltaTime * 10; 
-	}
-
-	if( this.effect ) {
-		this.effect.update( deltaTime );
-	}
-	*/
-}

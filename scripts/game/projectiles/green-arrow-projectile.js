@@ -8,30 +8,8 @@ function GreenArrowProjectile( sourcePaddle ) {
 	this.position.y = sourcePaddle.position.y;
 	this.sourcePaddle = sourcePaddle;
 	this.scale = 0;
+	this.rotate = false;
 }
 
 GreenArrowProjectile.prototype = new Projectile;
 GreenArrowProjectile.prototype.constructor = GreenArrowProjectile;
-
-GreenArrowProjectile.prototype.draw = function( context ) {
-	Sprite.prototype.draw.call( this, context );
-};
-
-GreenArrowProjectile.prototype.update = function( deltaTime ) {
-	Projectile.prototype.update.call( this, deltaTime );
-
-	this.rotation -= 180 * deltaTime;
-	/*
-	Sprite.prototype.update.call( this, deltaTime );
-
-	if( this.sourcePaddle ) {
-		if( this.boundingBox.left > viewport.width || this.boundingBox.right < 0 || this.boundingBox.top > viewport.height || this.boundingBox.bottom < 0 ) {
-			this.sourcePaddle.projectile = null;
-		}	
-	}
-
-	if( this.scale < 1 ) {
-		this.scale += deltaTime * 10; 
-	}
-	*/
-}

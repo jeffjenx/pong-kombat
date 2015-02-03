@@ -116,8 +116,7 @@ KombatLayer.prototype.addPowerup = function( ) {
 		}
 	}
 	var randomPowerup = Math.floor( Math.random( ) * count );
-	//randomPowerup = Powerups.GLUE;
-
+	
 	if( !app.settings.COMBAT && randomPowerup === Powerups.SHIELD ) {
 		return this.addPowerup();
 	};
@@ -145,17 +144,13 @@ KombatLayer.prototype.update = function( deltaTime ) {
 	switch( this.scene.state ) {
 		case this.scene.states.secretMessage :
 		case this.scene.states.starting :
-			//this.centerPaddles();
-			
 			if( leftKombatant ) {
-				//leftKombatant.update( deltaTime );
 				if( leftKombatant.paddle.projectiles.length > 0 ) {
 					leftKombatant.paddle.projectiles = [ ];
 				}
 			}
 
 			if( rightKombatant ) {
-				//rightKombatant.update( deltaTime );
 				if( rightKombatant.paddle.projectiles.length > 0 ) {
 					rightKombatant.paddle.projectiles = [ ];
 				}
@@ -168,7 +163,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 			if( ball ) {
 				ball.set();
 			}
-			//return;
 		break;
 		
 		case this.scene.states.fighting :
@@ -189,7 +183,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 				if( leftKombatant )
 				{
-					//if( ball.velocity.x < 0 && Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) && ball.position.x > leftKombatant.paddle.position.x )
 					if( ball.velocity.x < 0 &&
 					    Collision.RectRect( ball.boundingBox, leftKombatant.paddle.boundingBox ) && 
 					    Collision.CircleRect( ball.collisionAreas[0], leftKombatant.paddle.boundingBox ) && 
@@ -214,7 +207,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 
 				if( rightKombatant )
 				{
-					//if( ball.velocity.x > 0 && Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) && ball.position.x < rightKombatant.paddle.position.x )
 					if( ball.velocity.x > 0 &&
 					    Collision.RectRect( ball.boundingBox, rightKombatant.paddle.boundingBox ) && 
 					    Collision.CircleRect( ball.collisionAreas[0], rightKombatant.paddle.boundingBox ) && 
@@ -262,7 +254,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 									// blood
 									rightKombatant.paddle.getHit( projectile );
 								}
-								rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
+								rightKombatant.life -= 1 * projectile.lifeModifier * rightKombatant.paddle.lifeModifier;
 							} else {
 								rightKombatant.paddle.blockProjectile();
 							}
@@ -271,7 +263,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 								var speed = projectile.velocity.length();
 								var direction = projectile.velocity.normalize();
 								projectile.velocity = direction.multiply( speed * 0.8 );
-								//projectile.velocity = projectile.velocity.multiply( 0.85 );
 							} else {
 								leftKombatant.paddle.projectiles.splice( i, 1 );
 								--i;
@@ -279,18 +270,6 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						}
 					}
 				}
-
-				// if(leftKombatant.paddle.projectile && Collision.RectRect( leftKombatant.paddle.projectile.boundingBox, rightKombatant.paddle.boundingBox ) ) {
-				// 	if( !rightKombatant.paddle.shieldPowerup )
-				// 	{
-				// 		if( !app.settings.CENSORSHIP ) {
-				// 			// blood
-				// 			rightKombatant.paddle.getHit( );
-				// 		}
-				// 		rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
-				// 	}
-				// 	leftKombatant.paddle.projectile = null;
-				// }
 
 				if( rightKombatant.paddle.projectiles.length > 0 ) {
 					for( var i = 0; i < rightKombatant.paddle.projectiles.length; i++ ) {
@@ -303,27 +282,23 @@ KombatLayer.prototype.update = function( deltaTime ) {
 									// blood
 									leftKombatant.paddle.getHit( projectile );
 								}
-								leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
+								leftKombatant.life -= 1 * projectile.lifeModifier * leftKombatant.paddle.lifeModifier;
 							} else {
 								leftKombatant.paddle.blockProjectile( );
 							}
-							rightKombatant.paddle.projectiles.splice( i, 1 );
-							--i;
+
+
+							if( this.scene.state === this.scene.states.dismantling && (rightKombatant.paddle.enum === 'GREEN') ) {
+								var speed = projectile.velocity.length();
+								var direction = projectile.velocity.normalize();
+								projectile.velocity = direction.multiply( speed * 0.8 );
+							} else {
+								rightKombatant.paddle.projectiles.splice( i, 1 );
+								--i;
+							}
 						}
 					}
 				}
-				
-				// if( rightKombatant.paddle.projectile && Collision.RectRect( rightKombatant.paddle.projectile.boundingBox, leftKombatant.paddle.boundingBox ) ) {
-				// 	if( !leftKombatant.paddle.shieldPowerup )
-				// 	{
-				// 		if( !app.settings.CENSORSHIP ) {
-				// 			// blood
-				// 			leftKombatant.paddle.getHit( );
-				// 		}
-				// 		leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
-				// 	}
-				// 	rightKombatant.paddle.projectile = null;
-				// }
 			}
 		break;
 
