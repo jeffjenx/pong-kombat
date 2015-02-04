@@ -221,8 +221,8 @@ function ready( ) {
 		}
 	};
 	
-	ResourceManager.addJSON( 'Assets', 'languages/' + app.language + '/assets.lang.json' );
-	ResourceManager.addJSON( 'Strings', 'languages/' + app.language + '/strings.lang.json' );
+	ResourceManager.addJSON( 'Assets', 'languages/' + app.language + '/assets.' + app.language + '.json' );
+	ResourceManager.addJSON( 'Strings', 'languages/' + app.language + '/strings.' + app.language + '.json' );
 	
 	ResourceManager.onLoaded = function( ) {
 		clearInterval( loadingInterval );

@@ -130,7 +130,7 @@ jQuery(function( )
 
 	$.when(
 			// Readme
-			$.get( '/languages/en/readme.lang.md', function( result )
+			$.get( '/languages/en/readme.en.md', function( result )
 			{
 				var html = markdownConverter.makeHtml( result );
 				$readme.appendTo( $desktop );
