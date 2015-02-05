@@ -282,6 +282,7 @@ KombatScene.prototype.startMatch = function( ) {
 	var leftKombatant = this.layers['Kombat'].components['LeftKombatant'];
 	var rightKombatant = this.layers['Kombat'].components['RightKombatant'];
 	this.winner = null;
+	this.finishType = null;
 
 	if( Math.random() < 0.05 && leftKombatant.paddle.enum !== 'MRSLAYER' && rightKombatant.paddle.enum !== 'MRSLAYER' ) {
 		this.changeState( this.states.secretMessage );
@@ -293,6 +294,7 @@ KombatScene.prototype.startMatch = function( ) {
 	if( leftKombatant )
 	{
 		leftKombatant.roundsWon = 0;
+		leftKombatant.flawlessRounds = 0;
 		leftKombatant.life = this.startLife;
 		leftKombatant.paddle.opacity = 1;
 		leftKombatant.paddle.scale = 1;
@@ -301,6 +303,7 @@ KombatScene.prototype.startMatch = function( ) {
 	if( rightKombatant )
 	{
 		rightKombatant.roundsWon = 0;
+		rightKombatant.flawlessRounds = 0;
 		rightKombatant.life = this.startLife;
 		rightKombatant.paddle.opacity = 1;
 		rightKombatant.paddle.scale = 1;
@@ -387,6 +390,9 @@ KombatScene.prototype.update = function( deltaTime ) {
 					++rightKombatant.roundsWon;
 					this.layers['HUD'].components['RightRounds'].text = Array(rightKombatant.roundsWon+1).join('●');
 					this.layers['Kombat'].removeComponent( 'Ball' );
+					if( rightKombatant.life === this.startLife ) {
+						++rightKombatant.flawlessRounds;
+					}
 					if( rightKombatant.roundsWon > app.settings.ROUNDS / 2 )
 					{
 						this.winner = rightKombatant;
@@ -413,6 +419,9 @@ KombatScene.prototype.update = function( deltaTime ) {
 					++leftKombatant.roundsWon;
 					this.layers['HUD'].components['LeftRounds'].text = Array(leftKombatant.roundsWon+1).join('●');
 					this.layers['Kombat'].removeComponent( 'Ball' );
+					if( leftKombatant.life === this.startLife ) {
+						++leftKombatant.flawlessRounds;
+					}
 					if( leftKombatant.roundsWon > app.settings.ROUNDS / 2 )
 					{
 						this.winner = leftKombatant;
@@ -457,7 +466,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 		
 		case this.states.ending :
 			if( this.stateTime >= 3 && InputManager.checkButtonPress( Buttons.ACTION ) ) {
-				if(this.finishType === this.finishTypes.dismantled && this.winner.life === this.startLife && this.layers['Background'].components['Background'].resource === 'Background-Pit') {
+				if( this.winner.roundsWon === this.winner.flawlessRounds && this.layers['Background'].components['Background'].resource === 'Background-Pit' && this.finishType !== null ) {
 					var computer = new Opponent( );
 					computer.setPaddle( Paddles.MRSLAYER );
 					

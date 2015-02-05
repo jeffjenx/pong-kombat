@@ -208,10 +208,23 @@ Opponent.prototype.applyAI = function( ) {
 				if( !this.randomizer ) {
 					this.randomizer = Math.random( );
 				}
-				if( this.randomizer < 0.11 ) {
+				if( this.roundsWon === this.flawlessRounds && this.randomizer < 0.5 ) {
+					// do spamality pretty frequently, if they're getting flawless victories
+					this.layer.scene.finishType = this.layer.scene.finishTypes.spamality;
+					this.layer.scene.changeState( this.layer.scene.states.dismantling );
+				}
+				else if( SceneManager.currentScene.layers['Foreground'].dismantleSequence && this.randomizer < 0.05 ) {
+					// do a stage fatality if possible, but not very often
+					this.layer.scene.finishType = this.layer.scene.finishTypes.level;
+					this.layer.scene.changeState( this.layer.scene.states.dismantling );
+				}
+				else if( this.randomizer < 0.11 ) {
+					// do a regular fatility somewhat frequently
 					this.layer.scene.finishType = this.layer.scene.finishTypes.dismantled;
 					this.layer.scene.changeState( this.layer.scene.states.dismantling );
-				} else if( this.randomizer < 0.5 && this.paddle.canShootProjectile( ) ) {
+				}
+				else if( this.randomizer < 0.5 && this.paddle.canShootProjectile( ) ) {
+					// otherwise, just taunt them, essentially
 					this.paddle.shootProjectile( );
 				}
 			}

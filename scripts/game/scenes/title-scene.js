@@ -42,7 +42,7 @@ function TitleScene( ) {
 	this.logo.scale = viewport.height / 1080;
 	titleLayer.addComponent( 'Logo', this.logo );
 	
-	this.text = new Text( Resources.Strings.PRESS_SPACEBAR + ' ' + Resources.Strings.TO_BEGIN );
+	this.text = new Text( Resources.Strings.PRESS_START + ' ' + Resources.Strings.TO_BEGIN );
 	this.text.fontFamily = 'MK Mythologies';
 	this.text.fontSize = viewport.height * 0.044;
 	this.text.position.y = viewport.height * 0.67;
@@ -61,6 +61,8 @@ function TitleScene( ) {
 		this.music.setMaxVolume( 0.5 * app.settings.TUNES / 11 );
 		this.music.loop( );
 	}
+
+	this.godSequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION ];
 }
 
 TitleScene.prototype = new Scene;
@@ -103,9 +105,7 @@ TitleScene.prototype.update = function( deltaTime ) {
 	
 	if( !this.layers['Menu'] && (InputManager.checkButtonPress( Buttons.ACTION ) || InputManager.checkButtonPress( Buttons.START ) ) )
 	{
-		var sequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION ];
-
-		if( InputManager.checkSequence( sequence ) ) {
+		if( InputManager.checkSequence( this.godSequence ) ) {
 			app.godMode = 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r';
 			this.message.text = 'GOD MODE';
 			this.message.opacity = 1;

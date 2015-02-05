@@ -2,6 +2,9 @@ function Player( ) {
 	this.life = 0;
 	this.paddle = null;
 	this.roundsWon = 0;
+	this.flawlessRounds = 0;
+
+	this.spamalitySequence = [Buttons.ACTION, Buttons.ACTION, Buttons.ACTION, Buttons.UP];
 }
 
 Player.prototype.constructor = Player;
@@ -24,7 +27,7 @@ Player.prototype.handleInput = function( ) {
 	switch( this.layer.scene.state ) {
 		case this.layer.scene.states.finishing :
 			var foreground = SceneManager.currentScene.layers['Foreground'];
-			if( InputManager.checkSequence( [Buttons.ACTION, Buttons.ACTION, Buttons.ACTION, Buttons.UP ] ) ) {
+			if( this.roundsWon === this.flawlessRounds && InputManager.checkSequence( this.spamalitySequence ) ) {
 				this.layer.scene.finishType = this.layer.scene.finishTypes.spamality;
 				this.layer.scene.changeState( this.layer.scene.states.dismantling );
 			}

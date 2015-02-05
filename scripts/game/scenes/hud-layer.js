@@ -302,7 +302,7 @@ HUDLayer.prototype.draw = function( context ) {
 				this.spamality.draw( context );
 			}
 
-			if( this.scene.winner.life === this.scene.startLife && this.scene.stateTime > 5 ) {
+			if( this.scene.winner.flawlessRounds === this.scene.winner.roundsWon && this.scene.stateTime > 5 ) {
 				this.flawless.draw( context );
 			}
 		break;
