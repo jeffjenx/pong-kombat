@@ -13,39 +13,71 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	
 	if( leftKombatant )
 	{
-		if( leftKombatant.paddle.position.y > viewport.height * 0.51 ) {
-			leftKombatant.paddle.moveUp( );
-		} else if( leftKombatant.paddle.position.y < viewport.height * 0.49 ) {
-			leftKombatant.paddle.moveDown( );
-		} else {
-			leftKombatant.paddle.position.y = viewport.height * 0.50;
+		if( leftKombatant.paddle.position.y > viewport.height * 0.5 ) {
+			if(leftKombatant.paddle.velocity.y > 0){
+				leftKombatant.paddle.position.y = viewport.height * 0.5;
+				leftKombatant.paddle.velocity.y = 0;
+			} else {
+				leftKombatant.paddle.moveUp( );
+			}
+		} else if( leftKombatant.paddle.position.y < viewport.height * 0.5 ) {
+			if(leftKombatant.paddle.velocity.y < 0){
+				leftKombatant.paddle.position.y = viewport.height * 0.5;
+				leftKombatant.paddle.velocity.y = 0;
+			} else {
+				leftKombatant.paddle.moveDown( );
+			}
 		}
 	
 		if( leftKombatant.paddle.position.x > viewport.width * 0.03 ) {
-			leftKombatant.paddle.moveLeft( );
-		} else if( leftKombatant.paddle.position.x < viewport.width * 0.01 ) {
-			leftKombatant.paddle.moveRight( );
-		} else {
-			leftKombatant.paddle.position.x = viewport.width * 0.025;
+			if(leftKombatant.paddle.velocity.x > 0) {
+				leftKombatant.paddle.position.x = viewport.width * 0.03;
+				leftKombatant.paddle.velocity.x = 0;
+			} else {
+				leftKombatant.paddle.moveLeft( );
+			}
+		} else if( leftKombatant.paddle.position.x < viewport.width * 0.03 ) {
+			if(leftKombatant.paddle.velocity.x < 0){
+				leftKombatant.paddle.position.x = viewport.width * 0.03;
+				leftKombatant.paddle.velocity.x = 0;
+			} else {
+				leftKombatant.paddle.moveRight( );
+			}
 		}
 	}
 	
 	if( rightKombatant )
 	{
-		if( rightKombatant.paddle.position.y > viewport.height * 0.51 ) {
-			rightKombatant.paddle.moveUp( );
-		} else if( rightKombatant.paddle.position.y < viewport.height * 0.49 ) {
-			rightKombatant.paddle.moveDown( );
-		} else {
-			rightKombatant.paddle.position.y = viewport.height * 0.50;
+		if( rightKombatant.paddle.position.y > viewport.height * 0.5 ) {
+			if(rightKombatant.paddle.velocity.y > 0){
+				rightKombatant.paddle.position.y = viewport.height * 0.5;
+				rightKombatant.paddle.velocity.y = 0;
+			} else {
+				rightKombatant.paddle.moveUp( );
+			}
+		} else if( rightKombatant.paddle.position.y < viewport.height * 0.5 ) {
+			if(rightKombatant.paddle.velocity.y < 0){
+				rightKombatant.paddle.position.y = viewport.height * 0.5;
+				rightKombatant.paddle.velocity.y = 0;
+			} else {
+				rightKombatant.paddle.moveDown( );
+			}
 		}
-
-		if( rightKombatant.paddle.position.x > viewport.width * 0.99 ) {
-			rightKombatant.paddle.moveLeft( );
+	
+		if( rightKombatant.paddle.position.x > viewport.width * 0.97 ) {
+			if(rightKombatant.paddle.velocity.x > 0) {
+				rightKombatant.paddle.position.x = viewport.width * 0.97;
+				rightKombatant.paddle.velocity.x = 0;
+			} else {
+				rightKombatant.paddle.moveLeft( );
+			}
 		} else if( rightKombatant.paddle.position.x < viewport.width * 0.97 ) {
-			rightKombatant.paddle.moveRight( );
-		} else {
-			rightKombatant.paddle.position.x = viewport.width * 0.975;
+			if(rightKombatant.paddle.velocity.x < 0){
+				rightKombatant.paddle.position.x = viewport.width * 0.97;
+				rightKombatant.paddle.velocity.x = 0;
+			} else {
+				rightKombatant.paddle.moveRight( );
+			}
 		}
 	}
 };
@@ -100,11 +132,11 @@ KombatLayer.prototype.addKombatant = function( kombatant ) {
 	if( this.components['LeftKombatant'] ) {
 		this.addComponent( 'RightKombatant', kombatant );
 		this.scene.layers['HUD'].setRight( kombatant );
-		//this.scene.layers['HUD'].components['RightName'].text = kombatant.paddle.name;
+		this.components['RightKombatant'].zOrder = 0; // player paddle to appear "above" opponent
 	} else {
 		this.addComponent( 'LeftKombatant', kombatant );
 		this.scene.layers['HUD'].setLeft( kombatant );
-		//this.scene.layers['HUD'].components['LeftName'].text = kombatant.paddle.name;
+		this.components['LeftKombatant'].zOrder = 1;
 	}
 };
 
@@ -166,6 +198,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.scene.states.fighting :
+		case this.scene.states.training :
 			if( app.settings.POWER_UPS && !powerup && this.scene.timeElapsed >= this.nextPowerup ) {
 				this.addPowerup( );
 			}

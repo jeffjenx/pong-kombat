@@ -4,6 +4,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-54926068-5', { 'cookieDomain': 'none' });
 ga('require', 'displayfeatures');
+ga('send', 'pageview');
 
 window.track = function(action){ 
 	ga('send', 'event', document.URL, action);

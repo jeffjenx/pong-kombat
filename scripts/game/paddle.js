@@ -12,7 +12,9 @@ var Paddles = {
 	MONOLITH : 8,
 	WHITE    : 9,
 	MRSLAYER : 10,
-	MYST     : 11
+	MYST     : 11,
+
+	PADDLEBOT : 12
 };
 
 function Paddle( texture ) {
@@ -103,7 +105,6 @@ Paddle.prototype.constructor = Paddle;
 
 Paddle.prototype.canShootProjectile = function( ) {
 	return app.settings.COMBAT && this.projectiles.length < this.maxProjectiles;
-	//return app.settings.COMBAT && this.projectile === null;
 };
 
 Paddle.prototype.blockProjectile = function() {
@@ -130,6 +131,7 @@ Paddle.prototype.dismantle = function( opponent ) {
 				--i;
 			}
 			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				// called continuously
 				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
 				frame['action']( this, opponent.paddle, percentComplete );
 			}
@@ -668,7 +670,6 @@ Paddle.prototype.draw = function( context ) {
 		context.translate( this.position.x, this.position.y );
 		context.rotate( this.rotation * Math.TO_RADIANS );
 	}
-	//context.globalAlpha = this.gloss.opacity;
 	context.drawImage(
 		this.gloss.image,
 		-width * this.registration.x * 6.5,

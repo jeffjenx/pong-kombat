@@ -31,6 +31,7 @@
 		"Poof"   : "sounds/poof",
 		"Birds"   : "sounds/birds",
 		"Lava"   : "sounds/lava",
+		"Robot-Sound"   : "sounds/r2d2-speech",
 		"Storm"   : "sounds/storm",
 		"Pit"   : "sounds/pit",
 		"Acid"   : "sounds/acid",
@@ -265,6 +266,7 @@
 		"Icon-Hourglass"          : "images/icon-hourglass-min.png",
 		"Icon-Trophy"         : "images/icon-trophy-min.png",
 		
+		"Paddle-Bot"          : "images/paddles/paddle-bot-sheet-min.png",
 		"Paddle-Blue"          : "images/paddles/blue-texture-min.png",
 		"Paddle-Green"         : "images/paddles/green-texture-min.png",
 		"Paddle-Monolith"      : "images/paddles/monolith-texture-min.png",

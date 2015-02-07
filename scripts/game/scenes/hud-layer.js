@@ -370,7 +370,7 @@ HUDLayer.prototype.cinemaMode = function( ) {
 		letterBox.registration.y = 1;
 		letterBox.size.x = viewport.width;
 		letterBox.size.y = viewport.height;
-		letterBox.size.y *= ( app.settings.CENSORSHIP ) ? 0.51 : 0.10;
+		letterBox.size.y *= ( app.gameMode === GameModes.TRAINING ) ? 0.51 : 0.10;
 		letterBox.position.x = viewport.width * 0.50;
 		letterBox.position.y = viewport.height + letterBox.size.y;
 		letterBox.velocity.y = -viewport.height * 0.22;
@@ -380,7 +380,7 @@ HUDLayer.prototype.cinemaMode = function( ) {
 		letterBoxTop.registration.y = 0;
 		letterBoxTop.size.x = viewport.width;
 		letterBoxTop.size.y = viewport.height;
-		letterBoxTop.size.y *= ( app.settings.CENSORSHIP ) ? 0.51 : 0.10;
+		letterBoxTop.size.y *= ( app.gameMode === GameModes.TRAINING ) ? 0.51 : 0.10;
 		letterBoxTop.position.x = viewport.width * 0.50;
 		letterBoxTop.position.y = -letterBoxTop.size.y;
 		letterBoxTop.velocity.y = viewport.height * 0.22;
@@ -479,14 +479,15 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	}
 
 	// Drain health gradually
+	var lifeBarSpeed = viewport.width * 0.1 * deltaTime;
 	if( leftKombatant )
 	{
 		if( leftKombatant.life / this.scene.startLife < this.leftHealthBar.size.x / this.healthBarWidth ) {
-			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x - viewport.width * 0.05 * deltaTime, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
+			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x - lifeBarSpeed, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.leftHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 		}
 		else if( leftKombatant.life / this.scene.startLife > this.leftHealthBar.size.x / this.healthBarWidth ) {
-			this.leftHealthBar.size.x = Math.max( this.leftHealthBar.size.x + viewport.width * 0.05 * deltaTime, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
+			this.leftHealthBar.size.x = Math.min( this.leftHealthBar.size.x + lifeBarSpeed, leftKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.leftHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
 
@@ -510,11 +511,11 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	if( rightKombatant )
 	{
 		if( rightKombatant.life / this.scene.startLife < this.rightHealthBar.size.x / this.healthBarWidth ) {
-			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x - viewport.width * 0.05 * deltaTime, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
+			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x - lifeBarSpeed, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.rightHealthBar.size.x -= viewport.width * 0.05 * deltaTime;
 		}
 		else if( rightKombatant.life / this.scene.startLife > this.rightHealthBar.size.x / this.healthBarWidth ) {
-			this.rightHealthBar.size.x = Math.max( this.rightHealthBar.size.x + viewport.width * 0.05 * deltaTime, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
+			this.rightHealthBar.size.x = Math.min( this.rightHealthBar.size.x + lifeBarSpeed, rightKombatant.life / this.scene.startLife * this.healthBarWidth );
 			//this.rightHealthBar.size.x += viewport.width * 0.05 * deltaTime;
 		}
 
@@ -549,5 +550,5 @@ HUDLayer.prototype.update = function( deltaTime ) {
 	if( this.scene.state === this.scene.states.dismantling )
  	{
  		this.cinemaMode( );
- 	}	
+ 	}
 };

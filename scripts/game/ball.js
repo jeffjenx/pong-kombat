@@ -154,7 +154,7 @@ Ball.prototype.hitPaddle = function( kombatant ) {
 		return;
 	}
 
-	if( ball.bulletTimed ) {
+	if( this.bulletTimed ) {
 		this.bulletTimed = false;
 	}
 	
@@ -212,7 +212,7 @@ Ball.prototype.hitWall = function( ) {
 	this.changedRotation();
 };
 
-Ball.prototype.set = function( ) {
+Ball.prototype.set = function( direction ) {
 	this.speed = this.startSpeed;
 	
 	this.position.x = viewport.width * 0.50;
@@ -223,7 +223,7 @@ Ball.prototype.set = function( ) {
 	
 	// Randomize direction of ball
 	angle = Math.random( ) * 90 - 45; // Angle between -45 and +45deg
-	angle += ( Math.random( ) >= 0.5 ) ? 180 : 0; // Towards left or right
+	angle += ( direction === 'left' || (Math.random( ) >= 0.5 && direction !== 'right') ) ? 180 : 0; // Towards left or right
 	//angle = 180; // Force ball to start toward left
 	
 	this.velocity.x = Math.round( speed * Math.cos( angle * Math.TO_RADIANS ) );

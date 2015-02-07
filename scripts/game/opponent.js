@@ -22,8 +22,11 @@ Opponent.prototype.getNameSound = function() {
 	}
 };
 
-Opponent.prototype.applyAI = function( ) {
+Opponent.prototype.applyAI = function( difficulty ) {
+	difficulty = (difficulty !== undefined) ? difficulty : app.settings.DIFFICULTY;
+	
 	switch( this.layer.scene.state ) {
+		case this.layer.scene.states.training :
 		case this.layer.scene.states.fighting :
 			var ball = this.layer.components['Ball'];
 
@@ -36,7 +39,7 @@ Opponent.prototype.applyAI = function( ) {
 				ball.speed = ball.startSpeed;
 			}
 			
-			if( app.settings.DIFFICULTY === 0 )
+			if( difficulty === 0 )
 			{
 				// EASY
 				// Move to ball on return volley
@@ -54,7 +57,7 @@ Opponent.prototype.applyAI = function( ) {
 
 				// No Projectiles
 			}
-			else if( app.settings.DIFFICULTY === 1 ) 
+			else if( difficulty === 1 ) 
 			{
 				// MEDIUM
 				// Move to ball on return volley
@@ -77,7 +80,7 @@ Opponent.prototype.applyAI = function( ) {
 					this.nextProjectileTime = app.gameTime + Math.random( ) * 10000;
 				}
 			}
-			else if( app.settings.DIFFICULTY === 2 )
+			else if( difficulty === 2 )
 			{
 				// HARD
 				// Move to ball target on return
@@ -124,7 +127,7 @@ Opponent.prototype.applyAI = function( ) {
 					}
 				}
 			}
-			else if( app.settings.DIFFICULTY === 3 )
+			else if( difficulty === 3 )
 			{
 				var enemy = this.layer.components['LeftKombatant'];
 
@@ -245,6 +248,7 @@ Opponent.prototype.setPaddle = function( paddle ) {
 		case Paddles.MONOLITH : this.paddle = new MonolithPaddle( ); break;
 		case Paddles.MRSLAYER : this.paddle = new MrSlayerPaddle( ); break;
 		case Paddles.MYST : this.paddle = new MystPaddle( ); break;
+		case Paddles.PADDLEBOT : this.paddle = new PaddleBot( ); break;
 	}
 
 	this.paddle.rotation = 180;

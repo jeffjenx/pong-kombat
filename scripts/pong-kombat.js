@@ -63,6 +63,7 @@ load( '/scripts/game/', [
 	'menus/pause-menu',
 	'menus/test-menu',
 	'menus/level-menu',
+	'menus/training-menu',
 	
 	'paddles/yellow-paddle',
 	'paddles/blue-paddle',
@@ -74,6 +75,7 @@ load( '/scripts/game/', [
 	'paddles/shifter-paddle',
 	'paddles/monolith-paddle',
 	'paddles/white-paddle',
+	'paddles/paddle-bot',
 	
 	'powerups/glue-powerup',
 	'powerups/life-powerup',
@@ -99,6 +101,7 @@ load( '/scripts/game/', [
 	'scenes/tournament-scene',
 	'scenes/story-scene',
 	'scenes/settings-scene',
+	'scenes/training-scene',
 	'scenes/kombat-layer',
 	'scenes/legal-scene',
 	'scenes/hud-layer',

@@ -330,12 +330,19 @@ PickPaddleScene.prototype.update = function( deltaTime )
 				app.tournament = new TournamentScene( );
 				app.tournament.startPlayer( player );
 				if( app.godMode === 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r' ) {
+					// god mode cheat: skip to the final match
 					for( var i = 0; i < app.tournament.opponents.length - 1; i++ ) {
 						app.tournament.increaseRank( );
 					}
 				}
 				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 			}
+		}
+		else if( app.gameMode === GameModes.TRAINING )
+		{
+			var trainingScene = new TrainingScene();
+			trainingScene.addKombatant( player );
+			SceneManager.changeScene( trainingScene, Transitions.FADE, 0.5 );	
 		}
 		else
 		{

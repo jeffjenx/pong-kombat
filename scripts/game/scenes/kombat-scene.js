@@ -137,17 +137,17 @@ KombatScene.prototype.changeState = function( state ) {
 			if( app.settings.TUNES > 0 ) {
 				this.music.stop();
 			}
-		break;
+		// no break;
 
 		case this.states.starting :
 		case this.states.finishing :
-			if( this.layers['Kombat'].components['LeftKombatant'] ) {
-				this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.x = 0;
-				this.layers['Kombat'].components['LeftKombatant'].paddle.velocity.y = 0;
+			if( leftKombatant ) {
+				leftKombatant.paddle.velocity.x = 0;
+				leftKombatant.paddle.velocity.y = 0;
 			}
-			if( this.layers['Kombat'].components['RightKombatant'] ) {
-				this.layers['Kombat'].components['RightKombatant'].paddle.velocity.x = 0;
-				this.layers['Kombat'].components['RightKombatant'].paddle.velocity.y = 0;
+			if( rightKombatant ) {
+				rightKombatant.paddle.velocity.x = 0;
+				rightKombatant.paddle.velocity.y = 0;
 			}
 		break;
 
@@ -178,6 +178,7 @@ KombatScene.prototype.levelDismantle = function( winner, loser ) {
 				--i;
 			}
 			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				// called continuously
 				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
 				frame['action']( winner.paddle, loser.paddle, percentComplete );
 			}
@@ -198,6 +199,7 @@ KombatScene.prototype.spamality = function( winner, loser ) {
 				--i;
 			}
 			else if( frame.end < 0 || sceneTime <= frame.end ) {
+				// called continuously
 				var percentComplete = ( frame.end > frame.start ) ? (sceneTime - frame.start) / (frame.end - frame.start) : 0;
 				frame['action']( winner.paddle, loser.paddle, percentComplete );
 			}
