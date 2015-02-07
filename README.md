@@ -24,24 +24,24 @@ The purpose of Pong Kombat is--and always has been--to learn something new and t
 
 This project intends to stand as an example for the following web development topics:
 
-1. [Apache](http://www.apache.org) - A popular HTTP server
-  1.1 [PHP](http://www.php.net) - An open-source scripting language
-  1.2 [MySQL](http://www.mysql.com) - An open-source SQL database
+1. [Apache](http://www.apache.org) - A popular HTTP server  
+  1.1 [PHP](http://www.php.net) - An open-source scripting language  
+  1.2 [MySQL](http://www.mysql.com) - An open-source SQL database  
 2. [MEAN.JS](http://meanjs.org) - An open-source full-stack application solution  
   2.1 [MongoDB](http://mongodb.org) - An open-source NoSQL document database  
   2.2 [Express](http://expressjs.org) - A back-end web application framework  
   2.3 [AngularJS](http://angularjs.org) - A front-end MVW (Model-View-*Whatever*) web application framework  
-  2.4 [Node.js](http://nodejs.org) - An open-source JavaScript based runtime environment and application server
+  2.4 [Node.js](http://nodejs.org) - An open-source JavaScript based runtime environment and application server  
 3. [SASS](http://sass-lang.com) - A front-end styling extension  
-  3.1 [CSS](http://www.w3.org/Style/CSS/Overview.en.html) - Latest web standards include transitions, animations, transformations, etc.
-4. [HTML5](http://www.w3.org/TR/html5/) - Latest web standards including canvas, audio/video, sockets, etc.
-  4.1 [JavaScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm) - A powerful client-side scripting language
-5. Seach engine optimization and social media integration
-  5.1 [Facebook](http://developers.facebook.com) - Social media application
-  5.2 [Twitter](https://dev.twitter.com) - Social media application
-  5.3 [Pinterest](http://www.pinterest.com) - A visual content discovery tool
-  5.4 [YouTube](http://www.youtube.com) - A video sharing application
-  5.5 [GitHub](http://www.github.com) - A Git repository distribution channel and revision control application
+  3.1 [CSS](http://www.w3.org/Style/CSS/Overview.en.html) - Latest web standards include transitions, animations, transformations, etc.  
+4. [HTML5](http://www.w3.org/TR/html5/) - Latest web standards including canvas, audio/video, sockets, etc.  
+  4.1 [JavaScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm) - A powerful client-side scripting language  
+5. Seach engine optimization and social media integration  
+  5.1 [Facebook](http://developers.facebook.com) - Social media application  
+  5.2 [Twitter](https://dev.twitter.com) - Social media application  
+  5.3 [Pinterest](http://www.pinterest.com) - A visual content discovery tool  
+  5.4 [YouTube](http://www.youtube.com) - A video sharing application  
+  5.5 [GitHub](http://www.github.com) - A Git repository distribution channel and revision control application  
 
 Local Development
 -----------------
