@@ -95,3 +95,5 @@
 	                FiftyThree Pencil
 	                Sony Bravia
 	                Synology DiskStation
+	Resources:      Keith Sereby (Lighted Rocker Switch V2)
+	                Alan Cloiseau (Q*Bert Vector)
