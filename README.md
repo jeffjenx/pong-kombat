@@ -130,3 +130,5 @@ Related
 - [Facebook.com/PongKombat](http://www.facebook.com/pongkombat)
 - [Twitter.com/PongKombat](http://www.twitter.com/pongkombat)
 - [WordPress Developer Blog](http://wordpress.quantastical.com/category/projects/pong-kombat/)
+- [Google+ Profile](http://plus.google.com/+PongKombat)
+- [YouTube Channel](http://www.youtube.com/c/PongKombat)
