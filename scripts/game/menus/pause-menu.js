@@ -1,8 +1,8 @@
 function PauseMenu( scene ) {
 	Menu.call( this, scene );
 	
-	this.addItem( 'Kontinue', this.selectContinue );
-	this.addItem( 'Resign', this.selectResign );
+	this.addItem( 'Continue', this.selectContinue );
+	this.addItem( 'End Match', this.selectResign );
 }
 
 PauseMenu.prototype = new Menu;
