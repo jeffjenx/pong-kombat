@@ -27,7 +27,7 @@
 
 	$('a').click(function(e){
 		var href = $(this).attr('href');
-		if(href[0] !== '#'){
+		if(href[0] !== '#' && href.indexOf('mailto') !== 0){
 			e.preventDefault();
 			$('body').fadeOut(213,function(){
 				window.location = href;
