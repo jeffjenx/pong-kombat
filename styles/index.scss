@@ -6,13 +6,17 @@
 @import '../vendors/animate.scss/_flippers/_flipInY';
 @import '../vendors/animate.scss/_fading-entrances/_fadeInDown';
 
-body
+html, body
 {
 	background: black;
 	color: white;
 	cursor: default;
 	font-size: 10px;
 	margin: 0;
+
+	@media all and (min-width: 600px) {
+		font-size: 12px;
+	}
 }
 
 abbr
@@ -23,7 +27,7 @@ abbr
 
 h1
 {
-	background-image: url('/images/pong-kombat-logo.png');
+	background-image: url('/images/pong-kombat-logo-min.png');
 	background-position: 50%;
 	background-repeat: No-repeat;
 	background-size: contain;
@@ -34,6 +38,8 @@ h1
 	margin: 0.33em 0 0.11em;
 	text-align: center;
 	text-transform: uppercase;
+	user-select: none;
+	-webkit-user-select: none;
 
 	+ p
 	{
@@ -41,6 +47,8 @@ h1
 		font-size: 1.25em;
 		margin: 0 auto;
 		text-align: center;
+		user-select: none;
+		-webkit-user-select: none;
 		width: 28em;
 
 		a
@@ -62,6 +70,8 @@ nav
 	padding: 4em 0 2em;
 	position: fixed;
 	text-align: center;
+	user-select: none;
+	-webkit-user-select: none;
 	width: 100%;
 	z-index: 2;
 
@@ -113,7 +123,6 @@ a[href="/play"]
 	background-position: 50% 26%;
 	border-radius: 15px;
 	background-size: 150% 380%;
-	/*color: #d8cece;*/
 	color: transparent;
 	cursor: pointer;
 	display: block;
@@ -122,18 +131,25 @@ a[href="/play"]
 	font-weight: 600;
 	height: 80px;
 	left: 50%;
-	/*line-height: 10em;*/
 	margin: -40px -80px;
 	position: absolute;
 	text-decoration: none;
 	top: 50%;
 	text-indent: -42px;
+	user-select: none;
+	-webkit-user-select: none;
 	white-space: nowrap;
 	width: 160px;
 
 	&:active, &.active
 	{
 		background-position: 50% 77.1%;
+	}
+
+	@media all and (min-width: 600px) {
+		height: 120px;
+		margin: -60px -120px;
+		width: 240px;
 	}
 }
 
@@ -146,7 +162,13 @@ a[href="/play"]
 	position: absolute;
 	text-align: center;
 	top: 50%;
+	user-select: none;
+	-webkit-user-select: none;
 	width: 100%;
+
+	@media all and (min-width: 600px) {
+		margin-top: 6em;
+	}
 
 	h2
 	{
@@ -180,6 +202,7 @@ a[href="/play"]
 	margin-top: 8em;
 	position: absolute;
 	top: 0;
+	width: 100%;
 }
 
 #about
@@ -190,6 +213,8 @@ a[href="/play"]
 	line-height: 1.25em;
 	padding-bottom: 5em;
 	text-align: center;
+	user-select: none;
+	-webkit-user-select: none;
 	z-index: 1;
 
 	div
@@ -199,6 +224,8 @@ a[href="/play"]
 		max-width: 40em;
 		padding: 1em 2em;
 		text-align: left;
+		user-select: text;
+		-webkit-user-select: text;
 		vertical-align: top;
 		width: calc(100% - 2em);
 	}
@@ -210,13 +237,38 @@ a[href="/play"]
 
 	a
 	{
-		color: inherit;
+		color: #A0A0FF;
 		text-decoration: none;
+
+		&:hover, &:active {
+			color: #00F;
+			text-decoration: underline;
+		}
 	}
 
 	strong
 	{
 		font-weight: 500;
+	}
+
+	del {
+		text-decoration: none;
+
+		&:after {
+			content: ' *ahem*';
+			opacity: 0.5;
+			font-style: italic;
+		}
+	}
+
+	em {
+		color: #00CC00;
+		text-transform: uppercase;
+	}
+
+	p strong
+	{
+		color: #F90;
 	}
 }
 
@@ -225,8 +277,10 @@ a[href="/play"]
 	background: #000000;
 	font-family: 'Open Sans';
 	font-size: 1.5em;
-	padding: 0 2em 5em;
+	padding: 0 0 5em;
 	text-align: center;
+	user-select: none;
+	-webkit-user-select: none;
 
 	a
 	{
@@ -260,33 +314,85 @@ a[href="/play"]
 	table
 	{
 		margin: 1em auto;
-		text-align: left;
-		width: 100%;
-
-		th
-		{
-			padding-bottom: 0.5em;
-			padding-left: 0.5em;
-			padding-right: 0.5em;
-			text-align: center;
-		}
+		text-align: center;
 
 		td
 		{
 			padding-bottom: 0.5em;
-			text-align: left;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+			padding-top: 0.5em;
 			width: 50%;
+		}
 
-			&:first-child
-			{
-				text-align: right;
-			}
+		caption
+		{
+			font-weight: 500;
+			text-transform: uppercase;
 		}
 	}
 
 	strong
 	{
 		font-weight: 500;
+	}
+
+	.keyboard .key
+	{
+		background-image: url('/images/keyboard-mac-min.png');
+		background-size: 800% 800%;
+		color: transparent;
+		display: inline-block;
+		height: 2.5em;
+		vertical-align: middle;
+		width: 2.5em;
+
+		&.arrow {
+			background-size: 800% 1600%;
+			height: 1.25em;
+
+			&.up { background-position: -700% -1200%; }
+			&.down { background-position: -700% -1300%; }
+			&.left { background-position: -700% -1400%; }
+			&.right { background-position: -700% -1500%; }
+
+			&:empty { opacity: 0.33; }
+		}
+
+		&.spacebar {
+			background-position: 37.5% -600%;
+			background-size: 200% 800%;
+			width: 10em;
+		}
+
+		&.escape { background-position: -200% -300%; }
+
+		&.enter {
+			background-position: -407.5% -700%;
+			background-size: 533.33% 800%;
+			width: 3.75em;
+		}
+
+		&.delete {
+			background-position: -407.5% -600%;
+			background-size: 533.33% 800%;
+			width: 3.75em;
+		}
+
+		&.shift {
+			background-position: 58% -700%;
+			background-size: 400% 800%;
+			width: 5em;
+		}
+
+		&.w { background-position: -600% -200%; }
+		&.a { background-position: 0 0; }
+		&.s { background-position: -200% -200%; }
+		&.d { background-position: -300% 0; }
+	}
+
+	#keyboard-2 {
+		display: none;
 	}
 }
 
@@ -297,6 +403,8 @@ a[href="/play"]
 	margin-top: 12em;
 	min-height: calc(100% - 12em);
 	padding-bottom: 8em;
+	user-select: none;
+	-webkit-user-select: none;
 	width: 100%;
 	z-index: 1;
 

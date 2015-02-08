@@ -67,14 +67,14 @@
 			<div>
 				<h2>Description</h2>
 				<p>
-					Back in 1994, Stefan Gagne and his cohorts created Pong Kombat--a parody video game and, what would eventually become, a series--featuring lovable characters <em>*ahem*</em> paddles that fought to the death in epic battles of Pong.
+					Back in 1994, Stefan Gagne and his cohorts created Pong Kombat&mdash;a parody video game and, what would eventually become, a series&mdash;featuring lovable <del>characters</del> paddles that fought to the death in epic battles of Pong.
 					The initial game was a school project, adding elements of Mortal Kombat to a Pong match, but it's simple and fun gameplay caused it to "go viral," quickly spawning off sequels, notoriously titled Pong Kombat 2 and Pong Kombat 3.
 				</p>
 
 				<p>
-					Now, after two decades, White Paddle returns to the web in...Pong Kombat...uhh, 4?
+					Now, after two decades, White Paddle returns to the web in&hellip;Pong Kombat&hellip;uhh&hellip;4?
 					How 'bout, Pong Kombat HD? PongKombat.com?
-					Well, whatever it's called, <strong>PONG KOMBAT</strong> is back!
+					Well, whatever it's called, <strong>PONG KOMBAT</strong> is back, y'all!
 				</p>
 				<p>
 					Which paddle will you choose?
@@ -127,7 +127,7 @@
 					Support independent developers and game on!
 				</p>
 				<p>
-					Concerned about privacy and data collection? Read the <a href="/privacy" onclick="track('privacy');">Privacy Policy</a>
+					Concerned about privacy and data collection? Read the <a href="/privacy" onclick="track('privacy');">Privacy Policy</a>.
 				</p>
 			</div>
 		</section>
@@ -136,76 +136,100 @@
 			<div id="basic-controls">
 				<h2>Basic Controls</h2>
 
-				<figure>
-					<img alt="GamePad Example" src="/images/gamepad.png" />
-				</figure>
+				<select id="input-method">
+					<option selected="selected" value="keyboard-1">Default Keyboard</option>
+					<option value="keyboard-2">Alternate Keyboard</option>
+				</select>
 
-				<table id="keyboard">
+				<table class="keyboard" id="keyboard-1">
+					<caption>Default Keyboard</caption>
 					<tr>
-						<td>Move paddle up</td>
-						<th>&#x25B2;</th>
-						<td>Up Arrow Key</td>
+						<td>
+							Move paddle,<br />
+							Navigate menus
+						</td>
+						<td>
+							<span class="arrow keys">
+								<span class="up arrow key">Up Arrow Key</span><br />
+								<span class="left arrow key">Left Arrow Key</span>
+								<span class="down arrow key">Down Arrow Key</span>
+								<span class="right arrow key">Right Arrow Key</span>
+							</span>
+						</td>
 					</tr>
 					<tr>
-						<td>Move paddle down</td>
-						<th>&#x25BC;</th>
-						<td>Down Arrow Key</td>
+						<td>
+							Pause game,<br />
+							Close menu
+						</td>
+						<td>
+							<span class="escape key">Escape Key</span>
+						</td>
 					</tr>
 					<tr>
-						<td>Move paddle left</td>
-						<th>&#x25C0;</th>
-						<td>Left Arrow Key</td>
+						<td>
+							Special moves,<br >
+							Select menu item
+						</td>
+						<td>
+							<span class="spacebar key">Spacebar</span>
+						</td>
 					</tr>
 					<tr>
-						<td>Move paddle right</td>
-						<th>&#x25B6;</th>
-						<td>Right Arrow Key</td>
-					</tr>
-					<tr>
-						<td>Pause, Close menu</td>
-						<th>B</th>
-						<td>Backspace/Delete Key</td>
-					</tr>
-					<tr>
-						<td>End sequence, Menu select</td>
-						<th>A</th>
-						<td>Spacebar</td>
-					</tr>
-					<tr>
-						<td>Pause, Menu select</td>
-						<th>START</th>
-						<td>Enter Key, Escape Key</td>
+						<td>
+							Pause game,<br />
+							Open menu
+						</td>
+						<td>
+							<span class="enter key">Return Key</span>
+						</td>
 					</tr>
 				</table>
-			</div>
 
-			<div id="special-moves">
-				<h2>Special Moves</h2>
-				<p>Each paddle has their own set of special moves, so be sure to try new input combinations in order to gain an upper hand against your opponent.</p>
-				<p>All of the moves are a four-button sequence: 3&times;(Up, Down, Left, or Right) A</p>
-				<p>After defeating your opponent, you will be given the opportunity to finish them off by <em>dismantling</em> them, using the same criteria.</p>
-				<p>Here are some moves to get you started:</p>
-
-				<p>
-					<strong>Blue Paddle</strong><br />
-					Ice Blast Projectile: Left, Down, Right, A<br />
-					Frozen Shards Dismantle: Left, Right, Down, A
-				</p>
-
-				<p>
-					<strong>Yellow Paddle</strong><br />
-					Fireball Projectile: Left, Left, Right, A<br />
-					Hellfire Dismantle: Down, Right, Up, A
-				</p>
-			</div>
-
-			<div id="secrets">
-				<h2>Secrets</h2>
-				<p>
-					Special Moves and Dismantles are just the beginning.
-					There are lots of secrets waiting to be discovered.
-					The only way to find them is to play.
-				</p>
+				<table class="keyboard" id="keyboard-2">
+					<caption>Alternate Keyboard</caption>
+					<tr>
+						<td>
+							Move paddle,<br />
+							Navigate menus
+						</td>
+						<td>
+							<span class="wasd keys">
+								<span class="w key">W Key</span><br />
+								<span class="a key">A Key</span>
+								<span class="s key">S Key</span>
+								<span class="d key">D Key</span>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Pause game,<br />
+							Close menu
+						</td>
+						<td>
+							<span class="delete key">Delete Key</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Special moves,<br >
+							Select menu item
+						</td>
+						<td>
+							<span class="shift key">Shift Key</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Pause game,<br />
+							Open menu
+						</td>
+						<td>
+							<span class="enter key">Return Key</span>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</section>
 

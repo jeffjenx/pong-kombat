@@ -15,15 +15,35 @@
 		if($(section).is(':visible')) {
 			sections.fadeOut(400);
 		} else {
-			sections.hide();
-			showSection(section);
+			sections.fadeOut(125).promise().done(function(){
+				showSection(section);
+			});
 		}
-		//sections.fadeOut(400,function(){
-		//	showSection(section);
-		//});
 	});
 
 	$('h1').css('cursor','pointer').click(function(){
 		sections.fadeOut(400);
+	});
+
+	$('a').click(function(e){
+		var href = $(this).attr('href');
+		if(href[0] !== '#'){
+			e.preventDefault();
+			$('body').fadeOut(213,function(){
+				window.location = href;
+			});
+		}
+	});
+
+	$('.key').each(function() {
+		var $key = $(this);
+		$key.attr('title',$key.text());
+	});
+
+	$('#input-method').change(function(){
+		var id = $(this).val();
+		$('#instructions table').fadeOut(125).promise().done(function(){
+			$('#' + id).fadeIn(125);
+		});
 	});
 })(jQuery);
