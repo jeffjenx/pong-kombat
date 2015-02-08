@@ -38,7 +38,7 @@ function TrainingScene( ) {
 
 	this.messages = [
 		'Hello, World.',
-		'I am Paddle-Bot 9X, the training simulator.',
+		'I am Pong-bot 9000, the training simulator.',
 		'My creators, Thomas and Albert, designed me to teach\nothers the ancient combat style, Pon-Git-Su.',
 		'Press A to continue, or press B to end this session.',
 

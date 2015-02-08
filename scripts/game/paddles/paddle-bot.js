@@ -1,7 +1,7 @@
 function PaddleBot( ) {
 	this.color = new Color( 0, 0, 0 );
 	this.enum = "PADDLEBOT"
-	this.name = "Paddle-Bot 9X";
+	this.name = "Pong-bot 9000";
 	this.bigness = 4.00;
 	this.quickness = 3.25;
 
