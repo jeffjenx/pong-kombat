@@ -288,7 +288,7 @@ a[href="/play"]
 		text-decoration: none;
 	}
 
-	div
+	> div
 	{
 		box-sizing: border-box;
 		display: inline-block;
@@ -296,6 +296,57 @@ a[href="/play"]
 		padding: 1em 2em;
 		vertical-align: top;
 		width: calc(100% - 2em);
+	}
+
+	.dropdown {
+		$main-color: #333333;
+		$alt-color: #292929;
+		background: $main-color;
+		margin: 0 auto;
+
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.selected::after{
+			border-radius: 0 5px 5px 0;
+			box-shadow: inset -55px 0 25px -20px $main-color;
+		}
+
+		&:hover .selected::after,
+		&.focus .selected::after{
+			box-shadow: inset -55px 0 25px -20px $alt-color;
+		}
+
+		div{
+			background: $alt-color;
+			color: #040404;
+		}
+
+		&:hover div{
+			background: $alt-color;
+		}
+
+		&.scrollable div::after{
+			box-shadow: inset 0 -50px 30px -35px $alt-color;
+		}
+
+		&.scrollable:hover div::after{
+			box-shadow: inset 0 -50px 30px -35px $alt-color;
+		}
+
+		li{
+			border-bottom: 1px solid $main-color;
+		}
+
+		li.focus{
+			background: $alt-color;
+		}
+
+		li.active{
+			background: $main-color;
+		}
 	}
 
 	figure
@@ -327,6 +378,7 @@ a[href="/play"]
 
 		caption
 		{
+			display: none;
 			font-weight: 500;
 			text-transform: uppercase;
 		}
