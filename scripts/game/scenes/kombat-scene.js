@@ -444,7 +444,8 @@ KombatScene.prototype.update = function( deltaTime ) {
 				}
 			}
 			
-			if( InputManager.checkButtonPress( Buttons.BACK ) ) {
+			if( InputManager.checkButtonPress( [ Buttons.BACK, Buttons.START ] ) ) {
+				InputManager.clear();
 				this.changeState( this.states.paused );
 			}
 		break;
@@ -467,7 +468,8 @@ KombatScene.prototype.update = function( deltaTime ) {
 		break;
 		
 		case this.states.ending :
-			if( this.stateTime >= 3 && InputManager.checkButtonPress( Buttons.ACTION ) ) {
+			if( this.stateTime >= 3 && InputManager.checkButtonPress( [Buttons.ACTION, Buttons.START] ) ) {
+				InputManager.clear();
 				if( this.winner.roundsWon === this.winner.flawlessRounds && this.layers['Background'].components['Background'].resource === 'Background-Pit' && this.finishType !== null ) {
 					var computer = new Opponent( );
 					computer.setPaddle( Paddles.MRSLAYER );

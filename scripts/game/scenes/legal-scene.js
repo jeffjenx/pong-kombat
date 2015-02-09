@@ -36,8 +36,9 @@ LegalScene.prototype.update = function( deltaTime )
 		this.legalText.opacity = ( this.timeElapsed - 1 ) / 2;
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed > 11 )
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) || this.timeElapsed > 11 )
 	{
+		InputManager.clear();
 		var titleScene = new TitleScene( );
 		SceneManager.changeScene( titleScene, Transitions.FADE, 0.33 );
 	}

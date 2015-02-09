@@ -166,9 +166,7 @@ Menu.prototype.fadeIn = function( fadeTime ) {
 
 Menu.prototype.closeMenu = function( ) {
 	this.scene.removeLayer( 'Menu' );
-	InputManager.currentState = { };
-	InputManager.previousState = { };
-	InputManager.history = [ ];
+	InputManager.clear();
 
 	if( app.settings.SOUND_FX > 0 ) {
 		this.denySound.play();
@@ -190,11 +188,13 @@ Menu.prototype.update = function( deltaTime ) {
 		this.selectPreviousItem( );
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) ) {
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.START ] ) ) {
+		InputManager.clear();
 		this.selectCurrentItem( );
 	}
 	
 	if( InputManager.checkButtonPress( Buttons.BACK ) ) {
+		InputManager.clear();
 		this.closeMenu();
 	}
 };

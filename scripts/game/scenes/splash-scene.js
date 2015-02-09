@@ -56,8 +56,9 @@ SplashScene.prototype.update = function( deltaTime )
 		this.domain.opacity = ( this.timeElapsed - 2 ) / 2;
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed >= 6.66 )
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) || this.timeElapsed >= 6.66 )
 	{
+		InputManager.clear();
 		SceneManager.changeScene( new LegalScene( ), Transitions.FADE, 0.33 );
 	}
 };

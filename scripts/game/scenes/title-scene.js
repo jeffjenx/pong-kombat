@@ -42,7 +42,7 @@ function TitleScene( ) {
 	this.logo.scale = viewport.height / 1080;
 	titleLayer.addComponent( 'Logo', this.logo );
 	
-	this.text = new Text( Resources.Strings.PRESS_START + ' ' + Resources.Strings.TO_BEGIN );
+	this.text = new Text( Resources.Strings.PRESS_ENTER + ' ' + Resources.Strings.TO_BEGIN );
 	this.text.fontFamily = 'MK Mythologies';
 	this.text.fontSize = viewport.height * 0.044;
 	this.text.position.y = viewport.height * 0.67;
@@ -62,7 +62,7 @@ function TitleScene( ) {
 		this.music.loop( );
 	}
 
-	this.godSequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION ];
+	this.godSequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION, Buttons.START];
 }
 
 TitleScene.prototype = new Scene;
@@ -103,8 +103,9 @@ TitleScene.prototype.update = function( deltaTime ) {
 		this.text.opacity = 0.5 * Math.cos( 2 * Math.PI * this.timeElapsed * 0.5 ) + 0.5;
 	}
 	
-	if( !this.layers['Menu'] && (InputManager.checkButtonPress( Buttons.ACTION ) || InputManager.checkButtonPress( Buttons.START ) ) )
+	if( !this.layers['Menu'] && InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) )
 	{
+		InputManager.clear();
 		if( InputManager.checkSequence( this.godSequence ) ) {
 			app.godMode = 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r';
 			this.message.text = 'GOD MODE';
@@ -119,7 +120,8 @@ TitleScene.prototype.update = function( deltaTime ) {
 				track( 'god-mode' );
 			}
 		}
-		else {
+		else if( !InputManager.checkSequence(this.godSequence.splice(-1,1)) )
+		{
 			this.addLayer( 'Menu', new TitleMenu( this ) );
 		}
 	}

@@ -40,10 +40,10 @@ function TrainingScene( ) {
 		'Hello, World.',
 		'I am Pong-bot 9000, the training simulator.',
 		'My creators, Thomas and Albert, designed me to teach\nothers the ancient combat style, Pon-Git-Su.',
-		'Press A to continue, or press B to end this session.',
+		'Press SPACE to continue, or ESC to end this session.',
 
 		'In Pong Kombat, a ball is volleyed between you and your opponent.',
-		'Return the volley by moving your paddle \u25B2 or \u25BC.',
+		'Return the volley by moving your paddle with \u25B2 or \u25BC.',
 
 		'Good.',
 		'Now, try to hit the ball closer to the Center Line,\nusing \u25C0 or \u25B6 while I return the volley.',
@@ -51,11 +51,11 @@ function TrainingScene( ) {
 		'Excellent.',
 		'If you fail to return a volley, your paddle will take damage.\nWhichever paddle inflicts the most damage wins the match.',
 		'Paddles also possess the ability to attack each other\nby shooting projectiles while the ball is volleyed.',
-		'Try figuring out your paddle\'s projectile sequence.\nUse a sequence of \u25B2, \u25BC, \u25C0, or \u25B6 (3\u00D7), then the A button.',
+		'Try figuring out your paddle\'s projectile sequence.\nUse a sequence of \u25B2, \u25BC, \u25C0, or \u25B6 (3\u00D7), then SPACE.',
 
 		'Well done.',
 		'The winner of each match is given the opportunity \nto finish off their opponent by Dismantling them.',
-		'Try figuring out your paddle\'s dismantle sequence.\nUse another sequence of \u25B2, \u25BC, \u25C0, or \u25B6 (3\u00D7), then the A button.',
+		'Try figuring out your paddle\'s dismantle sequence.\nUse another sequence of \u25B2, \u25BC, \u25C0, or \u25B6 (3\u00D7), then SPACE.',
 
 		'That could\'ve hurt.',
 		'Congratulations! You\'ve become a Master Paddle.',
@@ -276,7 +276,7 @@ TrainingScene.prototype.updateTraining = function(deltaTime) {
 								case Buttons.DOWN : sequenceText += '\u25BC'; break;
 								case Buttons.LEFT : sequenceText += '\u25C0'; break;
 								case Buttons.RIGHT : sequenceText += '\u25B6'; break;
-								case Buttons.ACTION : sequenceText += ' A'; break;
+								case Buttons.ACTION : sequenceText += ' SPACE'; break;
 							}
 						}
 					}
@@ -318,7 +318,7 @@ TrainingScene.prototype.updateTraining = function(deltaTime) {
 							case Buttons.DOWN : sequenceText += '\u25BC'; break;
 							case Buttons.LEFT : sequenceText += '\u25C0'; break;
 							case Buttons.RIGHT : sequenceText += '\u25B6'; break;
-							case Buttons.ACTION : sequenceText += ' A'; break;
+							case Buttons.ACTION : sequenceText += ' SPACE'; break;
 						}
 					}
 				}
@@ -347,7 +347,8 @@ TrainingScene.prototype.updateTalking = function(deltaTime) {
 		paddleBot.paddle.currentAnimation = 'talking';
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) || (this.stateTime > 10 && this.currentMessage !== 3) ) {
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.START ] ) || (this.stateTime > 10 && this.currentMessage !== 3) ) {
+		InputManager.clear();
 		switch( this.currentMessage ) {
 			case 5 :
 				var ball = new DefaultBall();
@@ -431,7 +432,8 @@ TrainingScene.prototype.update = function(deltaTime) {
 	Scene.prototype.update.call( this, deltaTime );
 	this.stateTime += deltaTime;
 	
-	if( InputManager.checkButtonPress( Buttons.BACK ) ) {
+	if( InputManager.checkButtonPress( Buttons.BACK ) || (this.state === this.states.training && InputManager.checkButtonPress(Buttons.START) ) ) {
+		InputManager.clear();
 		this.previousState = this.state;
 		this.changeState( this.states.paused );
 	}

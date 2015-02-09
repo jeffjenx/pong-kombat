@@ -172,8 +172,9 @@ StoryScene.prototype.update = function( deltaTime ) {
 		}
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) )
 	{
+		InputManager.clear();
 		if( this.ending ) {
 			app.tournament = null;
 			SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
@@ -181,8 +182,9 @@ StoryScene.prototype.update = function( deltaTime ) {
 			SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
 		}
 	}
-	
-	if( !app.tournament && this.timeElapsed >= 15 ) {
+	else if( !app.tournament && this.timeElapsed >= 15 )
+	{
+		InputManager.clear();
 		SceneManager.changeScene( new TitleScene( ), Transitions.FADE, 0.5 );
 	}
 };

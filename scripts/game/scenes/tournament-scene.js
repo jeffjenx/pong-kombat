@@ -213,7 +213,8 @@ TournamentScene.prototype.increaseRank = function( ) {
 TournamentScene.prototype.update = function( deltaTime ) {
 	Scene.prototype.update.call( this, deltaTime );
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) || this.timeElapsed > 11 ) {
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) || this.timeElapsed > 11 ) {
+		InputManager.clear();
 		var computer = new Opponent( );
 		computer.setPaddle( Paddles[this.opponents[this.currentIndex].enum] );
 

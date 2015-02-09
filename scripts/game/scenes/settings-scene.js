@@ -454,6 +454,7 @@ SettingsScene.prototype.update = function( deltaTime )
 	
 	if( InputManager.checkSequence( [ Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT, Buttons.UP, Buttons.RIGHT, Buttons.DOWN, Buttons.LEFT ] ) )
 	{
+		InputManager.clear();
 		//console.log( 'Blasteroids' );
 	}
 
@@ -477,8 +478,9 @@ SettingsScene.prototype.update = function( deltaTime )
 		this.increaseSetting( );
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.START ] ) )
 	{
+		InputManager.clear();
 		if( this.currentSetting === 'Return' )
 		{
 			SceneManager.changeScene( new TitleScene( ), Transitions.FADE );
@@ -487,6 +489,12 @@ SettingsScene.prototype.update = function( deltaTime )
 		{
 			this.increaseSetting( );
 		}
+	}
+
+	if( InputManager.checkButtonPress( Buttons.BACK ) )
+	{
+		InputManager.clear();
+		SceneManager.changeScene( new TitleScene( ), Transitions.FADE );
 	}
 };
 

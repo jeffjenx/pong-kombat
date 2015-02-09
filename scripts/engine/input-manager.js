@@ -10,22 +10,24 @@ var Buttons = {
 };
 
 var Keyboard = {
-	38 : Buttons.UP,       // <up_arrow>
+	38 : Buttons.UP,       // up arrow
+	40 : Buttons.DOWN,     // down arrow
+	37 : Buttons.LEFT,     // left arrow
+	39 : Buttons.RIGHT,    // right arrow
+	27 : Buttons.BACK,     // escape
+	32 : Buttons.ACTION,   // spacebar
+	13 : Buttons.START,    // enter
+
 	87 : Buttons.UP,       // W
-	40 : Buttons.DOWN,     // <down_arrow>
 	83 : Buttons.DOWN,     // S
-	37 : Buttons.LEFT,     // <left_arrow>
 	65 : Buttons.LEFT,     // A
-	39 : Buttons.RIGHT,    // <right_arrow>
 	68 : Buttons.RIGHT,    // D
-	 8 : Buttons.BACK,     // <backspace>
-	27 : Buttons.BACK,     // ESCAPE
-	32 : Buttons.ACTION,   // <spacebar>
-	16 : Buttons.ACTION,   // <shift>
+	 8 : Buttons.BACK,     // backspace
+	16 : Buttons.ACTION    // shift
 };
 
 var Mouse = {
-	1 : Buttons.ACTION     // <left_button>
+	1 : Buttons.ACTION     // left button
 };
 
 var Gamepad = {
@@ -58,6 +60,18 @@ var InputManager = {
 			
 			return false;
 		}
+		else if( button instanceof Array )
+		{
+			for( var i in button )
+			{
+				if( this.wasButtonDown( button[i] ) && this.isButtonUp( Buttons[i] ) )
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 		
 		return ( this.wasButtonDown( button ) && this.isButtonUp( button ) ) ? true : false;
 	},
@@ -70,6 +84,12 @@ var InputManager = {
 		}
 		
 		return true;
+	},
+
+	clear : function() {
+		this.history = [];
+		this.currentState = {};
+		this.previousState = {};
 	},
 
 	handleGamepads : function( event ) {

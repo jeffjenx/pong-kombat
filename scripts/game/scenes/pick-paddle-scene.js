@@ -304,8 +304,9 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		selectedPaddle.update( deltaTime );
 	}
 	
-	if( InputManager.checkButtonPress( Buttons.ACTION ) )
+	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.START ] ) )
 	{
+		InputManager.clear();
 		var player = new Player( );
 		player.setPaddle( Paddles[paddles[this.currentIndex].enum] );
 
@@ -363,6 +364,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 	 || InputManager.checkSequence([Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT,Buttons.RIGHT])
 	 || InputManager.checkSequence([Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT,Buttons.LEFT])
 	) {
+		InputManager.clear();
 		this.addLayer( 'Menu', new LevelMenu( this ) );
 		if( typeof track === 'function' ) {
 			track( 'zone-select' );
@@ -379,7 +381,8 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			if( now - InputManager.currentState[ buttons[i] ] > 3 * 1000 )
 			{
 				this.currentPage = ( this.currentPage === this.primaryLayer ) ? this.secondaryLayer : this.primaryLayer;
-				InputManager.currentState[ buttons[i] ] = now;
+				//InputManager.currentState[ buttons[i] ] = now;
+				InputManager.clear();
 			}
 		}
 	}
@@ -404,6 +407,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 
 	if( InputManager.checkButtonPress( Buttons.BACK ) )
 	{
+		InputManager.clear();
 		if( app.settings.SOUND_FX > 0 ) {
 			this.denySound.stop();
 			this.denySound.play();
