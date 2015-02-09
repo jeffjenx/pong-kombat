@@ -7,6 +7,8 @@ function PaddleBot( ) {
 
 	Paddle.call( this, 'Paddle-Bot' );
 
+	this.icon = Resources['Paddle-Icon-Paddle-Bot'];
+
 	this.size.x = this.size.y;
 
 	this.animations = {

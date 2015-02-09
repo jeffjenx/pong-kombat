@@ -299,6 +299,7 @@
 		"Paddle-Broken-Yellow"        : "images/paddles/yellow-broken-min.png",
 		"Paddle-Broken-White"        : "images/paddles/white-broken-min.png",
 		
+		"Paddle-Icon-Paddle-Bot"      : "images/paddles/paddle-bot-icon-min.png",
 		"Paddle-Icon-Blue"          : "images/paddles/blue-icon-min.png",
 		"Paddle-Icon-Green"         : "images/paddles/green-icon-min.png",
 		"Paddle-Icon-Monolith"      : "images/paddles/monolith-icon-min.png",
