@@ -1,3 +1,4 @@
 .DS_Store
 vendors/
 videos/
+node/node_modules/
