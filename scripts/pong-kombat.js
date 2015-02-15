@@ -1,11 +1,12 @@
 load( '/scripts/game/', [
 	'ball',
 	'level',
-	'opponent',
+	'computer',
 	'paddle',
 	'player',
 	'powerup',
 	'projectile',
+	'peer',
 	'menu',
 	
 	'balls/baseball',
@@ -62,8 +63,10 @@ load( '/scripts/game/', [
 	'menus/title-menu',
 	'menus/pause-menu',
 	'menus/test-menu',
+	'menus/multiplayer-menu',
 	'menus/level-menu',
 	'menus/training-menu',
+	'menus/wait-menu',
 	
 	'paddles/yellow-paddle',
 	'paddles/blue-paddle',
@@ -104,6 +107,7 @@ load( '/scripts/game/', [
 	'scenes/training-scene',
 	'scenes/kombat-layer',
 	'scenes/legal-scene',
+	'scenes/multiplayer-scene',
 	'scenes/hud-layer',
 	'scenes/main-story-scene',
 	'scenes/test-scene',
@@ -122,6 +126,7 @@ function ready( ) {
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = '/';
 	app.language = 'en';
+	app.p2p = (window.io) ? new io('ws://www.pongkombat.dev:3000/pong-kombat') : false;
 	app.settings = {
 /*		'CENSORSHIP' : false,*/
 		'COINAGE'    : (localStorage && localStorage['PongKombat.settings.COINAGE']) ? parseInt( localStorage['PongKombat.settings.COINAGE'] ) : 0,
@@ -231,7 +236,7 @@ function ready( ) {
 		clearInterval( loadingInterval );
 		loadingPercentage.parentNode.removeChild( loadingPercentage );
 		
-		app.startupScene = new SplashScene();
+		app.startupScene = new TitleScene();
 		app.initialize( );
 	};
 };

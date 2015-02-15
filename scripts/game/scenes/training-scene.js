@@ -136,7 +136,7 @@ TrainingScene.prototype.unload = function( ) {
 TrainingScene.prototype.addKombatant = function( kombatant ) {
 	this.layers['Kombat'].addKombatant( kombatant );
 
-	var paddleBot = new Opponent( );
+	var paddleBot = new Computer( );
 	paddleBot.setPaddle( Paddles.PADDLEBOT );
 	paddleBot.paddle.rotation = 0;
 

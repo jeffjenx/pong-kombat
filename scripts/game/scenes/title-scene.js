@@ -63,6 +63,13 @@ function TitleScene( ) {
 	}
 
 	this.godSequence = [Buttons.UP, Buttons.UP, Buttons.DOWN, Buttons.DOWN, Buttons.LEFT, Buttons.RIGHT, Buttons.LEFT, Buttons.RIGHT, Buttons.BACK, Buttons.ACTION, Buttons.START];
+
+	//this.userIcon = new Sprite( 'Paddle-Icon-Unknown' );
+	//this.userIcon.position.x = viewport.width * 0.05;
+	//this.userIcon.position.y = this.userIcon.position.x;
+	//this.userIcon.size.x = viewport.width * 0.11;
+	//this.userIcon.size.y = this.userIcon.size.x;
+	//titleLayer.addComponent( 'User', this.userIcon );
 }
 
 TitleScene.prototype = new Scene;

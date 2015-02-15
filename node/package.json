@@ -1,0 +1,9 @@
+{
+  "name": "pong-kombat",
+  "version": "0.0.1",
+  "description": "A multiplayer server for PongKombat.com",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.3.3"
+  }
+}

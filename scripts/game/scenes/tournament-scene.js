@@ -215,7 +215,7 @@ TournamentScene.prototype.update = function( deltaTime ) {
 	
 	if( InputManager.checkButtonPress( [ Buttons.ACTION, Buttons.BACK, Buttons.START ] ) || this.timeElapsed > 11 ) {
 		InputManager.clear();
-		var computer = new Opponent( );
+		var computer = new Computer( );
 		computer.setPaddle( Paddles[this.opponents[this.currentIndex].enum] );
 
 		this.player.setPaddle( Paddles[this.player.paddle.enum] );

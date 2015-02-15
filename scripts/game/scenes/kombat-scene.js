@@ -471,7 +471,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 			if( this.stateTime >= 3 && InputManager.checkButtonPress( [Buttons.ACTION, Buttons.START] ) ) {
 				InputManager.clear();
 				if( this.winner.roundsWon === this.winner.flawlessRounds && this.layers['Background'].components['Background'].resource === 'Background-Pit' && this.finishType !== null ) {
-					var computer = new Opponent( );
+					var computer = new Computer( );
 					computer.setPaddle( Paddles.MRSLAYER );
 					
 					var kombatScene = new KombatScene( );

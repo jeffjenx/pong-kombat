@@ -60,7 +60,7 @@ Menu.prototype.draw = function( context ) {
 	Layer.prototype.draw.call( this, context );
 };
 
-Menu.prototype.addItem = function( title, action ) {
+Menu.prototype.addItem = function( title, action, disabled ) {
 	var lineSpacing = viewport.height * 0.01;
 	var fontSize = viewport.height * 0.05;
 	var item = new Text( title );
@@ -79,7 +79,7 @@ Menu.prototype.addItem = function( title, action ) {
 	this.items.push( {
 		'action' : action,
 		'component' : this.components['Item' + this.items.length],
-		'enabled' : true,
+		'enabled' : (disabled === true) ? false : true,
 		'title' : title
 	} );
 	
@@ -118,7 +118,7 @@ Menu.prototype.selectNextItem = function( ) {
 		sound.setMaxVolume(1 * app.settings.SOUND_FX / 11);
 		sound.play( );
 	}
-
+	
 	this.currentIndex += 1;
 	if( this.currentIndex >= this.items.length ) {
 		this.currentIndex = 0;

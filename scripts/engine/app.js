@@ -98,6 +98,11 @@ App.prototype.initialize = function( ) {
 	document.getElementById( 'play' ).appendChild( viewport );
 	
 	window.onblur = function( ) {
+		if(app.gameMode === GameModes.P2P){
+			// P2P can't be paused
+			return;
+		}
+
 		app.paused = false;
 		app.togglePause( );
 	};

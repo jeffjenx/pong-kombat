@@ -345,9 +345,26 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			trainingScene.addKombatant( player );
 			SceneManager.changeScene( trainingScene, Transitions.FADE, 0.5 );	
 		}
+		else if( app.gameMode === GameModes.P2P )
+		{
+			app.p2p.emit('client:paddle',{room:app.p2p.room,paddle:player.paddle.enum});
+			app.p2p.on('server:start',function(data){
+				console.log('Match starting')
+				var peer = new Peer();
+				peer.client = (app.p2p.id === data.host.id) ? data.guest.id : data.host.id;
+				peer.setPaddle( (app.p2p.id === data.host.id) ? Paddles[data.guest.paddle] : Paddles[data.host.paddle]);
+
+				var kombatScene = new KombatScene();
+				kombatScene.addKombatant(player);
+				kombatScene.addKombatant(peer);
+				kombatScene.setLevel( this.level );
+				SceneManager.changeScene( kombatScene, Transitions.NONE );
+			});
+			this.addLayer( 'Menu', new WaitMenu( this ) );
+		}
 		else
 		{
-			var computer = new Opponent( );
+			var computer = new Computer( );
 			computer.setPaddle( Paddles.RANDOM );
 
 			var kombatScene = new KombatScene( );
