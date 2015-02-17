@@ -11,12 +11,19 @@ MultiplayerMenu.prototype = new Menu;
 MultiplayerMenu.prototype.constructor = MultiplayerMenu;
 
 MultiplayerMenu.prototype.selectAnyone = function( ) {
-	app.p2p.emit('client:ready');
+	app.p2p.emit('client:playAnyone');
+	app.p2p.on('server:roomReady',function(room){
+		app.p2p.room = room.name;
+		app.p2p.host = (app.p2p.id === room.host.id) ? true : false;
+		SceneManager.changeScene( new PickPaddleScene(), Transitions.FADE, 0.5 );
+	});
+	/*
 	app.p2p.on('server:ready',function(id){
 		console.log('Players connected');
 		app.p2p.room = id;
 		SceneManager.changeScene( new PickPaddleScene(), Transitions.FADE, 0.5 );
 	});
+	*/
 	this.scene.addLayer( 'Menu', new WaitMenu( this ) );
 };
 

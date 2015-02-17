@@ -124,9 +124,8 @@ Player.prototype.update = function( deltaTime ) {
 	this.paddle.update( deltaTime );
 
 	if(app.gameMode === GameModes.P2P){
-		app.p2p.emit('client:update',{
+		app.p2p.emit('client:updatePaddle',{
 			room:app.p2p.room,
-			component:'paddle',
 			x:this.paddle.position.x,
 			y:this.paddle.position.y,
 			s:this.paddle.scale,

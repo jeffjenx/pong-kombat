@@ -82,7 +82,9 @@ KombatLayer.prototype.centerPaddles = function( ) {
 	}
 };
 
-KombatLayer.prototype.setBall = function( ballType ) {
+KombatLayer.prototype.setBall = function( ballType, ballResource ) {
+	var ball;
+
 	switch( ballType ) {
 		case Balls.RANDOM :
 			var count = 0;
@@ -93,28 +95,28 @@ KombatLayer.prototype.setBall = function( ballType ) {
 			}
 			return this.setBall( Math.ceil( Math.random( ) * count ) );
 		break;
-		case Balls.BASEBALL : ball = new Baseball( ); break;
-		case Balls.BASKETBALL : ball = new Basketball( ); break;
-		case Balls.BILLIARDS_BALL : ball = new BilliardsBall( ); break;
-		case Balls.COIN : ball = new Coin( ); break;
-		case Balls.CROQUET_BALL : ball = new CroquetBall( ); break;
-		case Balls.DICE : ball = new Dice( ); break;
-		case Balls.EMOTICON : ball = new Emoticon( ); break;
-		case Balls.EYE_BALL : ball = new EyeBall( ); break;
-		case Balls.FOIL_BALL : ball = new FoilBall( ); break;
-		case Balls.FOOD : ball = new Food( ); break;
-		case Balls.FOOTBALL : ball = new Football( ); break;
-		case Balls.LOGO : ball = new Logo( ); break;
-		case Balls.MARBLE : ball = new Marble( ); break;
-		case Balls.PAC_MAN : ball = new PacMan( ); break;
-		case Balls.POKEBALL : ball = new PokeBall( ); break;
-		case Balls.PONG_BALL : ball = new PongBall( ); break;
-		case Balls.RUPEE : ball = new Rupee( ); break;
-		case Balls.SOCCER_BALL : ball = new SoccerBall( ); break;
-		case Balls.SOLAR_SYSTEM : ball = new SolarSystem( ); break;
-		case Balls.STORAGE_MEDIA : ball = new StorageMedia( ); break;
-		case Balls.SUPER_MARIO : ball = new SuperMario( ); break;
-		case Balls.TENNIS_BALL : ball = new TennisBall( ); break;
+		case Balls.BASEBALL : ball = new Baseball( ballResource ); break;
+		case Balls.BASKETBALL : ball = new Basketball( ballResource ); break;
+		case Balls.BILLIARDS_BALL : ball = new BilliardsBall( ballResource ); break;
+		case Balls.COIN : ball = new Coin( ballResource ); break;
+		case Balls.CROQUET_BALL : ball = new CroquetBall( ballResource ); break;
+		case Balls.DICE : ball = new Dice( ballResource ); break;
+		case Balls.EMOTICON : ball = new Emoticon( ballResource ); break;
+		case Balls.EYE_BALL : ball = new EyeBall( ballResource ); break;
+		case Balls.FOIL_BALL : ball = new FoilBall( ballResource ); break;
+		case Balls.FOOD : ball = new Food( ballResource ); break;
+		case Balls.FOOTBALL : ball = new Football( ballResource ); break;
+		case Balls.LOGO : ball = new Logo( ballResource ); break;
+		case Balls.MARBLE : ball = new Marble( ballResource ); break;
+		case Balls.PAC_MAN : ball = new PacMan( ballResource ); break;
+		case Balls.POKEBALL : ball = new PokeBall( ballResource ); break;
+		case Balls.PONG_BALL : ball = new PongBall( ballResource ); break;
+		case Balls.RUPEE : ball = new Rupee( ballResource ); break;
+		case Balls.SOCCER_BALL : ball = new SoccerBall( ballResource ); break;
+		case Balls.SOLAR_SYSTEM : ball = new SolarSystem( ballResource ); break;
+		case Balls.STORAGE_MEDIA : ball = new StorageMedia( ballResource ); break;
+		case Balls.SUPER_MARIO : ball = new SuperMario( ballResource ); break;
+		case Balls.TENNIS_BALL : ball = new TennisBall( ballResource ); break;
 		
 		case Balls.DEFAULT_BALL :
 		default :
@@ -124,6 +126,12 @@ KombatLayer.prototype.setBall = function( ballType ) {
 	
 	ball.set( );
 	this.addComponent( 'Ball', ball );
+
+	if(app.gameMode === GameModes.P2P) {
+		app.p2p.on('server:updateBall',function(serverData){
+			ball.updateFromServer(serverData);
+		});
+	}
 };
 
 KombatLayer.prototype.addKombatant = function( kombatant ) {
@@ -228,7 +236,15 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					if( ball.velocity.x > 0 && ball.boundingBox.left > viewport.width )
 					{
 						rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
-						this.setBall( Balls.RANDOM );
+						this.removeComponent('Ball');
+						
+						if(app.gameMode === GameModes.P2P){
+							app.p2p.emit('client:pointScored',{
+								room:app.p2p.room
+							});
+						} else {
+							this.setBall( Balls.RANDOM );
+						}
 					}
 
 					if( leftKombatant.paddle.timePowerup && ball.velocity.x < 0 && ball.position.x < viewport.width / 2 && !ball.bulletTimed ) {
@@ -252,7 +268,15 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					if( ball.velocity.x < 0 && ball.boundingBox.right < 0 )
 					{
 						leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
-						this.setBall( Balls.RANDOM );
+						this.removeComponent('Ball');
+						
+						if(app.gameMode === GameModes.P2P){
+							app.p2p.emit('client:pointScored',{
+								room:app.p2p.room
+							});
+						} else {
+							this.setBall( Balls.RANDOM );
+						}
 					}
 
 					if( rightKombatant.paddle.timePowerup && ball.velocity.x > 0 && ball.position.x > viewport.width / 2 && !ball.bulletTimed ) {

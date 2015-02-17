@@ -2,9 +2,15 @@ function Peer( ) {
 	this.paddle = null;
 	this.life = 0;
 	this.roundsWon = 0;
+	this.client = null;
 
 	var that = this;
+	/*
 	app.p2p.on('server:update',function(peerData){
+		that.updateFromServer(peerData);
+	});
+	*/
+	app.p2p.on('server:updatePaddle',function(peerData){
 		that.updateFromServer(peerData);
 	});
 }
@@ -71,12 +77,11 @@ Peer.prototype.update = function( deltaTime ){
 };
 
 Peer.prototype.updateFromServer = function( peerData ) {
-	if(this.client === peerData.client && peerData.component === 'paddle') {
+	if(this.client === peerData.id) {
 		this.paddle.position.x = viewport.width - peerData.x;
 		this.paddle.position.y = peerData.y;
 		this.paddle.size.x = peerData.w;
 		this.paddle.size.y = peerData.h;
 		this.paddle.scale = peerData.s;
-		console.log(this.paddle.scale);
 	}
 };

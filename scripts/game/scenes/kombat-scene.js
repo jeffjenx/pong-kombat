@@ -374,8 +374,19 @@ KombatScene.prototype.update = function( deltaTime ) {
 
 		case this.states.starting :
 			if( this.stateTime >= 5 ) {
-				this.changeState( this.states.fighting );
-				this.layers['Kombat'].setBall( );
+				if(app.gameMode === GameModes.P2P){
+					this.changeState(this.states.fighting);
+					app.p2p.emit('client:requestBall',{
+						room:app.p2p.room
+					});
+					this.changeState( this.states.fighting );
+					app.p2p.on('server:ballSelected',function(room){
+						SceneManager.currentScene.layers['Kombat'].setBall( room.ball.type, room.ball.resource );
+					});
+				}else{
+					this.changeState( this.states.fighting );
+					this.layers['Kombat'].setBall( );
+				}
 			} else {
 				this.layers['Kombat'].centerPaddles( );
 			}

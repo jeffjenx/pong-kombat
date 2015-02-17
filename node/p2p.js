@@ -7,6 +7,204 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
+var rooms = {};
+var clientWaitingRoom = null;
+function randomRoom(){
+	var name='';
+	var length=6;
+	var i=0;
+	for(;i++<length;){
+		var randomNumber=Math.floor(Math.random()*10);
+		name+=randomNumber;
+	}
+	return name;
+};
+
+function Player(clientID){
+	this.id = clientID;
+	this.paddle = null;
+	this.desiredLevel = null;
+
+	this.x = null;
+	this.y = null;
+	this.s = null;
+	this.w = null;
+	this.h = null;
+}
+Player.prototype.constructor = Player;
+
+function Ball(){
+	this.type = null;
+	this.resource = null;
+	this.x = null;
+	this.y = null;
+	this.s = null;
+	this.w = null;
+	this.h = null;
+};
+Ball.prototype.constructor = Ball;
+
+p2p.on('connection',function(client){
+	console.log('Client ('+client.id+') connected.');
+
+	client.pickPaddle = function(data){
+		var room = rooms[data.room];
+		var player = (client.id === room.host.id) ? room.host : room.guest;
+
+		player.paddle = data.paddle;
+
+		if(room.host.paddle && room.guest.paddle){
+			p2p.to(room.name).emit('server:playersReady',room);
+		}
+	};
+
+	client.playAnyone = function(){
+		if(clientWaitingRoom){
+			var room = rooms[clientWaitingRoom];
+			console.log('Client ('+client.id+') joined client ('+room.host.id+') in room '+room.name+'.');
+			client.join(room.name);
+			room.guest = new Player(client.id);
+			clientWaitingRoom = null;
+			p2p.to(room.name).emit('server:roomReady',room);
+		} else {
+			var roomName = randomRoom();
+			console.log('Client ('+client.id+') waiting for match in room '+roomName+'.');
+			clientWaitingRoom = roomName;
+			rooms[roomName] = {
+				name : roomName,
+				host : new Player(client.id),
+				guest : null,
+				ball : null,
+				level : null
+			};
+			client.join(roomName);
+		}
+	};
+
+	client.pointScored = function(data){
+		var room = rooms[data.room];
+		room.ball = null;
+		client.requestBall(data);
+		/*
+		p2p.emit('client:requestBall',{
+			room:room.name
+		});
+	*/
+	};
+
+	client.requestBall = function(data){
+		var room = rooms[data.room];
+
+		console.log(room.ball);
+
+		if(room.ball){
+			p2p.to(room.name).emit('server:ballSelected',room);
+		} else {
+			var availableBalls = ['BASEBALL','BASKETBALL','BILLIARDS_BALL','COIN','CROQUET_BALL','DEFAULT_BALL','DICE','EMOTICON','EYE_BALL','FOIL_BALL','FOOD','FOOTBALL','LOGO','MARBLE','PAC_MAN','POKEBALL','PONG_BALL','RUPEE','SOCCER_BALL','SOLAR_SYSTEM','STORAGE_MEDIA','SUPER_MARIO','TENNIS_BALL'];
+			var availableResources = {
+				'BASEBALL' : ['Ball-Baseball','Ball-Baseball-MLB','Ball-Baseball-Old','Ball-Softball'],
+				'BASKETBALL' : [ 'Ball-Basketball', 'Ball-Basketball-ABA', 'Ball-Basketball-Old', 'Ball-Basketball-NBA', 'Ball-Kickball' ],
+				'BILLIARDS_BALL' : [ 'Ball-Billiards-1', 'Ball-Billiards-2', 'Ball-Billiards-3', 'Ball-Billiards-4', 'Ball-Billiards-5', 'Ball-Billiards-6', 'Ball-Billiards-7', 'Ball-Billiards-8', 'Ball-Billiards-9', 'Ball-Billiards-10', 'Ball-Billiards-11', 'Ball-Billiards-12', 'Ball-Billiards-13', 'Ball-Billiards-14', 'Ball-Billiards-15' ],
+				'COIN' : [ 'Ball-Coin-Penny', 'Ball-Coin-Nickle', 'Ball-Coin-Dime', 'Ball-Coin-Quarter' ],
+				'CROQUET_BALL' : [ 'Ball-Croquet-Black', 'Ball-Croquet-Blue', 'Ball-Croquet-Red', 'Ball-Croquet-Yellow' ],
+				'DEFAUL_BALL' : ['Ball-Default'],
+				'DICE' : [
+					'Ball-Dice-Red-1', 'Ball-Dice-Red-2', 'Ball-Dice-Red-3', 'Ball-Dice-Red-4', 'Ball-Dice-Red-5', 'Ball-Dice-Red-6',
+					'Ball-Dice-White-1', 'Ball-Dice-White-2', 'Ball-Dice-White-3', 'Ball-Dice-White-4', 'Ball-Dice-White-5', 'Ball-Dice-White-6',
+					'Ball-Dice-12-Sided', 'Ball-Dice-20-Sided'
+				],
+				'EMOTICON' : [ 'Ball-Emoticon-Angry', 'Ball-Emoticon-Frowning', 'Ball-Emoticon-Grinning', 'Ball-Emoticon-Shocked', 'Ball-Emoticon-Smiling', 'Ball-Emoticon-Winking' ],
+				'EYE_BALL' : [ 'Ball-Eye-Amber', 'Ball-Eye-Blue', 'Ball-Eye-Brown', 'Ball-Eye-Cat', 'Ball-Eye-Green', 'Ball-Eye-Grey', 'Ball-Eye-Hazel', 'Ball-Eye-Red' ],
+				'FOIL_BALL' : [ 'Ball-Tin-Foil' ],
+				'FOOD' : [
+					'Ball-Easter-Egg-Blue', 'Ball-Easter-Egg-Green', 'Ball-Easter-Egg-Purple', 'Ball-Easter-Egg-Red', 'Ball-Easter-Egg-Yellow',
+					'Ball-Food-Cookie', 'Ball-Food-Donut', 'Ball-Food-Pizza', 'Ball-Food-Plain-Bagel', 'Ball-Food-Salted-Bagel', 'Ball-Food-Waffle'
+				],
+				'FOOTBALL' : ['Ball-Football-NFL'],
+				'LOGO' : ['Ball-Logo-Android', 'Ball-Logo-Apple', 'Ball-Logo-BMW', 'Ball-Logo-Chrome', 'Ball-Logo-Facebook',
+					'Ball-Logo-Facebook', 'Ball-Logo-Firefox', 'Ball-Logo-IE', 'Ball-Logo-Pepsi', 'Ball-Logo-Pinterest', 'Ball-Logo-Safari',
+					'Ball-Logo-Starbucks', 'Ball-Logo-Twitter', 'Ball-Logo-Volkswagen', 'Ball-Logo-Wikipedia', 'Ball-Logo-WordPress',
+					'Ball-Logo-Obama', 'Ball-Yin-Yang', 'Ball-Yarn', 'Ball-Rubber-Band', 'Ball-Skull', 'Ball-Saw-Blade', 'Ball-Loading', 'Ball-Stop-Sign', 'Ball-Clock', 'Ball-Tron-Disc',
+					'Ball-BBS-Wheel'
+				],
+				'MARBLE' : [ 'Ball-Marble-Brown', 'Ball-Marble-Lavender', 'Ball-Marble-Mint', 'Ball-Marble-Orange', 'Ball-Marble-Pink', 'Ball-Marble-Teal', 'Ball-Bouncy' ],
+				'PAC_MAN' : [ 'Ball-Pac-Man', 'Ball-Ms-Pac-Man' ],
+				'POKEBALL' : ['Ball-PokeBall'],
+				'PONG_BALL' : ['White'],
+				'RUPEE' : [ 'Ball-Rupee-Green', 'Ball-Rupee-Blue', 'Ball-Rupee-Yellow', 'Ball-Rupee-Red', 'Ball-Rupee-Purple', 'Ball-Rupee-Orange', 'Ball-Rupee-Silver' ],
+				'SOCCER_BALL' : ['Ball-Soccer'],
+				'SOLAR_SYSTEM' : [ 'Ball-Asteroid', 'Ball-Sun', 'Ball-Moon', 'Ball-Mercury', 'Ball-Venus', 'Ball-Earth', 'Ball-Mars', 'Ball-Saturn', 'Ball-Neptune', 'Ball-Uranus', 'Ball-Jupiter', 'Ball-Pluto' ],
+				'STORAGE_MEDIA' : [ 'Ball-Compact-Disc', 'Ball-Cassette-Tape', 'Ball-Vinyl-Record', 'Ball-Floppy-Disk', 'Ball-Cartridge-Mario', 'Ball-Cartridge-Zelda' ],
+				'SUPER_MARIO' : [ 'Ball-Super-Mario-Koopa-Shell', 'Ball-Super-Mario-Mushroom', 'Ball-Super-Mario-1Up', 'Ball-Super-Mario-Coin', 'Ball-Super-Mario-Star-Coin' ],
+				'TENNIS_BALL' : [ 'Ball-Table-Tennis-Orange', 'Ball-Table-Tennis-White', 'Ball-Tennis' ]
+			};
+
+			room.ball = new Ball();
+			room.ball.type = availableBalls[Math.floor(Math.random() * availableBalls.length)];
+			room.ball.resource = availableResources[room.ball.type][ Math.floor(Math.random() * availableResources[room.ball.type].length) ];
+		}
+	};
+
+	client.requestLevel = function(data){
+		var room = rooms[data.room];
+		var player = (client.id === room.host.id) ? room.host : room.guest;
+		player.desiredLevel = data.level;
+
+		if(room.level){
+			p2p.to(room.name).emit('server:levelSelected',room);
+		} else {
+			var availableLevels = ['DEFAULT','FOREST','HELL','HIGHWAY','ICE_RIVER','PIT','PORTAL','STORM','TOWER','TOXIC_POOL','WATERCOLOR'];
+			room.level = availableLevels[Math.floor(Math.random() * availableLevels.length)];
+		}
+	};
+
+	client.updateBall = function(data){
+		var room = rooms[data.room];
+
+		room.ball.x = data.x;
+		room.ball.y = data.y;
+		room.ball.s = data.s;
+		room.ball.w = data.w;
+		room.ball.h = data.h;
+		room.ball.vx = data.vx;
+		room.ball.vy = data.vy;
+
+		p2p.to(room.name).emit('server:updateBall',room);
+	};
+
+	client.updatePaddle = function(data){
+		var room = rooms[data.room];
+
+		var player = (client.id === room.host.id) ? room.host : room.guest;
+		player.x = data.x;
+		player.y = data.y;
+		player.s = data.s;
+		player.w = data.w;
+		player.h = data.h;
+
+		p2p.to(room.name).emit('server:updatePaddle',player);
+	};
+
+	client.disconnect = function(){
+		console.log('Client ('+client.id+') disconnected.');
+	};
+
+	client.on('disconnect',client.disconnect);
+	client.on('client:pickPaddle',client.pickPaddle);
+	client.on('client:playAnyone',client.playAnyone);
+	client.on('client:pointScored',client.pointScored);
+	client.on('client:requestBall',client.requestBall);
+	client.on('client:requestLevel',client.requestLevel);
+	client.on('client:updateBall',client.updateBall);
+	client.on('client:updatePaddle',client.updatePaddle);
+});
+
+http.listen(3000, function(){
+	console.log('Listening on *:3000');
+});
+
+/*
+
 
 var waitingToPlay;
 var activeMatches = [];
@@ -23,8 +221,8 @@ p2p.on('connection', function(client){
 		console.log('Client ('+client.id+') Selected Paddle:' + data.paddle)
 		var match;
 		for(var i in activeMatches){
-			match = activeMatches[i];
 			if(match.room === data.room){
+				match = activeMatches[i];
 				break;
 			}
 		}
@@ -55,30 +253,11 @@ p2p.on('connection', function(client){
 		p2p.to(data.room).emit('server:update',peerData);
 	});
 
-	/*
-	client.on('client:input',function(data){
-		var match;
-		for(var i in activeMatches){
-			match = activeMatches[i];
-			if(match.room === data.room){
-				break;
-			}
-		}
-
-		if(match){
-			if(match.host.id === client.id){
-				match.host.paddle[data.action]();
-			} else if(match.guest.id === client.id) {
-				match.guest.paddle[data.action]();
-			}
-		}
-	});
-	*/
-
 	client.on('client:ready', function(){
 		if(waitingToPlay){
 			console.log('Client ('+client.id+') Joined: '+waitingToPlay);
 			client.join(waitingToPlay);
+			var levels = ['DEFAULT','FOREST','HELL','HIGHWAY','ICE_RIVER','PIT','PORTAL','STORM','TOWER','TOXIC_POOL','WATERCOLOR'];
 			activeMatches.push({
 				room: waitingToPlay,
 				host: {
@@ -89,7 +268,8 @@ p2p.on('connection', function(client){
 					id: client.id,
 					paddle: null
 				},
-				ball: null
+				ball: 'DEFAULT_BALL', // always start with default ball
+				level: levels[Math.floor(Math.random() * levels.length)] // randomize level
 			});
 			p2p.to(waitingToPlay).emit('server:ready',waitingToPlay);
 			waitingToPlay = null;
@@ -100,10 +280,7 @@ p2p.on('connection', function(client){
 	});
 });
 
-http.listen(3000, function(){
-	console.log('Listening on *:3000');
-});
-
+*/
 // Game Logic Updates
 /*
 var frameRate = 1000 / 1; // denominator fps

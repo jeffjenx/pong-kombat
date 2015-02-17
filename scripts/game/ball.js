@@ -288,12 +288,25 @@ Ball.prototype.update = function( deltaTime ) {
 
 	this.updateCollision( );
 	this.updateGlare( );
+
+	if(app.gameMode === GameModes.P2P && app.p2p.host){
+		app.p2p.emit('client:updateBall',{
+			room:app.p2p.room,
+			x:this.position.x,
+			y:this.position.y,
+			s:this.scale,
+			w:this.size.x,
+			h:this.size.y,
+			vx:this.velocity.x,
+			vy:this.velocity.y
+		});
+	}
 };
 
 Ball.prototype.updateCollision = function( ) {
 	this.collisionAreas[0].radius = this.width / 2 * this.scale;
 	this.collisionAreas[0].center = this.position;
-}
+};
 
 Ball.prototype.updateGlare = function( ) {
 	if( this.glare ){
@@ -318,4 +331,16 @@ Ball.prototype.updateGlare = function( ) {
 			}
 		}
 	}
-}
+};
+
+Ball.prototype.updateFromServer = function( serverData ) {
+	if(app.p2p.id === serverData.guest.id) {
+		this.position.x = viewport.width - serverData.ball.x;
+		this.position.y = serverData.ball.y;
+		this.size.x = serverData.ball.w;
+		this.size.y = serverData.ball.h;
+		this.scale = serverData.ball.s;
+		this.velocity.x = serverData.ball.vx;
+		this.velocity.y = serverData.ball.vy;
+	}
+};

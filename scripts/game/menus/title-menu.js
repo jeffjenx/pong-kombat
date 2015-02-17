@@ -44,7 +44,6 @@ TitleMenu.prototype.selectMultiplayer = function() {
 	}
 
 	app.gameMode = GameModes.P2P;
-	console.log(app.p2p.id);
 	SceneManager.changeScene( new MultiplayerScene( ), Transitions.FADE, 0.5 );
 };
 

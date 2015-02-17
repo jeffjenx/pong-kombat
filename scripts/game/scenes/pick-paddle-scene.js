@@ -347,9 +347,32 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		}
 		else if( app.gameMode === GameModes.P2P )
 		{
+			app.p2p.emit('client:pickPaddle',{
+				room:app.p2p.room,
+				paddle:player.paddle.enum
+			});
+			app.p2p.on('server:playersReady',function(room){
+				var kombatScene = new KombatScene();
+				kombatScene.addKombatant(player);
+
+				var peer = new Peer();
+				peer.client = (app.p2p.id === room.host.id) ? room.guest.id : room.host.id;
+				peer.setPaddle( (peer.client === room.host.id) ? Paddles[room.host.paddle] : Paddles[room.guest.paddle] );
+				kombatScene.addKombatant(peer);
+
+				app.p2p.emit('client:requestLevel',{
+					room:app.p2p.room,
+					level:this.level
+				});
+
+				app.p2p.on('server:levelSelected',function(room){
+					kombatScene.setLevel(Levels[room.level]);
+					SceneManager.changeScene(kombatScene, Transitions.NONE);
+				});
+			});
+			/*
 			app.p2p.emit('client:paddle',{room:app.p2p.room,paddle:player.paddle.enum});
 			app.p2p.on('server:start',function(data){
-				console.log('Match starting')
 				var peer = new Peer();
 				peer.client = (app.p2p.id === data.host.id) ? data.guest.id : data.host.id;
 				peer.setPaddle( (app.p2p.id === data.host.id) ? Paddles[data.guest.paddle] : Paddles[data.host.paddle]);
@@ -357,9 +380,10 @@ PickPaddleScene.prototype.update = function( deltaTime )
 				var kombatScene = new KombatScene();
 				kombatScene.addKombatant(player);
 				kombatScene.addKombatant(peer);
-				kombatScene.setLevel( this.level );
+				kombatScene.setLevel( Levels[data.level] );
 				SceneManager.changeScene( kombatScene, Transitions.NONE );
 			});
+			*/
 			this.addLayer( 'Menu', new WaitMenu( this ) );
 		}
 		else
