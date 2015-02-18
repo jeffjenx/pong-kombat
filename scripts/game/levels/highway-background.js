@@ -176,7 +176,7 @@ HighwayBackgroundLayer.prototype.update = function( deltaTime ) {
 			this.addVehicle( );
 		}
 
-		if( !vehicle.sound.started && Collision.RectRect( vehicle.boundingBox, {top:0,bottom:viewport.height,left:0,right:viewport.width} ) ) {
+		if( vehicle.sound && !vehicle.sound.started && Collision.RectRect( vehicle.boundingBox, {top:0,bottom:viewport.height,left:0,right:viewport.width} ) ) {
 			vehicle.sound.play( );
 		}
 	}
