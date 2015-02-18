@@ -1,6 +1,7 @@
 function Football( ) {
 	Ball.call( this, 'Ball-Football-NFL' );
 	
+	this.enum = 'FOOTBALL';
 	this.size.x = viewport.width * 0.05;
 	this.size.y = this.size.x;
 

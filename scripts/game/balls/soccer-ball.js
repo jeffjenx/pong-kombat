@@ -1,6 +1,7 @@
 function SoccerBall( ) {
 	Ball.call( this, 'Ball-Soccer' );
 	
+	this.enum = 'SOCCER_BALL';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 420;

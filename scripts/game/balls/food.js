@@ -5,6 +5,7 @@ function Food( texture ) {
 	];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'FOOD';
 	this.size.x = viewport.width * 0.04;
 	if( this.resource === 'Ball-Food-Pizza' ) {
 		this.size.x = viewport.width * 0.06;

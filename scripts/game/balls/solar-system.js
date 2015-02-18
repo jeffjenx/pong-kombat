@@ -2,6 +2,7 @@ function SolarSystem( texture ) {
 	var textures = [ 'Ball-Asteroid', 'Ball-Sun', 'Ball-Moon', 'Ball-Mercury', 'Ball-Venus', 'Ball-Earth', 'Ball-Mars', 'Ball-Saturn', 'Ball-Neptune', 'Ball-Uranus', 'Ball-Jupiter', 'Ball-Pluto' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'SOLAR_SYSTEM';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 256;

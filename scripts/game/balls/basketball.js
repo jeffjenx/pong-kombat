@@ -2,6 +2,7 @@ function Basketball( texture ) {
 	var textures = [ 'Ball-Basketball', 'Ball-Basketball-ABA', 'Ball-Basketball-Old', 'Ball-Basketball-NBA', 'Ball-Kickball' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'BASKETBALL';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 256;

@@ -2,6 +2,7 @@ function Rupee( texture ) {
 	var textures = [ 'Ball-Rupee-Green', 'Ball-Rupee-Blue', 'Ball-Rupee-Yellow', 'Ball-Rupee-Red', 'Ball-Rupee-Purple', 'Ball-Rupee-Orange', 'Ball-Rupee-Silver' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'RUPEE';
 	this.size.x = viewport.width * 0.035;
 	this.size.y = this.size.x;
 

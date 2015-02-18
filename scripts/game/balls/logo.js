@@ -6,6 +6,7 @@ function Logo( texture ) {
 	'Ball-BBS-Wheel' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'LOGO';
 	this.size.x = viewport.width * 0.045;
 	if( this.resource === 'Ball-Saw-Blade' || this.resource === 'Ball-Tron-Disc' || this.resource === 'Ball-BBS-Wheel' ) {
 		this.size.x = viewport.width * 0.05;

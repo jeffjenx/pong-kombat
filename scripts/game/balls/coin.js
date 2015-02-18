@@ -2,6 +2,7 @@ function Coin( texture ) {
 	var textures = [ 'Ball-Coin-Penny', 'Ball-Coin-Nickle', 'Ball-Coin-Dime', 'Ball-Coin-Quarter' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'COIN';
 	//this.size.x = viewport.width * 0.05;
 	switch( this.resource ) {
 		case 'Ball-Coin-Penny' : this.size.x = viewport.width * 0.035; break;

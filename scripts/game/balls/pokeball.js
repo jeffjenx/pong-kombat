@@ -1,6 +1,7 @@
 function PokeBall( ) {
 	Ball.call( this, 'Ball-PokeBall' );
 	
+	this.enum = 'POKEBALL';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 256;

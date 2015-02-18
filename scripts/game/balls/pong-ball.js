@@ -1,6 +1,7 @@
 function PongBall( ) {
 	Ball.call( this, 'White' );
 	
+	this.enum = 'PONG_BALL';
 	this.size.x = viewport.width * 0.02;
 	this.size.y = this.size.x;
 

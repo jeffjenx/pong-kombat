@@ -6,6 +6,7 @@ function Dice( texture ) {
 	];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'DICE';
 	if( this.resource === 'Ball-Dice-20-Sided' ) {
 		this.size.x = viewport.width * 0.033;
 	} else if( this.resource === 'Ball-Dice-12-Sided' ) {

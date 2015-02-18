@@ -2,6 +2,7 @@ function FoilBall( texture ) {
 	var textures = [ 'Ball-Tin-Foil' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'FOIL_BALL';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 512;

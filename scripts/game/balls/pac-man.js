@@ -2,6 +2,7 @@ function PacMan( texture ) {
 	var textures = [ 'Ball-Pac-Man', 'Ball-Ms-Pac-Man' ];
 	Ball.call( this, (textures.indexOf( texture ) >= 0) ? texture : textures[ Math.floor( Math.random( ) * textures.length ) ] );
 	
+	this.enum = 'PAC_MAN';
 	this.size.x = viewport.width * 0.035;
 	this.size.y = this.size.x;
 

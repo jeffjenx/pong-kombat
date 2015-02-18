@@ -1,6 +1,7 @@
 function DefaultBall( ) {
 	Ball.call( this, 'Ball-Default' );
 	
+	this.enum = 'DEFAULT_BALL';
 	this.pattern = this.patternContext.createPattern( this.image, 'repeat' );
 	
 	this.patternCanvas.width = 64;
