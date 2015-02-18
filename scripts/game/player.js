@@ -43,6 +43,7 @@ Player.prototype.handleInput = function( ) {
 			if( this.paddle.canShootProjectile( ) && InputManager.checkSequence( this.paddle.projectileSequence ) )
 			{
 				this.paddle.shootProjectile( );
+				InputManager.history = [ ];
 			}
 		break;
 		// No "break;" on this case
@@ -122,15 +123,4 @@ Player.prototype.update = function( deltaTime ) {
 		break;
 	}
 	this.paddle.update( deltaTime );
-
-	if(app.gameMode === GameModes.P2P){
-		app.p2p.emit('client:updatePaddle',{
-			room:app.p2p.room,
-			x:this.paddle.position.x,
-			y:this.paddle.position.y,
-			s:this.paddle.scale,
-			w:this.paddle.size.x,
-			h:this.paddle.size.y
-		});
-	}
 };

@@ -47,6 +47,13 @@ Ball.prototype.constructor = Ball;
 p2p.on('connection',function(client){
 	console.log('Client ('+client.id+') connected.');
 
+	client.disconnect = function(){
+		console.log('Client ('+client.id+') disconnected.');
+	};
+
+	client.on('disconnect',client.disconnect);
+
+	/*
 	client.pickPaddle = function(data){
 		var room = rooms[data.room];
 		var player = (client.id === room.host.id) ? room.host : room.guest;
@@ -85,11 +92,17 @@ p2p.on('connection',function(client){
 		var room = rooms[data.room];
 		room.ball = null;
 		client.requestBall(data);
-		/*
-		p2p.emit('client:requestBall',{
-			room:room.name
-		});
-	*/
+		// p2p.emit('client:requestBall',{
+		// 	room:room.name
+		// });
+	};
+
+	client.setBall = function(data){
+		var room = rooms[data.room];
+		room.ball = new Ball();
+		room.ball.type = data.type;
+		room.ball.resource = data.resource;
+		p2p.to(room.name).emit('server:setBall',room.ball);
 	};
 
 	client.requestBall = function(data){
@@ -181,15 +194,13 @@ p2p.on('connection',function(client){
 		player.s = data.s;
 		player.w = data.w;
 		player.h = data.h;
+		player.vx = data.vx;
+		player.vy = data.vy;
 
 		p2p.to(room.name).emit('server:updatePaddle',player);
 	};
-
-	client.disconnect = function(){
-		console.log('Client ('+client.id+') disconnected.');
-	};
-
-	client.on('disconnect',client.disconnect);
+	*/
+	/*
 	client.on('client:pickPaddle',client.pickPaddle);
 	client.on('client:playAnyone',client.playAnyone);
 	client.on('client:pointScored',client.pointScored);
@@ -197,6 +208,7 @@ p2p.on('connection',function(client){
 	client.on('client:requestLevel',client.requestLevel);
 	client.on('client:updateBall',client.updateBall);
 	client.on('client:updatePaddle',client.updatePaddle);
+	*/
 });
 
 http.listen(3000, function(){

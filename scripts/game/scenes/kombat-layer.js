@@ -126,12 +126,6 @@ KombatLayer.prototype.setBall = function( ballType, ballResource ) {
 	
 	ball.set( );
 	this.addComponent( 'Ball', ball );
-
-	if(app.gameMode === GameModes.P2P) {
-		app.p2p.on('server:updateBall',function(serverData){
-			ball.updateFromServer(serverData);
-		});
-	}
 };
 
 KombatLayer.prototype.addKombatant = function( kombatant ) {
@@ -237,7 +231,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					{
 						rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
 						this.removeComponent('Ball');
-						
+						this.setBall( Balls.RANDOM );
+						/*
 						if(app.gameMode === GameModes.P2P){
 							app.p2p.emit('client:pointScored',{
 								room:app.p2p.room
@@ -245,6 +240,7 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						} else {
 							this.setBall( Balls.RANDOM );
 						}
+						*/
 					}
 
 					if( leftKombatant.paddle.timePowerup && ball.velocity.x < 0 && ball.position.x < viewport.width / 2 && !ball.bulletTimed ) {
@@ -270,13 +266,15 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
 						this.removeComponent('Ball');
 						
+						this.setBall( Balls.RANDOM );
+						/*
 						if(app.gameMode === GameModes.P2P){
 							app.p2p.emit('client:pointScored',{
 								room:app.p2p.room
 							});
 						} else {
-							this.setBall( Balls.RANDOM );
 						}
+						*/
 					}
 
 					if( rightKombatant.paddle.timePowerup && ball.velocity.x > 0 && ball.position.x > viewport.width / 2 && !ball.bulletTimed ) {

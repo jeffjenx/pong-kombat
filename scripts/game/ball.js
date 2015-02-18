@@ -235,6 +235,15 @@ Ball.prototype.set = function( direction ) {
 	
 	this.updateBoundingBox( );
 	this.changedRotation( );
+
+	/*
+	if(app.gameMode === GameModes.P2P) {
+		var that = this;
+		app.p2p.on('server:updateBall',function(serverData){
+			that.updateFromServer(serverData);
+		});
+	}
+	*/
 };
 
 Ball.prototype.changedRotation = function( ) {
@@ -289,6 +298,7 @@ Ball.prototype.update = function( deltaTime ) {
 	this.updateCollision( );
 	this.updateGlare( );
 
+	/*
 	if(app.gameMode === GameModes.P2P && app.p2p.host){
 		app.p2p.emit('client:updateBall',{
 			room:app.p2p.room,
@@ -301,6 +311,7 @@ Ball.prototype.update = function( deltaTime ) {
 			vy:this.velocity.y
 		});
 	}
+	*/
 };
 
 Ball.prototype.updateCollision = function( ) {
@@ -333,6 +344,7 @@ Ball.prototype.updateGlare = function( ) {
 	}
 };
 
+/*
 Ball.prototype.updateFromServer = function( serverData ) {
 	if(app.p2p.id === serverData.guest.id) {
 		this.position.x = viewport.width - serverData.ball.x;
@@ -344,3 +356,4 @@ Ball.prototype.updateFromServer = function( serverData ) {
 		this.velocity.y = serverData.ball.vy;
 	}
 };
+*/

@@ -317,85 +317,74 @@ PickPaddleScene.prototype.update = function( deltaTime )
 		if( app.settings.SOUND_FX > 0 ) {
 			this.confirmSound.play();
 		}
-		
-		if( app.gameMode === GameModes.TOURNAMENT )
-		{
-			if( app.tournament )
-			{
-				app.tournament.changePlayer( player );
-				app.tournament.timeElapsed = 0;
-				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
-			}
-			else
-			{
-				app.tournament = new TournamentScene( );
-				app.tournament.startPlayer( player );
-				if( app.godMode === 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r' ) {
-					// god mode cheat: skip to the final match
-					for( var i = 0; i < app.tournament.opponents.length - 1; i++ ) {
-						app.tournament.increaseRank( );
-					}
+
+		switch(app.gameMode){
+			case GameModes.TOURNAMENT :
+				if( app.tournament )
+				{
+					app.tournament.changePlayer( player );
+					app.tournament.timeElapsed = 0;
+					SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
 				}
-				SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
-			}
-		}
-		else if( app.gameMode === GameModes.TRAINING )
-		{
-			var trainingScene = new TrainingScene();
-			trainingScene.addKombatant( player );
-			SceneManager.changeScene( trainingScene, Transitions.FADE, 0.5 );	
-		}
-		else if( app.gameMode === GameModes.P2P )
-		{
-			app.p2p.emit('client:pickPaddle',{
-				room:app.p2p.room,
-				paddle:player.paddle.enum
-			});
-			app.p2p.on('server:playersReady',function(room){
-				var kombatScene = new KombatScene();
-				kombatScene.addKombatant(player);
+				else
+				{
+					app.tournament = new TournamentScene( );
+					app.tournament.startPlayer( player );
+					if( app.godMode === 'Th3r3|15-n0~Kn0wl3d93/7h4t=15+n0t:P0w3r' ) {
+						// god mode cheat: skip to the final match
+						for( var i = 0; i < app.tournament.opponents.length - 1; i++ ) {
+							app.tournament.increaseRank( );
+						}
+					}
+					SceneManager.changeScene( app.tournament, Transitions.FADE, 0.5 );
+				}
+			break;
 
-				var peer = new Peer();
-				peer.client = (app.p2p.id === room.host.id) ? room.guest.id : room.host.id;
-				peer.setPaddle( (peer.client === room.host.id) ? Paddles[room.host.paddle] : Paddles[room.guest.paddle] );
-				kombatScene.addKombatant(peer);
+			case GameModes.TRAINING :
+				var trainingScene = new TrainingScene();
+				trainingScene.addKombatant( player );
+				SceneManager.changeScene( trainingScene, Transitions.FADE, 0.5 );
+			break;
 
-				app.p2p.emit('client:requestLevel',{
+			case GameModes.P2P :
+				/*
+				app.p2p.emit('client:pickPaddle',{
 					room:app.p2p.room,
-					level:this.level
+					paddle:player.paddle.enum
 				});
+				app.p2p.on('server:playersReady',function(room){
+					var kombatScene = new KombatScene();
+					kombatScene.addKombatant(player);
 
-				app.p2p.on('server:levelSelected',function(room){
-					kombatScene.setLevel(Levels[room.level]);
-					SceneManager.changeScene(kombatScene, Transitions.NONE);
+					var peer = new Peer();
+					peer.client = (app.p2p.id === room.host.id) ? room.guest.id : room.host.id;
+					peer.setPaddle( (peer.client === room.host.id) ? Paddles[room.host.paddle] : Paddles[room.guest.paddle] );
+					kombatScene.addKombatant(peer);
+
+					app.p2p.emit('client:requestLevel',{
+						room:app.p2p.room,
+						level:this.level
+					});
+
+					app.p2p.on('server:levelSelected',function(room){
+						kombatScene.setLevel(Levels[room.level]);
+						SceneManager.changeScene(kombatScene, Transitions.NONE);
+					});
 				});
-			});
-			/*
-			app.p2p.emit('client:paddle',{room:app.p2p.room,paddle:player.paddle.enum});
-			app.p2p.on('server:start',function(data){
-				var peer = new Peer();
-				peer.client = (app.p2p.id === data.host.id) ? data.guest.id : data.host.id;
-				peer.setPaddle( (app.p2p.id === data.host.id) ? Paddles[data.guest.paddle] : Paddles[data.host.paddle]);
+				this.addLayer( 'Menu', new WaitMenu( this ) );
+				*/
+			break;
 
-				var kombatScene = new KombatScene();
-				kombatScene.addKombatant(player);
-				kombatScene.addKombatant(peer);
-				kombatScene.setLevel( Levels[data.level] );
+			default :
+				var computer = new Computer( );
+				computer.setPaddle( Paddles.RANDOM );
+
+				var kombatScene = new KombatScene( );
+				kombatScene.addKombatant( player );
+				kombatScene.addKombatant( computer );
+				kombatScene.setLevel( this.level );
 				SceneManager.changeScene( kombatScene, Transitions.NONE );
-			});
-			*/
-			this.addLayer( 'Menu', new WaitMenu( this ) );
-		}
-		else
-		{
-			var computer = new Computer( );
-			computer.setPaddle( Paddles.RANDOM );
-
-			var kombatScene = new KombatScene( );
-			kombatScene.addKombatant( player );
-			kombatScene.addKombatant( computer );
-			kombatScene.setLevel( this.level );
-			SceneManager.changeScene( kombatScene, Transitions.NONE );
+			break;
 		}
 	}
 

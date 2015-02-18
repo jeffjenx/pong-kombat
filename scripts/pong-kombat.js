@@ -120,13 +120,14 @@ function ready( ) {
 		setTimeout( ready, 500 );
 		return;
 	}
+
+	var p2p = (window.io) ? new io('ws://www.pongkombat.dev:3000/pong-kombat') : false;
 	
 	app = new App( );
 	app.version = '1.5';
 	app.aspectRatio = { x : 1 + Math.sqrt( 5 ), y : 2 }; // Golden Ratio
 	app.resources = '/';
 	app.language = 'en';
-	app.p2p = (window.io) ? new io('ws://www.pongkombat.dev:3000/pong-kombat') : false;
 	app.settings = {
 /*		'CENSORSHIP' : false,*/
 		'COINAGE'    : (localStorage && localStorage['PongKombat.settings.COINAGE']) ? parseInt( localStorage['PongKombat.settings.COINAGE'] ) : 0,

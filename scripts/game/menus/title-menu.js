@@ -12,10 +12,12 @@ function TitleMenu( scene ) {
 	this.addItem( 'Free Play', this.selectFreePlay );
 	this.addItem( 'P9X Training', this.selectTraining );
 	this.addItem( 'Tournament Edition', this.selectTournament );
+	/*
 	if(app.p2p) {
 		//this.addItem( 'Log In', this.selectLogin );
 		this.addItem( 'Paddle-2-Paddle', this.selectMultiplayer );
 	}
+	*/
 	//this.addItem( 'Super PK', null );
 	this.addItem( 'Dip Switches', this.selectSettings );
 	this.addItem( 'Get Outta Here!', this.selectQuit );
