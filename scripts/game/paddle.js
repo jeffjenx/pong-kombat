@@ -853,7 +853,6 @@ Paddle.prototype.shootProjectile = function( projectile ) {
 	projectile.rotation = this.rotation;
 	
 	this.projectiles.push( projectile );
-	InputManager.history = [ ];
 
 	return projectile;
 };
