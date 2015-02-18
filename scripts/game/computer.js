@@ -1,4 +1,4 @@
-function Opponent( ) {
+function Computer( ) {
 	this.paddle = null;
 	this.life = 0;
 	this.roundsWon = 0;
@@ -6,13 +6,13 @@ function Opponent( ) {
 	this.targetPosition = viewport.height * 0.5;
 }
 
-Opponent.prototype.constructor = Opponent;
+Computer.prototype.constructor = Computer;
 
-Opponent.prototype.draw = function( context ) {
+Computer.prototype.draw = function( context ) {
 	this.paddle.draw( context );
 };
 
-Opponent.prototype.getNameSound = function() {
+Computer.prototype.getNameSound = function() {
 	if( this.paddle.nameSound ) {
 		return this.paddle.nameSound;
 	} else {
@@ -22,7 +22,7 @@ Opponent.prototype.getNameSound = function() {
 	}
 };
 
-Opponent.prototype.applyAI = function( difficulty ) {
+Computer.prototype.applyAI = function( difficulty ) {
 	difficulty = (difficulty !== undefined) ? difficulty : app.settings.DIFFICULTY;
 	
 	switch( this.layer.scene.state ) {
@@ -235,7 +235,7 @@ Opponent.prototype.applyAI = function( difficulty ) {
 	}
 };
 
-Opponent.prototype.setPaddle = function( paddle ) {
+Computer.prototype.setPaddle = function( paddle ) {
 	switch( paddle ) {
 		case Paddles.RANDOM : this.setPaddle( Math.floor( 2 + Math.random( ) * 5 ) ); break; // 2 + RAND[1,5] refers to Paddles ENUM
 		case Paddles.BLUE : this.paddle = new BluePaddle( ); break;
@@ -272,7 +272,7 @@ Opponent.prototype.setPaddle = function( paddle ) {
 	};
 };
 
-Opponent.prototype.update = function( deltaTime ) {
+Computer.prototype.update = function( deltaTime ) {
 	if( this.life < 0 ) {
 		this.life = 0;
 	}
