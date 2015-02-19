@@ -4,7 +4,7 @@ function PickPaddleScene( )
 
 	var paddleScale = 1.75;
 
-	this.level = Levels.RANDOM;
+	this.level = 'RANDOM';
 	
 	this.backgroundLayer = this.addLayer( 'BackgroundLayer', new Layer( ) );
 	this.backgroundLayer.addComponent( 'Background', new Background( 'Background-Title' ) );
@@ -347,6 +347,24 @@ PickPaddleScene.prototype.update = function( deltaTime )
 			break;
 
 			case GameModes.P2P :
+				var suggestedLevel = this.level;
+				p2p.emit('client:pickPaddle',{
+					room:p2p.currentRoom,
+					paddle:player.paddle.enum,
+					level:suggestedLevel
+				});
+				p2p.on('server:paddlesPicked',function(room){
+					var kombatScene = new KombatScene();
+					kombatScene.addKombatant(player);
+
+					var peer = new Peer();
+					peer.setPaddle((p2p.id === room.host) ? Paddles[room[room.guest].type] : Paddles[room[room.host].type]);
+					kombatScene.addKombatant(peer);
+
+					kombatScene.setLevel(Levels[room.level]);
+					SceneManager.changeScene(kombatScene, Transitions.NONEs);
+				});
+				this.addLayer('Menu', new WaitMenu(this));
 				/*
 				app.p2p.emit('client:pickPaddle',{
 					room:app.p2p.room,
@@ -382,7 +400,7 @@ PickPaddleScene.prototype.update = function( deltaTime )
 				var kombatScene = new KombatScene( );
 				kombatScene.addKombatant( player );
 				kombatScene.addKombatant( computer );
-				kombatScene.setLevel( this.level );
+				kombatScene.setLevel( Levels[this.level] );
 				SceneManager.changeScene( kombatScene, Transitions.NONE );
 			break;
 		}

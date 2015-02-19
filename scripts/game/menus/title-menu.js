@@ -12,6 +12,7 @@ function TitleMenu( scene ) {
 	this.addItem( 'Free Play', this.selectFreePlay );
 	this.addItem( 'P9X Training', this.selectTraining );
 	this.addItem( 'Tournament Edition', this.selectTournament );
+	this.addItem( 'Paddle-2-Paddle', this.selectMultiplayer );
 	/*
 	if(app.p2p) {
 		//this.addItem( 'Log In', this.selectLogin );

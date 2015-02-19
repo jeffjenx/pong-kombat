@@ -8,7 +8,8 @@ app.get('/', function(req, res){
 });
 
 var rooms = {};
-var clientWaitingRoom = null;
+//var clientWaitingRoom = null;
+var waitingRoom;
 function randomRoom(){
 	var name='';
 	var length=6;
@@ -20,38 +21,81 @@ function randomRoom(){
 	return name;
 };
 
-function Player(clientID){
-	this.id = clientID;
-	this.paddle = null;
-	this.desiredLevel = null;
-
-	this.x = null;
-	this.y = null;
-	this.s = null;
-	this.w = null;
-	this.h = null;
+function Paddle(){
+	this.type;
+	this.x;
+	this.y;
+	this.s;
+	this.w;
+	this.h;
+	this.vx;
+	this.vy;
 }
-Player.prototype.constructor = Player;
+Paddle.prototype.constructor = Paddle;
 
 function Ball(){
-	this.type = null;
-	this.resource = null;
-	this.x = null;
-	this.y = null;
-	this.s = null;
-	this.w = null;
-	this.h = null;
+	this.type;
+	this.resource;
+	this.x;
+	this.y;
+	this.s;
+	this.w;
+	this.h;
+	this.vx;
+	this.vy;
 };
 Ball.prototype.constructor = Ball;
 
 p2p.on('connection',function(client){
 	console.log('Client ('+client.id+') connected.');
 
-	client.disconnect = function(){
+	this.disconnect = function(){
 		console.log('Client ('+client.id+') disconnected.');
 	};
 
-	client.on('disconnect',client.disconnect);
+	this.pickPaddle = function(data){
+		var paddle = new Paddle();
+		paddle.type = data.paddle;
+
+		console.log('Client ('+client.id+') wants paddle '+data.paddle+'.');
+		console.log('Client ('+client.id+') wants level '+data.level+'.');
+
+		var room = rooms[data.room];
+		room[client.id] = paddle;
+		if(!room.level) {
+			room.level = data.level;
+		} else {
+			room.level = (Math.random() < 0.5) ? room.level : data.level;
+		}
+
+		if(room[room.host] && room[room.guest]){
+			p2p.to(room.id).emit('server:paddlesPicked',room);
+		}
+	};
+
+	this.selectAnyone = function(data){
+		if(waitingRoom){
+			var room = rooms[waitingRoom];
+			room['guest'] = client.id;
+			client.join(waitingRoom);
+			console.log('Client ('+client.id+') joined room '+waitingRoom+'.');
+			p2p.to(room.id).emit('server:playersJoined',room);
+			waitingRoom = null;
+		} else {
+			var roomId = randomRoom();
+			waitingRoom = roomId;
+			rooms[roomId] = {
+				id: roomId,
+				host: client.id
+			};
+			client.join(roomId);
+			console.log('Client ('+client.id+') joined room '+roomId+'.');
+		}
+	};
+
+	client.on('disconnect',this.disconnect);
+	client.on('client:pickPaddle',this.pickPaddle);
+	client.on('client:selectAnyone',this.selectAnyone);
 
 	/*
 	client.pickPaddle = function(data){

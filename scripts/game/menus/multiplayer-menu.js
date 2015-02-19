@@ -11,6 +11,11 @@ MultiplayerMenu.prototype = new Menu;
 MultiplayerMenu.prototype.constructor = MultiplayerMenu;
 
 MultiplayerMenu.prototype.selectAnyone = function( ) {
+	p2p.emit('client:selectAnyone');
+	p2p.on('server:playersJoined',function(room){
+		p2p.currentRoom = room.id;
+		SceneManager.changeScene(new PickPaddleScene(), Transitions.FADE, 0.5);
+	});
 	/*
 	app.p2p.emit('client:playAnyone');
 	app.p2p.on('server:roomReady',function(room){
