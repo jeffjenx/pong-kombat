@@ -363,12 +363,41 @@ PickPaddleScene.prototype.update = function( deltaTime )
 					var kombatScene = new KombatScene();
 					kombatScene.addKombatant(player);
 
+					var playerUpdate = player.update;
+					player.update = function(deltaTime){
+						playerUpdate.call(player, deltaTime);
+						p2p.emit('client:updatePaddle',{
+							room:p2p.currentRoom,
+							x:player.paddle.position.x,
+							y:player.paddle.position.y,
+							w:player.paddle.size.x,
+							h:player.paddle.size.y,
+							s:player.paddle.scale,
+							r:player.paddle.rotation,
+							vx:player.paddle.velocity.x,
+							vy:player.paddle.velocity.y
+						});
+					};
+
 					var peer = new Peer();
 					peer.setPaddle((p2p.id === room.host) ? Paddles[room[room.guest].type] : Paddles[room[room.host].type]);
 					kombatScene.addKombatant(peer);
 
+					p2p.on('server:updatePaddle',function(room){
+						var paddle = (p2p.id === room.host) ? room[room.guest] : room[room.host];
+
+						peer.paddle.position.x = viewport.width - paddle.x;
+						peer.paddle.position.y = paddle.y;
+						peer.paddle.size.x = paddle.w;
+						peer.paddle.size.y = paddle.h;
+						peer.paddle.velocity.x = paddle.vx;
+						peer.paddle.velocity.y = paddle.vy;
+						peer.paddle.scale = paddle.s;
+						peer.paddle.rotation = paddle.r;
+					});
+
 					kombatScene.setLevel(Levels[room.level]);
-					SceneManager.changeScene(kombatScene, Transitions.NONEs);
+					SceneManager.changeScene(kombatScene, Transitions.NONE);
 				});
 				this.addLayer('Menu', new WaitMenu(this));
 				/*

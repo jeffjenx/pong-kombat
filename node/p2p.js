@@ -114,10 +114,42 @@ p2p.on('connection',function(client){
 		}
 	};
 
+	this.updateBall = function(data){
+		var room = rooms[data.room];
+		room.ball.x = data.x;
+		room.ball.y = data.y;
+		room.ball.w = data.w;
+		room.ball.h = data.h;
+		room.ball.vx = data.vx;
+		room.ball.vy = data.vy;
+		room.ball.s = data.s;
+		room.ball.sp = data.sp;
+		room.ball.r = data.r;
+
+		p2p.to(room.id).emit('server:updateBall',room);
+	};
+
+	this.updatePaddle = function(data){
+		var room = rooms[data.room];
+		var paddle = room[client.id];
+		paddle.x = data.x;
+		paddle.y = data.y;
+		paddle.w = data.w;
+		paddle.h = data.h;
+		paddle.vx = data.vx;
+		paddle.vy = data.vy;
+		paddle.s = data.s;
+		paddle.r = data.r;
+
+		p2p.to(room.id).emit('server:updatePaddle',room);
+	};
+
 	client.on('disconnect',this.disconnect);
 	client.on('client:pickPaddle',this.pickPaddle);
 	client.on('client:selectAnyone',this.selectAnyone);
 	client.on('client:setBall',this.setBall);
+	client.on('client:updateBall',this.updateBall);
+	client.on('client:updatePaddle',this.updatePaddle);
 
 	/*
 	client.pickPaddle = function(data){

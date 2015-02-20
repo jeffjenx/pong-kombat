@@ -211,14 +211,96 @@ KombatScene.prototype.setBall = function( ballType, ballResource ) {
 	if(app.gameMode !== GameModes.P2P){
 		this.layers['Kombat'].setBall( Balls[ballType], ballResource );
 	} else {
-		if(ballType === 'RANDOM'){
+		if(!ballType || ballType === 'RANDOM'){
 			var keys = Object.keys(Balls);
 			do{
 				ballType = keys[ keys.length * Math.random() << 0];
 			} while (ballType === 'RANDOM');
 		}
-		if(!ballResource){
-			// figure out random ballResource from ballType
+		if(!ballResource || ballResource === 'RANDOM'){
+			var resources = [];
+			switch(ballType){
+				case 'BASEBALL':
+					resources = ['Ball-Baseball','Ball-Baseball-MLB','Ball-Baseball-Old','Ball-Softball'];
+				break;
+				case 'BASKETBALL':
+					resources = ['Ball-Basketball','Ball-Basketball-ABA','Ball-Basketball-Old','Ball-Basketball-NBA','Ball-Kickball'];
+				break;
+				case 'BILLIARDS':
+					resources = ['Ball-Billiards-1','Ball-Billiards-2','Ball-Billiards-3','Ball-Billiards-4','Ball-Billiards-5','Ball-Billiards-6','Ball-Billiards-7','Ball-Billiards-8','Ball-Billiards-9','Ball-Billiards-10','Ball-Billiards-11','Ball-Billiards-12','Ball-Billiards-13','Ball-Billiards-14','Ball-Billiards-15'];
+				break;
+				case 'COIN':
+					resources = ['Ball-Coin-Penny','Ball-Coin-Nickle','Ball-Coin-Dime','Ball-Coin-Quarter'];
+				break;
+				case 'CROQUET_BALL':
+					resources = ['Ball-Croquet-Black','Ball-Croquet-Blue','Ball-Croquet-Red','Ball-Croquet-Yellow'];
+				break;
+				case 'DICE':
+					resources = [
+						'Ball-Dice-Red-1', 'Ball-Dice-Red-2', 'Ball-Dice-Red-3', 'Ball-Dice-Red-4', 'Ball-Dice-Red-5', 'Ball-Dice-Red-6',
+						'Ball-Dice-White-1', 'Ball-Dice-White-2', 'Ball-Dice-White-3', 'Ball-Dice-White-4', 'Ball-Dice-White-5', 'Ball-Dice-White-6',
+						'Ball-Dice-12-Sided', 'Ball-Dice-20-Sided'
+					];
+				break;
+				case 'EMOTICON':
+					resources = [ 'Ball-Emoticon-Angry', 'Ball-Emoticon-Frowning', 'Ball-Emoticon-Grinning', 'Ball-Emoticon-Shocked', 'Ball-Emoticon-Smiling', 'Ball-Emoticon-Winking' ];
+				break;
+				case 'EYE_BALL':
+					resources = [ 'Ball-Eye-Amber', 'Ball-Eye-Blue', 'Ball-Eye-Brown', 'Ball-Eye-Cat', 'Ball-Eye-Green', 'Ball-Eye-Grey', 'Ball-Eye-Hazel', 'Ball-Eye-Red' ];
+				break;
+				case 'FOIL_BALL':
+					resources = [ 'Ball-Tin-Foil' ];
+				break;
+				case 'FOOD':
+					resources = [
+						'Ball-Easter-Egg-Blue', 'Ball-Easter-Egg-Green', 'Ball-Easter-Egg-Purple', 'Ball-Easter-Egg-Red', 'Ball-Easter-Egg-Yellow',
+						'Ball-Food-Cookie', 'Ball-Food-Donut', 'Ball-Food-Pizza', 'Ball-Food-Plain-Bagel', 'Ball-Food-Salted-Bagel', 'Ball-Food-Waffle'
+					];
+				break;
+				case 'FOOTBALL':
+					resources = ['Ball-Football-NFL'];
+				break;
+				case 'LOGO':
+					resources = [ 'Ball-Logo-Android', 'Ball-Logo-Apple', 'Ball-Logo-BMW', 'Ball-Logo-Chrome', 'Ball-Logo-Facebook',
+					'Ball-Logo-Facebook', 'Ball-Logo-Firefox', 'Ball-Logo-IE', 'Ball-Logo-Pepsi', 'Ball-Logo-Pinterest', 'Ball-Logo-Safari',
+					'Ball-Logo-Starbucks', 'Ball-Logo-Twitter', 'Ball-Logo-Volkswagen', 'Ball-Logo-Wikipedia', 'Ball-Logo-WordPress',
+					'Ball-Logo-Obama', 'Ball-Yin-Yang', 'Ball-Yarn', 'Ball-Rubber-Band', 'Ball-Skull', 'Ball-Saw-Blade', 'Ball-Loading', 'Ball-Stop-Sign', 'Ball-Clock', 'Ball-Tron-Disc',
+					'Ball-BBS-Wheel' ];
+				break;
+				case 'MARBLE':
+					resources = [ 'Ball-Marble-Brown', 'Ball-Marble-Lavender', 'Ball-Marble-Mint', 'Ball-Marble-Orange', 'Ball-Marble-Pink', 'Ball-Marble-Teal', 'Ball-Bouncy' ];
+				break;
+				case 'PAC_MAN':
+					resources = [ 'Ball-Pac-Man', 'Ball-Ms-Pac-Man' ];
+				break;
+				case 'POKEBALL':
+					resources = ['Ball-PokeBall'];
+				break;
+				case 'PONG_BALL':
+					resources = ['White'];
+				break;
+				case 'RUPEE':
+					resources = [ 'Ball-Rupee-Green', 'Ball-Rupee-Blue', 'Ball-Rupee-Yellow', 'Ball-Rupee-Red', 'Ball-Rupee-Purple', 'Ball-Rupee-Orange', 'Ball-Rupee-Silver' ];
+				break;
+				case 'SOCCER_BALL':
+					resources = ['Ball-Soccer'];
+				break;
+				case 'SOLAR_SYSTEM':
+					resources = [ 'Ball-Asteroid', 'Ball-Sun', 'Ball-Moon', 'Ball-Mercury', 'Ball-Venus', 'Ball-Earth', 'Ball-Mars', 'Ball-Saturn', 'Ball-Neptune', 'Ball-Uranus', 'Ball-Jupiter', 'Ball-Pluto' ];
+				break;
+				case 'STORAGE_MEDIA':
+					resources = [ 'Ball-Compact-Disc', 'Ball-Cassette-Tape', 'Ball-Vinyl-Record', 'Ball-Floppy-Disk', 'Ball-Cartridge-Mario', 'Ball-Cartridge-Zelda' ];
+				break;
+				case 'SUPER_MARIO':
+					resources = [ 'Ball-Super-Mario-Koopa-Shell', 'Ball-Super-Mario-Mushroom', 'Ball-Super-Mario-1Up', 'Ball-Super-Mario-Coin', 'Ball-Super-Mario-Star-Coin' ];
+				break;
+				case 'TENNIS_BALL':
+					resources = [ 'Ball-Table-Tennis-Orange', 'Ball-Table-Tennis-White', 'Ball-Tennis' ];
+				break;
+				default:
+					resources = ['Ball-Default'];
+			}
+			ballResource = resources[ resources.length * Math.random() << 0 ];
 		}
 		p2p.emit('client:setBall',{
 			room:p2p.currentRoom,
@@ -228,6 +310,41 @@ KombatScene.prototype.setBall = function( ballType, ballResource ) {
 		var kombatLayer = this.layers['Kombat'];
 		p2p.on('server:setBall',function(room){
 			kombatLayer.setBall(Balls[room.ball.type], room.ball.resource);
+
+			var ball = kombatLayer.components['Ball'];
+			
+			if(p2p.id === room.host){
+				// Host keeps track of ball position
+				var ballUpdate = ball.update;
+				ball.update = function(deltaTime) {
+					ballUpdate.call(ball, deltaTime);
+					p2p.emit('client:updateBall',{
+						room:p2p.currentRoom,
+						x:ball.position.x,
+						y:ball.position.y,
+						w:ball.size.x,
+						h:ball.size.y,
+						s:ball.scale,
+						r:ball.rotation,
+						vx:ball.velocity.x,
+						vy:ball.velocity.y,
+						sp:ball.speed
+					});
+				};
+			} else {
+				// Guest mirrors host's ball position
+				p2p.on('server:updateBall',function(room){
+					ball.position.x = viewport.width - room.ball.x;
+					ball.position.y = room.ball.y;
+					ball.size.x = room.ball.w;
+					ball.size.y = room.ball.h;
+					ball.velocity.x = room.ball.vx;
+					ball.velocity.y = room.ball.vy;
+					ball.scale = room.ball.s;
+					ball.rotation = room.ball.r;
+					ball.speed = room.ball.sp;
+				});
+			}
 		});
 	}
 };
@@ -396,7 +513,7 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.starting :
 			if( this.stateTime >= 5 ) {
 				this.changeState( this.states.fighting );
-				this.setBall( 'BASKETBALL' );
+				this.setBall( 'RANDOM' );
 				//this.layers['Kombat'].setBall( Balls.DEFAULT_BALL );
 			} else {
 				this.layers['Kombat'].centerPaddles( );

@@ -231,7 +231,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 					{
 						rightKombatant.life -= 1 * rightKombatant.paddle.lifeModifier;
 						this.removeComponent('Ball');
-						this.setBall( Balls.RANDOM );
+						//this.setBall( Balls.RANDOM );
+						this.scene.setBall( 'RANDOM' );
 						/*
 						if(app.gameMode === GameModes.P2P){
 							app.p2p.emit('client:pointScored',{
@@ -266,7 +267,8 @@ KombatLayer.prototype.update = function( deltaTime ) {
 						leftKombatant.life -= 1 * leftKombatant.paddle.lifeModifier;
 						this.removeComponent('Ball');
 						
-						this.setBall( Balls.RANDOM );
+						//this.setBall( Balls.RANDOM );
+						this.scene.setBall( 'RANDOM' );
 						/*
 						if(app.gameMode === GameModes.P2P){
 							app.p2p.emit('client:pointScored',{
