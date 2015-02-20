@@ -207,8 +207,29 @@ KombatScene.prototype.spamality = function( winner, loser ) {
 	}
 };
 
-KombatScene.prototype.setBall = function( ball ) {
-	this.layers['Kombat'].setBall( Balls.DEFAULT );
+KombatScene.prototype.setBall = function( ballType, ballResource ) {
+	if(app.gameMode !== GameModes.P2P){
+		this.layers['Kombat'].setBall( Balls[ballType], ballResource );
+	} else {
+		if(ballType === 'RANDOM'){
+			var keys = Object.keys(Balls);
+			do{
+				ballType = keys[ keys.length * Math.random() << 0];
+			} while (ballType === 'RANDOM');
+		}
+		if(!ballResource){
+			// figure out random ballResource from ballType
+		}
+		p2p.emit('client:setBall',{
+			room:p2p.currentRoom,
+			type: ballType,
+			resource: ballResource
+		});
+		var kombatLayer = this.layers['Kombat'];
+		p2p.on('server:setBall',function(room){
+			kombatLayer.setBall(Balls[room.ball.type], room.ball.resource);
+		});
+	}
 };
 
 KombatScene.prototype.setLevel = function( level ) {
@@ -375,7 +396,8 @@ KombatScene.prototype.update = function( deltaTime ) {
 		case this.states.starting :
 			if( this.stateTime >= 5 ) {
 				this.changeState( this.states.fighting );
-				this.layers['Kombat'].setBall( );
+				this.setBall( 'BASKETBALL' );
+				//this.layers['Kombat'].setBall( Balls.DEFAULT_BALL );
 			} else {
 				this.layers['Kombat'].centerPaddles( );
 			}

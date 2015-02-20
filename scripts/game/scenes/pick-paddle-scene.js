@@ -348,6 +348,12 @@ PickPaddleScene.prototype.update = function( deltaTime )
 
 			case GameModes.P2P :
 				var suggestedLevel = this.level;
+				if(suggestedLevel === 'RANDOM'){
+					var keys = Object.keys(Levels);
+					do{
+						suggestedLevel = keys[ keys.length * Math.random() << 0];
+					} while (suggestedLevel === 'RANDOM');
+				}
 				p2p.emit('client:pickPaddle',{
 					room:p2p.currentRoom,
 					paddle:player.paddle.enum,

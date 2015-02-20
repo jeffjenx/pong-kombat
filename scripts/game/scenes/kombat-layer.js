@@ -123,7 +123,7 @@ KombatLayer.prototype.setBall = function( ballType, ballResource ) {
 			ball = new DefaultBall( );
 		break;
 	}
-	
+
 	ball.set( );
 	this.addComponent( 'Ball', ball );
 };

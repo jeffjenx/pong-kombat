@@ -121,7 +121,7 @@ function ready( ) {
 		return;
 	}
 
-	window.p2p = (window.io) ? new io('ws://www.pongkombat.dev:3000/pong-kombat') : false;
+	window.p2p = (window.io) ? new io('ws://www.pongkombat.dev:3000/pong-kombat',{reconnection: false}) : false;
 	
 	app = new App( );
 	app.version = '1.5';

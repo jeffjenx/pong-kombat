@@ -43,6 +43,8 @@ function Ball(){
 	this.h;
 	this.vx;
 	this.vy;
+	this.r;
+	this.sp;
 };
 Ball.prototype.constructor = Ball;
 
@@ -93,9 +95,29 @@ p2p.on('connection',function(client){
 		}
 	};
 
+	this.setBall = function(data){
+		var room = rooms[data.room];
+		console.log('Client ('+client.id+') wants ball '+data.type+'.');
+
+		if(!room.ball) {
+			room.ball = new Ball();
+			room.ball.type = data.type;
+			room.ball.resource = data.resource;
+		} else {
+			if(Math.random() < 0.5){
+				room.ball = new Ball();
+				room.ball.type = data.type;
+				room.ball.resource = data.resource;
+			}
+
+			p2p.to(room.id).emit('server:setBall',room);
+		}
+	};
+
 	client.on('disconnect',this.disconnect);
 	client.on('client:pickPaddle',this.pickPaddle);
 	client.on('client:selectAnyone',this.selectAnyone);
+	client.on('client:setBall',this.setBall);
 
 	/*
 	client.pickPaddle = function(data){
